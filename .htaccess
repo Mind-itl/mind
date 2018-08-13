@@ -20,3 +20,12 @@ RewriteRule student/(.+) /student.php
 ErrorDocument 404 /404.php
 
 AddDefaultCharset utf-8
+
+<Files *.log>
+	order deny,allow
+	deny from all
+</Files>
+<Files phinfo.ph>
+	order deny,allow
+	deny from all
+</Files>
