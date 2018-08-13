@@ -13,9 +13,6 @@
 		
 		<link rel='stylesheet' href='css/fullcalendar.css' />
 
-		<script src='js/moment.min.js'></script>
-		<script src='js/fullcalendar.min.js'></script>
-
 		<script>
 			calendar_events_list = <?= get_events_json() ?>;
 		</script>
@@ -29,10 +26,19 @@
 	        <div class="row">
 				<?php menu(); ?>
 				<div class="col-md-12">
-					<!-- <div id="calendar"></div> -->
+					Уроки: <br>
+					<div id="lessons">
+						
+					</div>
+					Близжайшие события: <br>
+					<div id="calendar">
+						<ul id="calendar-events">
+							
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		<!-- <script src="js/calendar.js"></script> -->
+		<script src="js/calendar.js"></script>
 	</body>
 </html>

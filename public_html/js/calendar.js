@@ -1,16 +1,10 @@
-$(function() {
-	'use strict';
-	$('#calendar').fullCalendar({
-		defaultView: 'month'
-	});
+window.addEventListener("load", function() {
+	let events = calendar_events_list;
+	console.log(events);
 
-	const addEvent = (event) => {
-		$('#calendar').fullCalendar('renderEvent', event);
-	};
-
-	addEvent({
-		title: 'event',
-		start: moment("2018-07-23T09:00:00"),
-		allDay: true
+	events.forEach(e => {
+		$("#calendar-events").append(
+				`<li>${e["NAME"]}</li>`
+			);
 	});
 });
