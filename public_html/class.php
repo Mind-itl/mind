@@ -63,7 +63,7 @@
 												<?= $student->get_points() ?>
 											</td>
 											<td>
-												<a href="getstudent.php?s_login='.$s_login.'">Подробнее</a>
+												<a href="student/<?= $student->get_login() ?>">Подробнее</a>
 											</td>
 										</tr>
 										<?php

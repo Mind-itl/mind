@@ -15,6 +15,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 	RewriteRule ^(.*)$ $1.php
 
+RewriteRule student/(.+) /student.php
+
 ErrorDocument 404 /404.php
 
 AddDefaultCharset utf-8
