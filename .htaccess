@@ -3,7 +3,7 @@ php_flag display_startup_errors on
 php_value error_reporting 32767
 
 php_flag log_errors on
-php_value error_log  /storage/ssd5/448/2591448/php_errors.log
+php_value error_log  /storage/ssd5/448/2591448/public_html/errors.log
 
 php_value include_path ".:/storage/ssd5/448/2591448/lib"
 
