@@ -29,4 +29,9 @@
 		$("#" + localStorage.getItem("theme")).prop("disabled", false);
 
 	});
+
+	let coll = document.getElementsByClassName("menulink");
+	let arr = Array.from(coll);
+	arr .filter(a => a.href == document.location)
+		.forEach(a => a.classList.toggle("active"));
 })();

@@ -8,9 +8,9 @@
 		<link rel="stylesheet" href="/css/first_theme.css"  id="first_theme"  class="theme_link" disabled>
 		<link rel="stylesheet" href="/css/second_theme.css" id="second_theme" class="theme_link" disabled>
 		<link rel="stylesheet" href="/css/main.css">
-		<link rel="stylesheet" href="css/bootstrap-theme.css">
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/bootstrap-theme.css">
+		<link rel="stylesheet" href="/css/bootstrap.css">
+		<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/<?=$asd?>.css">
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<link href="http://allfont.ru/allfont.css?fonts=open-sans" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
 			document.title += " | Mind";
 		</script>
 
-		<script src="js/bootstrap.js"></script>
+		<script src="/js/bootstrap.js"></script>
 		<script>
             $(window).on('load', function () {
                 $('.container').delay(400).fadeIn();
@@ -83,16 +83,6 @@
 			</div>
 		</nav>
 			<script src="/js/menu.js"></script>
-			<script>
-				(function() {
-					'use strict';
-					let coll = document.getElementsByClassName("menulink");
-					let arr = Array.from(coll);
-					arr .filter(a => a.href == document.location)
-						.forEach(a => a.classList.toggle("active"));
-
-				})();
-			</script>
 			<?php
 	}
 
