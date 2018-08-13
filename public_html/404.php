@@ -1,10 +1,23 @@
+<?php
+	require_once "utils.php";
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	404 YeAh!
-</body>
+	<head>
+		<title>Выписка по классу</title>
+		
+		<?php default_meta("points"); ?>
+
+	</head>
+	<body>
+	    <div class="container" style="display: none;">
+	        <div class="row">
+				<div class="col-md-12">
+					<h1>404</h1>
+					Ошиблись адресом?						
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
