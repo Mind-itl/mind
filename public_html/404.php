@@ -7,7 +7,7 @@
 	<head>
 		<title>Выписка по классу</title>
 		
-		<?php default_meta("points"); ?>
+		<?php default_meta("404"); ?>
 
 	</head>
 	<body>
