@@ -1,0 +1,20 @@
+php_flag display_errors on
+php_flag display_startup_errors on
+php_value error_reporting 32767
+
+php_flag log_errors on
+php_value error_log  /storage/ssd5/448/2591448/php_errors.log
+
+php_value include_path ".:/storage/ssd5/448/2591448/lib"
+
+Header unset Cache-Control
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+	RewriteRule ^(.*)$ $1.php
+
+ErrorDocument 404 /404.php
+
+AddDefaultCharset utf-8

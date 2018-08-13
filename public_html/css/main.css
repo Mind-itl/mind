@@ -1,0 +1,125 @@
+body {
+    background: rgba(0, 95, 162, 0.1)!important;
+    font-family: 'Open Sans', arial;
+}
+.container {
+    background: rgba(0, 95, 162, 0.1);
+}  
+nav {
+	background-color: var(--some-color);
+}
+#log-in-s {
+	font-family: 'Courier New', arial;
+	background: #466cb2; 
+	padding: 5px 15px; 
+	border: 0; 
+	color: #bed5ff;
+}
+#log-in-s:hover {
+	background: #77a5f8;
+}
+#number {
+	margin-bottom: 10px;
+}
+.loader :first-child {
+	background:rgb(0, 75, 126);
+	animation-delay:-1.5s
+}
+.loader :nth-child(2) {
+	background:rgb(0, 75, 126);
+	animation-delay:-1s
+}
+.loader :nth-child(3) {
+	background:rgb(0, 75, 126);
+	animation-delay:-0.5s
+}
+.loader :last-child {
+	background:rgb(0, 75, 126)
+}
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+}
+.loader hr{ 
+	border: 0;
+	margin: 0;
+	width: 40%;
+	height: 40%;
+	position: absolute;
+	border-radius: 50%;
+	animation: spin 2s ease infinite;
+}
+@keyframes spin{
+	0%,100% {
+		transform: translate(0)
+	}
+	25% {
+		transform: translate(160%)
+	}
+	50% {
+		transform: translate(160%, 160%)
+	}
+	75% {
+		transform: translate(0, 160%)
+	}
+}
+.nav .active,
+.active > a {
+	background: rgb(0, 44, 74); 
+	color: #cecece;
+}
+.navbar-default .navbar-toggle {
+	border: 0;
+	background: rgb(0, 44, 74);
+	border-radius: 0;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	border: 0;
+	background: rgb(0, 93, 157);
+}
+.navbar {
+	background: rgb(0, 75, 126);
+	border: 0;
+	border-radius: 0;
+}
+.nav .active{
+	background: rgb(0, 44, 74);
+}
+.navbar-default .navbar-nav > li > a {
+	color: #fff;
+}
+.navbar-default .navbar-nav > li > a:hover {
+	color: #cecece;
+}
+.navbar-default .navbar-toggle span.icon-bar {
+	background: #fff;
+	border-radius: 0;
+}
+.navbar-collapse {
+	border: 0;
+}
+.span-point {
+	font-weight: bold;
+	font-size: 17px;
+}
+.span-points {
+	font-size: 20px;
+}
+#log-in-a {
+	font-family: 'Courier New', arial;
+	background: #466cb2; 
+	padding: 5px 15px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	border: 0; 
+	color: #bed5ff;
+	font-size: 16px;
+}
+#log-in-a:hover {
+	background: #77a5f8;
+}

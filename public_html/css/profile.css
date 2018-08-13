@@ -1,0 +1,14 @@
+div.info {
+	background-color: var(--some-color);
+}
+.anketa {
+    background: rgba(38, 116, 145, 0.5);
+    padding: 20px;
+}
+.today {
+    font-size: 40px;
+}
+.today-col {
+    background: rgba(0, 95, 162, 0.4);
+    padding: 15px;
+}
