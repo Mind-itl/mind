@@ -61,11 +61,6 @@
 		exit();
 	}
 
-	function asert(bool $bl) {
-		if (!$bl)
-			throw new Exception("<< assert failed >>");
-	} 
-
 	function today_rus(string $today): string { 
 		return [
 			"Monday" => "понедельник", 

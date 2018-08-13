@@ -19,17 +19,7 @@
 
 		return [$roles, $args];
 	}
-
-	(function() { //unittest
-		$roles = "classruk(9-1),zam,vospit(9-1)";
-		$expected = [
-			["classruk", "zam", "vospit"],
-			["classruk"=>"9-1", "vospit"=>"9-1"]
-		];
-
-		asert(parse_roles($roles)==$expected);
-	})();
-
+	
 	class Teacher extends User {
 		/*
 			array of enum {
