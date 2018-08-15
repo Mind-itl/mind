@@ -12,7 +12,13 @@
 	}
 
 	function sql_query_assoc(string $query) {
-		return sql_query($query)->fetch_assoc();
+		$q = sql_query($query);
+		if ($q === false) {
+			error_log("db.php:17 sql returned false");
+			$q = sql_query($query);
+		}
+
+		return $q->fetch_assoc();
 	}
 
 	function assoc_user(string $table, string $login): array {

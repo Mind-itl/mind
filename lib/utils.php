@@ -85,4 +85,8 @@
         return $noun;
     }
 	
+    function check_correct(string $str): bool {
+    	return strlen($str) !== 0 &&
+    	       preg_match("/^[a-zA-Z0-9_]+$/", $str);
+    }
 ?>
