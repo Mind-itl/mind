@@ -22,12 +22,23 @@
 	}
 
 	function assoc_user(string $table, string $login): array {
-		return sql_query_assoc("SELECT * FROM `$table` WHERE `LOGIN` = '$login'");
+		return sql_query_assoc(
+			"SELECT * FROM `$table` WHERE `LOGIN` = '$login'"
+		);
 	}
 
 	function get_student_points(string $login): int {
-		$got_points = sql_query_assoc("SELECT SUM(`POINTS`) AS SUM FROM `transactions` WHERE `TO_LOGIN`='$login'")["SUM"] ?? 0;
-		$given_points = sql_query_assoc("SELECT SUM(`POINTS`) AS SUM FROM `transactions` WHERE `FROM_LOGIN`='$login'")["SUM"] ?? 0;
+		$got_points = sql_query_assoc(
+			"SELECT SUM(`POINTS`) AS SUM
+			FROM `transactions`
+			WHERE `TO_LOGIN`='$login'"
+		)["SUM"] ?? 0;
+		
+		$given_points = sql_query_assoc(
+			"SELECT SUM(`POINTS`) AS SUM
+			FROM `transactions`
+			WHERE `FROM_LOGIN`='$login'"
+		)["SUM"] ?? 0;
 
 		return $got_points - $given_points;
  	}
@@ -37,13 +48,32 @@
  		if ($from_user->has_role("student") && $from_user->get_points() < $points)
  			return false;
 
- 		sql_query("INSERT INTO `transactions` (FROM_LOGIN, TO_LOGIN, POINTS, CAUSE) VALUES ('$from_login', '$to_login', $points, '$cause')");
+ 		sql_query(
+ 			"INSERT INTO `transactions` (
+ 				FROM_LOGIN,
+ 				TO_LOGIN,
+ 				POINTS,
+ 				CAUSE
+ 			) VALUES (
+ 				'$from_login',
+ 				'$to_login',
+ 				$points,
+ 				'$cause'
+ 			)"
+ 		);
  		return true;
  	}
 
  	function get_student_transactions(string $login): array {
  		$ret = [];
- 		$query = sql_query("SELECT * FROM `transactions` WHERE FROM_LOGIN='$login' OR TO_LOGIN='$login' ORDER BY TIME");
+ 		$query = sql_query(
+ 			"SELECT *
+ 			FROM `transactions`
+ 			WHERE
+ 				FROM_LOGIN='$login' OR
+ 				TO_LOGIN='$login'
+ 			ORDER BY TIME"
+ 		);
 
  		foreach ($query as $q) {
  			$ret[] = $q;
@@ -53,7 +83,16 @@
  	}
 
  	function get_classes_json(): string {
- 		$query = sql_query("SELECT CONCAT(CLASS_NUM, '-', CLASS_LIT) AS CLASS, GIVEN_NAME, FATHER_NAME, FAMILY_NAME, LOGIN FROM students ORDER BY CLASS_NUM, CLASS_LIT");
+ 		$query = sql_query(
+ 			"SELECT
+ 				CONCAT(CLASS_NUM, '-', CLASS_LIT) AS CLASS,
+ 				GIVEN_NAME,
+ 				FATHER_NAME,
+ 				FAMILY_NAME,
+ 				LOGIN
+ 			FROM students
+ 			ORDER BY CLASS_NUM, CLASS_LIT"
+ 		);
 		$classes = [];
 
 		foreach ($query as $student) {
