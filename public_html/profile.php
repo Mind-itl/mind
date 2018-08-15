@@ -20,14 +20,17 @@
 	        	<div class="col-md-7 col-md-offset-1">
                 	<div class="anketa">
 						<div class="info">
-							Имя: <?= get_curr()->get_full_name(); ?><br>
+							<h2>Здравствуйте, <?= get_curr()->get_full_name("gi"); ?></h2><br>
 							<?php
 								if (get_curr()->is_student()) {
 									$points = get_curr()->get_points();
                                     $noun = get_points_in_case($points);
                                     
-									echo "$points $noun";
+									echo "<h2>У Вас на счету $points $noun</h2>";
 								}
+                                else { 
+                                    echo "<h2>Должность: $points $noun</h2>";
+                                }
 							?>
 						</div>
 					</div>

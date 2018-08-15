@@ -4,6 +4,7 @@ div.info {
 .anketa {
     background: rgba(38, 116, 145, 0.5);
     padding: 20px;
+    margin-bottom: 20px;
 }
 .today {
     font-size: 40px;

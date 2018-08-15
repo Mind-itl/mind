@@ -80,7 +80,7 @@ nav {
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
 	border: 0;
-	background: rgb(0, 93, 157);
+	background: rgb(0, 93, 157)!important;
 }
 .navbar {
 	background: rgb(0, 75, 126);
@@ -122,4 +122,8 @@ nav {
 }
 #log-in-a:hover {
 	background: #77a5f8;
+}
+.brand {
+	width: 5%;
+	display: inline;
 }
