@@ -7,8 +7,12 @@
 	if (isset_post_fields("login", "cause")) {
 		$student_login = $_POST["login"];
 		$cause = $_POST['cause'];
-		
-		$result = get_curr()->give_points($student_login, $cause);
+
+		// if (!check_correct($student_login) || !check_correctc)
+		if (is_incorrect($student_login, $cause))
+			$result = false;
+		else
+			$result = get_curr()->give_points($student_login, $cause);
 	}
 ?>
 <!DOCTYPE html>

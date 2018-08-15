@@ -4,7 +4,16 @@
 	check_roles("student");
 
 	if (isset_post_fields("login", "points")) {
-		$result = get_curr()->give_points($_POST['login'], intval($_POST['points']));
+		$login = $_POST['login'];
+		$points = $_POST['points'];
+
+		if (is_incorrect($login, $points)) {
+			error_log('incorrect $login $points in give.php:11');
+			$result = false;
+		} else {
+			error_log('error give.php:14');
+			$result = get_curr()->give_points($login, intval($points));
+		}
 	}
 ?>
 

@@ -89,4 +89,15 @@
     	return strlen($str) !== 0 &&
     	       preg_match("/^[a-zA-Z0-9_]+$/", $str);
     }
+
+    function is_incorrect(string ...$strs): bool {
+    	foreach ($strs as $str) {
+    		if (!check_correct($str)) {
+    			error_log($str);
+    			return true;
+    		}
+    	}
+
+    	return false;
+    }
 ?>

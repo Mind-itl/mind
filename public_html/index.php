@@ -6,9 +6,10 @@
 		redirect("profile");
 
 	if (isset_post_fields("login", "password")) {
-		list($login, $password) = array($_POST["login"], $_POST['password']);
+		$login = $_POST['login'];
+		$password = $_POST['password'];
 
-		if (!check_correct($login) && check_correct($password))
+		if (!check_correct($login) || !check_correct($password))
 			$checked = false;
 		elseif (enter_user($login, $password))
 			redirect("profile");

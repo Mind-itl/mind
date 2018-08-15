@@ -34,7 +34,7 @@
 
  	function add_transaction(string $from_login, string $to_login, int $points, string $cause): bool {
  		$from_user = get_user($from_login);
- 		if ($from_user->has_role("student") && $from_user()->get_points() < $points)
+ 		if ($from_user->has_role("student") && $from_user->get_points() < $points)
  			return false;
 
  		sql_query("INSERT INTO `transactions` (FROM_LOGIN, TO_LOGIN, POINTS, CAUSE) VALUES ('$from_login', '$to_login', $points, '$cause')");
