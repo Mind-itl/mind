@@ -4,6 +4,9 @@
 	check_logined();
 
 	$student_login = explode('/', $_SERVER['REQUEST_URI'])[2];
+	if (is_incorrect($student_login))
+		exit();
+
 	$student = get_user($student_login, 'student');
 ?>
 <!DOCTYPE html>
