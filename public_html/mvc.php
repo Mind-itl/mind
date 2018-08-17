@@ -1,11 +1,12 @@
 <?php
 	declare(strict_types=1);
+	require_once "utils.php";
 	require_once "config.php";
 	require_once "Control.php";
 
 	function not_found() {
 		header("HTTP/1.0 404 Not Found");
-		include "404.php";
+		echo Control::process_view(load_view("404"), [], []);
 		exit();
 	}
 
@@ -27,14 +28,14 @@
 	}
 
 	function get_data_from_view(string $view): array {
-		preg_match_all("/\{\{ (.+){(.+)} \}\}/", $view, $matches, PREG_SET_ORDER);
+		preg_match_all("/\{\{ (.+)\{(.*)\} \}\}/", $view, $matches, PREG_SET_ORDER);
 		$data = [];
 
 		foreach ($matches as $key => $value) {
 			$data[$value[1]] = $value[2];
 		}
 
-		$view = preg_replace("/\{\{ (.+){(.*)} \}\}/", "", $view);
+		$view = preg_replace("/\{\{ (.+)\{(.*)\} \}\}/", "", $view);
 
 		return [$view, $data];
 	}

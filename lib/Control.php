@@ -2,7 +2,7 @@
 	declare(strict_types=1);
 
 	abstract class Control {
-		private $data;
+		protected $data;
 		private $name;
 		private $view;
 
@@ -13,13 +13,21 @@
 			$view = load_view($name);
 			list($view, $args) = get_data_from_view($view);
 
+			$this->data = $this->get_default_data();
+
 			$this->view = $view;
-			$this->data = $args;
+			add_to_arr($this->data, $args);
 		}
 
 		abstract protected function get_data(array $args): array;
 
-		protected static function process_view(string $view, array $data, array $args): string {
+		protected function get_default_data(): array {
+			return [
+				"CSS_PAGE_LINK" => "<link rel='stylesheet' href='/css/$this->name.css'>"
+			];
+		}
+
+		public static function process_view(string $view, array $data, array $args): string {
 			$clback = function($m) use ($data, $args) {
 				if (isset($data[$m[1]]))
 					return $data[$m[1]];

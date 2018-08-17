@@ -18,7 +18,7 @@ RewriteEngine on
 
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME}\.php !-f
-		RewriteRule .* /mvc.php		
+		RewriteRule .+ /mvc.php		
 
 ErrorDocument 404 /404.php
 

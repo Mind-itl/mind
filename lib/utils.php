@@ -61,18 +61,6 @@
 		exit();
 	}
 
-	function today_rus(string $today): string { 
-		return [
-			"Monday" => "понедельник", 
-			"Tuesday" => "вторник", 
-			"Wednesday" => "среда", 
-			"Thursday" => "четверг", 
-			"Friday" => "пятница", 
-			"Saturday" => "суббота", 
-			"Sunday" => "воскресенье"
-		][$today];
-	}
-
 	function get_points_in_case($points) {
 		$apoints = abs($points);
 		if ($apoints % 10 == 0 || $apoints % 10 >= 5)
@@ -88,6 +76,10 @@
     function check_correct(string $str): bool {
     	return strlen($str) !== 0 &&
     	       preg_match("/^[a-zA-Z0-9_]+$/", $str);
+    }
+
+    function tag(string $tag, string $html): string {
+    	return "<$tag>$html</$tag>";
     }
 
     function is_incorrect(string ...$strs): bool {

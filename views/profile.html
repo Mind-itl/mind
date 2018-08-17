@@ -1,0 +1,20 @@
+{{ MAIN_VIEW{} }}
+{{ TITLE{Профиль} }}
+<div class="col-md-7 col-md-offset-1">
+	<div class="anketa">
+		<div class="info">
+			<h2>Здравствуйте, {{ NAME }}</h2><br>
+			{{ USER_INFO }}
+		</div>
+	</div>
+</div>
+<div class="col-md-3 today-col">
+	<span class="today">
+		Сегодня: {{ TODAY }}
+	</span>
+	<span class="timetable">
+		<table class="table table-bordered" style="margin-top: 20px;">
+			{{ TIMETABLE }}
+		</table>
+	</span>
+</div>
