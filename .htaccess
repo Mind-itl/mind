@@ -10,12 +10,15 @@ php_value include_path ".:/storage/ssd5/448/2591448/lib"
 Header unset Cache-Control
 
 RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME}\.php -f
+		RewriteRule ^(.*)$ $1.php
 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-	RewriteRule ^(.*)$ $1.php
+	RewriteRule student/(.+) /student.php
 
-RewriteRule student/(.+) /student.php
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME}\.php !-f
+		RewriteRule .* /mvc.php		
 
 ErrorDocument 404 /404.php
 
