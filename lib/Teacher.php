@@ -94,5 +94,9 @@
 
 			return $ret;
 		}
+
+		public function get_roles(): array {
+			return $this->roles;
+		}
 	}
 ?>
