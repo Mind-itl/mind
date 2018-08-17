@@ -1,0 +1,25 @@
+{{ MAIN_VIEW{} }}
+{{ TITLE{Выписка по классу} }}
+<div class="col-md-12">
+	<span class="span-point" style="font-weight: bold;">Итого по классу:</span>
+	<span class="span-points">
+		{{ CLASS_SUM }}
+	</span>
+
+	<table class="table table-bordered table-hover">
+		<tr>
+			<th>Ученик</th>
+			<th>Баллы</th>
+			<th>Подробнее</th>
+		</tr>
+		{{ CLASS_TABLE }}
+		<tr>
+			<td class="summ">
+				Итого:
+			</td>
+			<td class="no-right" colspan="2">
+				{{ CLASS_SUM }}
+			</td>
+		</tr>
+	</table>
+</div>

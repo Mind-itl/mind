@@ -14,11 +14,11 @@ RewriteEngine on
 	RewriteCond %{REQUEST_FILENAME}\.php -f
 		RewriteRule ^(.*)$ $1.php
 
-	RewriteRule student/(.+) /student.php
-
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME}\.php !-f
 		RewriteRule .+ /mvc.php		
+
+	RewriteRule student/(.+) /student.php
 
 ErrorDocument 404 /404.php
 

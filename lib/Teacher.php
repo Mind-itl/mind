@@ -89,7 +89,7 @@
 					$class[] = $student;
 				}
 
-				$ret["Ваш класс:"] = $class;
+				$ret = $class;
 			}
 
 			return $ret;
