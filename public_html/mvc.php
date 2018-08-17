@@ -39,6 +39,23 @@
 		return [$view, $data];
 	}
 
+	function get_control_name(string $c): string {
+		$x = strtoupper(substr($c, 0, 1));
+		$xs = substr($c, 1);
+		return "$x{$xs}_control";
+	}
+
+	function load_control(string $c): Control {
+		require_once CONTROLS."$c.php";
+		$c = get_control_name($c);
+		return new $c;
+	}
+
+	function has_control(string $control_name): bool {
+		$control_file = CONTROLS."$control_name.php";
+		return file_exists($control_file);
+	}
+
 	function mvc_main() {
 		$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));
 		$control = $url[0];
@@ -50,8 +67,7 @@
 			not_found();
 		}
 
-		$control_name = "Curr_control";
-		$conr = new $control_name;
+		$conr = load_control($control);
 		echo $conr->get_html($url);
 	}
 	mvc_main();
