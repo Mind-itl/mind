@@ -1,4 +1,6 @@
 <?php
+	declare(strict_types=1);
+
 	const causes_list = [
 		[
 			"title" => "Победитель международной олимпиады",
