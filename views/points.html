@@ -1,0 +1,28 @@
+{{ MAIN_VIEW{} }}
+{{ TITLE{Баллы} }}
+
+<div class="col-md-12">
+	<span class="span-point">
+		Текущее количество баллов: 
+	</span>
+	<span class="span-points">
+		{{ SUM }}	
+	</span>
+	<table class="table table-bordered table-hover">
+		<tr>
+			<th>Дата</th>
+			<th>Отправитель</th>
+			<th>Причина</th>
+			<th>Количество</th>
+		</tr>
+		{{ TABLE }}
+		<tr>
+			<td colspan="3" class="summ">
+				Итого:
+			</td>
+			<td class="no-right">
+				{{ SUM }}
+			</td>
+		</tr>
+	</table>
+</div>

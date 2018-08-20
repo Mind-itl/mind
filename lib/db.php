@@ -134,6 +134,14 @@
  	}
 
  	function get_cause_title(string $cause): string {
+ 		$special_codes = [
+ 			'D' => 'Начальные баллы',
+ 			'C' => 'Передача баллов',
+ 		];
+
+ 		if (isset($special_codes[$cause]))
+ 			return $special_codes[$cause]; 
+
  		foreach (causes_list as $v) {
  			if ($v["code"] == $cause)
  				return $v['title'];
