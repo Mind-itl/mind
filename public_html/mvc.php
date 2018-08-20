@@ -62,6 +62,11 @@
 		$control = $url[0];
 		$control_file = CONTROLS."$control.php";
 
+		if ($control === "") {
+			require_once "index.php";
+			exit();
+		}
+
 		if (file_exists($control_file)) {
 			require $control_file;
 		} else {
