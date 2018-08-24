@@ -4,6 +4,10 @@
 	class Student_control extends Control {
 		private $row_view;
 
+		public function has_access(array $args): bool {
+			return is_logined();
+		}
+
 		protected function get_data(array $args): array {
 			$user = get_user($args[1]);
 			list($table, $sum) = $this->pre_table($user);

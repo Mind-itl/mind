@@ -10,6 +10,10 @@
 		exit();
 	}
 
+	function no_access() {
+		redirect("/");
+	}
+
 	function add_to_arr(&$arr, $arr2) {
 		foreach ($arr2 as $key => $value) {
 			$arr[$key] = $value;
@@ -28,14 +32,14 @@
 	}
 
 	function get_data_from_view(string $view): array {
-		preg_match_all("/\{\{ (.+)\{(.*)\} \}\}/", $view, $matches, PREG_SET_ORDER);
+		preg_match_all("/\{\{ (.+?)\{(.*?)\} \}\}/s", $view, $matches, PREG_SET_ORDER);
 		$data = [];
 
 		foreach ($matches as $key => $value) {
 			$data[$value[1]] = $value[2];
 		}
 
-		$view = preg_replace("/\{\{ (.+)\{(.*)\} \}\}/", "", $view);
+		$view = preg_replace("/\{\{ (.+?)\{(.*?)\} \}\}/s", "", $view);
 
 		return [$view, $data];
 	}
@@ -74,7 +78,12 @@
 		}
 
 		$conr = load_control($control);
-		echo $conr->get_html($url);
+
+		if ($conr->has_access($url)) {
+			echo $conr->get_html($url);
+		} else {
+			no_access();
+		}
 	}
 	mvc_main();
 ?>

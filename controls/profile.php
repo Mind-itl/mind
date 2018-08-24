@@ -1,8 +1,6 @@
 <?php
 	require_once "utils.php";
 
-	check_logined();
-
 	function today_rus(string $today): string { 
 		return [
 			"Monday" => "понедельник", 
@@ -16,6 +14,10 @@
 	}
 
 	class Profile_control extends Control {
+		public function has_access(array $args): bool {
+			return is_logined();
+		}
+
 		private $roles_r = [
 			"predmet" => "учитель-предметник",
 			"classruk" => "классный руководитель",
@@ -47,7 +49,7 @@
 				$points = get_curr()->get_points();
 				$noun = get_points_in_case($points);
 				
-				$str .= "<h2>У Вас на счету $points $noun</h2>";
+				$str .= "<h2>У Вас на счету $noun</h2>";
 			}
 			else {
 				foreach (get_curr()->get_roles() as $role) {

@@ -1,6 +1,4 @@
 <?php
-	check_roles("classruk");
-
 	class Class_control extends Control {
 		private $row_view;
 
@@ -14,6 +12,10 @@
 
 		private function class_sum(): string {
 			return "$this->points_sum";
+		}
+
+		public function has_access(array $args): bool {
+			return get_curr()->has_role("classruk");
 		}
 
 		private function class_row(array $row): string {

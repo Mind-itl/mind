@@ -1,8 +1,11 @@
 <?php
 	declare(strict_types=1);
-	
+
 	require_once "users.php";
 	require_once "templates.php";
+	
+	const CONTROLS = ROOT."controls/";
+	const VIEWS = ROOT."views/";
 
 	session_start();
 	
@@ -70,7 +73,7 @@
 		else
 			$noun = "балла";
 
-        return $noun;
+        return "$points $noun";
     }
 	
     function check_correct(string $str): bool {

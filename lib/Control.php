@@ -6,6 +6,10 @@
 		private $name;
 		private $view;
 
+		protected function get(string $key): string {
+			return $this->data[$key];
+		}
+
 		protected function __construct(string $name) {
 			$this->name = $name;
 			$this->data = [];
@@ -43,6 +47,10 @@
 
 			$view = preg_replace_callback("/\{\{ (.+) \}\}/", $clback, $view);
 			return $view;
+		}
+
+		public function has_access(array $args): bool {
+			return true;
 		}
 
 		public function get_html(array $args): string {
