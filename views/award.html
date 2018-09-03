@@ -1,5 +1,5 @@
 {{ MAIN_VIEW{} }}
-{{ TITLE{Передать баллы} }}
+{{ TITLE{Изменить баллы} }}
 
 {{ SUCCESS_DIV{
 	<div class="alert alert-info alert-dismissable">
@@ -15,18 +15,19 @@
 } }}
 
 <div class="col-md-10 col-md-offset-1">
-	{{ RESULT_DIV }}
-	<span class="span-point">Ваш баланс:</span>
-	<span class="span-points">{{ POINTS }}</span>
 	<script>
 		var causes_list = {{ CAUSES }};
 	</script>
+	{{ RESULT_DIV }}
 	<form action="" method="POST">
-		<div class="lab">
-			<label for="to">Выберите ученика:</label><br>
-			{{ select_student }}
-		</div>
-		<input placeholder="Введите количество баллов" class="form-control" type="number" name="points" min="0" id="number">
+		<label for="award_kind">Выберите ученика:</label><br>
+		{{ select_student }}
+		<label for="award_kind">Выберите категорию причины:</label><br>
+		<select id="award_kind" class="form-control"></select><br>
+		<label for="award_cause">Выберите причину:</label>
+		<select name="cause" id="award_cause" class="form-control"></select><br>
+		<script src="js/cause.js"></script>
+		
 		<input type="submit" id="log-in-a">
 	</form>
 </div>

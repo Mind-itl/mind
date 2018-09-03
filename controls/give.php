@@ -25,7 +25,7 @@
 			}
 
 			return [
-				"RESULT" => $result ?? "",
+				"RESULT_DIV" => $result ?? "",
 				"POINTS" => get_points_in_case(get_curr()->get_points())
 			];
 		}
