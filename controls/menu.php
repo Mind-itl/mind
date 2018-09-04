@@ -5,7 +5,7 @@
 		private $button_view;
 		private $buttons = [
 			// [role, title, url, class (maybe)]
-			["all", "Мой профиль", "/profile"],
+			["all", "Мой профиль", "/"],
 			["student", "Выписка по баллам", "/points"],
 			["student", "Передать баллы", "/give"],
 			["teacher", "Изменить баллы", "/award"],

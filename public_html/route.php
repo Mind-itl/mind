@@ -64,12 +64,15 @@
 	function mvc_main() {
 		$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));
 		$control = $url[0];
-		$control_file = CONTROLS."$control.php";
 
 		if ($control === "") {
-			require_once "index.php";
-			exit();
+			if (is_logined())
+				$control = "profile";
+			else
+				$control = "register";
 		}
+
+		$control_file = CONTROLS."$control.php";
 
 		if (file_exists($control_file)) {
 			require $control_file;

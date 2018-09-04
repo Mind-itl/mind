@@ -18,8 +18,6 @@ RewriteEngine on
 	RewriteCond %{REQUEST_FILENAME}\.php !-f
 		RewriteRule .+ /route.php
 
-	RewriteRule student/(.+) /student.php
-
 ErrorDocument 404 /404.php
 
 AddDefaultCharset utf-8
