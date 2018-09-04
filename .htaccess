@@ -3,22 +3,16 @@ php_flag display_startup_errors on
 php_value error_reporting 32767
 
 php_flag log_errors on
-php_value error_log  /storage/ssd5/448/2591448/public_html/errors.log
+php_value error_log  /home/c/cy73361/ITLKPFU/public_html/errors.log
 
-php_value include_path ".:/storage/ssd5/448/2591448/lib"
+php_value include_path ".:/home/c/cy73361/ITLKPFU/lib"
 
 Header unset Cache-Control
 
 RewriteEngine on
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteCond %{REQUEST_FILENAME}\.php -f
-		RewriteRule ^(.*)$ $1.php
-
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME}\.php !-f
-		RewriteRule .+ /mvc.php		
-
-	RewriteRule student/(.+) /student.php
+		RewriteRule .+ /route.php
 
 ErrorDocument 404 /404.php
 
