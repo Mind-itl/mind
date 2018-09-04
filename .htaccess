@@ -10,9 +10,15 @@ php_value include_path ".:/home/c/cy73361/ITLKPFU/lib"
 Header unset Cache-Control
 
 RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME}\.php -f
+		RewriteRule ^(.*)$ $1.php
+
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME}\.php !-f
 		RewriteRule .+ /route.php
+
+	RewriteRule student/(.+) /student.php
 
 ErrorDocument 404 /404.php
 
