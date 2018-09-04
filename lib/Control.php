@@ -45,7 +45,7 @@
 				return $m[0];
 			};
 
-			$view = preg_replace_callback("/\{\{ (.+) \}\}/", $clback, $view);
+			$view = preg_replace_callback("/\{\{ (.+?) \}\}/", $clback, $view);
 			return $view;
 		}
 

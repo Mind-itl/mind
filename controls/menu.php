@@ -4,14 +4,13 @@
 	class Menu_control extends Control {
 		private $button_view;
 		private $buttons = [
-			// [role, title, url]
+			// [role, title, url, class (maybe)]
 			["all", "Мой профиль", "/profile"],
 			["student", "Выписка по баллам", "/points"],
 			["student", "Передать баллы", "/give"],
 			["teacher", "Изменить баллы", "/award"],
 			["classruk", "Выписка по классу", "/class"],
 			["all", "Расписание", "/calendar"],
-			["all", "Выйти", "/out"]
 		];
 
 		public function __construct() {
@@ -23,16 +22,17 @@
 			$b = "";
 			foreach ($this->buttons as $button) {
 				if ($button[0]=="all" || get_curr()->has_role($button[0])) {
-					$b .= $this->button($button[1], $button[2]);
+					$b .= $this->button($button[1], $button[2], $button[3] ?? "");
 				}
 			}
 			return $b;
 		}
 
-		private function button(string $title, string $link) {
+		private function button(string $title, string $link, string $class) {
 			return $this->process_view($this->button_view, [
 				"URL" => $link,
-				"TITLE" => $title
+				"TITLE" => $title,
+				"CLASS" => $class
 			], []);
 		}
 
