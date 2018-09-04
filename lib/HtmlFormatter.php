@@ -22,7 +22,7 @@ class HtmlFormatter {
 			}
 			else if ($element['standalone'])
 			{
-				$output[] = "\n".str_repeat($indentWith, $indent).trim($element['content']);
+				$output[] = str_repeat($indentWith, $indent).trim($element['content']);
 			}
 			else if ($element['closing'])
 			{
