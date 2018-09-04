@@ -71,20 +71,23 @@
 		}
 
 		private function timetable(): string {
-			$lessons = [
-				["Математика", "203"],
-				["Математика", "203"],
-				["Русский язык", "203"],
-				["Биология", "316"],
-				["География", "316"],
-				["Физическая культура", "115"],
-				["Подготовка к ОГЭ (русский язык)", "104"],
-				["Подготовка к ОГЭ (русский язык)", "104"],
-			];
+			if (get_curr()->is_teacher())
+				return "";
+
+			$day = date("l");
+			$class = get_curr()->get_class();
+
+			$lessons = sql_query(
+				"SELECT LESSON, PLACE
+				FROM lessons
+				WHERE
+					CLASS='$class' AND
+					WEEKDAY='$day'
+				ORDER BY NUMBER");
 
 			$str = "";
 			foreach ($lessons as $lesson) {
-				$s = tag("td", $lesson[0]) . tag("td", $lesson[1]);
+				$s = tag("td", $lesson["LESSON"]) . tag("td", $lesson["PLACE"]);
 				$str .= tag("tr", $s);
 			}
 
