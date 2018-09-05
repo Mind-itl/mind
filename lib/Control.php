@@ -2,7 +2,7 @@
 	declare(strict_types=1);
 	require_once "HtmlFormatter.php";
 
-	abstract class Control {
+	class Control {
 		protected $data;
 		private $name;
 		private $view;
@@ -11,7 +11,7 @@
 			return $this->data[$key];
 		}
 
-		protected function __construct(string $name) {
+		public function __construct(string $name) {
 			$this->name = $name;
 			$this->data = [];
 			
@@ -24,7 +24,9 @@
 			add_to_arr($this->data, $args);
 		}
 
-		abstract protected function get_data(array $args): array;
+		protected function get_data(array $args): array {
+			return [];
+		}
 
 		protected function get_default_data(): array {
 			return [

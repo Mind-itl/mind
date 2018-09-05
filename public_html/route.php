@@ -37,7 +37,6 @@
 		$data = [];
 
 		foreach ($matches as $key => $value) {
-			// echo "|$value[0]|";
 			$data[$value[1]] = $value[2];
 		}
 
@@ -65,30 +64,29 @@
 
 	function mvc_main() {
 		$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));
-		$control = $url[0];
+		$control_name = $url[0];
 
-		if ($control === "") {
+		if ($control_name === "") {
 			if (is_logined())
-				$control = "profile";
+				$control_name = "profile";
 			else
-				$control = "signin";
+				$control_name = "signin";
 		}
 
-		$control_file = CONTROLS."$control.php";
+		if (has_control($control_name)) {
+			$control = load_control($control_name);
 
-		if (file_exists($control_file)) {
-			require $control_file;
-		} else {
+			if ($control->has_access($url))
+				echo $control->get_html($url);
+			else
+				no_access();
+
+		} elseif (has_view($control_name)) {
+			$control = new Control($control_name);
+			echo $control->get_html($url);
+		} else
 			not_found();
-		}
-
-		$conr = load_control($control);
-
-		if ($conr->has_access($url)) {
-			echo $conr->get_html($url);
-		} else {
-			no_access();
-		}
 	}
+
 	mvc_main();
 ?>
