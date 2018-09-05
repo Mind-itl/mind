@@ -2,7 +2,6 @@
 	declare(strict_types=1);
 
 	require_once "users.php";
-	require_once "templates.php";
 	
 	const CONTROLS = ROOT."controls/";
 	const VIEWS = ROOT."views/";

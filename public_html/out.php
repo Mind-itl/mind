@@ -3,5 +3,5 @@
 
 	$_SESSION['login'] = null;
 
-	redirect("/index.php");
+	redirect("/");
 ?>

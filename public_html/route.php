@@ -32,14 +32,16 @@
 	}
 
 	function get_data_from_view(string $view): array {
-		preg_match_all("/\{\{ (.+?)\{(.*?)\} \}\}/s", $view, $matches, PREG_SET_ORDER);
+		$r = "/\{\{ ([^\}]+?)\{(.*?)\} \}\}/s";
+		preg_match_all($r, $view, $matches, PREG_SET_ORDER);
 		$data = [];
 
 		foreach ($matches as $key => $value) {
+			// echo "|$value[0]|";
 			$data[$value[1]] = $value[2];
 		}
 
-		$view = preg_replace("/\{\{ (.+?)\{(.*?)\} \}\}/s", "", $view);
+		$view = preg_replace($r, "", $view);
 
 		return [$view, $data];
 	}
@@ -69,7 +71,7 @@
 			if (is_logined())
 				$control = "profile";
 			else
-				$control = "register";
+				$control = "signin";
 		}
 
 		$control_file = CONTROLS."$control.php";

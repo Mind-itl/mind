@@ -37,7 +37,7 @@ class HtmlFormatter {
 			else if ($element['text'])
 			{
 				
-				$output[] = "\n".str_repeat($indentWith, $indent).preg_replace('/ [ \t]*/', ' ', $element['content']);
+				$output[] = "\n".str_repeat($indentWith, $indent >= 0 ? $indent : 0).preg_replace('/ [ \t]*/', ' ', $element['content']);
 			}
 			else if ($element['comment'])
 			{

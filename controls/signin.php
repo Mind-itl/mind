@@ -2,9 +2,9 @@
 	require_once "utils.php";
 	require_once "passwords.php";
 
-	class Register_control extends Control {
+	class Signin_control extends Control {
 		public function __construct() {
-			parent::__construct("register");
+			parent::__construct("signin");
 		}
 
 		public function has_access(array $args): bool {
