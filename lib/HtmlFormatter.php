@@ -1,6 +1,6 @@
 <?php
 class HtmlFormatter {
-	public static function format($html, $indentWith = '	', $tagsWithoutIndentation = 'html,link,img,meta') {
+	public static function format($html, $indentWith = "\t", $tagsWithoutIndentation = 'html,link,img,meta') {
 		
 		$html = preg_replace('/\\r?\\n([^\s])/', ' $1', $html);
 		

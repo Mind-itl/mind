@@ -30,7 +30,6 @@
 		private $role_args;
 
 		private function download_from_bd() {
-			// $st_assoc = sql_query_assoc("SELECT * FROM `teachers` WHERE `LOGIN` = '$this->login'");
 			$st_assoc = assoc_user("teachers", $this->login);
 
 			$this->given_name = $st_assoc["GIVEN_NAME"];

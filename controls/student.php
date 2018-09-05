@@ -1,6 +1,4 @@
 <?php
-	// check_roles("student");
-
 	class Student_control extends Control {
 		private $row_view;
 
