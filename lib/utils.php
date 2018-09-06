@@ -64,6 +64,11 @@
 	}
 
 	function get_points_in_case($points) {
+		$noun = get_points_case($points);
+        return "$points $noun";
+    }
+
+    function get_points_case($points) {
 		$apoints = abs($points);
 		if ($apoints % 10 == 0 || $apoints % 10 >= 5)
 			$noun = "баллов";
@@ -72,7 +77,7 @@
 		else
 			$noun = "балла";
 
-        return "$points $noun";
+        return $noun;
     }
 	
     function check_correct(string $str): bool {

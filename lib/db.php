@@ -78,12 +78,17 @@
  	function get_student_transactions(string $login): array {
  		$ret = [];
  		$query = sql_query(
- 			"SELECT *
+ 			"SELECT
+ 				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NORM_TIME,
+ 				FROM_LOGIN,
+ 				TO_LOGIN,
+ 				CAUSE,
+ 				POINTS
  			FROM `transactions`
  			WHERE
  				FROM_LOGIN='$login' OR
  				TO_LOGIN='$login'
- 			ORDER BY TIME"
+ 			ORDER BY TIME DESC"
  		);
 
  		foreach ($query as $q) {
@@ -176,7 +181,7 @@
 
  	function get_notifications(User $user): array {
  		$login = $user->get_login();
- 		$s = sql_query("SELECT * FROM notifications WHERE TO_USER='$login' ORDER BY TIME");
+ 		$s = sql_query("SELECT DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS TIME, MESSAGE, READED FROM notifications WHERE TO_USER='$login' ORDER BY TIME DESC");
 
  		$nots = [];
  		foreach ($s as $v) {

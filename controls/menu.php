@@ -10,7 +10,7 @@
 			["student", "Передать баллы", "/give"],
 			["teacher", "Изменить баллы", "/award"],
 			["classruk", "Выписка по классу", "/class"],
-			["all", "Расписание", "/calendar"],
+			["all", "Расписание", "/timetable"],
 		];
 
 		public function __construct() {

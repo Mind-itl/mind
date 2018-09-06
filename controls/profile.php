@@ -68,17 +68,16 @@
 
 			if (get_curr()->is_student()) {
 				$points = get_curr()->get_points();
-				$noun = get_points_in_case($points);
+				$noun = get_points_case($points);
 				
-				$str .= "<h2>У Вас на счету $noun</h2>";
-			}
-			else {
+				$str .= "У Вас на счету <strong>$points</strong> $noun";
+			} else {
 				foreach (get_curr()->get_roles() as $role) {
 					$rol = $this->roles_r[$role] ?? $role;
 					$str .= "$rol, ";
 				}  
 				$str = substr($str, 0, -2);
-				$str = "<h2>Должность: $str";
+				$str = "Должность: $str";
 			}
 
 			return $str;

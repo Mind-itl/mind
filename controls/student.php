@@ -62,7 +62,7 @@
 					'cause' => $cause,
 					'from' => $name,
 					'cls' => $cls,
-					'time' => $trans["TIME"],
+					'time' => $trans["NORM_TIME"],
 					'points' => $trans["POINTS"]
 				];
 

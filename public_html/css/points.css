@@ -1,24 +1,9 @@
 .from_me {
 	color: red
 }
-
 .not_from_me {
 	color: green
 }
-.summ {
-	text-align: right; 
-	font-weight: bold
-}
 th, tr, td {
 	border: 1px solid rgb(0, 44, 74);
-}
-.table-hover tr:hover {
-	background: rgba(0, 127, 216, 0.1)!important;
-}
-table {
-	border: 2px solid rgb(0, 44, 74);
-	border-top: 2px solid rgb(0, 44, 74);
-	border-left: 0;
-	border-right: 0;
-	margin-top: 10px;
 }

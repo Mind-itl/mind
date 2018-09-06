@@ -8,15 +8,17 @@ body {
 nav {
 	background-color: var(--some-color);
 }
-#log-in-s {
+.log-in-s {
 	font-family: 'Courier New', arial;
 	background: #466cb2; 
 	padding: 5px 15px; 
 	border: 0; 
 	color: #bed5ff;
+	height: 30px !important;
 }
-#log-in-s:hover {
+.log-in-s:hover {
 	background: #77a5f8;
+	color: white;
 }
 #number {
 	margin-bottom: 10px;
@@ -139,4 +141,23 @@ nav {
 }
 .index-notification {
 	color: white;
+}
+.notification-time {
+	color: rgba(0, 0, 0, 0.5);
+	border-left: 3px solid rgba(0, 100, 200, 0.2);
+}
+
+.table-hover tr:hover {
+	background: rgba(0, 127, 216, 0.1)!important;
+}
+table {
+	border: 2px solid rgb(0, 44, 74);
+	border-top: 2px solid rgb(0, 44, 74);
+	border-left: 0;
+	border-right: 0;
+	margin-top: 10px;
+}
+.summ {
+	text-align: right; 
+	font-weight: bold
 }
