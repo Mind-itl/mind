@@ -37,6 +37,8 @@
 		}
 
 		private function notifications(): string {
+			$notification_view = load_view("profile_notification_row");
+
 			$read_class = $this->get("CHECKED_MESSAGE_TR_CLASS");
 			$unread_class = $this->get("UNCHECKED_MESSAGE_TR_CLASS");
 			
@@ -44,12 +46,11 @@
 
 			$str = "";
 			foreach ($nots as $v) {
-				$s = "";
-				foreach ($v as $key => $value) {
-					$s .= tag('td', $value);
-				}
-
-				$str .= tag('tr', $s);
+				$str .= $this->process_view($notification_view, [
+					"CLASS" => $v["read"] ? $read_class : $unread_class,
+					"MESSAGE" => $v["message"],
+					"TIME" => $v["time"]
+				], []);
 			}
 
 			return $str;

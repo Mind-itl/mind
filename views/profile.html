@@ -1,6 +1,6 @@
 {{ MAIN_VIEW{} }}
 {{ TITLE{Профиль} }}
-<div class="col-md-7 col-md-offset-1">
+<div class="col-md-6 col-md-offset-1">
 	<div class="anketa">
 		<div class="info">
 			<h2>Здравствуйте, {{ NAME }}</h2><br>
@@ -18,11 +18,12 @@
 		</table>
 	</span>
 </div>
-<div class="col-md-3 notifications-col">
+<div class="col-md-4 col-md-offset-1 notifications-col">
 	<span class="notifications">
 		<table class="table table-bordered" style="margin-top: 20px;">
-			{{ CHECKED_MESSAGE_TR_CLASS{Rinat_napishi_suda_class_dlya_tr_kotorie_prochitali} }}	
-			{{ UNCHECKED_MESSAGE_TR_CLASS{Rinat_napishi_suda_class_dlya_tr_kotorie_ne_prochitali} }}	
+			{{ CHECKED_MESSAGE_TR_CLASS{read-notification} }}	
+			{{ UNCHECKED_MESSAGE_TR_CLASS{unread-notification} }}
+
 			{{ NOTIFICATIONS }}
 		</table>
 	</span>

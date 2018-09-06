@@ -127,3 +127,16 @@ nav {
 	width: 5%;
 	display: inline;
 }
+.unread-notification {
+	background: rgba(0, 70, 170, 0.3);
+}
+.unread-notification td,
+.read-notification td {
+	border-bottom: 3px solid rgba(0, 100, 200, 0.2);
+}
+.read-notification {
+	background: rgba(0, 70, 170, 0.1);
+}
+.index-notification {
+	color: white;
+}
