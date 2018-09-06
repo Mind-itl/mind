@@ -45,8 +45,14 @@
 
  	function add_transaction(string $from_login, string $to_login, int $points, string $cause): bool {
  		$from_user = get_user($from_login);
+ 		$to_user = get_user($to_login);
+
+ 		if (!$to_user->has_role("student"))
+ 			return false;
+
  		if ($from_user->has_role("student") && $from_user->get_points() < $points)
  			return false;
+
 
  		sql_query(
  			"INSERT INTO `transactions` (
@@ -61,6 +67,11 @@
  				'$cause'
  			)"
  		);
+
+ 		$points = get_points_in_case($points);
+ 		$name = $to_user->get_full_name();
+ 		add_notification($to_user, "$name перечислил(а) вам $points");
+
  		return true;
  	}
 
@@ -146,5 +157,36 @@
  			if ($v["code"] == $cause)
  				return $v['title'];
  		}
+ 	}
+
+ 	function add_notification(User $user, string $message) {
+ 		$login = $user->get_login();
+ 		sql_query(
+ 			"INSERT INTO notifications (
+ 				TO_USER,
+ 				MESSAGE,
+ 				READED
+ 			) VALUES (
+				'$login',
+				'$message',
+				FALSE
+			)"
+		);
+ 	}
+
+ 	function get_notifications(User $user): array {
+ 		$login = $user->get_login();
+ 		$s = sql_query("SELECT * FROM notifications WHERE TO_USER='$login' ORDER BY TIME");
+
+ 		$nots = [];
+ 		foreach ($s as $v) {
+ 			$nots[] = [
+ 				"time" => $v["TIME"],
+ 				"message" => $v["MESSAGE"],
+ 				"read" => $v["READED"]
+ 			];
+ 		}
+
+ 		return $nots;
  	}
 ?>

@@ -31,8 +31,28 @@
 				"NAME" => $this->name(),
 				"USER_INFO" => $this->user_info(),
 				"TODAY" => $this->today(),
-				"TIMETABLE" => $this->timetable()
+				"TIMETABLE" => $this->timetable(),
+				"NOTIFICATIONS" => $this->notifications()
 			];
+		}
+
+		private function notifications(): string {
+			$read_class = $this->get("CHECKED_MESSAGE_TR_CLASS");
+			$unread_class = $this->get("UNCHECKED_MESSAGE_TR_CLASS");
+			
+			$nots = get_notifications(get_curr());
+
+			$str = "";
+			foreach ($nots as $v) {
+				$s = "";
+				foreach ($v as $key => $value) {
+					$s .= tag('td', $value);
+				}
+
+				$str .= tag('tr', $s);
+			}
+
+			return $str;
 		}
 
 		private function name(): string {
