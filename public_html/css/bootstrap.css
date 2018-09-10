@@ -5061,6 +5061,11 @@ a.thumbnail.active {
 .alert-success .alert-link {
   color: #2b542c;
 }
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #555;
+}
 .alert-info hr {
   border-top-color: #a6e1ec;
 }
