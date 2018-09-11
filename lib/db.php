@@ -185,7 +185,8 @@
  			"SELECT
  				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NTIME,
  				MESSAGE,
- 				READED
+ 				READED,
+ 				ID
  			FROM notifications
  			WHERE TO_USER='$login'
  			ORDER BY TIME DESC"
@@ -196,7 +197,8 @@
  			$nots[] = [
  				"time" => $v["NTIME"],
  				"message" => $v["MESSAGE"],
- 				"read" => $v["READED"]
+ 				"read" => $v["READED"],
+ 				"id" => $v["ID"]
  			];
  		}
 

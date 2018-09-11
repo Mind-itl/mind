@@ -71,7 +71,8 @@
 				$str .= $this->process_view($notification_view, [
 					"CLASS" => $v["read"] ? $read_class : $unread_class,
 					"MESSAGE" => $v["message"],
-					"TIME" => $v["time"]
+					"TIME" => $v["time"],
+					"ID" => $v["id"]
 				], []);
 			}
 
