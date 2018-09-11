@@ -181,12 +181,20 @@
 
  	function get_notifications(User $user): array {
  		$login = $user->get_login();
- 		$s = sql_query("SELECT DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS TIME, MESSAGE, READED FROM notifications WHERE TO_USER='$login' ORDER BY TIME DESC");
+ 		$s = sql_query(
+ 			"SELECT
+ 				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NTIME,
+ 				MESSAGE,
+ 				READED
+ 			FROM notifications
+ 			WHERE TO_USER='$login'
+ 			ORDER BY TIME DESC"
+ 		);
 
  		$nots = [];
  		foreach ($s as $v) {
  			$nots[] = [
- 				"time" => $v["TIME"],
+ 				"time" => $v["NTIME"],
  				"message" => $v["MESSAGE"],
  				"read" => $v["READED"]
  			];
