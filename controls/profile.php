@@ -32,8 +32,30 @@
 				"USER_INFO" => $this->user_info(),
 				"TODAY" => $this->today(),
 				"TIMETABLE" => $this->timetable(),
-				"NOTIFICATIONS" => $this->notifications()
+				"NOTIFICATIONS" => $this->notifications(),
+				"DAYTIME" => $this->daytime(),
 			];
+		}
+
+		private function daytime(): string {
+			$h = (new DateTime())->format("H");
+			$h = intval($h);
+
+			$night   = "Доброй ночи" ;
+			$morning = "Доброе утро" ;
+			$day     = "Добрый день" ;
+			$evening = "Добрый вечер";
+
+			if ($h < 5)
+				return $night;
+			elseif ($h < 12)
+				return $morning;
+			elseif ($h < 16)
+				return $day;
+			elseif ($h < 22)
+				return $evening;
+
+			return $night;
 		}
 
 		private function notifications(): string {
