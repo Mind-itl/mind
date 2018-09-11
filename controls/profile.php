@@ -83,18 +83,35 @@
 			return $str;
 		}
 
-		private function today(): string {
-			$r = today_rus(date("l"));
-			$d = date("d.m.Y");
+		private function table_date(): DateTime {
+			$today = new DateTime();
+			$tomorrow = new DateTime('tomorrow');
 
-			return "$r, $d";
+			$h = $today->format('H');
+			$h = intval($h);
+
+			if ($h >= 13)
+				return $tomorrow;
+			else
+				return $today;
+		}
+
+		private function today(): string {
+			$a = $this->table_date();
+			$d = $a->format("d.m.Y"); 
+
+			$r = $a->format("l");
+			$r = today_rus($r);
+
+			$n = ($a == new DateTime()) ? "Сегодня" : "Завтра";
+			return "$n: $r, $d";
 		}
 
 		private function timetable(): string {
 			if (get_curr()->is_teacher())
 				return "";
 
-			$day = date("l");
+			$day = $this->table_date()->format("l");
 			$class = get_curr()->get_class();
 
 			$lessons = sql_query(
