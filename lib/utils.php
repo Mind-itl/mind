@@ -99,4 +99,28 @@
 
     	return false;
     }
+
+    function today_rus(string $today): string { 
+		return [
+			"Monday" => "Понедельник", 
+			"Tuesday" => "Вторник", 
+			"Wednesday" => "Среда", 
+			"Thursday" => "Четверг", 
+			"Friday" => "Пятница", 
+			"Saturday" => "Суббота", 
+			"Sunday" => "Воскресенье"
+		][$today];
+	}
+
+	function today_en(string $today): string {
+		return [
+			"Понедельник" => "Monday", 
+			"Вторник" => "Tuesday", 
+			"Среда" => "Wednesday", 
+			"Четверг" => "Thursday", 
+			"Пятница" => "Friday", 
+			"Суббота" => "Saturday", 
+			"Воскресенье" => "Sunday"
+		][$today];
+	}
 ?>

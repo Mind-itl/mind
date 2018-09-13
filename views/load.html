@@ -1,0 +1,14 @@
+{{ MAIN_VIEW{} }}
+{{ TITLE{Загрузить данные} }}
+
+<form action="" method="POST" enctype="multipart/form-data">
+	{{ ASD }}
+	<select name="excel_type">
+		<option>Расписание</option>
+		<option>Ученики</option>
+		<option>Кружки</option>
+	</select>
+
+	<input type="file" name="excel">
+	<input type="submit">
+</form>

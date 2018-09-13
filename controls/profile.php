@@ -1,18 +1,6 @@
 <?php
 	require_once "utils.php";
 
-	function today_rus(string $today): string { 
-		return [
-			"Monday" => "Понедельник", 
-			"Tuesday" => "Вторник", 
-			"Wednesday" => "Среда", 
-			"Thursday" => "Четверг", 
-			"Friday" => "Пятница", 
-			"Saturday" => "Суббота", 
-			"Sunday" => "Воскресенье"
-		][$today];
-	}
-
 	class Profile_control extends Control {
 		public function has_access(array $args): bool {
 			return is_logined();
@@ -108,7 +96,7 @@
 
 		private function table_date(): DateTime {
 			$today = new DateTime();
-			$tomorrow = new DateTime('tomorrow');
+			$tomorrow = new DateTime('10-09-2018');
 
 			$h = $today->format('H');
 			$h = intval($h);
