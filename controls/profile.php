@@ -96,7 +96,7 @@
 
 		private function table_date(): DateTime {
 			$today = new DateTime();
-			$tomorrow = new DateTime('10-09-2018');
+			$tomorrow = new DateTime('tomorrow');
 
 			$h = $today->format('H');
 			$h = intval($h);
