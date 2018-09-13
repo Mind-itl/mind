@@ -126,7 +126,7 @@
 			$r = $a->format("l");
 			$r = today_rus($r);
 
-			$n = ($a == new DateTime()) ? "Сегодня" : "Завтра";
+			$n = ($a->format("l") == (new DateTime())->format("l")) ? "Сегодня" : "Завтра";
 			return "$n: $r, $d";
 		}
 
