@@ -71,38 +71,40 @@
 									required
 								>
 							</div>
-							<script>
-								var student_list = {{ CLASSES }};
-							</script>
+
 							<div class="input-group form-group">
-								<label class="shadow-label">Ваш класс: </label>
+								<label>Учитель</label>
+								<input type="radio" name="role" class="radio-role" value="Учитель" place>
+								<label>Ученик</label>
+								<input type="radio" name="role" class="radio-role" value="Ученик">
+							</div>
+							<div id="class-select-div" class="input-group form-group">
+								<label>Ваш класс: </label>
 								<select id="class_select" class="form-control">
-									<option value="1">6-1</option>
-									<option value="2">6-2</option>
-									<option value="3">6-3</option>
-									<option value="4">6-4</option>
-									<option value="5">6-5</option>
-									<option value="6">6-6</option>
-									<option value="7">6-7</option>
-									<option value="8">6-8</option>
-									<option value="9">6-9</option>
-									<option value="10">6-10</option>
-									<option value="11">6-11</option>
-									<option value="12">6-12</option>
-									<option value="13">6-13</option>
-									<option value="14">6-14</option>
-									<option value="15">6-15</option>
-									<option value="16">6-16</option>
-									<option value="17">6-17</option>
-									<option value="18">6-18</option>
-									<option value="19">6-19</option>
-									<option value="20">6-20</option>
-									<option value="21">6-21</option>
-									<option value="22">6-22</option>
-									<option value="23">6-23</option>
-									<option value="24">6-24</option>
 								</select>
 							</div>
+
+							<script>	
+								(function() {
+									const student_list = {{ CLASSES }};
+
+									$("#class-select-div").hide();	
+									$(".radio-role").change(function() {	
+										let val = $('input[name=role]:checked').val();	
+										$("#class-select-div").hide();	
+										if (val == "Ученик") {	
+											$("#class-select-div").show();	
+										} 	
+									});	
+
+									student_list.forEach(function(e) {	
+										$("#class_select").append(	
+											`<option>${e}</option>`	
+										)	
+									});
+								})();	
+							</script>
+
 							<br>
 							<script src="/js/select_student.js"></script>
 							<input type="submit" class="log-in-u" value="Зарегистрироваться">
