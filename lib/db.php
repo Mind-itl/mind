@@ -69,8 +69,17 @@
  		);
 
  		$points = get_points_in_case($points);
- 		$name = $to_user->get_full_name();
- 		add_notification($to_user, "$name перечислил(а) вам $points");
+
+ 		$noun = get_points_case($points);
+
+ 		add_notification(
+ 			$to_user,
+ 			$from_user->get_full_name("gi fm")." перечислил(а) вам $points $noun"
+ 		);
+ 		add_notification(
+ 			$from_user,
+ 			"Вы перечислили $points $noun пользователю под именем ".$to_user->get_full_name("gi fm")
+ 		);
 
  		return true;
  	}
@@ -162,46 +171,5 @@
  			if ($v["code"] == $cause)
  				return $v['title'];
  		}
- 	}
-
- 	function add_notification(User $user, string $message) {
- 		$login = $user->get_login();
- 		sql_query(
- 			"INSERT INTO notifications (
- 				TO_USER,
- 				MESSAGE,
- 				READED
- 			) VALUES (
-				'$login',
-				'$message',
-				FALSE
-			)"
-		);
- 	}
-
- 	function get_notifications(User $user): array {
- 		$login = $user->get_login();
- 		$s = sql_query(
- 			"SELECT
- 				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NTIME,
- 				MESSAGE,
- 				READED,
- 				ID
- 			FROM notifications
- 			WHERE TO_USER='$login'
- 			ORDER BY TIME DESC"
- 		);
-
- 		$nots = [];
- 		foreach ($s as $v) {
- 			$nots[] = [
- 				"time" => $v["NTIME"],
- 				"message" => $v["MESSAGE"],
- 				"read" => $v["READED"],
- 				"id" => $v["ID"]
- 			];
- 		}
-
- 		return $nots;
  	}
 ?>

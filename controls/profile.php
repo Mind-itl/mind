@@ -101,7 +101,7 @@
 			$h = $today->format('H');
 			$h = intval($h);
 
-			if ($h >= 13)
+			if ($h >= 17)
 				return $tomorrow;
 			else
 				return $today;

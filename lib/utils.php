@@ -2,6 +2,7 @@
 	declare(strict_types=1);
 
 	require_once "users.php";
+	require_once "notifications.php";
 	
 	const CONTROLS = ROOT."controls/";
 	const VIEWS = ROOT."views/";
