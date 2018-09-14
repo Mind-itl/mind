@@ -1,5 +1,12 @@
-sftp-config.json
+# config
 config.php
+sftp-config*.json
+
+# logs
 errors.log
 access_log
 error_log
+
+# composer
+composer.phar
+/vendor/
