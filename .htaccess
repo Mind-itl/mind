@@ -27,7 +27,7 @@ AddDefaultCharset utf-8
 	order deny,allow
 	deny from all
 </Files>
-<Files phinfo.ph>
+<Files phpinfo.php>
 	order deny,allow
 	deny from all
 </Files>
