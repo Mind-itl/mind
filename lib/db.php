@@ -101,6 +101,9 @@
  		);
 
  		foreach ($query as $q) {
+ 			if ($q["FROM_LOGIN"] == $login)
+ 				$q["POINTS"] = -$q["POINTS"];
+ 			
  			$ret[] = $q;
  		}
 

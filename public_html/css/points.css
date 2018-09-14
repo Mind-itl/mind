@@ -1,7 +1,7 @@
-.from_me {
+.bad-points {
 	color: red
 }
-.not_from_me {
+.good-points {
 	color: green
 }
 th, tr, td {

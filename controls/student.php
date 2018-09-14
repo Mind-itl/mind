@@ -43,17 +43,15 @@
 			$table = [];
 
 			foreach ($student->get_transactions() as $trans) {
-				if (isset($trans["FROM_LOGIN"])) {
+				if (isset($trans["FROM_LOGIN"]))
 					$name = get_user($trans["FROM_LOGIN"])->get_full_name("fm gi");
-
-					if ($trans["FROM_LOGIN"] == $student->get_login())
-						$cls = "from_me";
-					else
-						$cls = "not_from_me";
-				} else {
-					$cls = "not_from_me";
+				else
 					$name = "";
-				}
+
+				if ($trans["POINTS"] >= 0)
+					$cls = "good-points";
+				else
+					$cls = "bad-points";
 
 				$code = $trans["CAUSE"];
 				$cause = get_cause_title($code);
