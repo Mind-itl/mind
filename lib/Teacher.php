@@ -4,21 +4,21 @@
 	require_once "User.php";
 	require_once "utils.php";
 
-	function parse_roles(string $roles_raw): array {
-		$roles = [];
-		$args = [];
+	// function parse_roles(string $roles_raw): array {
+	// 	$roles = [];
+	// 	$args = [];
 
-		foreach (explode(",", $roles_raw) as $role) {
-			if (preg_match("/(.+)\((.+)\)/", $role, $matches)) {
-				$roles[] = $matches[1];
-				$args[$matches[1]] = $matches[2];
-			} else {
-				$roles[] = $role;
-			}
-		}
+	// 	foreach (explode(",", $roles_raw) as $role) {
+	// 		if (preg_match("/(.+)\((.+)\)/", $role, $matches)) {
+	// 			$roles[] = $matches[1];
+	// 			$args[$matches[1]] = $matches[2];
+	// 		} else {
+	// 			$roles[] = $role;
+	// 		}
+	// 	}
 
-		return [$roles, $args];
-	}
+	// 	return [$roles, $args];
+	// }
 	
 	class Teacher extends User {
 		/*
@@ -36,8 +36,19 @@
 			$this->family_name = $st_assoc["FAMILY_NAME"];
 			$this->father_name = $st_assoc["FATHER_NAME"];
 
-			$roles = $st_assoc["ROLE"];
-			list($this->roles, $this->role_args) = parse_roles($roles);
+			$r = sql_query("
+				SELECT ROLE, ARG
+				FROM teacher_roles
+				WHERE LOGIN='$this->login'
+			");
+
+			$this->roles = [];
+			$this->role_args = [];
+
+			foreach ($r as $role) {
+				$this->roles[] = $role["ROLE"];
+				$this->role_args[$role["ROLE"]] = $role["ARG"];
+			}
 		}
 		
 		private function upload_to_bd() {
