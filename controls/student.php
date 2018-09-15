@@ -56,6 +56,14 @@
 				$code = $trans["CAUSE"];
 				$cause = get_cause_title($code);
 
+				if ($cause == "Передача баллов") {
+					if ($trans["POINTS"] >= 0) {
+						$cause .= " мне";
+					} else {
+						$cause .= " пользователю ".get_user($trans['TO_LOGIN'])->get_full_name("gi fm");
+					}
+				}
+
 				$row = [
 					'cause' => $cause,
 					'from' => $name,
