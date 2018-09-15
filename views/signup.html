@@ -33,6 +33,15 @@
 								>
 							</div>
 							<div class="input-group form-group">
+								<label class="shadow-label">Подтвердите пароль: </label><br>
+								<input
+									type="password"
+									placeholder="Подтвердите пароль"
+									class="form-control-up form-control"
+									required
+								>
+							</div>
+							<div class="input-group form-group">
 								<label class="shadow-label">Ваша фамилия: </label><br>
 								<input
 									type="text"
@@ -56,7 +65,7 @@
 								<label class="shadow-label">Ваше отчество: </label><br>
 								<input
 									type="text"
-									name="name"
+									name="fname"
 									placeholder="Введите отчество"
 									class="form-control-up form-control"
 									required
@@ -73,17 +82,17 @@
 							</div>
 
 							<div class="input-group form-group">
-								<input type="radio" name="role" class="radio-role" value="Учитель" place>
+								<input type="radio" name="role" class="radio-role" value="teacher" place required>
 								<label class="radio-role">Учитель</label>
-								<input type="radio" name="role" class="radio-role" value="Ученик">
+								<input type="radio" name="role" class="radio-role" value="student" required>
 								<label class="radio-role">Ученик</label>
 							</div>
 							<div id="class-select-div" class="input-group form-group">
 								<label>В каком классе Вы учитесь: </label><br>
-								<select id="class_select" class="form-control-up form-control"></select>
+								<select id="class_select" class="form-control-up form-control" name="class" required></select>
 							</div>
 
-							<script>	
+							<script>
 								(function() {
 									const student_list = {{ CLASSES }};
 
@@ -91,7 +100,7 @@
 									$(".radio-role").change(function() {	
 										let val = $('input[name=role]:checked').val();	
 										$("#class-select-div").hide();	
-										if (val == "Ученик") {	
+										if (val == "student") {	
 											$("#class-select-div").show();	
 										} 	
 									});	
