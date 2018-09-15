@@ -20,6 +20,19 @@ nav {
 	background: #77a5f8;
 	color: white;
 }
+.log-in-u {
+	font-family: 'Courier New', arial;
+	background: #466cb2; 
+	padding: 5px 15px; 
+	border: 0; 
+	color: #bed5ff;
+	height: 30px !important;
+	margin-bottom: 20px;
+}
+.log-in-u:hover {
+	background: #77a5f8;
+	color: white;
+}
 #number {
 	margin-bottom: 10px;
 }
@@ -159,4 +172,31 @@ table {
 .summ {
 	text-align: right; 
 	font-weight: bold
+}
+.pt {
+	padding-top: 30px;
+}
+.talcenter {
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 2px 2px 15px #888;
+}
+.shadow-label {
+	text-shadow: 2px 2px 12px #888;
+}
+/*.sm-width {
+	width: 300px !important;
+}*/
+.blue-color {
+	color: rgb(0, 67, 156);
+}
+input[type="radio"].radio-role {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+label.radio-role {
+	font-size: 15px;
+}
+.form-control-up {
+	width: 500px !important;
 }
