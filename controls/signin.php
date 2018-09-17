@@ -12,33 +12,25 @@
 		}
 
 		protected function get_data(array $args): array {
-			$result = "NOT_SET";
+			$result = "not_set";
 
 			if (isset_post_fields("login", "password")) {
 				$login = $_POST['login'];
 				$password = $_POST['password'];
 
 				if (!check_correct($login) || !check_correct($password)) { 
-					$result = "INCORRECT";
+					$result = "incorrect";
 				} elseif (enter_user($login, $password)) {
-					$result = "GOOD";
+					$result = "right";
 					redirect("profile");
 				} else {
-					$result = "BAD";
+					$result = "wrong";
 				}
 			}
 
-			if ($result === "NOT_SET") {
-				$result = "";
-			} elseif ($result === "INCORRECT") {
-				$result = $this->get("BAD_PASS");
-			} else {
-				$result = $this->get("WRONG_PASS");
-			}
-
 			return [
-				"RESULT" => $result,
-				"LOGIN" => $login ?? ""
+				"result" => $result,
+				"login" => $login ?? ""
 			];
 		}
 	}

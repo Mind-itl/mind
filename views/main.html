@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 	<head>
-		<title>{{ TITLE }}</title>
-		{{ links }}
-		{{ CSS_PAGE_LINK }}
+		<title>
+			{% block title %} title {% endblock %}
+		</title>
+		{{ include('links.html') }}
+		{% block css_pages %}
+			<link rel="stylesheet" href="/css/{{ control_name }}">
+		{% endblock %}
 	</head>
 	<body>
-		{{ loader }}
+		{{ include('loader.html') }}
 		<div class="container" style="display: none;">
 			<div class="row">
 				{{ menu }}
-				{{ BODY }}
+				{% block body %}{% endblock %}
 			</div>
 		</div>
 	</body>

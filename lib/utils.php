@@ -18,6 +18,13 @@
 		$curr_user = get_user($_SESSION['login'], $_SESSION['role']);
 	}
 
+	function add_to_arr(&$arr, $arr2) {
+		foreach ($arr2 as $key => $value) {
+			$arr[$key] = $value;
+		}
+	}
+
+
 	function get_curr() {
 		global $curr_user;
 		return $curr_user;
