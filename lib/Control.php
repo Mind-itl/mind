@@ -1,6 +1,5 @@
 <?php
 	declare(strict_types=1);
-	require_once "HtmlFormatter.php";
 
 	class Control {
 		protected $data;
@@ -68,7 +67,7 @@
 			}
 
 			$html = $this->process_view($html, $data, $args);
-			return HtmlFormatter::format($html);
+			return Mihaeu\HtmlFormatter::format($html);
 		}
 
 	}

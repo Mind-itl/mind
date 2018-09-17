@@ -1,4 +1,4 @@
-<?
+<?php
  	function add_notification(User $user, string $message) {
  		$login = $user->get_login();
  		sql_query(

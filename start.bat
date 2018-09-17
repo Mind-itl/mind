@@ -1,0 +1,1 @@
+php -S localhost:8080 -t public_html public_html/route.php

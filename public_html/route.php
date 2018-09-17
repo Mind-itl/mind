@@ -63,6 +63,12 @@
 	}
 
 	function mvc_main() {
+		$public_file = "public_html".$_SERVER['REQUEST_URI'];
+		if (file_exists($public_file) && is_file($public_file)) {
+			return false;
+			exit();
+		}
+
 		$url = explode('/', substr($_SERVER['REQUEST_URI'], 1));
 		$control_name = $url[0];
 
@@ -88,5 +94,7 @@
 			not_found();
 	}
 
-	mvc_main();
+	if (mvc_main()===false) {
+		return false;
+	}
 ?>
