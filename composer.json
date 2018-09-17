@@ -1,0 +1,8 @@
+{
+	"require": {
+		"php":">=7.2.0",
+		"phpoffice/phpspreadsheet": "^1.4",
+		"twig/twig": "^2.5",
+		"mihaeu/html-formatter": "^1.0"
+	}
+}
