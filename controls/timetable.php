@@ -37,7 +37,7 @@
 				}
 
 				$days[] = [
-					"name" => $day,
+					"name" => today_rus($day),
 					"lessons" => $lessons
 				];
 			}
