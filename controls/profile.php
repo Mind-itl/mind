@@ -13,14 +13,38 @@
 		];
 
 		protected function get_data(array $args): array {
+			list($group, $cl_ruk) = $this->get_group_clruk();
+
 			return [
 				"name" => $this->name(),
 				"today" => $this->today(),
 				"timetable" => $this->timetable(),
 				"notifications" => $this->notifications(),
 				"daytime" => $this->daytime(),
-				"points" => $this->points()
+				"points" => $this->points(),
+				"group" => $group,
+				"cl_ruk" => $cl_ruk
 			];
+		}
+
+		private function get_group_clruk(): array {
+			if (get_curr()->is_teacher())
+				return ["", ""];
+
+			$class = get_curr()->get_class();
+
+			$r = sql_query("
+				SELECT LOGIN
+				FROM teacher_roles
+				WHERE
+					ROLE='classruk' AND
+					ARG='$class'
+			");
+
+			if ($a = $r->fetch_assoc()) {
+				$clruk = get_user($a["LOGIN"])->get_full_name("gi ft");
+			}
+			return [$class, $clruk ?? "Не найдено"];
 		}
 
 		private function points(): array {
