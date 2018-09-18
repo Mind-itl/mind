@@ -1,7 +1,6 @@
 <?php
 	declare(strict_types=1);
 	require_once "utils.php";
-	require_once "config.php";
 	require_once "Control.php";
 
 	function not_found() {
