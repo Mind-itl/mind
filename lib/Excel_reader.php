@@ -1,5 +1,5 @@
 <?php
-	require_once "excel/PHPExcel.php";
+	require_once LIBS."excel/PHPExcel.php";
 
 	abstract class Excel_reader {
 		static function load(string $file_name) {

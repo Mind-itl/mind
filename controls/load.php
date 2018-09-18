@@ -1,5 +1,5 @@
 <?php
-	require_once "Excel_reader.php";
+	require_once LIBS."Excel_reader.php";
 
 	class Load_control extends Control {
 		public function __construct() {

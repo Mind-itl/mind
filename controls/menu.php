@@ -1,6 +1,4 @@
 <?php
-	require_once "utils.php";
-
 	class Menu_control extends Control {
 		private $button_view;
 		private $buttons = [

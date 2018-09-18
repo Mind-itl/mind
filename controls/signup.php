@@ -1,5 +1,5 @@
 <?php
-	require_once 'passwords.php';
+	require_once LIBS.'passwords.php';
 
 	class Signup_control extends Control {
 		private static $post_fields = [

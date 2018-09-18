@@ -1,6 +1,4 @@
 <?php
-	require_once "utils.php";
-
 	class Profile_control extends Control {
 		public function has_access(array $args): bool {
 			return is_logined();

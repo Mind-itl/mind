@@ -1,7 +1,8 @@
 <?php
 	declare(strict_types=1);
-	require_once "utils.php";
-	require_once "Control.php";
+
+	require_once __DIR__."/../lib/utils.php";
+	require_once LIBS."Control.php";
 
 	function not_found() {
 		header("HTTP/1.0 404 Not Found");

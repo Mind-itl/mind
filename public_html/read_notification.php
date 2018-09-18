@@ -1,5 +1,5 @@
 <?php
-	require_once "utils.php";
+	require_once __DIR__."/../lib/utils.php";
 	check_logined();
 
 	if (!isset_post_fields("id"))
