@@ -66,7 +66,7 @@
  			)"
  		);
 
- 		$points = get_points_in_case($points);
+ 		$points = get_points_in_case(intval($points));
 
  		add_notification(
  			$to_user,
