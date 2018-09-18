@@ -68,15 +68,13 @@
 
  		$points = get_points_in_case($points);
 
- 		$noun = get_points_case($points);
-
  		add_notification(
  			$to_user,
- 			$from_user->get_full_name("gi fm")." перечислил(а) вам $points $noun"
+ 			$from_user->get_full_name("gi fm")." перечислил(а) вам $points"
  		);
  		add_notification(
  			$from_user,
- 			"Вы перечислили $points $noun пользователю под именем ".$to_user->get_full_name("gi fm")
+ 			"Вы перечислили $points пользователю под именем ".$to_user->get_full_name("gi fm")
  		);
 
  		return true;
