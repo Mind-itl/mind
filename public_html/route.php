@@ -20,17 +20,18 @@
 		return file_exists($view_file);
 	}
 
+	function get_control_class_name(string $c): string {
+		$x = strtoupper(substr($c, 0, 1));
+		$xs = substr($c, 1);
+		return "$x{$xs}_control";
+	}
 
-	function load_control(string $c): Control {
-		function get_control_class_name(string $c): string {
-			$x = strtoupper(substr($c, 0, 1));
-			$xs = substr($c, 1);
-			return "$x{$xs}_control";
-		}
+	function load_control(string $name): Control {
 
-		require_once CONTROLS."$c.php";
-		$c = get_control_class_name($c);
-		return new $c;
+		require_once CONTROLS."$name.php";
+
+		$c = get_control_class_name($name);
+		return new $c($name);
 	}
 
 	function has_control(string $control_name): bool {
@@ -40,6 +41,14 @@
 
 	$loader = new Twig_Loader_Filesystem(VIEWS);
 	$twig = new Twig_Environment($loader);
+
+	$twig->addFunction(new Twig_Function("controller", function(string $control_name) {
+		$control = load_control($control_name);
+		if ($control->has_access([]))
+			echo $control->get_html([]);
+		else
+			no_access();
+	}));
 
 	function get_twig() {
 		global $twig;
@@ -59,8 +68,7 @@
 			return false;
 
 		$url_arr = explode('/', substr($url, 1));
-
-		$control_name = $url[0];
+		$control_name = $url_arr[0];
 
 		if ($control_name === "" || $control_name === "/") {
 			if (is_logined())

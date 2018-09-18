@@ -1,29 +1,56 @@
-{{ MAIN_VIEW{} }}
-{{ TITLE{Профиль} }}
-<script src="/js/profile.js"></script>
-<div class="col-md-6 col-md-offset-1">
-	<div class="anketa">
-		<div class="info">
-			<h4>{{ DAYTIME }}, {{ NAME }}!</h4>
-			<h4 class="top-margin">{{ USER_INFO }}</h4>
-		</div>
-	</div>
-	<span class="notifications">
-		<table class="table table-bordered">
-			{{ CHECKED_MESSAGE_TR_CLASS{read-notification} }}	
-			{{ UNCHECKED_MESSAGE_TR_CLASS{unread-notification} }}
+{% extends "main.html" %}
+{% block title %}
+	Профиль
+{% endblock %}
 
-			{{ NOTIFICATIONS }}
-		</table>
-	</span>
-</div>
-<div class="col-md-4 today-col">
-	<span class="today">
-		{{ TODAY }}
-	</span>
-	<span class="timetable">
-		<table class="table table-bordered" style="margin-top: 20px;">
-			{{ TIMETABLE }}
-		</table>
-	</span>
-</div>
+{% block body %}
+	<script src="/js/profile.js"></script>
+	<div class="col-md-6 col-md-offset-1">
+		<div class="anketa">
+			<div class="info">
+				<h4>{{ daytime }}, {{ name }}!</h4>
+				<h4 class="top-margin">
+					{% if is_student %}
+						У вас на счету <strong>{{ points.count }}</strong> {{ points.noun }}
+					{% endif %}
+				</h4>
+			</div>
+		</div>
+		<span class="notifications">
+			<table class="table table-bordered">
+
+				{% for notif in notifications %}
+					{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
+
+					<tr class="{{ notif_class }}">
+						<td>
+							{{ notif.message }}
+						</td>
+						<td class="notification-time">
+							{{ notif.time }}
+						</td>
+						<td style="display: none;" class="notification-id">
+							{{ notif.id }}
+						</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</span>
+	</div>
+	<div class="col-md-4 today-col">
+		<span class="today">
+			{{ today }}
+		</span>
+		<span class="timetable">
+			<table class="table table-bordered" style="margin-top: 20px;">
+				{% for lesson in timetable %}
+					<tr>
+						<td>{{ lesson.lesson }}</td>
+						<td>{{ lesson.place }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</span>
+	</div>
+{% endblock %}

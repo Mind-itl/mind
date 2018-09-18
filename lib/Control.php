@@ -19,9 +19,16 @@
 		}
 
 		protected function get_default_data(): array {
-			return [
-				"control_name" => $this->name
+			$arr =  [
+				"control_name" => $this->name,
 			];
+			
+			if (is_logined()) {
+				$arr["is_student"] = get_curr()->is_student();
+				$arr["is_teacher"] = get_curr()->is_teacher();
+			}
+
+			return $arr;
 		}
 
 		public function get_html(array $args): string {

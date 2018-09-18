@@ -14,12 +14,24 @@
 
 		protected function get_data(array $args): array {
 			return [
-				"NAME" => $this->name(),
-				"USER_INFO" => $this->user_info(),
-				"TODAY" => $this->today(),
-				"TIMETABLE" => $this->timetable(),
-				"NOTIFICATIONS" => $this->notifications(),
-				"DAYTIME" => $this->daytime(),
+				"name" => $this->name(),
+				"user_info" => $this->user_info(),
+				"today" => $this->today(),
+				"timetable" => $this->timetable(),
+				"notifications" => $this->notifications(),
+				"daytime" => $this->daytime(),
+				"points" => $this->points()
+			];
+		}
+
+		private function points(): array {
+			if (!get_curr()->is_student()) 
+				return [];
+
+			$points = get_curr()->get_points();
+			return [
+				"count" => $points,
+				"noun" => get_points_case($points)
 			];
 		}
 
@@ -44,25 +56,9 @@
 			return $night;
 		}
 
-		private function notifications(): string {
-			$notification_view = load_view("profile_notification_row");
-
-			$read_class = $this->get("CHECKED_MESSAGE_TR_CLASS");
-			$unread_class = $this->get("UNCHECKED_MESSAGE_TR_CLASS");
-			
+		private function notifications(): array {			
 			$nots = get_notifications(get_curr());
-
-			$str = "";
-			foreach ($nots as $v) {
-				$str .= $this->process_view($notification_view, [
-					"CLASS" => $v["read"] ? $read_class : $unread_class,
-					"MESSAGE" => $v["message"],
-					"TIME" => $v["time"],
-					"ID" => $v["id"]
-				], []);
-			}
-
-			return $str;
+			return $nots;
 		}
 
 		private function name(): string {
@@ -70,26 +66,6 @@
 			$name = get_curr()->get_full_name($name);
 
 			return $name;
-		}
-
-		private function user_info(): string {
-			$str = "";
-
-			if (get_curr()->is_student()) {
-				$points = get_curr()->get_points();
-				$noun = get_points_case($points);
-				
-				$str .= "У Вас на счету <strong>$points</strong> $noun";
-			} else {
-				foreach (get_curr()->get_roles() as $role) {
-					$rol = $this->roles_r[$role] ?? $role;
-					$str .= "$rol, ";
-				}  
-				$str = substr($str, 0, -2);
-				$str = "Должность: $str";
-			}
-
-			return $str;
 		}
 
 		private function table_date(): DateTime {
@@ -116,9 +92,9 @@
 			return "$n: $r, $d";
 		}
 
-		private function timetable(): string {
+		private function timetable(): array {
 			if (get_curr()->is_teacher())
-				return "";
+				return [];
 
 			$day = $this->table_date()->format("l");
 			$class = get_curr()->get_class();
@@ -131,17 +107,15 @@
 					WEEKDAY='$day'
 				ORDER BY NUMBER");
 
-			$str = "";
+			$arr = [];
 			foreach ($lessons as $lesson) {
-				$s = tag("td", $lesson["LESSON"]) . tag("td", $lesson["PLACE"]);
-				$str .= tag("tr", $s);
+				$arr[] = [
+					"lesson" => $lesson["LESSON"],
+					"place" => $lesson["PLACE"]
+				];
 			}
 
-			return $str;
-		}
-
-		public function __construct() {
-			parent::__construct("profile");
+			return $arr;
 		}
 	}
 ?>

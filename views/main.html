@@ -6,14 +6,14 @@
 		</title>
 		{{ include('links.html') }}
 		{% block css_pages %}
-			<link rel="stylesheet" href="/css/{{ control_name }}">
+			<link rel="stylesheet" href="/css/{{ control_name }}.css">
 		{% endblock %}
 	</head>
 	<body>
 		{{ include('loader.html') }}
 		<div class="container" style="display: none;">
 			<div class="row">
-				{{ menu }}
+				{{ controller("menu") }}	
 				{% block body %}{% endblock %}
 			</div>
 		</div>

@@ -11,32 +11,20 @@
 			["all", "Расписание", "/timetable"],
 		];
 
-		public function __construct() {
-			$this->button_view = load_view("menu_button");
-			parent::__construct("menu");
-		}
+		protected function get_data(array $args): array {
+			$buttons = [];
 
-		private function buttons(): string {
-			$b = "";
 			foreach ($this->buttons as $button) {
 				if ($button[0]=="all" || get_curr()->has_role($button[0])) {
-					$b .= $this->button($button[1], $button[2], $button[3] ?? "");
+					$buttons[] = [
+						"title" => $button[1],
+						"url" => $button[2]
+					];
 				}
 			}
-			return $b;
-		}
 
-		private function button(string $title, string $link, string $class) {
-			return $this->process_view($this->button_view, [
-				"URL" => $link,
-				"TITLE" => $title,
-				"CLASS" => $class
-			], []);
-		}
-
-		protected function get_data(array $args): array {
 			return [
-				"BUTTONS" => $this->buttons()
+				"buttons" => $buttons
 			];
 		}		
 	}
