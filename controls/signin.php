@@ -17,7 +17,7 @@
 					$result = "incorrect";
 				} elseif (enter_user($login, $password)) {
 					$result = "right";
-					redirect("profile");
+					redirect("/");
 				} else {
 					$result = "wrong";
 				}
