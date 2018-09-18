@@ -1,36 +1,49 @@
-{{ MAIN_VIEW{} }}
-{{ TITLE{Баллы} }}
+{% extends 'main.html' %}
 
-<div class="col-md-12">
-	<span class="span-point">
-		Текущее количество баллов: 
-	</span>
-	<span class="span-points">
-		{{ SUM }}	
-	</span>
-	<table class="table table-bordered table-hover">
-		<tr>
-			<th>Дата</th>
-			<th>Отправитель</th>
-			<th>Причина</th>
-			<th>Количество</th>
-		</tr>
-		{{ TABLE }}
-		<tr>
-			<td colspan="3" class="summ">
-				Итого:
-			</td>
-			<td class="no-right">
-				{{ SUM }}
-			</td>
-		</tr>
-	</table>
-	<div class="trans-hist">
-		<div class="trans-block">
-			<div class="date">14.09.2018 17:58</div>
-			<div class="from-login">Митясова Елена</div>
-			<div class="num-points">-500</div>
-			<div class="cause">	Средний балл аттестата "5,0" за четверть</div>
-		</div>
+{% block title %}
+	Баллы
+{% endblock %}
+
+{% block body %}
+	<div class="col-md-12">
+		<span class="span-point">
+			Текущее количество баллов: 
+		</span>
+		<span class="span-points">
+			{{ sum }}	
+		</span>
+		
+		{{ text ?? ""}}
+
+		<table class="table table-bordered table-hover">
+			<tr>
+				<th>Дата</th>
+				<th>Отправитель</th>
+				<th>Причина</th>
+				<th>Количество</th>
+			</tr>
+			
+			{% for trans in table %}
+				{% set trans_class = trans.points > 0 ? "good-points" : "bad-points" %}
+
+				<tr>
+					<td>{{ trans.time }} </td>
+					<td>{{ trans.from }} </td>
+					<td>{{ trans.cause }}</td>
+					<td class="{{ trans_class }}">
+						{{ trans.points }}	
+					</td>
+				</tr>
+			{% endfor %}
+
+			<tr>
+				<td colspan="3" class="summ">
+					Итого:
+				</td>
+				<td class="no-right">
+					{{ sum }}
+				</td>
+			</tr>
+		</table>
 	</div>
-</div>
+{% endblock %}

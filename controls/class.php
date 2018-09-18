@@ -2,59 +2,61 @@
 	class Class_control extends Control {
 		private $row_view;
 
+		public function has_access(array $args): bool {
+			if (isset($args[1]) && $args[1] != "")
+				return true;
+			else
+				return get_curr()->has_role("classruk");
+		}
+
 		protected function get_data(array $args): array {
+			$class_name = $args[1] ?? get_curr()->get_role_arg("classruk");
+		
+			list($class, $sum) = $this->get_sum_class($class_name);
+
 			return [
-				"CLASS_SUM" => $this->class_sum(),
-				"CLASS_TABLE" => $this->class_table(),
-				"CSS_PAGE_LINK" => "<link rel='stylesheet' href='/css/points.css'>"
+				"class" => $class_name,
+				"sum" => $sum,
+				"students" => $class,
 			];
 		}
 
-		private function class_sum(): string {
-			return "$this->points_sum";
-		}
+		private function get_sum_class(string $class_name) {
+			$class = [];
+			$sum = 0;
 
-		public function has_access(array $args): bool {
-			return get_curr()->has_role("classruk");
-		}
-
-		private function class_row(array $row): string {
-			return $this->process_view($this->row_view, [
-				"NAME" => $row['name'],
-				"LOGIN" => $row['login'],
-				"POINTS" => $row['points']
-			], []);
-		}
-
-		private function class_table(): string {
-			$s = "";
-			foreach ($this->table as $row) {
-				$s .= $this->class_row($row);
-			}
-			return $s;
-		}
-
-		public function __construct() {
-			$this->row_view = load_view("class_table_row");
-			parent::__construct("class");
-
-			$this->load();
-		}
-
-		private function load() {
-			$this->table = [];
-			$this->points_sum = 0;
-
-			foreach (get_curr()->get_children() as $student) {
-				$row = [
+			foreach ($this->get_students_in_class($class_name) as $student) {
+				$class[] = [
 					"points" => $student->get_points(),
 					"login" => $student->get_login(),
 					"name" => $student->get_full_name("fm gi")
 				];
-				$this->table[] = $row;
 
-				$this->points_sum += $student->get_points(); 
+				$sum += $student->get_points();
 			}
+
+			return [$class, $sum];
+		}
+		
+		private function get_students_in_class(string $class_name): array {
+			$class = [];
+
+			list($class_num, $class_lit) = explode("-", $class_name);
+
+			$r = sql_query("
+				SELECT LOGIN
+				FROM `students`
+				WHERE
+					CLASS_LIT = '$class_lit' AND
+					CLASS_NUM = '$class_num'
+			");
+
+			foreach ($r as $st) {
+				$student = get_user($st["LOGIN"], "student");
+				$class[] = $student;
+			}
+
+			return $class;
 		}
 	}
 ?>

@@ -1,6 +1,24 @@
-{{ MAIN_VIEW{} }}
-{{ TITLE{Расписание} }}
+{% extends 'main.html' %}
+{% block title %}
+	Расписание
+{% endblock %}
 
-<div>
-	{{ TIMETABLE }}
-</div>
+{% block body %}
+	<div>
+		{% for day in days %}
+			<table class="table table-bordered table-hover">
+				<tr>
+					<td>{{ day.name }}</td>
+				</tr>
+
+				{% for lesson in day.lessons %}
+					<tr>
+						<td>{{ lesson.name }}</td>
+						<td>{{ lesson.place }}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		{% endfor %}
+	</div>
+{% endblock %}

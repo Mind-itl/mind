@@ -2,10 +2,6 @@
 	require_once LIBS."passwords.php";
 
 	class Signin_control extends Control {
-		public function __construct() {
-			parent::__construct("signin");
-		}
-
 		public function has_access(array $args): bool {
 			return !is_logined();
 		}

@@ -1,25 +1,48 @@
-{{ MAIN_VIEW{} }}
-{{ TITLE{Выписка по классу} }}
-<div class="col-md-12">
-	<span class="span-point" style="font-weight: bold;">Итого по классу:</span>
-	<span class="span-points">
-		{{ CLASS_SUM }}
-	</span>
+{% extends 'points.html' %}
+{% block title %}
+	Выписка по классу
+{% endblock %}
 
-	<table class="table table-bordered table-hover">
-		<tr>
-			<th>Ученик</th>
-			<th>Баллы</th>
-			<th>Подробнее</th>
-		</tr>
-		{{ CLASS_TABLE }}
-		<tr>
-			<td class="summ">
-				Итого:
-			</td>
-			<td class="no-right" colspan="2">
-				{{ CLASS_SUM }}
-			</td>
-		</tr>
-	</table>
-</div>
+{% block css_pages %}
+	<link rel='stylesheet' href='/css/points.css'>
+{% endblock %}
+
+{% block body %}
+	<div class="col-md-12">
+		<span class="span-point" style="font-weight: bold;">Итого по классу:</span>
+		<span class="span-points">
+			{{ sum }}
+		</span>
+
+		<table class="table table-bordered table-hover">
+			<tr>
+				<th>Ученик</th>
+				<th>Баллы</th>
+				<th>Подробнее</th>
+			</tr>
+		
+			{% for student in students %}
+				<tr>
+					<td>
+						{{ student.name }}
+					</td>
+					<td>
+						{{ student.points }}
+					</td>
+					<td>
+						<a href="points/{{ student.login }}">Подробнее</a>
+					</td>
+				</tr>
+			{% endfor %}
+
+			<tr>
+				<td class="summ">
+					Итого:
+				</td>
+				<td class="no-right" colspan="2">
+					{{ sum }}
+				</td>
+			</tr>
+		</table>
+	</div>
+{% endblock %}

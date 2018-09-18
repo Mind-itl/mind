@@ -1,32 +1,38 @@
-{{ MAIN_VIEW{} }}
-{{ TITLE{Передать баллы} }}
+{% extends 'main.html' %}
+{% block title %}
+    Передать баллы
+{% endblock %}
 
-{{ SUCCESS_DIV{
-	<div class="alert alert-success alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>Готово!</strong> Транзакция успешно завершена!
-	</div>
-} }}
-{{ FAIL_DIV{
-	<div class="alert alert-danger alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>Упс!</strong> Что-то пошло не так!
-	</div>
-} }}
+{% block body %}
+	<div class="col-md-10 col-md-offset-1">
+		{% if result=="success" %}
 
-<div class="col-md-10 col-md-offset-1">
-	{{ RESULT_DIV }}
-	<span class="span-point">Ваш баланс:</span>
-	<span class="span-points">{{ POINTS }}</span>
-	<script>
-		var causes_list = {{ CAUSES }};
-	</script>
-	<form action="" method="POST">
-		<div class="lab">
-			<label for="to">Выберите ученика:</label><br>
-			{{ select_student }}
-		</div>
-		<input placeholder="Введите количество баллов" class="form-control" type="number" name="points" min="0" id="number">
-		<input type="submit" id="log-in-a">
-	</form>
-</div>
+			<div class="alert alert-success alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Готово!</strong> Транзакция успешно завершена!
+			</div>
+
+		{% elseif result=="fail" %}
+
+			<div class="alert alert-danger alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Упс!</strong> Что-то пошло не так!
+			</div>
+
+		{% endif %}
+
+		<span class="span-point">Ваш баланс:</span>
+		<span class="span-points">{{ points }}</span>
+		<script>
+			var causes_list = {{ causes }};
+		</script>
+		<form action="" method="POST">
+			<div class="lab">
+				<label for="to">Выберите ученика:</label><br>
+				{{ controller("select_student") }}
+			</div>
+			<input placeholder="Введите количество баллов" class="form-control" type="number" name="points" min="0" id="number">
+			<input type="submit" id="log-in-a">
+		</form>
+	</div>
+{% endblock %}

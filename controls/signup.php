@@ -6,10 +6,6 @@
 			"login", "password", "sname", "name", "fname", "bday"
 		];
 
-		public function __construct() {
-			parent::__construct("signup");
-		}
-
 		public function has_access(array $args): bool {
 			return !is_logined();
 		}

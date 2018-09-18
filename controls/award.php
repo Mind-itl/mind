@@ -15,20 +15,16 @@
 					$result = get_curr()->give_points($student_login, $cause);
 
 				if ($result) {
-					$result = $this->get("SUCCESS_DIV");
+					$result = "success";
 				} else {
-					$result = $this->get("FAIL_DIV");
+					$result = "fail";
 				}
 			}
 
 			return [
-				"RESULT_DIV" => $result ?? "",
-				"CAUSES" => json_encode(causes_list)
+				"result" => $result ?? "",
+				"causes" => json_encode(causes_list)
 			];
-		}
-
-		public function __construct() {
-			parent::__construct("award");
 		}
 	}
 ?>

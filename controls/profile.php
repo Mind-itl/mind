@@ -15,7 +15,6 @@
 		protected function get_data(array $args): array {
 			return [
 				"name" => $this->name(),
-				"user_info" => $this->user_info(),
 				"today" => $this->today(),
 				"timetable" => $this->timetable(),
 				"notifications" => $this->notifications(),

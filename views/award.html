@@ -1,33 +1,37 @@
-{{ MAIN_VIEW{} }}
-{{ TITLE{Изменить баллы} }}
+{% extends 'main.html' %}
+{% block title %}
+    Изменить баллы
+{% endblock %}
 
-{{ SUCCESS_DIV{
-	<div class="alert alert-info alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>Готово!</strong> Транзакция успешно завершена!
-	</div>
-} }}
-{{ FAIL_DIV{
-	<div class="alert alert-info alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>Внимание!</strong> Что-то пошло не так!
-	</div>
-} }}
+{% block body %}
+	<div class="col-md-10 col-md-offset-1">
+		<script>
+			var causes_list = {{ causes|raw }};
+		</script>
 
-<div class="col-md-10 col-md-offset-1">
-	<script>
-		var causes_list = {{ CAUSES }};
-	</script>
-	{{ RESULT_DIV }}
-	<form action="" method="POST">
-		<label for="award_kind">Выберите ученика:</label><br>
-		{{ select_student }}
-		<label for="award_kind">Выберите категорию причины:</label><br>
-		<select id="award_kind" class="form-control"></select><br>
-		<label for="award_cause">Выберите причину:</label>
-		<select name="cause" id="award_cause" class="form-control"></select><br>
-		<script src="js/cause.js"></script>
-		
-		<input type="submit" id="log-in-a">
-	</form>
-</div>
+		{% if result=="success" %}
+			<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Готово!</strong> Транзакция успешно завершена!
+			</div>
+		{% elseif result=="fail" %}
+			<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Внимание!</strong> Что-то пошло не так!
+			</div>
+		{% endif %}
+
+		<form action="" method="POST">
+			<label for="award_kind">Выберите ученика:</label><br>
+			{{ controller('select_student') }}
+
+			<label for="award_kind">Выберите категорию причины:</label><br>
+			<select id="award_kind" class="form-control"></select><br>
+			<label for="award_cause">Выберите причину:</label>
+			<select name="cause" id="award_cause" class="form-control"></select><br>
+			<script src="js/cause.js"></script>
+			
+			<input type="submit" id="log-in-a">
+		</form>
+	</div>
+{% endblock %}

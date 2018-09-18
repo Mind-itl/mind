@@ -9,29 +9,24 @@
 				$login = $_POST['login'];
 				$points = $_POST['points'];
 
-				if (is_incorrect($login, $points)) {
+				if (is_incorrect($login, $points) || $login == get_curr()->get_login()) {
 					error_log('incorrect $login $points in give.php:11');
 					$result = false;
 				} else {
-					error_log('error give.php:14');
 					$result = get_curr()->give_points($login, intval($points));
 				}
 
 				if ($result) {
-					$result = $this->get("SUCCESS_DIV");
+					$result = "success";
 				} else {
-					$result = $this->get("FAIL_DIV");
+					$result = "fail";
 				}
 			}
 
 			return [
-				"RESULT_DIV" => $result ?? "",
-				"POINTS" => get_points_in_case(get_curr()->get_points())
+				"result" => $result ?? "",
+				"points" => get_points_in_case(get_curr()->get_points())
 			];
-		}
-
-		public function __construct() {
-			parent::__construct("give");
 		}
 	}
 ?>

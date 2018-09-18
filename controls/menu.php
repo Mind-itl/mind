@@ -8,7 +8,7 @@
 			["student", "Передать баллы", "/give"],
 			["teacher", "Изменить баллы", "/award"],
 			["classruk", "Выписка по классу", "/class"],
-			["all", "Расписание", "/timetable"],
+			["student", "Расписание", "/timetable"],
 		];
 
 		protected function get_data(array $args): array {

@@ -1,13 +1,11 @@
 <?php
 	require_once LIBS."Excel_reader.php";
 
-	class Load_control extends Control {
-		public function __construct() {
-			parent::__construct("load");
-		}
 
+
+	class Load_control extends Control {
 		public function has_access(array $args): bool {
-			return get_curr()->has_role("teacher");
+			return false;
 		}
 
 		protected function get_data(array $args): array {

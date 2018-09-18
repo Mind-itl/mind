@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
 	<title>Регистрация</title>
-	{{ links }}
-	{{ CSS_PAGE_LINK }}
+	{{ include('links.html') }}
+	<link rel="stylesheet" href="/css/{{ control_name }}.css">
 </head>
 	<body>
 		<div class="container pt">
@@ -90,7 +90,7 @@
 								<input type="radio" name="role" class="radio-role" value="student" required>
 								<label class="radio-role">Ученик</label>
 							</div>
-							<div id="class-select-div" class="input-group form-group">
+							<div id="class-select-div" style="display: none;" class="input-group form-group">
 								<label>В каком классе Вы учитесь: </label><br>
 								<select id="class_select" class="form-control-up form-control" name="class" required></select>
 							</div>
