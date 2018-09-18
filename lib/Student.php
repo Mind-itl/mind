@@ -1,8 +1,8 @@
 <?php
 	declare(strict_types=1);
 
-	require_once "User.php";
-	require_once "db.php";
+	require_once LIBS."User.php";
+	require_once LIBS."db.php";
 
 	class Student extends User {
 		private $class_num, $class_lit;

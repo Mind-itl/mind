@@ -1,9 +1,9 @@
 <?php
 	declare(strict_types=1);
 
-	require_once "db.php";
-	require_once "Student.php";
-	require_once "Teacher.php";
+	require_once LIBS."db.php";
+	require_once LIBS."Student.php";
+	require_once LIBS."Teacher.php";
 
 	$_login_user_cache = array();
 

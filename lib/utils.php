@@ -2,13 +2,13 @@
 	declare(strict_types=1);
 
 	const ROOT = __DIR__ . "/../";
+	const CONTROLS = ROOT."controls/";
+	const VIEWS = ROOT."views/";
+	const LIBS = ROOT."lib/";
 
 	require_once "users.php";
 	require_once "notifications.php";
 	
-	const CONTROLS = ROOT."controls/";
-	const VIEWS = ROOT."views/";
-
 	require_once ROOT."vendor/autoload.php";
 	require_once ROOT."config.php";
 

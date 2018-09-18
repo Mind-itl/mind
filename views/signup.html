@@ -11,7 +11,7 @@
 				<!-- <h1 class="talcenter blue-color">Форма регистрации Mind</h1> -->
 				<div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6 col-xs-12">
 					<div class="plitka">
-						<form action="" method="POST">
+						<form action="" method="POST" id="register-form">
 							<div class="input-group form-group">
 								<label class="shadow-label">Придумайте логин: </label><br>
 								<input
@@ -25,6 +25,7 @@
 							<div class="input-group form-group">
 								<label class="shadow-label">Придумайте пароль: </label><br>
 								<input
+									id="password-input"
 									type="password"
 									name="password"
 									placeholder="Введите пароль (более 6 символов)"
@@ -35,11 +36,13 @@
 							<div class="input-group form-group">
 								<label class="shadow-label">Подтвердите пароль: </label><br>
 								<input
+									id="password-confirm-input"
 									type="password"
 									placeholder="Подтвердите пароль"
 									class="form-control-up form-control"
 									required
 								>
+								<span style="display: none;" id="passwords-wrong">Пароли не совпадают</span>
 							</div>
 							<div class="input-group form-group">
 								<label class="shadow-label">Ваша фамилия: </label><br>
@@ -110,12 +113,29 @@
 											`<option>${e}</option>`	
 										)	
 									});
-								})();	
+
+									$("#register-form").submit(function() {
+										let pass = $("#password-input").val();
+										let pass_conf = $("#password-confirm-input").val();
+
+										if (pass !== pass_conf) {
+											$("#passwords-wrong").show();
+											return false;
+										}
+
+										return true;
+									});
+
+									$("#password-input, #password-confirm-input").keydown(function() {
+										$("#passwords-wrong").hide();									
+									});
+								})();
+
 							</script>
 
 							<br>
 							<script src="/js/select_student.js"></script>
-							<input type="submit" class="log-in-u" value="Зарегистрироваться">
+							<input type="submit" id="form-submit"  class="log-in-u" value="Зарегистрироваться">
 						</form>
 					</div>
 				</div>

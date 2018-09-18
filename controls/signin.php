@@ -1,6 +1,5 @@
 <?php
-	require_once "utils.php";
-	require_once "passwords.php";
+	require_once LIBS."passwords.php";
 
 	class Signin_control extends Control {
 		public function __construct() {

@@ -1,8 +1,8 @@
 <?php
 	declare(strict_types=1);
 	
-	require_once "User.php";
-	require_once "utils.php";
+	require_once LIBS."User.php";
+	require_once LIBS."utils.php";
 
 	// function parse_roles(string $roles_raw): array {
 	// 	$roles = [];

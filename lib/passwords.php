@@ -1,8 +1,7 @@
 <?php
 	declare(strict_types=1);
 
-	require_once "utils.php";
-	require_once "db.php";
+	require_once LIBS."db.php";
 
 	function hash_password(string $pass): string {
 		return md5(md5("}2sa(<@!".$pass));
