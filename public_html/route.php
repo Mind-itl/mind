@@ -7,7 +7,9 @@
 	function not_found() {
 		header("HTTP/1.0 404 Not Found");
 
-		echo "404";
+		$c = new Control("404");
+		echo $c->get_html([]);
+		
 		exit();
 	}
 
