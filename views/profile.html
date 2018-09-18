@@ -8,10 +8,20 @@
 	<div class="col-md-6 col-md-offset-1">
 		<div class="anketa">
 			<div class="info">
-				<h4>{{ daytime }}, {{ name }}!</h4>
-				<h4 class="top-margin">
+				<h3>{{ daytime }}, {{ name }}!</h3>
+				<h3 class="top-margin">
 					{% if is_student %}
 						У вас на счету <strong>{{ points.count }}</strong> {{ points.noun }}
+					{% endif %}
+				</h3>
+				<h4 class="top-margin">
+					{% if is_student %}
+						Ваш класс: <strong>{{ group }}</strong>
+					{% endif %}
+				</h4>
+				<h4 class="top-margin">
+					{% if is_student %}
+						Ваш классный руководитель: <strong>{{ cl_ruk }}</strong>
 					{% endif %}
 				</h4>
 			</div>
