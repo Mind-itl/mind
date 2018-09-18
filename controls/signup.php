@@ -55,9 +55,9 @@
 			if ($user["role"] == "teacher") {
 				sql_query("
 					INSERT INTO teachers (
-						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, ROLE, LOGIN, BIRTHDAY
+						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, BIRTHDAY
 					) VALUES (
-						'$name', '$sname', '$fname', '', '$login', '$bday'
+						'$name', '$sname', '$fname', '$login', '$bday'
 					)
 				");
 			} else {
