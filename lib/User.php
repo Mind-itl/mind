@@ -42,6 +42,8 @@
 		 *   "ft" (father name)
 		 * keys that will be replaced by names
 		 * 
+		 * Default format - `"fm gi ft"`
+		 * 
 		 * @param string $format Format string 
 		 * @return string
 		 */
