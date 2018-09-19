@@ -2,6 +2,31 @@
 	declare(strict_types=1);
 	require_once "causes.php";
 
+	function get_pdo() {
+		$dsn = 
+			"mysql:host=".DB_ADDRESS.";".
+			"dbname=".DB_NAME.';'.
+			"charset=utf8";
+
+		$opt = [
+			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+			PDO::ATTR_EMULATE_PREPARES   => false,
+		];
+		$pdo = new PDO($dsn, DB_USER, DB_PASSWORD, $opt);
+		return $pdo;
+	}
+
+	function pdo_execute(string $r, array $arr) {
+		$r = get_pdo()->prepare($r);
+		$r->execute($arr);
+		return $r;
+	}
+
+	function pdo_assoc_execute(string $r, array $arr) {
+		return pdo_execute($r, $arr)->fetch();
+	}
+
 	function sql_query(string $query) {
 		$mysql = new mysqli(DB_ADDRESS, DB_USER, DB_PASSWORD, DB_NAME);
 		$res = $mysql->query($query);
@@ -26,20 +51,22 @@
 	}
 
 	function get_student_points(string $login): int {
-		$got_points = sql_query_assoc(
-			"SELECT SUM(`POINTS`) AS SUM
-			FROM `transactions`
-			WHERE `TO_LOGIN`='$login'"
-		)["SUM"] ?? 0;
+		$got_points = pdo_assoc_execute("
+			SELECT SUM(POINTS) AS SUM
+			FROM transactions
+			WHERE TO_LOGIN = ?
+		", [$login])
+			["SUM"] ?? 0;	
 		
-		$given_points = sql_query_assoc(
-			"SELECT SUM(`POINTS`) AS SUM
+		$given_points = pdo_assoc_execute("
+			SELECT SUM(`POINTS`) AS SUM
 			FROM `transactions`
-			WHERE `FROM_LOGIN`='$login'"
-		)["SUM"] ?? 0;
+			WHERE `FROM_LOGIN`= ?
+		", [$login])
+			["SUM"] ?? 0;
 
 		return $got_points - $given_points;
- 	}
+	}
 
  	function add_transaction(string $from_login, string $to_login, int $points, string $cause): bool {
  		$from_user = get_user($from_login);
