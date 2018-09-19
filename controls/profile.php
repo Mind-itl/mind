@@ -23,7 +23,8 @@
 				"daytime" => $this->daytime(),
 				"points" => $this->points(),
 				"group" => $group,
-				"cl_ruk" => $cl_ruk
+				"cl_ruk" => $cl_ruk,
+				"login" => get_curr()->get_login()
 			];
 		}
 
