@@ -60,7 +60,8 @@
 	</div>
 	<div class="col-md-4 today-col">
 		<span class="today">
-			{{ today }}
+			{{ is_today ? 'Сегодня' : 'Завтра'}}:
+			{{ date|date("l")|weekday_rus }}, {{ date|date("d.m.Y") }}
 		</span>
 		<span class="timetable">
 			<table class="table table-bordered" style="margin-top: 20px;">

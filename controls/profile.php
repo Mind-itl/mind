@@ -16,7 +16,8 @@
 			list($group, $cl_ruk) = $this->get_group_clruk();
 
 			return [
-				"today" => $this->today(),
+				"date" => $this->table_date(),
+				"is_today" => $this->is_today(),
 				"timetable" => $this->timetable(),
 				"notifications" => $this->notifications(),
 				"daytime" => $this->daytime(),
@@ -102,15 +103,9 @@
 				return $today;
 		}
 
-		private function today(): string {
+		private function is_today(): bool {
 			$a = $this->table_date();
-			$d = $a->format("d.m.Y"); 
-
-			$r = $a->format("l");
-			$r = today_rus($r);
-
-			$n = ($a->format("l") == (new DateTime())->format("l")) ? "Сегодня" : "Завтра";
-			return "$n: $r, $d";
+			return $a->format("l") == (new DateTime())->format("l");
 		}
 
 		private function timetable(): array {

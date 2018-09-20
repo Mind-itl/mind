@@ -51,6 +51,9 @@
 		else
 			no_access();
 	}));
+	$twig->addFilter(new Twig_Filter("weekday_rus", function(string $day) {
+		return today_rus($day);
+	}));
 
 	function get_twig() {
 		global $twig;
