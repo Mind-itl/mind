@@ -29,7 +29,7 @@
 				$class[] = [
 					"points" => $student->get_points(),
 					"login" => $student->get_login(),
-					"name" => $student->get_full_name("fm gi")
+					"names" => $student->get_names()
 				];
 
 				$sum += $student->get_points();

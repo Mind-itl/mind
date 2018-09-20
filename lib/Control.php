@@ -55,11 +55,7 @@
 			if (is_logined()) {
 				$arr["is_student"] = get_curr()->is_student();
 				$arr["is_teacher"] = get_curr()->is_teacher();
-				$arr["names"] = [
-					"given" => get_curr()->get_given_name(),
-					"family" => get_curr()->get_family_name(),
-					"father" => get_curr()->get_father_name(),
-				];
+				$arr["names"] = get_curr()->get_names();
 			}
 
 			return $arr;

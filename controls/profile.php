@@ -44,11 +44,7 @@
 
 			if ($a = $r->fetch_assoc()) {
 				$clruk = get_user($a["LOGIN"]);
-				$clruk = [
-					"given" => $clruk->get_given_name(),
-					"father" => $clruk->get_father_name(),
-					"family" => $clruk->get_family_name(),
-				];
+				$clruk = $clruk->get_names();
 			}
 			return [$class, $clruk ?? "Не найдено"];
 		}

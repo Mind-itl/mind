@@ -8,11 +8,12 @@
 		{% for day in days %}
 			<table class="table table-bordered table-hover timetable">
 				<tr>
-					<td colspan='2'>{{ day.name }}</td>
+					<td colspan='3'>{{ day.name }}</td>
 				</tr>
 
 				{% for lesson in day.lessons %}
 					<tr>
+						<td>{{ loop.index }}</td>
 						<td>{{ lesson.name }}</td>
 						<td>{{ lesson.place }}</td>
 					</tr>

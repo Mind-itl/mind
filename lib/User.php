@@ -48,10 +48,18 @@
 		 * @return string
 		 */
 		public function get_full_name(string $format = "fm gi ft"): string {
-			$search = array("gi", "ft", "fm");
-			$replace = array($this->given_name, $this->father_name, $this->family_name);
+			$search = ["gi", "ft", "fm"];
+			$replace = [$this->given_name, $this->father_name, $this->family_name];
 
 			return str_replace($search, $replace, $format);
+		}
+
+		public function get_names(): array {
+			return [
+				"given" => $this->get_given_name(),
+				"father" => $this->get_father_name(),
+				"family" => $this->get_family_name(),
+			];
 		}
 
 		/**
