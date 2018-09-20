@@ -1,26 +1,30 @@
 {% extends 'main.html' %}
 {% block title %}
-    Аукцион
+	Аукцион
 {% endblock %}
 
 {% block body %}
 	<div class="col-md-10 col-md-offset-1">
+
+		{# Текущий слот #}
 		<div class="now-thing">
 			<h3>
 				Текущий лот: 
 				<span class="thing" id="curr_lot_name">
-					{{ curr_lot.name }}
+					{{ curr_lot.name ?? "Ручка" }}
 				</span>
 			</h3>
 			<h4 class="gray-h">
 				Минимальная ставка:
 				<span class="bigger" id="curr_lot_min_points">
-					{{ curr_lot.min_points}}
+					{{ curr_lot.min_points ?? "1000000" }}
 				</span>
 			</h4>
 		</div>
-		<div class="now-auction">
-			{% if curr_rate %}
+
+		{# Текущая ставка (если есть) #}
+		{% if curr_rate %}
+			<div class="now-auction">
 				<div class="now-rate">
 					Текущая ставка:
 					<span id="curr_rate_points">
@@ -39,10 +43,11 @@
 						{{ curr_rate.time }}
 					</span>
 				</div>
-			{% endif %}
-		</div>
+			</div>
+		{% endif %}
+	
+		{# Поставить больше #}
 		<div class="row">
-
 			{% set next_rate_points_list = next_rate_points_list ?? [10, 50] %}
 
 			{% for next_rate_points in next_rate_points_list %}
@@ -54,16 +59,26 @@
 			{% endfor %}
 
 		</div>
-		<div class="my-points">
-			<h4>Баланс: <span class="bigger">{{ points.count }}</span></h4>
-		</div>
-		<div>
 
+		{# Текущий баланс #}
+		<div class="my-points">
+			<h4>Баланс: <span class="bigger">{{ points.count }} {{ points.noun }}</span></h4>
+		</div>
+	
+		{# История #}
+		<div>
 			{% for bought in bought_list %}
 			    <div class="things-hist"> 
 					<h3 class="">{{ bought.thing }}</h3>
-					<h4>Купил(а): {{ bought.names.family }} {{ bought.names.given }}, {{ bought.class.num }}-{{ bought.class.lit }}</h4>
-					<h4 class="gray-h">Цена: <strong> how much points</strong></h4>
+
+					{% with {names: bought.names, class: bought.class} %}
+						<h4>
+							Купил(а): {{ names.family }} {{ names.given }},
+							{{ class.num }}-{{ class.lit }}
+						</h4>
+					{% endwith %}
+
+					<h4 class="gray-h">Цена: <strong>{{ bought.points }}</strong></h4>
 				</div>
 			{% endfor %}
 		</div>
