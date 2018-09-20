@@ -18,17 +18,17 @@
 				<h3>{{ daytime }}, {{ name }}!</h3>
 				<h3 class="top-margin">
 					{% if is_student %}
-						У вас на счету <strong>{{ points.count }}</strong> {{ points.noun }}
+						На счету <strong>{{ points.count }}</strong> {{ points.noun }}
 					{% endif %}
 				</h3>
 				<h4 class="top-margin">
 					{% if is_student %}
-						Ваш класс: <strong>{{ group }}</strong>
+						Класс: <strong>{{ group }}</strong>
 					{% endif %}
 				</h4>
 				<h4 class="top-margin">
 					{% if is_student %}
-						Ваш классный руководитель: 
+						Классный руководитель: 
 						<strong>
 							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
 						</strong>
