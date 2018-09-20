@@ -1,0 +1,31 @@
+.now-thing,
+.now-auction,
+.things-hist {
+	padding: 15px 20px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 3px 3px gray;
+}
+.now-thing {
+	background: rgba(0, 127, 216, 0.2);
+}
+.now-auction {
+	background: rgba(70, 108, 178, 0.4);
+}
+.things-hist {
+	background: rgba(0, 127, 216, 0.1);
+}
+.up-rate {
+	background: #466cb2;
+}
+.gray-h {
+	color: gray;
+}
+span.bigger {
+	font-size: 22px;
+}
+.up-rate {
+	padding: 15px;
+}
+.up-100 {
+	margin-left: 10px !important;
+}

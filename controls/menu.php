@@ -9,6 +9,8 @@
 			["teacher", "Изменить баллы", "/award"],
 			["classruk", "Выписка по классу", "/class"],
 			["student", "Расписание", "/timetable"],
+			["all", "Аукцион", "/auction"],
+
 		];
 
 		protected function get_data(array $args): array {
