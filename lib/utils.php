@@ -83,7 +83,7 @@
 
     function get_points_case($points) {
 		$apoints = abs($points);
-		if ($apoints <= 20 && $apoints >= 10)
+		if ($apoints % 100 <= 20 && $apoints %100 >= 10)
 			$noun = "баллов";
 		elseif ($apoints % 10 == 0 || $apoints % 10 >= 5)
 			$noun = "баллов";
