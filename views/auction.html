@@ -6,44 +6,66 @@
 {% block body %}
 	<div class="col-md-10 col-md-offset-1">
 		<div class="now-thing">
-			<h3>Текущий лот: <span class="thing"> lot name </span></h3>
-			<h4 class="gray-h">Минимальная ставка: <span class="bigger">50</span></h4>
+			<h3>
+				Текущий лот: 
+				<span class="thing" id="curr_lot_name">
+					{{ curr_lot.name }}
+				</span>
+			</h3>
+			<h4 class="gray-h">
+				Минимальная ставка:
+				<span class="bigger" id="curr_lot_min_points">
+					{{ curr_lot.min_points}}
+				</span>
+			</h4>
 		</div>
 		<div class="now-auction">
-			<div class="now-rate">
-				Текущая ставка:
-			</div>
-			<div class="who-rate">
-				Поставил: 
-			</div>
-			<div class="sec-left">
-				Осталось:
-			</div>
+			{% if curr_rate %}
+				<div class="now-rate">
+					Текущая ставка:
+					<span id="curr_rate_points">
+						{{ curr_rate.points }}
+					</span>
+				</div>
+				<div class="who-rate">
+					Поставил:
+					<span id="curr_rate_student">
+						{{ curr_rate.student }}
+					</span>
+				</div>
+				<div class="sec-left">
+					Осталось:
+					<span id="curr_rate_time">
+						{{ curr_rate.time }}
+					</span>
+				</div>
+			{% endif %}
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-2">
-				<div class="up-rate">
-					<h4>Повысить ставку на <span class="bigger">50</span></h4>
+
+			{% set next_rate_points_list = next_rate_points_list ?? [10, 50] %}
+
+			{% for next_rate_points in next_rate_points_list %}
+				<div class="col-md-4 col-md-offset-2">
+					<div class="up-rate">
+						<h4>Повысить ставку на <span class="bigger">{{ next_rate_points }}</span></h4>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-4 col-md-offset-6">
-				<div class="up-rate up-100">
-					<h4>Повысить ставку на <span class="bigger">100</span></h4>
-				</div>
-			</div>
+			{% endfor %}
+
 		</div>
 		<div class="my-points">
-			<h4>Баланс: <span class="bigger">25559{{ points.count }}</span></h4>
+			<h4>Баланс: <span class="bigger">{{ points.count }}</span></h4>
 		</div>
-		<div class="things-hist"> 
-			<h3 class=""> lot name</h3>
-			<h4>Купил(а):  family name given name, class </h4>
-			<h4 class="gray-h">Цена: <strong> how much points</strong></h4>
-		</div>
-		<div class="things-hist">
-			<h3 class=""> lotname </h3>
-			<h4>Купил(а):  family name given name, class </h4>
-			<h4 class="gray-h">Цена: <strong> how much points </strong></h4>
+		<div>
+
+			{% for bought in bought_list %}
+			    <div class="things-hist"> 
+					<h3 class="">{{ bought.thing }}</h3>
+					<h4>Купил(а): {{ bought.names.family }} {{ bought.names.given }}, {{ bought.class.num }}-{{ bought.class.lit }}</h4>
+					<h4 class="gray-h">Цена: <strong> how much points</strong></h4>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 {% endblock %}
