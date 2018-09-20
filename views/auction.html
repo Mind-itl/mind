@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% block title %}
+    Аукцион
+{% endblock %}
+
+{% block body %}
+	<div class="col-md-10 col-md-offset-1">
+		<div class="now-thing">
+			<h3>Текущий лот: <span class="thing"> lot name </span></h3>
+			<h4 class="gray-h">Минимальная ставка: <span class="bigger">50</span></h4>
+		</div>
+		<div class="now-auction">
+			<div class="now-rate">
+				Текущая ставка:
+			</div>
+			<div class="who-rate">
+				Поставил: 
+			</div>
+			<div class="sec-left">
+				Осталось:
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-2">
+				<div class="up-rate">
+					<h4>Повысить ставку на <span class="bigger">50</span></h4>
+				</div>
+			</div>
+			<div class="col-md-4 col-md-offset-6">
+				<div class="up-rate up-100">
+					<h4>Повысить ставку на <span class="bigger">100</span></h4>
+				</div>
+			</div>
+		</div>
+		<div class="my-points">
+			<h4>Баланс: <span class="bigger">25559{{ points.count }}</span></h4>
+		</div>
+		<div class="things-hist"> 
+			<h3 class=""> lot name</h3>
+			<h4>Купил(а):  family name given name, class </h4>
+			<h4 class="gray-h">Цена: <strong> how much points</strong></h4>
+		</div>
+		<div class="things-hist">
+			<h3 class=""> lotname </h3>
+			<h4>Купил(а):  family name given name, class </h4>
+			<h4 class="gray-h">Цена: <strong> how much points </strong></h4>
+		</div>
+	</div>
+{% endblock %}
