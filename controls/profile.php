@@ -16,14 +16,13 @@
 			list($group, $cl_ruk) = $this->get_group_clruk();
 
 			return [
-				"name" => $this->name(),
 				"today" => $this->today(),
 				"timetable" => $this->timetable(),
 				"notifications" => $this->notifications(),
 				"daytime" => $this->daytime(),
 				"points" => $this->points(),
 				"group" => $group,
-				"cl_ruk" => $cl_ruk,
+				"clruk_name" => $cl_ruk,
 				"login" => get_curr()->get_login()
 			];
 		}
@@ -43,7 +42,12 @@
 			");
 
 			if ($a = $r->fetch_assoc()) {
-				$clruk = get_user($a["LOGIN"])->get_full_name("gi ft");
+				$clruk = get_user($a["LOGIN"]);
+				$clruk = [
+					"given" => $clruk->get_given_name(),
+					"father" => $clruk->get_father_name(),
+					"family" => $clruk->get_family_name(),
+				];
 			}
 			return [$class, $clruk ?? "Не найдено"];
 		}
@@ -83,13 +87,6 @@
 		private function notifications(): array {			
 			$nots = get_notifications(get_curr());
 			return $nots;
-		}
-
-		private function name(): string {
-			$name = get_curr()->is_student() ? "gi" : "gi ft";
-			$name = get_curr()->get_full_name($name);
-
-			return $name;
 		}
 
 		private function table_date(): DateTime {

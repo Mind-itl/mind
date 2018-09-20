@@ -41,17 +41,25 @@
 		/**
 		 * Return default array of values that will be enable from view template
 		 * This values can be overriden in `get_data` method
+		 * Keys: `["control_name", "is_student", "is_teacher", "is_logined", "names" => [0, 1, 2]]`
 		 * 
 		 * @return array<string, mixed>
 		 */
 		private function get_default_data(): array {
 			$arr =  [
 				"control_name" => $this->name,
+				"is_logined" => is_logined(),
+
 			];
 			
 			if (is_logined()) {
 				$arr["is_student"] = get_curr()->is_student();
 				$arr["is_teacher"] = get_curr()->is_teacher();
+				$arr["names"] = [
+					"given" => get_curr()->get_given_name(),
+					"family" => get_curr()->get_family_name(),
+					"father" => get_curr()->get_father_name(),
+				];
 			}
 
 			return $arr;
