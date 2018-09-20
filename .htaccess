@@ -29,3 +29,11 @@ AddDefaultCharset utf-8
 	order deny,allow
 	deny from all
 </Files>
+
+<IfModule mod_headers.c>
+	Header append Cache-Control "no-store, no-cache, must-revalidate"
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive On ExpiresDefault "now"
+</IfModule>
