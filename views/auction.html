@@ -65,8 +65,8 @@
 	
 		{# История #}
 		<div>
-			{% for bought in bought_list %}
-			    <div class="things-hist"> 
+			{% for bought in history %}
+			    <div class="things-hist" id="rate_history"> 
 					<h3 class="">{{ bought.thing }}</h3>
 
 					{% with {names: bought.names, class: bought.class} %}
@@ -81,5 +81,5 @@
 			{% endfor %}
 		</div>
 	</div>
-	<script src="/js/auction.js"></script>
+	<script src="/js/auction/auction.js"></script>
 {% endblock %}
