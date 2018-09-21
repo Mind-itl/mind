@@ -5,81 +5,87 @@
 
 {% block body %}
 	<div class="col-md-10 col-md-offset-1">
-
-		{# Текущий слот #}
-		<div class="now-thing">
-			<h3>
-				Текущий лот: 
-				<span class="thing" id="curr_lot_name">
-					{{ curr_lot.name ?? "Ручка" }}
-				</span>
-			</h3>
-			<h4 class="gray-h">
-				Минимальная ставка:
-				<span class="bigger" id="curr_lot_min_points">
-					{{ curr_lot.min_points ?? "1000000" }}
-				</span>
-			</h4>
+		<div id="auction-off">
+			Аукцион ещё не начался
 		</div>
+		<div id="auction-on" hidden>
+			{# Текущий слот #}
+			<div class="now-thing">
+				<h3>
+					Текущий лот: 
+					<span class="thing" id="curr_lot_name">
+						{{ curr_lot.name ?? "Ручка" }}
+					</span>
+				</h3>
+				<h4 class="gray-h">
+					Минимальная ставка:
+					<span class="bigger" id="curr_lot_min_points">
+						{{ curr_lot.min_points ?? "1000000" }}
+					</span>
+				</h4>
+			</div>
 
-		{# Текущая ставка #}
-		<div class="now-auction" id="curr_rate" hidden>
-			<div class="now-rate">
-				Текущая ставка:
-				<span id="curr_rate_points">
-					{{ curr_rate.points }}
-				</span>
+			{# Текущая ставка #}
+			<div class="now-auction" id="curr_rate" hidden>
+				<div class="now-rate">
+					Текущая ставка:
+					<span id="curr_rate_points">
+						{{ curr_rate.points }}
+					</span>
+				</div>
+				<div class="who-rate">
+					Поставил:
+					<span id="curr_rate_student">
+						{{ curr_rate.student }}
+					</span>
+				</div>
+				<div class="sec-left" id="curr_rate_time_div">
+					Осталось:
+					<span id="curr_rate_time">
+						{{ curr_rate.time }}
+					</span>
+				</div>
 			</div>
-			<div class="who-rate">
-				Поставил:
-				<span id="curr_rate_student">
-					{{ curr_rate.student }}
-				</span>
-			</div>
-			<div class="sec-left" id="curr_rate_time_div">
-				Осталось:
-				<span id="curr_rate_time">
-					{{ curr_rate.time }}
-				</span>
-			</div>
-		</div>
-	
-		{# Поставить больше #}
-		<div class="row">
-			{% set next_rate_points_list = next_rate_points_list ?? [10, 50] %}
+		
+			{# Поставить больше #}
+			<div class="row">
+				{% set next_rate_points_list = next_rate_points_list ?? [10, 50] %}
 
-			{% for next_rate_points in next_rate_points_list %}
-				<div class="col-md-4 col-md-offset-2">
-					<div class="up-rate">
-						<h4>Повысить ставку на <span class="bigger">{{ next_rate_points }}</span></h4>
+				{% for next_rate_points in next_rate_points_list %}
+					<div class="col-md-4 col-md-offset-2">
+						<div class="up-rate">
+							<h4>Повысить ставку на <span class="bigger">{{ next_rate_points }}</span></h4>
+						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
 
-		</div>
+			</div>
 
-		{# Текущий баланс #}
-		<div class="my-points">
-			<h4>Баланс: <span class="bigger">{{ points.count }} {{ points.noun }}</span></h4>
-		</div>
-	
-		{# История #}
-		<div>
-			{% for bought in history %}
-			    <div class="things-hist" id="rate_history"> 
-					<h3 class="">{{ bought.thing }}</h3>
+			{# Текущий баланс #}
+			<div class="my-points">
+				<h4>Баланс: <span class="bigger">{{ points.count }} {{ points.noun }}</span></h4>
+			</div>
+		
+			{# История #}
+			<div>
+				{% for bought in history %}
+				    <div class="things-hist" id="rate_history"> 
+						<h3 class="">{{ bought.thing }}</h3>
 
-					{% with {names: bought.names, class: bought.class} %}
-						<h4>
-							Купил(а): {{ names.family }} {{ names.given }},
-							{{ class.num }}-{{ class.lit }}
-						</h4>
-					{% endwith %}
+						{% with {names: bought.names, class: bought.class} %}
+							<h4>
+								Купил(а): {{ names.family }} {{ names.given }},
+								{{ class.num }}-{{ class.lit }}
+							</h4>
+						{% endwith %}
 
-					<h4 class="gray-h">Цена: <strong>{{ bought.points }}</strong></h4>
-				</div>
-			{% endfor %}
+						<h4 class="gray-h">Цена: <strong>{{ bought.points }}</strong></h4>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
-	<script src="/js/auction/auction.js"></script>
+	{{ "<script>" }}
+		{{ scripts|raw }}
+	{{ "</script>" }}
 {% endblock %}
