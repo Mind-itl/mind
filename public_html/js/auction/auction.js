@@ -1,105 +1,81 @@
-(function() {
-	'use strict';
+class Auction {
+	constructor(views, socket) {
+		this.currRate = new CurrentRate(views.curr_rate);
 
-	const gid = e => document.getElementById(e);
+		this.started = false;
+		this.views = views;
+		this.socket = socket;
 
-	const views = {
-		curr_lot: {
-			name: gid("curr_lot_name"),
-			min_points: gid("curr_lot_min_points"),
-		},
-		curr_rate: {
-			points: gid("curr_rate_points"),
-			student: gid("curr_rate_student"),
-			time: gid("curr_rate_time")
-		},
-		history: gid("rate_history")
-	};
+		socket.onmessage = this.onSocketMessage;
 
-	class Auction {
-		constructor(views, socket) {
-			this.started = false;
-			this.views = views;
-			this.socket = socket;
+		this.send({type: "connect"});
+	}
 
-			socket.onmessage = this.onSocketMessage;
+	send(data) {
+		this.socket.send(JSON.stringify(data));
+	}
 
-			this.send({type: "connect"});
-		}
+	onSocketMessage(event) {
+		const self = this;
 
-		send(data) {
-			this.socket.send(JSON.stringify(data));
-		}
+		let data = JSON.parse(event.data);
 
-		onSocketMessage(event) {
-			const self = this;
-
-			let data = JSON.parse(event.data);
-
-			const f = {
-				begin: function(data) {
-					self.begin();
-				},
-				end: function(data) {
-					self.end();
-				},
-				new_rate: function(data) {
-					self.addRate(data.student, data.points, data.time);
-				},
-				new_lot: function(data) {
-					self.setLot(data.name, data.points)
-				}
+		const f = {
+			begin: function(data) {
+				self.begin();
+			},
+			end: function(data) {
+				self.end();
+			},
+			new_rate: function(data) {
+				self.addRate(data.student, data.points, data.time);
+			},
+			new_lot: function(data) {
+				self.setLot(data.name, data.points)
 			}
-
-			if (data.type === undefined || !(data.type in f))
-				return;
-
-			f[data.type](data.data);
 		}
 
-		begin() {
-			console.log("Auction has begun");
-		}
+		if (data.type === undefined || !(data.type in f))
+			return;
 
-		end() {
-			console.log("Auction has ended");
-		}
-
-		new_rate(student, points, time) {
-			console.log(`
-				New rate:
-				- student: |${student}|,
-				- points: |${points}|,
-				- time: |${time}|
-			`);
-		}
-
-		new_lot(name, points) {
-			console.log(`
-				New lot:
-				- name: |${name}|,
-				- points: |${points}|
-			`);
-		}
+		f[data.type](data.data);
 	}
 
-	new Promise(function(resolve, reject) {
-		let socket = new WebSocket("ws:" + document.location.host);
+	begin() {
+		console.log("Auction has begun");
 
-		socket.onopen = function() {
-			resolve(socket);
-		}
-		socket.onerror = function(error) {
-			reject(error);
-		}
-	}).then(function(socket) {
-		let auction = new Auction(views, socket);
+		this.views.auction.off.hidden = true;
+		this.views.auction.on.hidden = false;
 
-		testing(auction);
-	});
-
-	function testing(auction) {
-		// auction.begin();
+		this.started = true;
 	}
 
-})();
+	end() {
+		console.log("Auction has ended");
+
+		this.views.auction.off.hidden = false;
+		this.views.auction.on.hidden = true;
+		
+		this.started = false;
+	}
+
+	new_rate(student, points, time) {
+		console.log(`
+			New rate:
+			- student: |${student}|,
+			- points: |${points}|,
+			- time: |${time}|
+		`);
+
+		this.currRate.newRate(student, points, time);
+	}
+
+	new_lot(name, points) {
+		console.log(`
+			New lot:
+			- name: |${name}|,
+			- points: |${points}|
+		`);
+	}
+}
+	
