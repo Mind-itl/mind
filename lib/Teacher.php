@@ -36,11 +36,11 @@
 			$this->family_name = $st_assoc["FAMILY_NAME"];
 			$this->father_name = $st_assoc["FATHER_NAME"];
 
-			$r = sql_query("
+			$r = safe_query("
 				SELECT ROLE, ARG
 				FROM teacher_roles
-				WHERE LOGIN='$this->login'
-			");
+				WHERE LOGIN = ?s
+			", $this->login);
 
 			$this->roles = [];
 			$this->role_args = [];
@@ -94,7 +94,16 @@
 				$class = [];
 
 				list($class_num, $class_lit) = explode("-", $this->get_role_arg("classruk"));
-				foreach (sql_query("SELECT LOGIN FROM `students` WHERE CLASS_LIT = '$class_lit' AND CLASS_NUM = '$class_num'") as $st) {
+
+				$r = safe_query("
+					SELECT LOGIN
+					FROM `students`
+					WHERE
+						CLASS_LIT = ?s AND
+						CLASS_NUM = ?s
+					", $class_lit, $class_num
+				);
+				foreach ($r as $st) {
 					$student = get_user($st["LOGIN"], "student");
 					$class[] = $student;
 				}
