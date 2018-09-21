@@ -9,6 +9,7 @@ class CurrentRate {
 		this.success = false;
 		this.has = false;
 
+		this.render();
 		setInterval(this.timer.bind(this), 1000);
 	}
 	
