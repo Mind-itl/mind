@@ -2,6 +2,20 @@
 	declare(strict_types=1);
 	require_once "causes.php";
 
+	function safe_query(...$args) {
+		$safe = new SafeMySQL([
+			'user' => DB_USER,
+			'db' => DB_NAME,
+			'pass' => DB_PASSWORD
+		]);
+
+		return $safe->query(...$args);
+	}
+
+	function safe_query_assoc(...$args) {
+		return safe_query(...$args)->fetch_assoc();
+	}
+
 	function sql_query(string $query) {
 		$mysql = new mysqli(DB_ADDRESS, DB_USER, DB_PASSWORD, DB_NAME);
 		$res = $mysql->query($query);
@@ -20,26 +34,29 @@
 	}
 
 	function assoc_user(string $table, string $login): array {
-		return sql_query_assoc(
-			"SELECT * FROM `$table` WHERE `LOGIN` = '$login'"
+		return safe_query_assoc("
+			SELECT *
+			FROM `$table`
+			WHERE `LOGIN` = ?s
+			", $login
 		);
 	}
 
 	function get_student_points(string $login): int {
-		$got_points = sql_query_assoc(
-			"SELECT SUM(`POINTS`) AS SUM
-			FROM `transactions`
-			WHERE `TO_LOGIN`='$login'"
-		)["SUM"] ?? 0;
+		$got_points = safe_query_assoc("
+			SELECT SUM(POINTS) AS SUM
+			FROM transactions
+			WHERE TO_LOGIN = ?s
+		", $login)["SUM"] ?? 0;	
 		
-		$given_points = sql_query_assoc(
-			"SELECT SUM(`POINTS`) AS SUM
+		$given_points = safe_query_assoc("
+			SELECT SUM(`POINTS`) AS SUM
 			FROM `transactions`
-			WHERE `FROM_LOGIN`='$login'"
-		)["SUM"] ?? 0;
+			WHERE `FROM_LOGIN`= ?s
+		", $login)["SUM"] ?? 0;
 
 		return $got_points - $given_points;
- 	}
+	}
 
  	function add_transaction(string $from_login, string $to_login, int $points, string $cause): bool {
  		$from_user = get_user($from_login);
@@ -51,19 +68,15 @@
  		if ($from_user->has_role("student") && $from_user->get_points() < $points)
  			return false;
 
-
- 		sql_query(
+ 		safe_query(
  			"INSERT INTO `transactions` (
  				FROM_LOGIN,
  				TO_LOGIN,
  				POINTS,
  				CAUSE
  			) VALUES (
- 				'$from_login',
- 				'$to_login',
- 				$points,
- 				'$cause'
- 			)"
+ 				?s, ?s, ?i, ?s
+ 			)", $from_login, $to_login, $points, $cause
  		);
 
  		$points = get_points_in_case(intval($points));
@@ -82,7 +95,7 @@
 
  	function get_student_transactions(string $login): array {
  		$ret = [];
- 		$query = sql_query(
+ 		$query = safe_query(
  			"SELECT
  				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NORM_TIME,
  				FROM_LOGIN,
@@ -91,9 +104,10 @@
  				POINTS
  			FROM `transactions`
  			WHERE
- 				FROM_LOGIN='$login' OR
- 				TO_LOGIN='$login'
- 			ORDER BY TIME DESC"
+ 				FROM_LOGIN=?s OR
+ 				TO_LOGIN=?s
+ 			ORDER BY TIME DESC
+ 			", $login, $login
  		);
 
  		foreach ($query as $q) {
@@ -107,7 +121,7 @@
  	}
 
  	function get_classes_json(): string {
- 		$query = sql_query(
+ 		$query = safe_query(
  			"SELECT
  				CONCAT(CLASS_NUM, '-', CLASS_LIT) AS CLASS,
  				GIVEN_NAME,
@@ -130,7 +144,7 @@
  	}
 
  	function get_events_json(): string {
- 		$query = sql_query("SELECT * FROM `calendar`");
+ 		$query = safe_query("SELECT * FROM `calendar`");
 
  		$events = [];
  		foreach ($query as $event) {
