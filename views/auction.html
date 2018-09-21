@@ -22,29 +22,27 @@
 			</h4>
 		</div>
 
-		{# Текущая ставка (если есть) #}
-		{% if curr_rate %}
-			<div class="now-auction">
-				<div class="now-rate">
-					Текущая ставка:
-					<span id="curr_rate_points">
-						{{ curr_rate.points }}
-					</span>
-				</div>
-				<div class="who-rate">
-					Поставил:
-					<span id="curr_rate_student">
-						{{ curr_rate.student }}
-					</span>
-				</div>
-				<div class="sec-left">
-					Осталось:
-					<span id="curr_rate_time">
-						{{ curr_rate.time }}
-					</span>
-				</div>
+		{# Текущая ставка #}
+		<div class="now-auction" id="curr_rate" hidden>
+			<div class="now-rate">
+				Текущая ставка:
+				<span id="curr_rate_points">
+					{{ curr_rate.points }}
+				</span>
 			</div>
-		{% endif %}
+			<div class="who-rate">
+				Поставил:
+				<span id="curr_rate_student">
+					{{ curr_rate.student }}
+				</span>
+			</div>
+			<div class="sec-left" id="curr_rate_time_div">
+				Осталось:
+				<span id="curr_rate_time">
+					{{ curr_rate.time }}
+				</span>
+			</div>
+		</div>
 	
 		{# Поставить больше #}
 		<div class="row">
@@ -83,4 +81,5 @@
 			{% endfor %}
 		</div>
 	</div>
+	<script src="/js/auction.js"></script>
 {% endblock %}
