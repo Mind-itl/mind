@@ -5,6 +5,7 @@
 		"twig/twig": "^2.5",
 		"mihaeu/html-formatter": "^1.0",
 		"workerman/workerman": "^3.5",
-		"simplon/mysql": "^2.2"
+		"simplon/mysql": "^2.2",
+		"colshrapnel/safemysql": "^1.1"
 	}
 }
