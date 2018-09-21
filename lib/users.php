@@ -14,7 +14,12 @@
 			return $_login_users_cache[$login];
 
 		if ($role == "") {
-			$role = sql_query_assoc("SELECT ROLE FROM `passwords` WHERE LOGIN='$login'")["ROLE"];
+			$role = safe_query_assoc("
+				SELECT ROLE
+				FROM `passwords`
+				WHERE LOGIN = ?s
+				", $login
+			)["ROLE"];
 		}
 
 		if ($role == "teacher")

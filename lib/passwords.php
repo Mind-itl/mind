@@ -9,7 +9,12 @@
 
 	function check_password(string $login, string $pass) {
 		$hash = hash_password($pass);
-		$user = sql_query_assoc("SELECT * FROM `passwords` WHERE `LOGIN` = '$login'");
+		$user = safe_query_assoc("
+			SELECT *
+			FROM `passwords`
+			WHERE `LOGIN` = ?s
+			", $login
+		);
 
 		if ($user['HASH'] == $hash)
 			return $user["ROLE"];
@@ -31,7 +36,16 @@
 			return false;
 
 		$hash = hash_password($pass);
-		sql_query("INSERT INTO `passwords` (`LOGIN`, `HASH`, `ROLE`) VALUES ('$login', '$hash', '$role')");
+
+		safe_query("
+			INSERT INTO `passwords` (
+				`LOGIN`,
+				`HASH`,
+				`ROLE`
+			) VALUES (?s, ?s, ?s)
+			", $login, $hash, $role
+		);
+
 		return true;
 	}
 ?>
