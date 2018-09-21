@@ -2,31 +2,6 @@
 	declare(strict_types=1);
 	require_once "causes.php";
 
-	function get_pdo() {
-		$dsn = 
-			"mysql:host=".DB_ADDRESS.";".
-			"dbname=".DB_NAME.';'.
-			"charset=utf8";
-
-		$opt = [
-			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-			PDO::ATTR_EMULATE_PREPARES   => false,
-		];
-		$pdo = new PDO($dsn, DB_USER, DB_PASSWORD, $opt);
-		return $pdo;
-	}
-
-	function pdo_query(string $r, array $arr) {
-		$r = get_pdo()->prepare($r);
-		$r->execute($arr);
-		return $r;
-	}
-
-	function pdo_assoc_execute(string $r, array $arr) {
-		return pdo_query($r, $arr)->fetch();
-	}
-
 	function safe_query(...$args) {
 		$safe = new SafeMySQL([
 			'user' => DB_USER,
@@ -59,11 +34,11 @@
 	}
 
 	function assoc_user(string $table, string $login): array {
-		return pdo_assoc_execute("
+		return safe_query_assoc("
 			SELECT *
 			FROM `$table`
-			WHERE `LOGIN` = ?",
-			[$login]
+			WHERE `LOGIN` = ?s
+			", $login
 		);
 	}
 
