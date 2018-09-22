@@ -34,13 +34,14 @@
 
 			$class = get_curr()->get_class();
 
-			$r = sql_query("
+			$r = safe_query("
 				SELECT LOGIN
 				FROM teacher_roles
 				WHERE
-					ROLE='classruk' AND
-					ARG='$class'
-			");
+					ROLE = ?s AND
+					ARG = ?s
+				", $classruk, $class
+			);
 
 			if ($a = $r->fetch_assoc()) {
 				$clruk = get_user($a["LOGIN"]);
@@ -111,13 +112,15 @@
 			$day = $this->table_date()->format("l");
 			$class = get_curr()->get_class();
 
-			$lessons = sql_query(
+			$lessons = safe_query(
 				"SELECT LESSON, PLACE
 				FROM lessons
 				WHERE
-					CLASS='$class' AND
-					WEEKDAY='$day'
-				ORDER BY NUMBER");
+					CLASS = ?s AND
+					WEEKDAY = ?s
+				ORDER BY NUMBER
+				", $class, $day
+			);
 
 			$arr = [];
 			foreach ($lessons as $lesson) {

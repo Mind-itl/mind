@@ -43,13 +43,14 @@
 
 			list($class_num, $class_lit) = explode("-", $class_name);
 
-			$r = sql_query("
+			$r = safe_query("
 				SELECT LOGIN
 				FROM `students`
 				WHERE
-					CLASS_LIT = '$class_lit' AND
-					CLASS_NUM = '$class_num'
-			");
+					CLASS_LIT = ?s AND
+					CLASS_NUM = ?s
+				", $class_lit, $class_num
+			);
 
 			foreach ($r as $st) {
 				$student = get_user($st["LOGIN"], "student");

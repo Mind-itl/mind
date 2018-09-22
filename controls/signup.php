@@ -21,7 +21,7 @@
 		}
 
 		private function get_classes(): string {
-			$q = sql_query("SELECT DISTINCT(CLASS) AS CLASS FROM lessons");
+			$q = safe_query("SELECT DISTINCT(CLASS) AS CLASS FROM lessons");
 			$r = [];
 
 			foreach ($q as $v) {
@@ -49,21 +49,21 @@
 
 			register_user($user["login"], $user["password"], $user["role"]);
 			if ($user["role"] == "teacher") {
-				sql_query("
+				safe_query("
 					INSERT INTO teachers (
 						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, BIRTHDAY
 					) VALUES (
-						'$name', '$sname', '$fname', '$login', '$bday'
-					)
-				");
+						?s, ?s, ?s, ?s, ?s
+					)", $name, $sname, $fname, $login, $bday
+				);
 			} else {
-				sql_query("
+				safe_query("
 					INSERT INTO students (
 						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, CLASS_NUM, CLASS_LIT, BIRTHDAY
 					) VALUES (
-						'$name', '$sname', '$fname', '$login', $class_num, $class_lit, '$bday'
-					)
-				");
+						?s, ?s, ?s, ?s, ?i, ?i, ?s
+					)", $name, $sname, $fname, $login, $class_num, $class_lit, $bday
+				);
 			}
 
 			enter_user($login, $password);
