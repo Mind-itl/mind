@@ -1,8 +1,6 @@
 <?php
 	require_once LIBS."Excel_reader.php";
 
-
-
 	class Load_control extends Control {
 		public function has_access(array $args): bool {
 			return false;

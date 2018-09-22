@@ -1,9 +1,8 @@
 <?php
-	require_once LIBS."excel/PHPExcel.php";
-
 	abstract class Excel_reader {
 		static function load(string $file_name) {
-			$x = PHPExcel_IOFactory::load($file_name);
+			$x = \PhpOffice\PhpSpreadsheet\IOFactory::load($file_name);
+
 			$x->setActiveSheetIndex(0);
 			$sheet = $x->getActiveSheet();
 
