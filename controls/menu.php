@@ -9,7 +9,7 @@
 			["teacher", "Изменить баллы", "/award"],
 			["classruk", "Выписка по классу", "/class"],
 			["student", "Расписание", "/timetable"],
-			["all", "Аукцион", "/auction"],
+			["student", "Аукцион", "/auction"],
 
 		];
 
