@@ -20,13 +20,14 @@
 
 			$days = [];
 			foreach ($weekdays as $day) {
-				$r = sql_query("
+				$r = safe_query("
 					SELECT *
 					FROM lessons
 					WHERE
-						CLASS = '$class' AND
-						WEEKDAY = '$day'
-				");
+						CLASS = ?s AND
+						WEEKDAY = ?s
+					", $class, $day
+				);
 
 				$lessons = [];
 				foreach ($r as $v) {

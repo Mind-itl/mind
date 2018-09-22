@@ -7,5 +7,5 @@
 
 	$id = $_POST["id"];
 
-	sql_query("UPDATE notifications SET READED=1 WHERE ID=?i", $id);
+	safe_query("UPDATE notifications SET READED=1 WHERE ID=?i", $id);
 ?>
