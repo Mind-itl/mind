@@ -1,3 +1,4 @@
+var auction;
 window.onload = function() {
 	'use strict';
 
@@ -21,21 +22,22 @@ window.onload = function() {
 		}
 	};
 
-	new Promise(function(resolve, reject) {
-		let socket = new WebSocket("ws:" + document.location.host + "/ws");
+	// new Promise(function(resolve, reject) {
+	// 	let socket = new WebSocket("ws:" + document.location.host + "/ws");
 
-		socket.onopen = function() {
-			resolve(socket);
-		}
-		socket.onerror = function(error) {
-			reject(error);
-		}
-	}).then(
-		socket => {
-			let auction = new Auction(views, socket);
-		},
-		error => {
-			views.auction.off.innerHTML = "Проблемы с сервером";
-		}
-	);
+	// 	socket.onopen = function() {
+	// 		resolve(socket);
+	// 	}
+	// 	socket.onerror = function(error) {
+	// 		reject(error);
+	// 	}
+	// }).then(
+	// 	socket => {
+	// 		let auction = new Auction(views, socket);
+	// 	},
+	// 	error => {
+	// 		views.auction.off.innerHTML = "Проблемы с сервером";
+	// 	}
+	// );
+	auction = new Auction(views, {send: function(){}});
 };

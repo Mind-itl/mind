@@ -15,6 +15,7 @@ class CurrentRate {
 	
 	newRate(student, points, time) {
 		this.success = false;
+		this.has = true;
 
 		this.time = time;
 		this.points = points;
@@ -31,9 +32,9 @@ class CurrentRate {
 			this.views.div.hidden = false;
 
 		if (this.success)
-			views.div.classList.add("success-rate");
+			this.views.div.classList.add("success-rate");
 		else
-			views.div.classList.remove("success-rate");
+			this.views.div.classList.remove("success-rate");
 
 		this.views.points.innerHTML = this.points;
 		this.views.student.innerHTML = this.student;
@@ -45,8 +46,8 @@ class CurrentRate {
 			return;
 
 		this.time--;
-		if (time==0) {
-			this.succes = true;
+		if (this.time<=0) {
+			this.success = true;
 		}
 
 		this.render()
