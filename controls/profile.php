@@ -16,14 +16,15 @@
 			list($group, $cl_ruk) = $this->get_group_clruk();
 
 			return [
-				"name" => $this->name(),
-				"today" => $this->today(),
+				"date" => $this->table_date(),
+				"is_today" => $this->is_today(),
 				"timetable" => $this->timetable(),
 				"notifications" => $this->notifications(),
 				"daytime" => $this->daytime(),
 				"points" => $this->points(),
 				"group" => $group,
-				"cl_ruk" => $cl_ruk
+				"clruk_name" => $cl_ruk,
+				"login" => get_curr()->get_login()
 			];
 		}
 
@@ -33,16 +34,18 @@
 
 			$class = get_curr()->get_class();
 
-			$r = sql_query("
+			$r = safe_query("
 				SELECT LOGIN
 				FROM teacher_roles
 				WHERE
-					ROLE='classruk' AND
-					ARG='$class'
-			");
+					ROLE = ?s AND
+					ARG = ?s
+				", $classruk, $class
+			);
 
 			if ($a = $r->fetch_assoc()) {
-				$clruk = get_user($a["LOGIN"])->get_full_name("gi ft");
+				$clruk = get_user($a["LOGIN"]);
+				$clruk = $clruk->get_names();
 			}
 			return [$class, $clruk ?? "Не найдено"];
 		}
@@ -84,13 +87,6 @@
 			return $nots;
 		}
 
-		private function name(): string {
-			$name = get_curr()->is_student() ? "gi" : "gi ft";
-			$name = get_curr()->get_full_name($name);
-
-			return $name;
-		}
-
 		private function table_date(): DateTime {
 			$today = new DateTime();
 			$tomorrow = new DateTime('tomorrow');
@@ -104,15 +100,9 @@
 				return $today;
 		}
 
-		private function today(): string {
+		private function is_today(): bool {
 			$a = $this->table_date();
-			$d = $a->format("d.m.Y"); 
-
-			$r = $a->format("l");
-			$r = today_rus($r);
-
-			$n = ($a->format("l") == (new DateTime())->format("l")) ? "Сегодня" : "Завтра";
-			return "$n: $r, $d";
+			return $a->format("l") == (new DateTime())->format("l");
 		}
 
 		private function timetable(): array {
@@ -122,13 +112,15 @@
 			$day = $this->table_date()->format("l");
 			$class = get_curr()->get_class();
 
-			$lessons = sql_query(
+			$lessons = safe_query(
 				"SELECT LESSON, PLACE
 				FROM lessons
 				WHERE
-					CLASS='$class' AND
-					WEEKDAY='$day'
-				ORDER BY NUMBER");
+					CLASS = ?s AND
+					WEEKDAY = ?s
+				ORDER BY NUMBER
+				", $class, $day
+			);
 
 			$arr = [];
 			foreach ($lessons as $lesson) {

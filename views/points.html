@@ -31,7 +31,7 @@
 					<td>{{ trans.from }} </td>
 					<td>{{ trans.cause }}</td>
 					<td class="{{ trans_class }}">
-						{{ trans.points }}	
+						{{ trans.points < 0 ? trans.points : '+' ~ trans.points }}	
 					</td>
 				</tr>
 			{% endfor %}

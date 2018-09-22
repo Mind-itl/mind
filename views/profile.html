@@ -8,20 +8,30 @@
 	<div class="col-md-6 col-md-offset-1">
 		<div class="anketa">
 			<div class="info">
+
+				{% if is_student %}
+					{% set name = names.family ~ ' ' ~ names.given %}
+				{% else %}
+					{% set name = names.given ~ ' ' ~ names.father %}
+				{% endif %}
+
 				<h3>{{ daytime }}, {{ name }}!</h3>
 				<h3 class="top-margin">
 					{% if is_student %}
-						У вас на счету <strong>{{ points.count }}</strong> {{ points.noun }}
+						На счету <strong>{{ points.count }}</strong> {{ points.noun }}
 					{% endif %}
 				</h3>
 				<h4 class="top-margin">
 					{% if is_student %}
-						Ваш класс: <strong>{{ group }}</strong>
+						Класс: <strong>{{ group }}</strong>
 					{% endif %}
 				</h4>
 				<h4 class="top-margin">
 					{% if is_student %}
-						Ваш классный руководитель: <strong>{{ cl_ruk }}</strong>
+						Классный руководитель: 
+						<strong>
+							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
+						</strong>
 					{% endif %}
 				</h4>
 			</div>
@@ -50,7 +60,8 @@
 	</div>
 	<div class="col-md-4 today-col">
 		<span class="today">
-			{{ today }}
+			{{ is_today ? 'Сегодня' : 'Завтра'}}:
+			{{ date|date("l")|weekday_rus }}, {{ date|date("d.m.Y") }}
 		</span>
 		<span class="timetable">
 			<table class="table table-bordered" style="margin-top: 20px;">

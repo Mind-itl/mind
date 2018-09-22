@@ -24,7 +24,7 @@
 			{% for student in students %}
 				<tr>
 					<td>
-						{{ student.name }}
+						{{ student.names.family }} {{ student.names.given }}
 					</td>
 					<td>
 						{{ student.points }}

@@ -29,3 +29,11 @@ span.bigger {
 .up-100 {
 	margin-left: 10px !important;
 }
+
+.success-rate {
+	background: rgba(0, 255, 0, 0.2);
+}
+
+.success-rate > .sec-left {
+	display: none;
+}	
