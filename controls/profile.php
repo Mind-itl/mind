@@ -38,9 +38,9 @@
 				SELECT LOGIN
 				FROM teacher_roles
 				WHERE
-					ROLE = ?s AND
+					ROLE = 'classruk' AND
 					ARG = ?s
-				", $classruk, $class
+				", $class
 			);
 
 			if ($a = $r->fetch_assoc()) {
