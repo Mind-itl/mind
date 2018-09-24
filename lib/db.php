@@ -16,23 +16,6 @@
 		return safe_query(...$args)->fetch_assoc();
 	}
 
-	function sql_query(string $query) {
-		$mysql = new mysqli(DB_ADDRESS, DB_USER, DB_PASSWORD, DB_NAME);
-		$res = $mysql->query($query);
-
-		return $res;
-	}
-
-	function sql_query_assoc(string $query) {
-		$q = sql_query($query);
-		if ($q === false) {
-			error_log("db.php:17 sql returned false");
-			$q = sql_query($query);
-		}
-
-		return $q->fetch_assoc();
-	}
-
 	function assoc_user(string $table, string $login): array {
 		return safe_query_assoc("
 			SELECT *
