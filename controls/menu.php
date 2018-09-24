@@ -10,6 +10,7 @@
 			["classruk", "Выписка по классу", "/class"],
 			["student", "Расписание", "/timetable"],
 			["student", "Аукцион", "/auction"],
+			["teacher", "Оповестить учеников", "/broadcast"]
 
 		];
 
