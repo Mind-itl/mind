@@ -17,10 +17,23 @@
 				"title" => $v["TITLE"],
 				"performer" => $v["PERFORMER"],
 				"votes_count" => $votes_count,
+				"id" => $v["ID"]
 			];
 
 		}
 
 		return $music;
+	}
+
+	function get_music_vote(Student $student): int {
+		$r = safe_query("
+			SELECT * FROM music_votes WHERE LOGIN=?s
+			", $student->get_login()
+		);
+
+		if ($r = $r->fetch_assoc())
+			return $r["ID"];
+
+		return -1;
 	}
 ?>

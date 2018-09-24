@@ -21,6 +21,9 @@
 		{% for music in musics %}
 
 			<div class="music_el">
+				<div hidden class="music-id">
+					{{ music.id }}
+				</div>
 				<div class="music_name">
 					<span class="music_performer">
 						{{ music.performer }}
@@ -29,7 +32,7 @@
 						{{ music.title }}
 					</span>
 				</div>
-				<div class="vote">
+				<div class="vote-info">
 					<span class="votes">
 						{{ music.votes_count }}
 					</span>
@@ -42,6 +45,11 @@
 					</button>
 				</div>
 			</div>
+
 		{% endfor %}
+		<script>
+			const user_vote_id = {{ user_vote_id }};
+		</script>
+		<script src="/js/internat.js"></script>
 	</div>
 {% endblock %}

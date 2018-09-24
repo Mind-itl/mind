@@ -8,7 +8,8 @@
 
 		public function get_data(array $args): array {
 			return [
-				"musics" => get_music()
+				"musics" => get_music(),
+				"user_vote_id" => get_music_vote(get_curr())
 			];
 		}
 	}
