@@ -12,18 +12,14 @@
 	{% endif %}
 
 	<form action="" method="POST">
-		<input type="text" placeholder="Сообщение" name="message"><br>
-		<input type="text" hidden readonly><br>
+		<input type="text" placeholder="Сообщение" name="message" required><br>
+		<textarea type="textarea" hidden readonly required id="selector-list" name="selector"></textarea>
 
-		<input type="text" id="add-student-text" placeholder="Логин ученика">
-		<button id="add-student-button">Добавить</button><br>
+		{{ include("select_student.html") }}
+		<div id="add-student-button">Добавить</div><br>
 		
 		<input type="submit">
 	</form>
-	
-	{{ "<script>" }}
-		list_of_students = {{ list_of_students|raw }};
-	{{ "</script>"}}
 
 	<script src="/js/broadcast.js"></script>
 {% endblock %}

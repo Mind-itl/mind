@@ -9,28 +9,36 @@
 		protected function get_data(array $args): array {
 			if (isset_post_fields("selector", "message")) {
 
-				$student_login = $_POST['selector'];
+				$student_logins = $_POST['selector'];
 				$message       = $_POST['message'];
 
-				if (is_incorrect($student_login) || !has_login($student_login))
-					$result = false;
-				else {
-					$student = get_user($student_login);
-					add_notification($student, $message);
+				foreach (explode("\n", $student_logins) as $student_login) {
+					$student_login = trim($student_login);
 
-					$result = true;
-				}
+					if ($student_login === "")
+						continue;
 
-				if ($result) {
-					$result = "success";
-				} else {
-					$result = "fail";
+					if (is_incorrect($student_login) || !has_login($student_login))
+						$result = false;
+					else {
+						$student = get_user($student_login);
+						add_notification($student, $message);
+
+						$result = true;
+					}
+
+					if ($result) {
+						$result = "success";
+					} else {
+						$result = "fail";
+						break;
+					}
 				}
 			}
 
 			return [
 				"result" => $result ?? "not_set",
-				"list_of_students" => get_classes_json()
+				"classes" => get_classes_json()
 			];
 		}
 	}

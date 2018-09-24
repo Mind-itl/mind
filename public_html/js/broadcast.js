@@ -1,15 +1,15 @@
 window.onload = function() {
 	'use strict';
-	let students = (function(students){
-		let arr = {};
-		for (let cls in students) {
-			students[cls].forEach(el=>{
-				arr[el.LOGIN] = `${el.CLASS}, ${el.FAMILY_NAME} ${el.FATHER_NAME} ${el.GIVEN_NAME}`;
-			});
-		}
 
-		return arr;
-	})(list_of_students);
+	$("#add-student-button").click(function() {
+		let val = $("#student_select").val();
+		if (val === "")
+			return;
+		
+		let logins = $("#selector-list").val();
 
-	console.log(students);
+		$("#selector-list").val(logins + val +'\n').show();
+
+		console.log("asd");
+	});
 };
