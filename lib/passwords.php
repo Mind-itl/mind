@@ -7,6 +7,17 @@
 		return md5(md5("}2sa(<@!".$pass));
 	}
 
+	function has_login(string $login): bool {
+		$r = safe_query("
+			SELECT *
+			FROM `passwords`
+			WHERE `LOGIN` = ?s
+			", $login
+		);
+
+		return $r->num_rows != 0;
+	}
+
 	function check_password(string $login, string $pass) {
 		$hash = hash_password($pass);
 		$user = safe_query_assoc("
