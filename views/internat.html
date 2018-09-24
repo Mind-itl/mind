@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    Интернат
+{% endblock %}
+
+{% block body %}
+	Сегодня дежурят:
+	<table>
+		<tr>
+			<th>Блок</th>
+			<th>Воспитатель</th>
+		</tr>
+		<tr>
+			<td>А2</td>
+			<td>Михаил Осипович</td>
+		</tr>
+	</table>
+
+	<div id="music_list">
+		<div class="music_el">
+			<div class="music_name">
+				<span class="music_performer">System Of a Down</span> -
+				<span class="music_title">Such a Lonely Day</span>
+			</div>
+			<div class="vote">
+				<span class="votes">12</span>
+				<button class="vote">+</button>
+			</div>
+		</div>
+		<div class="music_el user_vote">
+			<div class="music_name">
+				<span class="music_performer">Другой автор</span> -
+				<span class="music_title">Другое название</span>
+			</div>
+			<div class="vote">
+				<span class="votes">1</span>
+				<button class="vote">Отменить голос</button>
+			</div>
+		</div>
+	</div>
+{% endblock %}
