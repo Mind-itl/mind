@@ -29,7 +29,8 @@
 			}
 
 			return [
-				"result" => $result ?? "not_set"
+				"result" => $result ?? "not_set",
+				"list_of_students" => get_classes_json()
 			];
 		}
 	}
