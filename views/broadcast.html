@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block title %}
+	Оповестить
+{% endblock %}
+
+{% block body %}
+	{% if result=="success" %}
+		Сообщение отправлено!
+	{% elseif result=="fail" %}
+		Ошибка
+	{% endif %}
+
+	<form action="" method="POST">
+		<input type="text" placeholder="Сообщение" name="message">
+		<input type="text" placeholder="Логин ученика" name="selector">
+		<input type="submit">
+	</form>
+{% endblock %}

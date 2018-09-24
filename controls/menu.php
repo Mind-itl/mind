@@ -10,7 +10,9 @@
 			["classruk", "Выписка по классу", "/class"],
 			["student", "Расписание", "/timetable"],
 			["student", "Аукцион", "/auction"],
-			["student", "Интернат", "/internat"]
+			["student", "Интернат", "/internat"],
+			["teacher", "Оповестить учеников", "/broadcast"]
+
 		];
 
 		protected function get_data(array $args): array {
