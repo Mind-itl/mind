@@ -1,7 +1,6 @@
 window.onload = function() {
 	const get_music_elem = function(music) {
 		let cls;
-		console.log(music);
 		if (music.student_vote_this)
 			music.cls = "vote-this";
 		else
@@ -26,7 +25,6 @@ window.onload = function() {
 			$("#music_list").append(get_music_elem(music));
 		});
 		$(".vote").click(function() {
-			console.log("click");
 			let self = this;
 			let val = $(self).parent().parent().
 				children(".music-id").html().trim();
@@ -39,7 +37,6 @@ window.onload = function() {
 				},
 				dataType: "json"
 			}).done(function(data) {
-				console.log(data);
 				render(data);
 			});
 		});
@@ -50,7 +47,6 @@ window.onload = function() {
 		url: "/vote_music",
 		dataType: "json"
 	}).done(function(data) {
-		console.log(data);
 		render(data);
 	});
 }
