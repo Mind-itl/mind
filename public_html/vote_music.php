@@ -10,8 +10,12 @@
 			return;
 		}
 
-		remove_music_vote(get_curr());
-		add_music_vote(get_curr(), $id);
+		if ($curr_vote == $id)
+			remove_music_vote(get_curr());
+		else {
+			remove_music_vote(get_curr());
+			add_music_vote(get_curr(), $id);
+		}
 	}
 
 	if (isset($_POST['id']) && is_logined()) {
