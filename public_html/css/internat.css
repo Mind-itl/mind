@@ -1,0 +1,11 @@
+.vote-this .dovote {
+	display: none;
+}
+
+.vote-not-this .unvote {
+	display: none;
+}
+
+#primer_music_el {
+	display: none;
+}
