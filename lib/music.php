@@ -54,4 +54,14 @@
 	function remove_music_vote(Student $student) {
 		safe_query("DELETE FROM music_votes WHERE LOGIN=?s", $student->get_login());
 	}
+
+	function add_music(string $performer, string $title, User $from) {
+		safe_query("
+			INSERT INTO music (
+				PERFORMER, TITLE, LOGIN
+			) VALUES (
+				?s, ?s, ?s
+			)", $performer, $title, $from->get_login()
+		);
+	}
 ?>

@@ -7,10 +7,10 @@
 		}
 
 		public function get_data(array $args): array {
-			return [
-				"musics" => get_music(),
-				"user_vote_id" => get_music_vote(get_curr())
-			];
+			if (isset_post_fields("performer", "title"))
+				add_music($_POST["performer"], $_POST["title"], get_curr());	
+
+			return [];
 		}
 	}
 ?>
