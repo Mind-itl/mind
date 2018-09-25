@@ -10,7 +10,7 @@
 			<div class="info">
 
 				{% if is_student %}
-					{% set name = names.family ~ ' ' ~ names.given %}
+					{% set name = names.given %}
 				{% else %}
 					{% set name = names.given ~ ' ' ~ names.father %}
 				{% endif %}
@@ -31,6 +31,22 @@
 						Классный руководитель: 
 						<strong>
 							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
+						</strong>
+					{% endif %}
+				</h4>
+				<h4 class="top-margin">
+					{% if is_student %}
+						Воспитатель: 
+						<strong>
+							{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
+						</strong>
+					{% endif %}
+				</h4>
+				<h4 class="top-margin">
+					{% if is_student %}
+						Дежурит на этаже: 
+						<strong>
+							{{ night_vospit_name.family }} {{ night_vospit_name.given|first }}. {{ night_vospit_name.father|first }}.
 						</strong>
 					{% endif %}
 				</h4>
@@ -67,6 +83,7 @@
 			<table class="table table-bordered" style="margin-top: 20px;">
 				{% for lesson in timetable %}
 					<tr>
+						<td>{{ loop.index }}</td>
 						<td>{{ lesson.lesson }}</td>
 						<td>{{ lesson.place }}</td>
 					</tr>
