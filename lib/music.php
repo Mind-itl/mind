@@ -36,4 +36,15 @@
 
 		return -1;
 	}
+
+	function add_music_vote(Student $student, int $id) {
+		safe_query("
+			INSERT INTO music_votes (LOGIN, ID) VALUES (?s, ?i)
+			", $student->get_login(), $id
+		);
+	}
+
+	function remove_music_vote(Student $student) {
+		safe_query("DELETE FROM music_votes WHERE LOGIN=?s", $student->get_login());
+	}
 ?>

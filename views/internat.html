@@ -18,42 +18,33 @@
 	</table>
 
 	<div id="music_list">
-		{% for music in musics %}
-			{% if music.student_vote_this %}
-				{% set class = "vote-this" %}
-			{% else %}
-				{% set class = "vote-not-this" %}
-			{% endif %}
-		
-			<div class="music_el {{ class }}">
-				<div hidden class="music-id">
-					{{ music.id }}
-				</div>
-				<div class="music_name">
-					<span class="music_performer">
-						{{ music.performer }}
-					</span> - 
-					<span class="music_title">
-						{{ music.title }}
-					</span>
-				</div>
-				<div class="vote-info">
-					<span class="votes">
-						{{ music.votes_count }}
-					</span>
-					<button class="vote unvote">
-							Отменить голос
-					</button>
-					<button class="vote dovote">
-						+
-					</button>
-				</div>
+		<div id="primer_music_el" class="music_el">
+			<div hidden class="music-id">
+				${music.id}
 			</div>
-
-		{% endfor %}
-		<script>
-			const user_vote_id = {{ user_vote_id }};
-		</script>
-		<script src="/js/internat.js"></script>
+			<div class="music_name">
+				<span class="music_performer">
+					${music.performer}
+				</span> - 
+				<span class="music_title">
+					${music.title}
+				</span>
+			</div>
+			<div class="vote-info">
+				<span class="votes">
+					${music.votes_count}
+				</span>
+				<button class="vote unvote">
+						Отменить голос
+				</button>
+				<button class="vote dovote">
+					+
+				</button>
+			</div>
+		</div>
 	</div>
+	{{ "<script>" }}
+		const user_vote_id = {{ user_vote_id }};
+	{{ "</script>" }}
+	<script src="/js/internat.js"></script>
 {% endblock %}
