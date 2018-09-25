@@ -1,0 +1,7 @@
+.vote-this .dovote {
+	display: none;
+}
+
+.vote-not-this .unvote {
+	display: none;
+}

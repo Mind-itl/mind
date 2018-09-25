@@ -19,8 +19,13 @@
 
 	<div id="music_list">
 		{% for music in musics %}
-
-			<div class="music_el">
+			{% if music.student_vote_this %}
+				{% set class = "vote-this" %}
+			{% else %}
+				{% set class = "vote-not-this" %}
+			{% endif %}
+		
+			<div class="music_el {{ class }}">
 				<div hidden class="music-id">
 					{{ music.id }}
 				</div>
@@ -36,12 +41,11 @@
 					<span class="votes">
 						{{ music.votes_count }}
 					</span>
-					<button class="vote">
-						{% if music.student_vote_this %}
+					<button class="vote unvote">
 							Отменить голос
-						{% else %}
-							+
-						{% endif %}
+					</button>
+					<button class="vote dovote">
+						+
 					</button>
 				</div>
 			</div>

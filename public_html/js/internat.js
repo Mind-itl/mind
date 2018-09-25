@@ -1,10 +1,17 @@
 window.onload = function() {
 	$(".vote").click(function() {
-		let val = $(this).parent().parent().
+		let self = this;
+		let val = $(self).parent().parent().
 			children(".music-id").html().trim();
 
-		
-
-		console.log(val);
+		$.ajax({
+			method: "POST",
+			url: "/vote_music",
+			data: {
+				"vote": val
+			}
+		}).done(function() {
+			location.reload();
+		});
 	});
 }
