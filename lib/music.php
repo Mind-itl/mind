@@ -2,6 +2,11 @@
 	function get_music() {
 		$music = [];
 
+		if (is_logined() && get_curr()->is_student())
+			$cid = get_music_vote(get_curr());
+		else
+			$cid = -1;
+
 		$r = safe_query("SELECT * FROM music");
 		foreach ($r as $v) {
 			$id = $v["ID"];
@@ -13,11 +18,13 @@
 				", $id
 			)->fetch_assoc()["COUNT"];
 
+
 			$music[] = [
 				"title" => $v["TITLE"],
 				"performer" => $v["PERFORMER"],
 				"votes_count" => $votes_count,
-				"id" => $v["ID"]
+				"id" => $v["ID"],
+				"student_vote_this" => ($v["ID"] == $cid)
 			];
 
 		}

@@ -1,6 +1,7 @@
 window.onload = function() {
 	const get_music_elem = function(music) {
 		let cls;
+		console.log(music);
 		if (music.student_vote_this)
 			music.cls = "vote-this";
 		else
@@ -8,17 +9,19 @@ window.onload = function() {
 
 		let el = $("#primer_music_el").clone();
 
-		el.children(".music-id").html(music.id);
-		el.children(".music_performer").html(music.performer);
-		el.children(".music_title").html(music.title);
-		el.children(".votes").html(music.votes_count);
+		el.removeAttr("id");
+		el.addClass(music.cls);
+		el.find(".music-id").html(music.id);
+		el.find(".music_performer").html(music.performer);
+		el.find(".music_title").html(music.title);
+		el.find(".votes").html(music.votes_count);
 		el.addClass(music.cls);
 
 		return el;
 	}
 
 	const render = function(musics) {
-		$("#music_list").children().remove();
+		$("#music_list").children(":not(#primer_music_el)").remove();
 		musics.forEach(music => {
 			$("#music_list").append(get_music_elem(music));
 		});
