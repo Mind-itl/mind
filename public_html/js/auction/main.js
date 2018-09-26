@@ -1,4 +1,3 @@
-var auction;
 window.onload = function() {
 	'use strict';
 
@@ -40,5 +39,4 @@ window.onload = function() {
 			views.auction.off.innerHTML = "Проблемы с сервером";
 		}
 	);
-	auction = new Auction(views, {send: function(){}});
 };
