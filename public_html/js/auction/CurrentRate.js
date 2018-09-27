@@ -20,7 +20,7 @@ class CurrentRate {
 		this.time = time;
 		this.points = points;
 		this.student = student;
-		
+
 		this.render();
 	}
 
