@@ -20,9 +20,9 @@ window.onload = function() {
 	}
 
 	const render = function(musics) {
-		$("#music_list").children(":not(#primer_music_el)").remove();
+		$("#music_list").children(".music_el:not(#primer_music_el)").remove();
 		musics.forEach(music => {
-			$("#music_list").append(get_music_elem(music));
+			$("#music_list").prepend(get_music_elem(music));
 		});
 		$(".vote").click(function() {
 			let self = this;

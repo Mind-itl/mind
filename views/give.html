@@ -4,35 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-md-10 col-md-offset-1">
-		{% if result=="success" %}
+	{% if result=="success" %}
 
-			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Готово!</strong> Транзакция успешно завершена!
-			</div>
+		<div class="alert alert-success alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>Готово!</strong> Транзакция успешно завершена!
+		</div>
 
-		{% elseif result=="fail" %}
+	{% elseif result=="fail" %}
 
-			<div class="alert alert-danger alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Упс!</strong> Что-то пошло не так!
-			</div>
+		<div class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>Упс!</strong> Что-то пошло не так!
+		</div>
 
-		{% endif %}
-
-		<span class="span-point">Ваш баланс:</span>
-		<span class="span-points">{{ points }}</span>
+	{% endif %}
+	<div class="container container-points">
+		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
 		<script>
 			var causes_list = {{ causes }};
 		</script>
 		<form action="" method="POST">
-			<div class="lab">
-				<label for="to">Выберите ученика:</label><br>
-				{{ controller("select_student") }}
-			</div>
+			{{ controller("select_student") }}
 			<input placeholder="Введите количество баллов" class="form-control" type="number" name="points" min="0" id="number">
-			<input type="submit" id="log-in-a">
+			<input type="submit" class="submit">
 		</form>
 	</div>
 {% endblock %}

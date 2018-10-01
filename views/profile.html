@@ -2,85 +2,32 @@
 {% block title %}
 	Профиль
 {% endblock %}
-
 {% block body %}
-	<script src="/js/profile.js"></script>
-	<div class="col-md-6 col-md-offset-1">
-		<div class="anketa">
-			<div class="info">
 
-				{% if is_student %}
-					{% set name = names.given %}
-				{% else %}
-					{% set name = names.given ~ ' ' ~ names.father %}
-				{% endif %}
-
-				<h3>{{ daytime }}, {{ name }}!</h3>
-				<h3 class="top-margin">
-					{% if is_student %}
-						На счету <strong>{{ points.count }}</strong> {{ points.noun }}
-					{% endif %}
-				</h3>
-				<h4 class="top-margin">
-					{% if is_student %}
-						Класс: <strong>{{ group }}</strong>
-					{% endif %}
-				</h4>
-				<h4 class="top-margin">
-					{% if is_student %}
-						Классный руководитель: 
-						<strong>
-							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
-						</strong>
-					{% endif %}
-				</h4>
-				<h4 class="top-margin">
-					{% if is_student %}
-						Воспитатель: 
-						<strong>
-							{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
-						</strong>
-					{% endif %}
-				</h4>
-				<h4 class="top-margin">
-					{% if is_student %}
-						Дежурит на этаже: 
-						<strong>
-							{{ night_vospit_name.family }} {{ night_vospit_name.given|first }}. {{ night_vospit_name.father|first }}.
-						</strong>
-					{% endif %}
-				</h4>
-			</div>
+			
+		
+	{% if is_student %}
+		{% set name = names.given %}
+	{% else %}
+		{% set name = names.given ~ ' ' ~ names.father %}
+	{% endif %}
+	<div class="container">
+		<div class="block-information profile-information">
+			<h2>{{ daytime }}, {{ name }}!</h2>
+			<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
+			<h3>Класс: <strong>{{ group }}</strong></h3>
+			<h3>Классный руководитель: <strong>{% if is_student %}{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.{% endif %}</strong></h3>
+			<h3>Воспитатель: <strong>{% if is_student %}{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.{% endif %}</strong></h3>
+			<h3>Дежурит на этаже: <strong>{% if is_student %}{{ night_vospit_name.family }} {{ night_vospit_name.given|first }}. {{ night_vospit_name.father|first }}.{% endif %}</strong></h3>
 		</div>
-		<span class="notifications">
-			<table class="table table-bordered">
-
-				{% for notif in notifications %}
-					{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
-
-					<tr class="{{ notif_class }}">
-						<td>
-							{{ notif.message }}
-						</td>
-						<td class="notification-time">
-							{{ notif.time }}
-						</td>
-						<td style="display: none;" class="notification-id">
-							{{ notif.id }}
-						</td>
-					</tr>
-				{% endfor %}
-
-			</table>
-		</span>
-	</div>
-	<div class="col-md-4 today-col">
-		<span class="today">
-			{{ is_today ? 'Сегодня' : 'Завтра'}}:
-			{{ date|date("l")|weekday_rus }}, {{ date|date("d.m.Y") }}
-		</span>
-		<span class="timetable">
-			<table class="table table-bordered" style="margin-top: 20px;">
+		<div class="block-information timetable">
+			<h2>{{ is_today ? 'Сегодня' : 'Завтра'}}: <strong>{{ date|date("l")|weekday_rus }}</strong>, {{ date|date("d.m.Y") }}</h2>
+			<table class="timetable-table">
+				<tr>
+					<th></th>
+					<th>Предмет</th>
+					<th>Каб.</th>
+				</tr>
 				{% for lesson in timetable %}
 					<tr>
 						<td>{{ loop.index }}</td>
@@ -89,6 +36,20 @@
 					</tr>
 				{% endfor %}
 			</table>
-		</span>
-	</div>
+		</div>
+		<div class="notifications">
+			{% for notif in notifications %}
+				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
+				<div class="one-notif {{ notif_class }}">
+					<div class="from-name">
+						{{ notif.from_name }} <span class="transaction-time">{{ notif.time }} </span>
+					</div>
+					<div class="cause">
+						{% set trans_class = trans.points > 0 ? "good-points" : "bad-points" %}
+						{{ notif.message }} <span class="points {{ trans_class }}">{{ notif.points }}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div> 
 {% endblock %}

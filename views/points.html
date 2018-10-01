@@ -5,45 +5,37 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-md-12">
-		<span class="span-point">
-			Текущее количество баллов: 
-		</span>
-		<span class="span-points">
-			{{ sum }}	
-		</span>
-		
-		{{ text ?? ""}}
-
-		<table class="table table-bordered table-hover">
-			<tr>
-				<th>Дата</th>
-				<th>Отправитель</th>
-				<th>Причина</th>
-				<th>Количество</th>
-			</tr>
-			
-			{% for trans in table %}
-				{% set trans_class = trans.points > 0 ? "good-points" : "bad-points" %}
-
-				<tr>
-					<td>{{ trans.time }} </td>
-					<td>{{ trans.from }} </td>
-					<td>{{ trans.cause }}</td>
-					<td class="{{ trans_class }}">
-						{{ trans.points < 0 ? trans.points : '+' ~ trans.points }}	
-					</td>
-				</tr>
-			{% endfor %}
-
-			<tr>
-				<td colspan="3" class="summ">
-					Итого:
-				</td>
-				<td class="no-right">
-					{{ sum }}
-				</td>
-			</tr>
-		</table>
+	<div class="container container-points">
+		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
+		<div class="day">
+			<h3 class="date">25 сент 2018</h3>
+			<div class="transaction">
+				<div class="from-name">
+					Елена Митясова <span class="transaction-time">в 12:25</span>
+				</div>
+				<div class="cause">
+					Средний балл аттестата "4,5" - "4,99" за четверть <span class="points good-points">+100</span>
+				</div>
+			</div>
+		</div>
+		<div class="day">
+			<h3 class="date">22 сент 2018</h3>
+			<div class="transaction">
+				<div class="from-name">
+					Илья Аникеев <span class="transaction-time">в 17:33</span>
+				</div>
+				<div class="cause">
+					Активное участие в мероприятии <span class="points good-points">+70</span>
+				</div>
+			</div>
+			<div class="transaction">
+				<div class="from-name">
+					Артем Чапурин <span class="transaction-time">в 15:13</span>
+				</div>
+				<div class="cause">
+					Отсутствие значка лицеиста <span class="points bad-points">-5</span>
+				</div>
+			</div>
+		</div>
 	</div>
 {% endblock %}

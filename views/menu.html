@@ -1,40 +1,19 @@
-<nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-
-				{% for button in buttons %}
-				    <li>
-						<a href="{{ button.url }}" class="menulink">
-							{{ button.title }}
-						</a>
-					</li>
-				{% endfor %}
-
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="/out" class="menulink">
-						Выйти
-					</a>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="/settings" class="menulink">
-						Настройки
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
+<div class="container-menu">
+	<img class="banner" src="img/banner.png" alt="">
+	<nav>
+		<ul class="main-menu">
+			<li><a href="profile">Профиль</a></li>
+			<li><div class="btn-group">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">Баллы <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="points">Выписка по баллам</a></li>
+					<li><a href="give">Передать баллы</a></li>
+					<li><a href="auction">Аукцион</a></li>
+				</ul>
+			</div></li>
+			<li><a href="timetable">Расписание</a></li>
+			<li><a href="internat">Интернат</a></li>
+		</ul>
+	</nav>
+</div>
 <script src="/js/menu.js"></script>
