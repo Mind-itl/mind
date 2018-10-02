@@ -406,8 +406,25 @@ tr.lesson-now {
 	height: 0;
 	margin-left: 2px;
 	vertical-align: middle;
+	border-color: #fff;
 	border-top: 4px dashed;
-	border-top: 4px solid \9;
+	border-top: 4px solid;
 	border-right: 4px solid transparent;
 	border-left: 4px solid transparent;
+}
+.profile-photo {
+	width: 10px;
+	height: 10px;
+	background: #fff;
+}
+.dropdown-menu hr {
+	margin: 0;
+	overflow: hidden;
+	background-color: #CCDFEC;
+	border: 1px solid #CCDFEC;
+	border-top: 1px solid #93BAC8;
+	border-bottom: 1px solid #93BAC8;
+}
+.right-menu {
+	float: right;
 }
