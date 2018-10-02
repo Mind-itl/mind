@@ -2,26 +2,56 @@
 {% block title %}
 	Профиль
 {% endblock %}
-{% block body %}
 
-			
-		
+{% block body %}		
 	{% if is_student %}
 		{% set name = names.given %}
 	{% else %}
 		{% set name = names.given ~ ' ' ~ names.father %}
 	{% endif %}
+
 	<div class="container">
 		<div class="block-information profile-information">
 			<h2>{{ daytime }}, {{ name }}!</h2>
-			<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
-			<h3>Класс: <strong>{{ group }}</strong></h3>
-			<h3>Классный руководитель: <strong>{% if is_student %}{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.{% endif %}</strong></h3>
-			<h3>Воспитатель: <strong>{% if is_student %}{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.{% endif %}</strong></h3>
-			<h3>Дежурит на этаже: <strong>{% if is_student %}{{ night_vospit_name.family }} {{ night_vospit_name.given|first }}. {{ night_vospit_name.father|first }}.{% endif %}</strong></h3>
+			<h2>
+				Баланс: <strong>
+					{{ points.count }}
+				</strong>
+				{{ points.noun }}
+			</h2>
+			<h3>
+				Класс: <strong>
+					{{ group }}
+				</strong>
+			</h3>
+			{% if is_student %}
+				<h3>
+					Классный руководитель: <strong>
+						{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
+					</strong>
+				</h3>
+				<h3>
+					Воспитатель: <strong>
+						{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
+					</strong>
+				</h3>
+				<h3>
+					Дежурит на этаже: <strong>
+					{% with { n:night_vospit_name } %}	
+						{{ n.family }} {{ n.given|first }}. {{ n.father|first }}
+					{% endwith %}
+					</strong>
+				</h3>
+			{% endif %}
 		</div>
 		<div class="block-information timetable">
-			<h2>{{ is_today ? 'Сегодня' : 'Завтра'}}: <strong>{{ date|date("l")|weekday_rus }}</strong>, {{ date|date("d.m.Y") }}</h2>
+			<h2>
+				{{ is_today ? 'Сегодня' : 'Завтра'}}:
+				<strong>
+					{{ date|date("l")|weekday_rus }}
+				</strong>,
+				{{ date|date("d.m.Y") }}
+			</h2>
 			<table class="timetable-table">
 				<tr>
 					<th></th>
