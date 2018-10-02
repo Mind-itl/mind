@@ -3,7 +3,7 @@
 
 	class Broadcast_control extends Control {
 		public function has_access(array $args): bool {
-			return get_curr()->has_role("teacher");
+			return is_logined() && get_curr()->has_role("teacher");
 		}
 
 		protected function get_data(array $args): array {

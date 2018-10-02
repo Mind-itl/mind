@@ -1,7 +1,7 @@
 <?php
 	class Timetable_control extends Control {
 		public function has_access(array $args): bool {
-			return get_curr()->has_role("student");
+			return is_logined() && get_curr()->has_role("student");
 		}
 
 		protected function get_data(array $args): array {
