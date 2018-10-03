@@ -7,7 +7,7 @@ class Auction {
 		this.views = views;
 		this.socket = socket;
 
-		socket.onmessage = this.onSocketMessage;
+		socket.onmessage = this.onSocketMessage.bind(this);
 
 		this.send({type: "connect"});
 	}
@@ -39,6 +39,7 @@ class Auction {
 		if (data.type === undefined || !(data.type in f))
 			return;
 
+		console.log(data);
 		f[data.type](data.data);
 	}
 
