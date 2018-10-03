@@ -11,14 +11,16 @@
 	</head>
 	<body>
 		{{ include('loader.html') }}
-		<header>
-			<div class="top-menu">
-				<div class="container-menu">
-					<img src="img/logo full.png" alt="">
+		<div class="load-block" style="display:none;">
+			<header>
+				<div class="top-menu">
+					<div class="container-menu">
+						<img src="img/logo full.png" alt="">
+					</div>
 				</div>
-			</div>
-			{{ controller("menu") }}
-		</header>
-		{% block body %}{% endblock %}
+				{{ controller("menu") }}
+			</header>
+			{% block body %}{% endblock %}
+		</div>
 	</body>
 </html>
