@@ -148,11 +148,13 @@ ul.dropdown-menu li:hover {
 .timetable-table:hover {
 	box-shadow: 5px 5px 8px #666;
 }
+.timetable-table tr {
+	border-bottom: 1px solid rgba(129, 150, 180, .2);
+}
 .timetable-table th,
 .timetable-table td {
 	padding: 3px;
 	text-align: left;
-	border-bottom: 1px solid rgba(129, 150, 180, .2);
 }
 .timetable-table th:nth-child(3n),
 .timetable-table td:nth-child(3n),
@@ -438,9 +440,29 @@ tr.lesson-now {
 .form-group label {
 	font-weight: bold;
 }
-.plitka {
-	display: flex;
-	flex-wrap: wrap;
+@media (max-width: 768px) {
+	.plitka {
+		width: 50%;
+		margin-left: 10%;
+	}
+}
+@media (min-width: 768px) and (max-width: 992px) {
+	.plitka {
+		width: 40%;
+		margin-left: 10%;
+	}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+	.plitka {
+		width: 40%;
+		margin-left: 10%;
+	}
+}
+@media (min-width: 1200px) {
+	.plitka {
+		width: 30%;
+		margin-left: 10%;
+	}
 }
 .fa {
 	color: #fff;
