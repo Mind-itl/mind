@@ -18,10 +18,13 @@
 	border-radius: 0;
 }
 body {
-	background: linear-gradient(to right, #5e87d3, #bed5ff );
 	height: 100%;
 	font-family: 'Open Sans', arial;
 }
-html, .row {
+html {
 	background: linear-gradient(to right, #5e87d3, #bed5ff );
+}
+.container,
+body {
+	background: none;
 }
