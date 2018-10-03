@@ -13,7 +13,6 @@
 				"Thursday", 
 				"Friday", 
 				"Saturday", 
-				"Sunday"
 			];
 
 			$class = get_curr()->get_class();
