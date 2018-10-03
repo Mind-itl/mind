@@ -70,6 +70,11 @@
 					<button class="vote dovote vote-for-this">
 						+
 					</button>
+					{% if is_teacher %}
+						<button>
+							&times;
+						</button>
+					{% endif %}
 				</div>
 			</div>
 			<button class="add submit">Добавить свою</button>
@@ -80,8 +85,5 @@
 			</form>
 		</div>
 	</div>
-	{{ "<script>" }}
-		const user_vote_id = {{ user_vote_id }};
-	{{ "</script>" }}
 	<script src="/js/internat.js"></script>
 {% endblock %}

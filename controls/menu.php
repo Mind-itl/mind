@@ -11,6 +11,7 @@
 			["student", "Расписание", "/timetable"],
 			["student", "Аукцион", "/auction"],
 			["student", "Интернат", "/internat"],
+			["vospit", "Интернат", "/internat"],
 			["teacher", "Оповестить учеников", "/broadcast"]
 
 		];

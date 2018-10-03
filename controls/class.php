@@ -6,7 +6,7 @@
 			if (isset($args[1]) && $args[1] != "")
 				return true;
 			else
-				return get_curr()->has_role("classruk");
+				return is_logined() && get_curr()->has_role("classruk");
 		}
 
 		protected function get_data(array $args): array {
