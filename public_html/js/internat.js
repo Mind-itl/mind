@@ -1,4 +1,5 @@
 window.onload = function() {
+	'use strict';
 	const get_music_elem = function(music) {
 		let cls;
 		if (music.student_vote_this)
@@ -21,7 +22,13 @@ window.onload = function() {
 
 	const render = function(musics) {
 		$("#music_list").children(".music_el:not(#primer_music_el)").remove();
-		musics.forEach(music => {
+		musics.sort((a,b)=>{
+			if (a.votes_count < b.votes_count)
+				return -1;
+			else if (b.votes_count < a.votes_count)
+				return 1;
+			return 0;
+		}).forEach(music => {
 			$("#music_list").prepend(get_music_elem(music));
 		});
 		$(".vote").click(function() {
