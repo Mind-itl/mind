@@ -59,7 +59,12 @@
 					<th>Каб.</th>
 				</tr>
 				{% for lesson in timetable %}
-					<tr>
+					{% if lesson.is_now %}
+						{% set cls = "lesson-now" %}
+					{% else %}
+						{% set cls = "" %}
+					{% endif %}
+					<tr class="{{ cls ?? ""}}">
 						<td>{{ loop.index }}</td>
 						<td>{{ lesson.lesson }}</td>
 						<td>{{ lesson.place }}</td>

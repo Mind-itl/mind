@@ -113,7 +113,7 @@
 			$class = get_curr()->get_class();
 
 			$lessons = safe_query(
-				"SELECT LESSON, PLACE
+				"SELECT LESSON, PLACE, NUMBER
 				FROM lessons
 				WHERE
 					CLASS = ?s AND
@@ -124,9 +124,20 @@
 
 			$arr = [];
 			foreach ($lessons as $lesson) {
+				$num = intval($lesson["NUMBER"]);
+				if (isset(lesson_times[$num-1])) {
+					$f = "H:i";
+					$bg = DateTime::createFromFormat($f, lesson_times[$num-1][0]);
+					$end = DateTime::createFromFormat($f, lesson_times[$num-1][1]);
+
+					$is_now = $bg <= (new DateTime()) && (new DateTime()) <= $end;
+				}
+
 				$arr[] = [
 					"lesson" => $lesson["LESSON"],
-					"place" => $lesson["PLACE"]
+					"place" => $lesson["PLACE"],
+					"is_now" => $is_now ?? false,
+					"number" => $num
 				];
 			}
 
