@@ -73,6 +73,16 @@
 						>
 					</div>
 					<div class="input-group form-group">
+						<label class="shadow-label">Email: </label><br>
+						<input
+							type="text"
+							name="fname"
+							placeholder="Введите email"
+							class="form-control-up form-control"
+							required
+						>
+					</div>
+					<div class="input-group form-group">
 						<label class="shadow-label">Когда Вас поздравить с днем рождения: </label><br>
 						<input
 							type="date"
@@ -92,50 +102,49 @@
 						<label>В каком классе Вы учитесь: </label><br>
 						<select id="class_select" class="form-control-up form-control" name="class" required></select>
 					</div>
-
-					<script>
-						(function() {
-							const student_list = {{ CLASSES }};
-
-							$("#class-select-div").hide();	
-							$(".radio-role").change(function() {	
-								let val = $('input[name=role]:checked').val();	
-								$("#class-select-div").hide();	
-								if (val == "student") {	
-									$("#class-select-div").show();	
-								} 	
-							});	
-
-							student_list.forEach(function(e) {	
-								$("#class_select").append(	
-									`<option>${e}</option>`	
-								)	
-							});
-
-							$("#register-form").submit(function() {
-								let pass = $("#password-input").val();
-								let pass_conf = $("#password-confirm-input").val();
-
-								if (pass !== pass_conf) {
-									$("#passwords-wrong").show();
-									return false;
-								}
-
-								return true;
-							});
-
-							$("#password-input, #password-confirm-input").keydown(function() {
-								$("#passwords-wrong").hide();									
-							});
-						})();
-
-					</script>
-
 					<br>
-					<script src="/js/select_student.js"></script>
 					<input type="submit" id="form-submit"  class="submit big-submit" value="Зарегистрироваться">
 				</form>
 			</div>
 		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="/js/select_student.js"></script>
+		<script>
+			(function() {
+				const student_list = {{ CLASSES }};
+
+				$("#class-select-div").hide();	
+				$(".radio-role").change(function() {	
+					let val = $('input[name=role]:checked').val();	
+					$("#class-select-div").hide();	
+					if (val == "student") {	
+						$("#class-select-div").show();	
+					} 	
+				});	
+
+				student_list.forEach(function(e) {	
+					$("#class_select").append(	
+						`<option>${e}</option>`	
+					)	
+				});
+
+				$("#register-form").submit(function() {
+					let pass = $("#password-input").val();
+					let pass_conf = $("#password-confirm-input").val();
+
+					if (pass !== pass_conf) {
+						$("#passwords-wrong").show();
+						return false;
+					}
+
+					return true;
+				});
+
+				$("#password-input, #password-confirm-input").keydown(function() {
+					$("#passwords-wrong").hide();									
+				});
+			})();
+
+		</script>
 	</body>
 </html>
