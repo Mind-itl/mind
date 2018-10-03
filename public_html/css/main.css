@@ -61,7 +61,7 @@ nav ul {
 }
 nav > ul > li { 
 	font-size: 15px; 
-	padding: 10px;
+	padding: 10px 0;
 	color: #fff;
 	display: inline-block; 
 	vertical-align: middle;
@@ -70,10 +70,12 @@ nav > ul > li {
 	cursor: pointer;
 } 
 nav > ul > li a { 
+	padding: 10px;
 	transition: 0.5s;
 	cursor: pointer;
 }
 nav > ul > li > a:hover {
+	background: rgba(0, 55, 106, .9);
 	color: #ccc;
 	text-shadow: 0 0 3px #555;
 }
