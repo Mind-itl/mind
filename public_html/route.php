@@ -72,6 +72,7 @@
 		if (has_public_file($url))
 			return false;
 
+		$url = explode('?', $url)[0];
 		$url_arr = explode('/', substr($url, 1));
 		$control_name = $url_arr[0];
 
