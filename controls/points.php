@@ -16,8 +16,11 @@
 			list($trans, $sum) = $this->trans($user);
 
 			return [
-				"sum" => $sum,
 				"table" => $trans,
+				"points" => [
+					"count" => $sum,
+					"noun" => get_points_case($sum)
+				]
 			];
 		}
 

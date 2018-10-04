@@ -25,7 +25,10 @@
 
 			return [
 				"result" => $result ?? "",
-				"points" => get_points_in_case(get_curr()->get_points())
+				"points" => [
+					"count" => get_curr()->get_points(),
+					"noun" => get_points_case(get_curr()->get_points())
+				]
 			];
 		}
 	}
