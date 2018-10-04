@@ -22,25 +22,22 @@
 			$type = $_POST["type"];
 			
 			if ($type=="change_password") {
-				if (!isset_post_fields("old_password", "new_password"))
-					return "fail";
-
-				$old = $_POST["old_password"];
-				$new = $_POST["new_password"];
-
-				if (!check_password(get_curr()->get_login(), $old))
-					return "wrong";
-
-				safe_query("
-					UPDATE passwords
-					SET HASH = ?s
-					WHERE LOGIN = ?s
-					", hash_password($new), get_curr()->get_login()
-				);
-
-				return "success";
+				return $this->change_password();
 			}
+		}
 
+		private function change_password(): string {
+			if (!isset_post_fields("old_password", "new_password"))
+				return "fail";
+
+			$old = $_POST["old_password"];
+			$new = $_POST["new_password"];
+			$login = get_curr()->get_login();
+
+			if (!change_password($login, $old, $new))
+				return "wrong";
+
+			return "success";
 		}
 	}
 ?>

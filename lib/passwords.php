@@ -59,4 +59,18 @@
 
 		return true;
 	}
+
+	function change_password(string $login, string $old_password, string $new_password): bool {
+		if (!check_password($login, $old_password))
+			return false;
+
+		safe_query("
+			UPDATE passwords
+			SET HASH = ?s
+			WHERE LOGIN = ?s
+			", hash_password($new), get_curr()->get_login()
+		);
+
+		return true;
+	}
 ?>
