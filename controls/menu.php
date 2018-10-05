@@ -4,9 +4,8 @@
 		private $buttons = [
 			// [role, title, url, class (maybe)]
 			["all", "Профиль", "/"],
-			["student", "Выписка по баллам", "/points"],
-			["student", "Передать баллы", "/give"],
-			["teacher", "Изменить баллы", "/award"],
+			["student", "Баллы", "/points"],
+			["teacher", "Выдать баллы", "/award"],
 			["classruk", "Выписка по классу", "/class"],
 			["student", "Расписание", "/timetable"],
 			["student", "Аукцион", "/auction"],
