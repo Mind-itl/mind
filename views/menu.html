@@ -2,25 +2,19 @@
 	<img class="banner" src="img/banner.png" alt="">
 	<nav>
 		<ul class="main-menu">
-			<li><a href="profile">Профиль</a></li>
-			<li><div class="btn-group">
-				<a type="button" class="dropdown-toggle" data-toggle="dropdown">Баллы <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="points">Выписка по баллам</a></li>
-					<li><a href="give">Передать баллы</a></li>
-					<li><a href="auction">Аукцион</a></li>
-				</ul>
-			</div></li>
-			<li><a href="timetable">Расписание</a></li>
-			<li><a href="internat">Интернат</a></li>3
-			<li class="right-menu"><div class="btn-group">
-				<a type="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i> <span class="caret"></span></a>
-				<ul class="right-dropdown-menu dropdown-menu" role="menu">
-					<li><a href="points">Настройки</a></li>
-					<hr>
-					<li><a href="out">Выйти</a></li>
-				</ul>
-			</div></li>
+			{% for button in buttons %}
+				<li>
+					<a href="{{ button.url }}">
+						{{ button.title }}
+					</a>
+				</li>
+			{% endfor %}
+			<li class="right-menu">
+				<a href="/out">Выйти</a>
+			</li>
+			<li class="right-menu">
+				<a href="/settings">Настройки</a>
+			</li>
 		</ul>
 	</nav>
 </div>
