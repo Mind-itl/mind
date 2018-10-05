@@ -84,7 +84,8 @@
  				FROM_LOGIN,
  				TO_LOGIN,
  				CAUSE,
- 				POINTS
+ 				POINTS,
+ 				TIME
  			FROM `transactions`
  			WHERE
  				FROM_LOGIN=?s OR

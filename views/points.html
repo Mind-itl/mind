@@ -7,7 +7,39 @@
 {% block body %}
 	<div class="container container-points">
 		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
-		<div class="day">
+		{% for day in trans_by_day %}
+			<div class="day">
+				<h3 class="date">{{ day.date|date("j.m.Y") }}</h3>
+
+				{% for trans in day.trans %}
+					<div class="transaction">
+						<div class="from-name">
+							{% if trans.from %}
+								{{ trans.from.given }} {{ trans.from.father }}
+							{% endif %}
+							<span class="transaction-time">
+								в {{ trans.date|date("H:i") }}
+							</span>
+						</div>
+						<div class="cause">
+							{{ trans.cause }}
+							
+							{% if trans.points > 0 %}
+								<span class="points good-points">
+									+{{ trans.points }}
+								</span>
+							{% else %}
+							    <span class="points bad-points">
+							    	{{ trans.points }}
+							    </span>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+		{% endfor %}
+		<!-- <div class="day">
 			<h3 class="date">25 сент 2018</h3>
 			<div class="transaction">
 				<div class="from-name">
@@ -36,6 +68,6 @@
 					Отсутствие значка лицеиста <span class="points bad-points">-5</span>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 {% endblock %}
