@@ -118,6 +118,9 @@ ul.dropdown-menu li:hover {
 .container-points {
 	display: block;
 }
+.container-points h2 {
+	display: inline-block;
+}
 .container-internat {
 	align-items: flex-start;
 }
@@ -265,6 +268,7 @@ tr.lesson-now {
 	font-family: 'Courier New', arial;
 	background: #466cb2;
 	padding: 5px 15px;
+	margin-bottom: 10px;
 	border: 0;
 	color: #bed5ff;
 	font-size: 16px;
@@ -273,6 +277,10 @@ tr.lesson-now {
 }
 .submit:hover {
 	background: #77a5f8;
+}
+.points-submit {
+	margin-left: 10px;
+	margin-top: -10px;
 }
 .big-submit {
 	font-size: 20px;
@@ -321,6 +329,12 @@ tr.lesson-now {
 	padding: 20px;
 	margin-bottom: 10px;
 }
+.vote-this {
+	background: #306B82;
+}
+.vote-this span {
+	color: #fff;
+}
 .vote-info {
 	display: inline-block;
 	float: right;
@@ -348,6 +362,15 @@ tr.lesson-now {
 	transition: .5s;
 	color: #CCDFEC;
 	background: #004B7E;
+}
+.remove-music {
+	padding: 3px 7px;
+	margin-left: 5px;
+	border: 0;
+	font-size: 20px;
+	transition: .5s;
+	color: #7F2200;
+	background: #E26638;
 }
 .song-name {
 	font-size: 17px;
@@ -448,12 +471,6 @@ tr.lesson-now {
 		margin-left: 10%;
 	}
 }
-@media (min-width: 768px) and (max-width: 992px) {
-	.plitka {
-		width: 40%;
-		margin-left: 10%;
-	}
-}
 @media (min-width: 992px) and (max-width: 1200px) {
 	.plitka {
 		width: 40%;
@@ -514,4 +531,24 @@ tr.lesson-now {
 	75% {
 		transform: translate(0, 160%)
 	}
+}
+.all-width {
+	flex-basis: 100%;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 20px;
+}
+.add-student {
+	background: #B3C8E6;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+.form {
+	flex-basis: 60%;
+}
+.form-50 {
+	flex-basis: 50%;
+}
+label {
+	margin-bottom: 50px;
 }
