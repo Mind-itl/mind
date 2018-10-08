@@ -13,18 +13,18 @@
 	<div class="container">
 		<div class="block-information profile-information">
 			<h2>{{ daytime }}, {{ name }}!</h2>
-			<h2>
-				Баланс: <strong>
-					{{ points.count }}
-				</strong>
-				{{ points.noun }}
-			</h2>
-			<h3>
-				Класс: <strong>
-					{{ group }}
-				</strong>
-			</h3>
 			{% if is_student %}
+				<h2>
+					Баланс: <strong>
+						{{ points.count }}
+					</strong>
+					{{ points.noun }}
+				</h2>
+				<h3>
+					Класс: <strong>
+						{{ group }}
+					</strong>
+				</h3>
 				<h3>
 					Классный руководитель: <strong>
 						{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
