@@ -13,38 +13,12 @@
 					<th>Блок</th>
 					<th>Воспитатель</th>
 				</tr>
-				<tr>
-					<td>2A</td>
-					<td>Темирбулатова Н.Г.</td>
-				</tr>
-				<tr>
-					<td>2B</td>
-					<td>Кириллова И.Г.</td>
-				</tr>
-				<tr>
-					<td>3A</td>
-					<td>Васильев В.Г.</td>
-				</tr>
-				<tr>
-					<td>3B</td>
-					<td>Хамитов Н.А.</td>
-				</tr>
-				<tr>
-					<td>4A</td>
-					<td>Макришин В.Н.</td>
-				</tr>
-				<tr>
-					<td>4B</td>
-					<td>Баранов М.В.</td>
-				</tr>
-				<tr>
-					<td>5A</td>
-					<td>Чапурин А.И.</td>
-				</tr>
-				<tr>
-					<td>5B</td>
-					<td>Миняев О.Г.</td>
-				</tr>
+				{% for vospit in vospits %}
+				    <tr>
+				    	<td>{{ vospit.block }}</td>
+				    	<td>{{ vospit.login }}</td>
+				    </tr>
+				{% endfor %}
 			</table>
 		</div>
 		<div class="vote-for-music" id="music_list">
