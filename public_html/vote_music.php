@@ -18,8 +18,15 @@
 		}
 	}
 
+	function remove(int $id) {
+		remove_music($id);
+	}
+
 	if (isset($_POST['id']) && is_logined()) {
-		vote($_POST['id']);
+		if (isset($_POST['remove']))
+			remove($_POST['id']);
+		else
+			vote($_POST['id']);
 	}
 
 	echo json_encode(get_music());

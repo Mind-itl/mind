@@ -47,6 +47,23 @@ window.onload = function() {
 				render(data);
 			});
 		});
+		$(".remove-music").click(function() {
+			let self = this;
+			let val = $(self).parent().parent().
+				children(".music-id").html().trim();
+
+			$.ajax({
+				method: "POST",
+				url: "/vote_music",
+				data: {
+					"id": val,
+					"remove": true
+				},
+				dataType: "json"
+			}).done(function(data) {
+				render(data);
+			});
+		})
 	};
 
 

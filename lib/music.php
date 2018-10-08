@@ -32,10 +32,10 @@
 		return $music;
 	}
 
-	function get_music_vote(Student $student): int {
+	function get_music_vote(User $user): int {
 		$r = safe_query("
 			SELECT * FROM music_votes WHERE LOGIN=?s
-			", $student->get_login()
+			", $user->get_login()
 		);
 
 		if ($r = $r->fetch_assoc())
@@ -44,15 +44,15 @@
 		return -1;
 	}
 
-	function add_music_vote(Student $student, int $id) {
+	function add_music_vote(User $user, int $id) {
 		safe_query("
 			INSERT INTO music_votes (LOGIN, ID) VALUES (?s, ?i)
-			", $student->get_login(), $id
+			", $user->get_login(), $id
 		);
 	}
 
-	function remove_music_vote(Student $student) {
-		safe_query("DELETE FROM music_votes WHERE LOGIN=?s", $student->get_login());
+	function remove_music_vote(User $user) {
+		safe_query("DELETE FROM music_votes WHERE LOGIN=?s", $user->get_login());
 	}
 
 	function add_music(string $performer, string $title, User $from) {
@@ -62,6 +62,14 @@
 			) VALUES (
 				?s, ?s, ?s
 			)", $performer, $title, $from->get_login()
+		);
+	}
+
+	function remove_music(int $id) {
+		safe_query("
+			DELETE FROM music
+			WHERE ID = ?i
+			", $id
 		);
 	}
 ?>
