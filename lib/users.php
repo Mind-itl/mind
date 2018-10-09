@@ -5,14 +5,7 @@
 	require_once LIBS."Student.php";
 	require_once LIBS."Teacher.php";
 
-	$_login_user_cache = array();
-
 	function get_user(string $login, string $role = ""): User {
-		global $_login_users_cache;
-
-		if (isset($_login_users_cache[$login]))
-			return $_login_users_cache[$login];
-
 		if ($role == "") {
 			$role = safe_query_assoc("
 				SELECT ROLE
@@ -29,7 +22,6 @@
 		else
 			return null;
 
-		$_login_users_cache[$login] = $user;
 		return $user;
 	}
 ?>
