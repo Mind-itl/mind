@@ -36,7 +36,7 @@
 		$login = $user->get_login();
 		$s = safe_query(
 			"SELECT
-				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NTIME,
+				TIME,
 				MESSAGE,
 				READED,
 				FROM_USER,
@@ -53,7 +53,7 @@
 			$usr = get_user($v["FROM_USER"])->get_names();
 			$usr["is_student"] = get_user($v["FROM_USER"])->is_student();
 			$nots[] = [
-				"time" => $v["NTIME"],
+				"date" => $v["TIME"],
 				"message" => $v["MESSAGE"],
 				"read" => $v["READED"],
 				"id" => $v["ID"],

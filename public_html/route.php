@@ -54,6 +54,9 @@
 	$twig->addFilter(new Twig_Filter("weekday_rus", function(string $day) {
 		return today_rus($day);
 	}));
+	$twig->addFilter(new Twig_Filter("month_rus", function(string $day) {
+		return month_rus($day);
+	}));
 
 	function get_twig() {
 		global $twig;

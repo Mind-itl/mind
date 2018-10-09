@@ -82,7 +82,11 @@
 						{% else %}
 							{{ notif.from.given }} {{ notif.from.father}}
 						{% endif %}
-						<span class="transaction-time"> {{ notif.time }} </span>
+						<span class="transaction-time">
+							{{ notif.date|date("H:i, j") }}
+							{{ notif.date|date("n")|month_rus }}
+							{{ notif.date|date("Y") }}
+						</span>
 					</div>
 					<div class="cause">
 						{{ notif.message }}
