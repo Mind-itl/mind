@@ -76,7 +76,7 @@
 						<label class="shadow-label">Email: </label><br>
 						<input
 							type="text"
-							name="fname"
+							name="email"
 							placeholder="Введите email"
 							class="form-control-up form-control"
 							required
@@ -108,13 +108,13 @@
 			</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="/js/select_student.js"></script>
+		<!-- // <script src="/js/select_student.js"></script> -->
 		<script>
 			(function() {
-				const student_list = {{ CLASSES }};
+				const student_list = {{ classes|raw }};
 
 				$("#class-select-div").hide();	
-				$(".radio-role").change(function() {	
+				$(".radio-role").change(function() {
 					let val = $('input[name=role]:checked').val();	
 					$("#class-select-div").hide();	
 					if (val == "student") {	

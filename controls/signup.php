@@ -16,7 +16,7 @@
 			}
 
 			return [
-				"CLASSES" => $this->get_classes()
+				"classes" => $this->get_classes()
 			];
 		}
 
