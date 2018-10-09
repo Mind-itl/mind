@@ -467,23 +467,8 @@ tr.lesson-now {
 .form-group label {
 	font-weight: bold;
 }
-@media (max-width: 768px) {
-	.plitka {
-		width: 50%;
-		margin-left: 10%;
-	}
-}
-@media (min-width: 992px) and (max-width: 1200px) {
-	.plitka {
-		width: 40%;
-		margin-left: 10%;
-	}
-}
-@media (min-width: 1200px) {
-	.plitka {
-		width: 30%;
-		margin-left: 10%;
-	}
+.plitka { 
+	width: 40%; 
 }
 .fa {
 	color: #fff;

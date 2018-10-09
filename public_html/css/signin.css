@@ -3,6 +3,7 @@
 	padding: 15px;
 	margin-top: 50px;
 	margin-bottom: 50px;
+	width: 40%;
 }
 .plitka input {
 	font-family: 'Courier New', arial;
@@ -11,6 +12,9 @@
 }
 .plitka i {
 	color: #2a3955;
+}
+.plitka .submit {
+	margin-bottom: 0;
 }
 .input-group-addon {
 	background: #77a5f8;
