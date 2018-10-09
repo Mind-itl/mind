@@ -33,7 +33,7 @@
 		 * 
 		 * @param array $args Splitted by '\' url request path
 		 * @return array<string, mixed> 
- 		 */
+		 */
 		protected function get_data(array $args): array {
 			return [];
 		}

@@ -41,78 +41,78 @@
 		return $got_points - $given_points;
 	}
 
- 	function add_transaction(string $from_login, string $to_login, int $points, string $cause): bool {
- 		$from_user = get_user($from_login);
- 		$to_user = get_user($to_login);
+	function add_transaction(string $from_login, string $to_login, int $points, string $cause): bool {
+		$from_user = get_user($from_login);
+		$to_user = get_user($to_login);
 
- 		if (!$to_user->has_role("student"))
- 			return false;
+		if (!$to_user->has_role("student"))
+			return false;
 
- 		if ($from_user->has_role("student") && $from_user->get_points() < $points)
- 			return false;
+		if ($from_user->has_role("student") && $from_user->get_points() < $points)
+			return false;
 
- 		safe_query(
- 			"INSERT INTO `transactions` (
- 				FROM_LOGIN,
- 				TO_LOGIN,
- 				POINTS,
- 				CAUSE
- 			) VALUES (
- 				?s, ?s, ?i, ?s
- 			)", $from_login, $to_login, $points, $cause
- 		);
+		safe_query(
+			"INSERT INTO `transactions` (
+				FROM_LOGIN,
+				TO_LOGIN,
+				POINTS,
+				CAUSE
+			) VALUES (
+				?s, ?s, ?i, ?s
+			)", $from_login, $to_login, $points, $cause
+		);
 
- 		$points = get_points_in_case(intval($points));
+		$points = get_points_in_case(intval($points));
 
- 		add_notification(
- 			$to_user,
- 			$from_user,
- 			"Вам перечислили баллы",
- 			intval($points)
- 		);
+		add_notification(
+			$to_user,
+			$from_user,
+			"Вам перечислили баллы",
+			intval($points)
+		);
 
- 		return true;
- 	}
+		return true;
+	}
 
- 	function get_student_transactions(string $login): array {
- 		$ret = [];
- 		$query = safe_query(
- 			"SELECT
- 				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NORM_TIME,
- 				FROM_LOGIN,
- 				TO_LOGIN,
- 				CAUSE,
- 				POINTS,
- 				TIME
- 			FROM `transactions`
- 			WHERE
- 				FROM_LOGIN=?s OR
- 				TO_LOGIN=?s
- 			ORDER BY TIME DESC
- 			", $login, $login
- 		);
+	function get_student_transactions(string $login): array {
+		$ret = [];
+		$query = safe_query(
+			"SELECT
+				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NORM_TIME,
+				FROM_LOGIN,
+				TO_LOGIN,
+				CAUSE,
+				POINTS,
+				TIME
+			FROM `transactions`
+			WHERE
+				FROM_LOGIN=?s OR
+				TO_LOGIN=?s
+			ORDER BY TIME DESC
+			", $login, $login
+		);
 
- 		foreach ($query as $q) {
- 			if ($q["FROM_LOGIN"] == $login)
- 				$q["POINTS"] = -$q["POINTS"];
- 			
- 			$ret[] = $q;
- 		}
+		foreach ($query as $q) {
+			if ($q["FROM_LOGIN"] == $login)
+				$q["POINTS"] = -$q["POINTS"];
+			
+			$ret[] = $q;
+		}
 
- 		return $ret;
- 	}
+		return $ret;
+	}
 
- 	function get_classes_json(): string {
- 		$query = safe_query(
- 			"SELECT
- 				CONCAT(CLASS_NUM, '-', CLASS_LIT) AS CLASS,
- 				GIVEN_NAME,
- 				FATHER_NAME,
- 				FAMILY_NAME,
- 				LOGIN
- 			FROM students
- 			ORDER BY CLASS_NUM, CLASS_LIT"
- 		);
+	function get_classes_json(): string {
+		$query = safe_query(
+			"SELECT
+				CONCAT(CLASS_NUM, '-', CLASS_LIT) AS CLASS,
+				GIVEN_NAME,
+				FATHER_NAME,
+				FAMILY_NAME,
+				LOGIN
+			FROM students
+			ORDER BY CLASS_NUM, CLASS_LIT"
+		);
 		$classes = [];
 
 		foreach ($query as $student) {
@@ -123,48 +123,48 @@
 		}
 
 		return json_encode($classes);
- 	}
+	}
 
- 	function get_events_json(): string {
- 		$query = safe_query("SELECT * FROM `calendar`");
+	function get_events_json(): string {
+		$query = safe_query("SELECT * FROM `calendar`");
 
- 		$events = [];
- 		foreach ($query as $event) {
- 			$events[] = $event;
- 		}
+		$events = [];
+		foreach ($query as $event) {
+			$events[] = $event;
+		}
 
- 		return json_encode($events);
- 	}
+		return json_encode($events);
+	}
 
- 	function get_cause_price(string $cause): int {
- 		foreach (causes_list as $v) {
- 			if ($v["code"] == $cause)
- 				return $v['price'];
- 		}
- 	}
+	function get_cause_price(string $cause): int {
+		foreach (causes_list as $v) {
+			if ($v["code"] == $cause)
+				return $v['price'];
+		}
+	}
 
- 	function has_cause(string $cause): bool {
- 		foreach (causes_list as $v) {
- 			if ($v["code"] == $cause){
- 				return true;
- 			}
- 		}
+	function has_cause(string $cause): bool {
+		foreach (causes_list as $v) {
+			if ($v["code"] == $cause){
+				return true;
+			}
+		}
 
- 		return false;
- 	}
+		return false;
+	}
 
- 	function get_cause_title(string $cause): string {
- 		$special_codes = [
- 			'D' => 'Начальные баллы',
- 			'C' => 'Передача баллов',
- 		];
+	function get_cause_title(string $cause): string {
+		$special_codes = [
+			'D' => 'Начальные баллы',
+			'C' => 'Передача баллов',
+		];
 
- 		if (isset($special_codes[$cause]))
- 			return $special_codes[$cause]; 
+		if (isset($special_codes[$cause]))
+			return $special_codes[$cause]; 
 
- 		foreach (causes_list as $v) {
- 			if ($v["code"] == $cause)
- 				return $v['title'];
- 		}
- 	}
+		foreach (causes_list as $v) {
+			if ($v["code"] == $cause)
+				return $v['title'];
+		}
+	}
 ?>

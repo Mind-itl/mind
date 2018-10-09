@@ -79,10 +79,10 @@
 
 	function get_points_in_case($points) {
 		$noun = get_points_case($points);
-        return "$points $noun";
-    }
+		return "$points $noun";
+	}
 
-    function get_points_case($points) {
+	function get_points_case($points) {
 		$apoints = abs($points);
 		if ($apoints % 100 <= 20 && $apoints %100 >= 10)
 			$noun = "баллов";
@@ -93,30 +93,30 @@
 		else
 			$noun = "балла";
 
-        return $noun;
-    }
+		return $noun;
+	}
 	
-    function check_correct(string $str): bool {
-    	return strlen($str) !== 0 &&
-    	       preg_match("/^[a-zA-Z0-9_]+$/", $str);
-    }
+	function check_correct(string $str): bool {
+		return strlen($str) !== 0 &&
+			   preg_match("/^[a-zA-Z0-9_]+$/", $str);
+	}
 
-    function tag(string $tag, string $html): string {
-    	return "<$tag>$html</$tag>";
-    }
+	function tag(string $tag, string $html): string {
+		return "<$tag>$html</$tag>";
+	}
 
-    function is_incorrect(string ...$strs): bool {
-    	foreach ($strs as $str) {
-    		if (!check_correct($str)) {
-    			error_log($str);
-    			return true;
-    		}
-    	}
+	function is_incorrect(string ...$strs): bool {
+		foreach ($strs as $str) {
+			if (!check_correct($str)) {
+				error_log($str);
+				return true;
+			}
+		}
 
-    	return false;
-    }
+		return false;
+	}
 
-    function today_rus(string $today): string { 
+	function today_rus(string $today): string { 
 		return [
 			"Monday" => "Понедельник", 
 			"Tuesday" => "Вторник", 
