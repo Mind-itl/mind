@@ -77,7 +77,8 @@
 				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
 				<div class="one-notif {{ notif_class }}">
 					<div class="from-name">
-						{{ notif.from_name }} <span class="transaction-time">{{ notif.time }} </span>
+						{{ notif.from.given }} {{ notif.from.father}}
+						<span class="transaction-time"> {{ notif.time }} </span>
 					</div>
 					<div class="cause">
 						{% set trans_class = trans.points > 0 ? "good-points" : "bad-points" %}
