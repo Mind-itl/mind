@@ -1,15 +1,19 @@
 <?php
- 	function add_notification(User $user, string $message) {
+ 	function add_notification(User $to_user, User $from_user string $message) {
  		$login = $user->get_login();
  		
  		safe_query(
  			"INSERT INTO notifications (
  				TO_USER,
+ 				FROM_USER
  				MESSAGE,
- 				READED
+ 				READED,
  			) VALUES (
-				?s, ?s, FALSE
-			)", $login, $message
+				?s, ?s, ?s, FALSE
+			)",
+			$to_user->get_login(),
+			$from_user->get_login(),
+			$message
 		);
  	}
 
@@ -20,6 +24,7 @@
  				DATE_FORMAT(TIME, '%H:%i %d.%m.%y') AS NTIME,
  				MESSAGE,
  				READED,
+ 				FROM_USER,
  				ID
  			FROM notifications
  			WHERE TO_USER = ?s

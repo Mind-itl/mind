@@ -22,7 +22,7 @@
 						$result = false;
 					else {
 						$student = get_user($student_login);
-						add_notification($student, $message);
+						add_notification($student, get_curr(), $message);
 
 						$result = true;
 					}
