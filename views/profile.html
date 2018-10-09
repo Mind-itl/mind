@@ -77,7 +77,11 @@
 				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
 				<div class="one-notif {{ notif_class }}">
 					<div class="from-name">
-						{{ notif.from.given }} {{ notif.from.father}}
+						{% if notif.from.is_student %}
+						    {{ notif.from.given }} {{ notif.from.family }}
+						{% else %}
+							{{ notif.from.given }} {{ notif.from.father}}
+						{% endif %}
 						<span class="transaction-time"> {{ notif.time }} </span>
 					</div>
 					<div class="cause">

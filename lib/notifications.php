@@ -32,12 +32,14 @@
 
 		$nots = [];
 		foreach ($s as $v) {
+			$usr = get_user($v["FROM_USER"])->get_names();
+			$usr["is_student"] = get_user($v["FROM_USER"])->is_student();
 			$nots[] = [
 				"time" => $v["NTIME"],
 				"message" => $v["MESSAGE"],
 				"read" => $v["READED"],
 				"id" => $v["ID"],
-				"from" => get_user($v["FROM_USER"])->get_names()
+				"from" => $usr
 			];
 		}
 
