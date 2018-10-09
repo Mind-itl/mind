@@ -3,7 +3,7 @@
 
 	class Internat_control extends Control {
 		public function has_access(array $args): bool {
-			return is_logined() && get_curr()->is_student() || get_curr()->has_role("vospit");
+			return is_logined() && (get_curr()->is_student() || get_curr()->has_role("vospit"));
 		}
 
 		public function get_data(array $args): array {
