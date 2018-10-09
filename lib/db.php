@@ -67,7 +67,8 @@
  		add_notification(
  			$to_user,
  			$from_user,
- 			"Вам перечислили $points"
+ 			"Вам перечислили баллы",
+ 			intval($points)
  		);
 
  		return true;

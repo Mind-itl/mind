@@ -85,8 +85,12 @@
 						<span class="transaction-time"> {{ notif.time }} </span>
 					</div>
 					<div class="cause">
-						{% set trans_class = trans.points > 0 ? "good-points" : "bad-points" %}
-						{{ notif.message }} <span class="points {{ trans_class }}">{{ notif.points }}</span>
+						{{ notif.message }}
+						{% if notif.points %}
+							<span class="points good-points">
+								+{{ notif.points }}
+							</span>
+						{% endif %}
 					</div>
 					<div class="notification-id" hidden>{{ notif.id }}</div>
 				</div>
