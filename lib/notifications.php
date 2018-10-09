@@ -58,7 +58,7 @@
 				"read" => $v["READED"],
 				"id" => $v["ID"],
 				"from" => $usr,
-				"points" => $v["POINTS"]
+				"points" => intval($v["POINTS"])
 			];
 		}
 

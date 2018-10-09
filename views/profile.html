@@ -87,9 +87,15 @@
 					<div class="cause">
 						{{ notif.message }}
 						{% if notif.points %}
-							<span class="points good-points">
-								+{{ notif.points }}
-							</span>
+							{% if notif.points > 0 %}
+								<span class="points good-points">
+									+{{ notif.points }}
+								</span>
+							{% else %}									
+								<span class="points bad-points">
+									{{ notif.points }}
+								</span>
+							{% endif %}
 						{% endif %}
 					</div>
 					<div class="notification-id" hidden>{{ notif.id }}</div>
