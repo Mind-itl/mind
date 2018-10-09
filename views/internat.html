@@ -28,8 +28,9 @@
 				</div>
 				<div class="music_name">
 					<span class="music_performer song-singer">
-						${music.performer}
-					</span> - 
+						${music.performer} 
+					</span>
+					<span class="music-divider"> - </span>
 					<span class="music_title song-name">
 						${music.title}
 					</span>
@@ -45,7 +46,7 @@
 						+
 					</button>
 					{% if is_teacher %}
-						<button class="remove-music">
+						<button class="remove-music voted-for-this">
 							&times;
 						</button>
 					{% endif %}
@@ -55,9 +56,10 @@
 			<form action="" method="POST"  class="add-voting">
 				<input placeholder="Название песни" class="form-control" name="song-name" id="song-name">
 				<input placeholder="Исполнитель" class="form-control" name="song-singer" id="song-singer">
-				<input type="submit" class="submit">
+				<input type="submit" class="submit" value="Добавить">
 			</form>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/js/internat.js"></script>
 {% endblock %}

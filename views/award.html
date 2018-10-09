@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-md-10 col-md-offset-1">
+	<div class="container">
 		<script>
 			var causes_list = {{ causes|raw }};
 		</script>
@@ -21,17 +21,15 @@
 			</div>
 		{% endif %}
 
-		<form action="" method="POST">
-			<label for="award_kind">Выберите ученика:</label><br>
+		<form action="" method="POST" class="form">
+			<label for="award_kind">Выберите ученика:</label>
 			{{ controller('select_student') }}
-
-			<label for="award_kind">Выберите категорию причины:</label><br>
-			<select id="award_kind" class="form-control"></select><br>
+			<label for="award_kind">Выберите категорию причины:</label>
+			<select id="award_kind" class="form-control"></select>
 			<label for="award_cause">Выберите причину:</label>
-			<select name="cause" id="award_cause" class="form-control"></select><br>
-			<script src="js/cause.js"></script>
-			
-			<input type="submit" id="log-in-a">
+			<select name="cause" id="award_cause" class="form-control"></select>
+			<input type="submit" class="submit big-submit">
 		</form>
+		<script src="js/cause.js"></script>
 	</div>
 {% endblock %}

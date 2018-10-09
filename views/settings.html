@@ -4,26 +4,23 @@
 {% endblock %}
 
 {% block body %}
-	{% if result=="success" %}
-		Успешно!
-	{% elseif result=="fail" %}
-	    Что-то пошло не так!
-	{% elseif result=="wrong" %}
-	    Неправильный пароль!
-	{% endif %}
-
-    <form action="" method="POST">
-    	<label>Старый пароль</label>
-    	<input type="password" name="old_password">
-    	
-    	<label>Новый пароль</label>
-    	<input type="password" name="new_password" id="new_password">
-    	
-    	<label>Подтвердите пароль</label>
-		<input type="password" id="confirm_password">
-	
-		<input type="submit">
-
-		<input hidden name="type" value="change_password">
-    </form>
+	<div class="container">
+		{% if result=="success" %}
+			Успешно!
+		{% elseif result=="fail" %}
+			Что-то пошло не так!
+		{% elseif result=="wrong" %}
+			Неправильный пароль!
+		{% endif %}
+	    <form action="" method="POST" class="form-50">
+	    	<label>Старый пароль</label>
+	    	<input type="password" name="old_password" class="form-control">
+	    	<label>Новый пароль</label>
+	    	<input type="password" name="new_password" id="new_password" class="form-control">
+	    	<label>Подтвердите пароль</label>
+			<input type="password" id="confirm_password" class="form-control">
+			<input type="submit" class="submit">
+			<input hidden name="type" value="change_password">
+	    </form>
+	</div>
 {% endblock %}

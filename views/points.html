@@ -7,7 +7,7 @@
 {% block body %}
 	<div class="container container-points">
 		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
-		<a href="/give">Передать</a>
+		<a class="submit points-submit big-submit" href="/give">Передать</a>
 		{% for day in trans_by_day %}
 			<div class="day">
 				<h3 class="date">{{ day.date|date("j.m.Y") }}</h3>

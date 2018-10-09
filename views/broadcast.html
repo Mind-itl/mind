@@ -5,21 +5,26 @@
 {% endblock %}
 
 {% block body %}
-	{% if result=="success" %}
-		Сообщение отправлено!
-	{% elseif result=="fail" %}
-		Ошибка
-	{% endif %}
+	<div class="container">
+		{% if result=="success" %}
+			<span class="all-width">Сообщение отправлено!</span>
+		{% elseif result=="fail" %}
+			<span class="all-width">Ошибка</span>
+		{% endif %}
 
-	<form action="" method="POST">
-		<input type="text" placeholder="Сообщение" name="message" required><br>
-		<textarea type="textarea" hidden readonly required id="selector-list" name="selector"></textarea>
-
-		{{ include("select_student.html") }}
-		<div id="add-student-button">Добавить</div><br>
-		
-		<input type="submit">
-	</form>
-
+		<form action="" method="POST" class="form">
+			<div class="add-student">
+				<label for="award_kind">Добавить учеников:</label>
+				{{ include("select_student.html") }}
+				<div id="add-student-button">
+					<button class="submit">Добавить</button>
+				</div>
+			</div>
+			<textarea type="textarea" hidden readonly required id="selector-list" name="selector" class="form-control"></textarea>
+			<label for="award_kind">Введите сообщение:</label>
+			<input type="text" placeholder="Сообщение" name="message" required class="form-control">
+			<input type="submit" class="submit big-submit">
+		</form>
+	</div>
 	<script src="/js/broadcast.js"></script>
 {% endblock %}
