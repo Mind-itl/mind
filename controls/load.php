@@ -3,7 +3,7 @@
 
 	class Load_control extends Control {
 		public function has_access(array $args): bool {
-			return false;
+			return is_logined() && get_curr()->is_teacher();
 		}
 
 		protected function get_data(array $args): array {
