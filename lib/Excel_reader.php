@@ -13,5 +13,13 @@
 			static::handle($sheet);
 		}		
 		abstract protected static function handle(Closure $get);
+		abstract public static function get_name(): string;
+	}
+
+	function get_reader_name(string $name): string {
+		$x = $name[0];
+		$xs = substr($name, 1);
+
+		return strtoupper($x).$xs."_excel_reader";
 	}
 ?>

@@ -1,14 +1,18 @@
 <?php
-	class Timetable extends Excel_reader {
-		static function process(Closure $f): array {
-			//todo
+	class Timetable_excel_reader extends Excel_reader {
+		static function get_name(): string {
+			return "Расписание";
 		}
 
 		static function handle(Closure $f) {
 			foreach (static::process($f) as $lesson) {
 				static::add_lesson($lesson);
 			}
-		};
+		}
+
+		static function process(Closure $f): array {
+			//todo
+		}
 
 		static function add_lesson($lesson) {
 			safe_query("
@@ -17,12 +21,12 @@
 				) VALUES (
 					?s, ?s, ?i, ?s, ?s
 				)",
-					$lesson["class"],
-					$lesson["day"],
-					$lesson["num"],
-					$lesson["name"],
-					$lesson["place"]
-			)
+				$lesson["class"],
+				$lesson["day"],
+				$lesson["num"],
+				$lesson["name"],
+				$lesson["place"]
+			);
 		}
 	}
 ?>
