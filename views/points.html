@@ -10,7 +10,11 @@
 		<a class="submit points-submit big-submit" href="/give">Передать</a>
 		{% for day in trans_by_day %}
 			<div class="day">
-				<h3 class="date">{{ day.date|date("j.m.Y") }}</h3>
+				<h3 class="date">
+					{{ notif.date|date("j") }}
+					{{ notif.date|date("n")|month_rus }}
+					{{ notif.date|date("Y") }}
+				</h3>
 
 				{% for trans in day.trans %}
 

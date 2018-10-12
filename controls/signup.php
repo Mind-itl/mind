@@ -3,7 +3,7 @@
 
 	class Signup_control extends Control {
 		private static $post_fields = [
-			"login", "password", "sname", "name", "fname", "bday"
+			"login", "password", "sname", "name", "fname"
 		];
 
 		public function has_access(array $args): bool {
@@ -12,11 +12,12 @@
 
 		protected function get_data(array $args): array {
 			if (isset_post_fields(...static::$post_fields)) {
-				$this->post();
+				$status = $this->post();
 			}
 
 			return [
-				"CLASSES" => $this->get_classes()
+				"classes" => $this->get_classes(),
+				"status" => $status ?? "not_stated"
 			];
 		}
 
@@ -42,28 +43,35 @@
 			$fname = $user["fname"];
 			$sname = $user["sname"];
 
-			$bday = $user["bday"];
+			if (get_user($login)) {
+				return "already";
+			}
+
+			// $bday = $user["bday"];
 			$class = $user["class"] ?? "";
 
 			list($class_num, $class_lit) = explode('-', $class);
 
-			register_user($user["login"], $user["password"], $user["role"]);
-			if ($user["role"] == "teacher") {
+			register_user($login, $password, $role);
+			if ($role == "teacher") {
 				safe_query("
 					INSERT INTO teachers (
-						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, BIRTHDAY
+						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN
 					) VALUES (
 						?s, ?s, ?s, ?s, ?s
-					)", $name, $sname, $fname, $login, $bday
+					)", $name, $sname, $fname, $login
 				);
 			} else {
 				safe_query("
 					INSERT INTO students (
-						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, CLASS_NUM, CLASS_LIT, BIRTHDAY
+						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, CLASS_NUM, CLASS_LIT
 					) VALUES (
-						?s, ?s, ?s, ?s, ?i, ?i, ?s
-					)", $name, $sname, $fname, $login, $class_num, $class_lit, $bday
+						?s, ?s, ?s, ?s, ?i, ?i
+					)", $name, $sname, $fname, $login, $class_num, $class_lit
 				);
+				$user = get_user($login);
+				if ($clruk = $user->get_classruk())
+					add_notification($user, $clruk, "Ученик зарегистрировался");
 			}
 
 			enter_user($login, $password);
