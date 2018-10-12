@@ -12,11 +12,12 @@
 
 		protected function get_data(array $args): array {
 			if (isset_post_fields(...static::$post_fields)) {
-				$this->post();
+				$status = $this->post();
 			}
 
 			return [
-				"classes" => $this->get_classes()
+				"classes" => $this->get_classes(),
+				"status" => $status ?? "not_stated"
 			];
 		}
 
@@ -41,6 +42,10 @@
 			$name = $user["name"];
 			$fname = $user["fname"];
 			$sname = $user["sname"];
+
+			if (get_user($login)) {
+				return "already";
+			}
 
 			// $bday = $user["bday"];
 			$class = $user["class"] ?? "";

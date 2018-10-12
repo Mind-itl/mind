@@ -9,6 +9,9 @@
 		<div class="container">
 			<!-- <h1 class="talcenter blue-color">Форма регистрации Mind</h1> -->
 			<div class="plitka">
+				{% if status=="already" %}
+					<h1>Этот логин уже занят</h1>
+				{% endif %}
 				<form action="" method="POST" id="register-form">
 					<div class="input-group form-group">
 						<label class="shadow-label">Придумайте логин: </label><br>
@@ -40,7 +43,7 @@
 							class="form-control-up form-control"
 							required
 						>
-						<span style="display: none;" id="passwords-wrong">Пароли не совпадают</span>
+						<span style="display: none;" id="passwords-wrong"><h1>Пароли не совпадают</h1></span>
 					</div>
 					<div class="input-group form-group">
 						<label class="shadow-label">Ваша фамилия: </label><br>

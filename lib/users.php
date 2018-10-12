@@ -5,7 +5,7 @@
 	require_once LIBS."Student.php";
 	require_once LIBS."Teacher.php";
 
-	function get_user(string $login, string $role = ""): User {
+	function get_user(string $login, string $role = ""): ?User {
 		if ($role == "") {
 			$role = safe_query_assoc("
 				SELECT ROLE
