@@ -3,10 +3,13 @@
 		private $row_view;
 
 		public function has_access(array $args): bool {
+			if (!is_logined())
+				return false;
+
 			if (isset($args[1]) && $args[1] != "")
 				return true;
 			else
-				return is_logined() && get_curr()->has_role("classruk");
+				return get_curr()->has_role("classruk");
 		}
 
 		protected function get_data(array $args): array {
