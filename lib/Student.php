@@ -59,5 +59,22 @@
 		public function give_points(string $to_login, int $points): bool {
 			return add_transaction($this->login, $to_login, $points, "C");
 		}
+
+		public function get_classruk(): ?Teacher {
+			$r = safe_query("
+				SELECT LOGIN
+				FROM teacher_roles
+				WHERE
+					ROLE = 'classruk' AND
+					ARG = ?s
+				", $this->get_class()
+			);
+
+			if ($a = $r->fetch_assoc()) {
+				$clruk = get_user($a["LOGIN"]);
+			}
+
+			return $clruk ?? null;
+		}
 	}
 ?>

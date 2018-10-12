@@ -25,23 +25,29 @@
 						{{ group }}
 					</strong>
 				</h3>
-				<h3>
-					Классный руководитель: <strong>
-						{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
-					</strong>
-				</h3>
-				<h3>
-					Воспитатель: <strong>
-						{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
-					</strong>
-				</h3>
-				<h3>
-					Дежурит на этаже: <strong>
-					{% with { n:night_vospit_name } %}	
-						{{ n.family }} {{ n.given|first }}. {{ n.father|first }}
-					{% endwith %}
-					</strong>
-				</h3>
+				{% if clruk_name %}
+					<h3>
+						Классный руководитель: <strong>
+							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
+						</strong>
+					</h3>
+				{% endif %}
+				{% if vospit_name %}
+					<h3>
+						Воспитатель: <strong>
+							{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
+						</strong>
+					</h3>
+				{% endif %}
+				{% if night_vospit_name %}
+					<h3>
+						Дежурит на этаже: <strong>
+						{% with { n:night_vospit_name } %}	
+							{{ n.family }} {{ n.given|first }}. {{ n.father|first }}
+						{% endwith %}
+						</strong>
+					</h3>
+				{% endif %}
 			{% endif %}
 		</div>
 		<div class="block-information timetable">
