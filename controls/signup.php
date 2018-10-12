@@ -42,7 +42,7 @@
 			$fname = $user["fname"];
 			$sname = $user["sname"];
 
-			$bday = $user["bday"];
+			// $bday = $user["bday"];
 			$class = $user["class"] ?? "";
 
 			list($class_num, $class_lit) = explode('-', $class);
@@ -51,18 +51,18 @@
 			if ($user["role"] == "teacher") {
 				safe_query("
 					INSERT INTO teachers (
-						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, BIRTHDAY
+						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN
 					) VALUES (
 						?s, ?s, ?s, ?s, ?s
-					)", $name, $sname, $fname, $login, $bday
+					)", $name, $sname, $fname, $login
 				);
 			} else {
 				safe_query("
 					INSERT INTO students (
-						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, CLASS_NUM, CLASS_LIT, BIRTHDAY
+						GIVEN_NAME, FAMILY_NAME, FATHER_NAME, LOGIN, CLASS_NUM, CLASS_LIT
 					) VALUES (
 						?s, ?s, ?s, ?s, ?i, ?i, ?s
-					)", $name, $sname, $fname, $login, $class_num, $class_lit, $bday
+					)", $name, $sname, $fname, $login, $class_num, $class_lit
 				);
 			}
 
