@@ -1,6 +1,6 @@
 <?php
 	function add_notification(User $to_user, User $from_user, string $message, int $points = -1) {		
-		if ($points == 0)
+		if ($points == -1)
 			safe_query(
 				"INSERT INTO notifications (
 					TO_USER,
