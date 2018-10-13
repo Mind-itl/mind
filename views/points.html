@@ -21,7 +21,11 @@
 					<div class="transaction">
 						<div class="from-name">
 							{% if trans.from %}
-								{{ trans.from.given }} {{ trans.from.father }}
+								{% if trans.is_teacher %}
+									{{ trans.from.given }} {{ trans.from.father }}
+								{% else %}
+									{{ trans.from.given }} {{ trans.from.family }}
+								{% endif %}
 							{% endif %}
 							<span class="transaction-time">
 								в {{ trans.date|date("H:i") }}

@@ -23,11 +23,29 @@
 			foreach (scandir(READERS) as $reader_file) {
 				if ($reader_file == "." || $reader_file == "..")
 					continue;
-				
+
 				require_once READERS.$reader_file;
 				$cls_name = get_reader_name(substr($reader_file, 0, -4));
-				
+
 				$arr[] = call_user_func($cls_name."::get_name");
+			}
+
+			return $arr;
+		}
+
+		private function get_readers_assoc(): array {
+			$arr = [];
+
+			foreach (scandir(READERS) as $reader_file) {
+				if ($reader_file == "." || $reader_file == "..")
+					continue;
+
+				require_once READERS.$reader_file;
+				$cls_name = get_reader_name(substr($reader_file, 0, -4));
+
+				$name = call_user_func($cls_name."::get_name");
+
+				$arr[$name] = $cls_name;
 			}
 
 			return $arr;
@@ -35,7 +53,15 @@
 
 		private function post_handle() {
 			$type = $_POST["excel_type"];
-			// todo
+			$readers = $this->get_readers();
+
+			if (!in_array($type, $readers))
+				return;
+
+			$readers = $this->get_readers_assoc();
+			$cls_name = $readers[$type];
+
+			call_user_func($cls_name."::load", $_FILES["excel"]["tmp_name"]);
 		}
 	}
 ?>
