@@ -34,20 +34,10 @@
 
 			$class = get_curr()->get_class();
 
-			$r = safe_query("
-				SELECT LOGIN
-				FROM teacher_roles
-				WHERE
-					ROLE = 'classruk' AND
-					ARG = ?s
-				", $class
-			);
-
-			if ($a = $r->fetch_assoc()) {
-				$clruk = get_user($a["LOGIN"]);
+			if ($clruk = get_curr()->get_classruk()) {
 				$clruk = $clruk->get_names();
 			}
-			return [$class, $clruk ?? "Не найдено"];
+			return [$class, $clruk ?? null];
 		}
 
 		private function points(): array {

@@ -37,48 +37,18 @@
 			return $role=="student";
 		}
 
-		/**
-		 * Return current count of points of student
-		 * 
-		 * @return int
-		 */
 		public function get_points(): int {
 			return get_student_points($this->login);
 		}
 
-		/**
-		 * Add transactions with `to_login` field setted to login of student
-		 * Return `true` if successful and `false` otherwise
-		 * 
-		 * @param string $from_login Login of teacher that gives points
-		 * @param int $points Count of points
-		 * @param string $cause Code of cause
-		 * @return bool
-		 */
 		public function add_points(string $from_login, int $points, string $cause): bool {
 			return add_transaction($from_login, $this->login, $points, $cause);
 		}
 
-		/**
-		 * Return transactions of this student
-		 * @see get_student_transactions
-		 */
 		public function get_transactions(): array {
 			return get_student_transactions($this->login);
 		}
 
-		/**
-		 * Return class of student with format
-		 * 
-		 * Keys:
-		 *   "num" will be replaced with class number
-		 *   "lit" will be replaced with class literal
-		 * 
-		 * Default format = "num-lit"
-		 * 
-		 * @param string $format Format string
-		 * @return string
-		 */
 		public function get_class(string $format="num-lit"): string {
 			$search = array("num", "lit");
 			$replace = array($this->class_num, $this->class_lit);
@@ -86,16 +56,25 @@
 			return str_replace($search, $replace, $format);
 		}
 
-		/**
-		 * Add transaction that takes points from one student and gives them to this student
-		 * Return `true` if successful and `false` otherwise
-		 * 
-		 * @param string $to_login Login of student that gives points
-		 * @param int $points Count of points
-		 * @return bool
-		 */
 		public function give_points(string $to_login, int $points): bool {
 			return add_transaction($this->login, $to_login, $points, "C");
+		}
+
+		public function get_classruk(): ?Teacher {
+			$r = safe_query("
+				SELECT LOGIN
+				FROM teacher_roles
+				WHERE
+					ROLE = 'classruk' AND
+					ARG = ?s
+				", $this->get_class()
+			);
+
+			if ($a = $r->fetch_assoc()) {
+				$clruk = get_user($a["LOGIN"]);
+			}
+
+			return $clruk ?? null;
 		}
 	}
 ?>
