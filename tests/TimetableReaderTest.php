@@ -8,7 +8,7 @@
 		/**
 		 * @dataProvider providerFiles
 		 */
-		public function testPoints($file_name, $need): void {
+		public function testExcel($file_name, $need): void {
 			$assoc = Timetable_excel_reader::load_assoc($file_name);
 			// var_dump($assoc);
 			$this->assert($assoc, $need);
