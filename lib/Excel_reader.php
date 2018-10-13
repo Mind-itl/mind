@@ -1,6 +1,6 @@
 <?php
 	abstract class Excel_reader {
-		public static function load(string $file_name) {
+		private static function get_get(string $file_name): Closure {
 			$x = \PhpOffice\PhpSpreadsheet\IOFactory::load($file_name);
 
 			$x->setActiveSheetIndex(0);
@@ -15,9 +15,20 @@
 				return "";
 			};
 
-			static::handle($get);
-		}		
+			return $get;
+		}
+
+		public static function load(string $file_name): void {
+			static::handle(static::get_get($file_name));
+		}
+
+		public static function load_assoc(string $file_name): array {
+			$assoc = static::process(static::get_get($file_name));
+			return $assoc;
+		} 
+
 		abstract protected static function handle(Closure $get);
+		abstract protected static function process(Closure $get): array;
 		abstract public static function get_name(): string;
 	}
 
