@@ -7,10 +7,15 @@
 			$sheet = $x->getActiveSheet();
 
 			$get = function(int $x, int $y) use ($sheet) {
-				return $sheet->getCellByColumnAndRow($x, $y);
+				$cell = $sheet->getCellByColumnAndRow($x+1, $y+1);
+
+				if ($cell)
+					return $cell->getValue() ?? "";
+
+				return "";
 			};
 
-			static::handle($sheet);
+			static::handle($get);
 		}		
 		abstract protected static function handle(Closure $get);
 		abstract public static function get_name(): string;
