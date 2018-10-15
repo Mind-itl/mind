@@ -25,6 +25,7 @@
 					WHERE
 						CLASS = ?s AND
 						WEEKDAY = ?s
+					ORDER BY NUMBER
 					", $class, $day
 				);
 
@@ -32,7 +33,8 @@
 				foreach ($r as $v) {
 					$lessons[] = [
 						"name" => $v["LESSON"],
-						"place" => $v["PLACE"]
+						"place" => $v["PLACE"],
+						"number" => $v["NUMBER"]
 					];
 				}
 
