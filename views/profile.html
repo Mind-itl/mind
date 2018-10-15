@@ -84,12 +84,12 @@
 				<div class="one-notif {{ notif_class }}">
 					<div class="from-name">
 						{% if notif.from.is_student %}
-						    {{ notif.from.given }} {{ notif.from.family }}
+						    {{ notif.from.given }} {{ notif.from.family }}, 
 						{% else %}
-							{{ notif.from.given }} {{ notif.from.father}}
+							{{ notif.from.given }} {{ notif.from.father}}, 
 						{% endif %}
 						<span class="transaction-time">
-							{{ notif.date|date("H:i, d.m.Y") }}
+							{{ notif.date|date("d.m.y в H:i") }}
 						</span>
 					</div>
 					<div class="cause">

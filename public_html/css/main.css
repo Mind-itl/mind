@@ -173,6 +173,7 @@ tr.lesson-now {
 .notifications { 
 	display: flex;
 	flex-wrap: wrap;
+	width: 100%;
 }
 .notifications .one-notif { 
 	padding: 10px;
@@ -331,6 +332,7 @@ tr.lesson-now {
 }
 .vote-this {
 	background: #306B82;
+	color: #fff;
 }
 .vote-this span {
 	color: #fff;
@@ -464,24 +466,6 @@ tr.lesson-now {
 }
 .form-group label {
 	font-weight: bold;
-}
-@media (max-width: 768px) {
-	.plitka {
-		width: 50%;
-		margin-left: 10%;
-	}
-}
-@media (min-width: 992px) and (max-width: 1200px) {
-	.plitka {
-		width: 40%;
-		margin-left: 10%;
-	}
-}
-@media (min-width: 1200px) {
-	.plitka {
-		width: 30%;
-		margin-left: 10%;
-	}
 }
 .fa {
 	color: #fff;
