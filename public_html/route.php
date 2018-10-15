@@ -96,7 +96,7 @@
 
 		} elseif (has_pure_page($control_name)) {
 			$control = new Control($control_name);
-			echo $control->get_html($url_arr);
+			echo Muhaeu\HtmlFormatter::format($control->get_html($url_arr));
 		} else
 			not_found();
 	}
