@@ -36,7 +36,7 @@
 
 		static function format_name(string $name): string {
 			preg_match('/(\w+) *(\w)\.? *(\w)\.?/u', $name, $m);
-			return $m[1]." ".$m[2].".".$m[3].".";
+			return $m[1]." ".mb_strtoupper($m[2]).".".mb_strtoupper($m[3]).".";
 		}
 
 		static function format_group(string $group): string {
