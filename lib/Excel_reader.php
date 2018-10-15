@@ -1,4 +1,6 @@
 <?php
+	use \PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+
 	abstract class Excel_reader {
 		private static function get_get(string $file_name): Closure {
 			$x = \PhpOffice\PhpSpreadsheet\IOFactory::load($file_name);
@@ -6,13 +8,18 @@
 			$x->setActiveSheetIndex(0);
 			$sheet = $x->getActiveSheet();
 
-			$get = function(int $x, int $y) use ($sheet) {
+			$get = function(int $x, int $y) use ($sheet): string {
 				$cell = $sheet->getCellByColumnAndRow($x+1, $y+1);
 
-				if ($cell)
-					return $cell->getValue() ?? "";
+				if (!$cell)
+					return "";
 
-				return "";
+				if ($range = $cell->getMergeRange()) {
+					$range = Coordinate::splitRange($range)[0][0];
+					return $sheet->getCell($range)->getValue();
+				}
+
+				return $cell->getValue() ?? "";
 			};
 
 			return $get;
