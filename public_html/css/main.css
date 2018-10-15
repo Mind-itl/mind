@@ -8,6 +8,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 body {
     background: #E6EFF6;
+	/*background: linear-gradient( rgba( 125 , 157 , 179 , .45 ) , rgba( 0 , 75 , 126 , .45 ) );*/
     font-family: 'Open Sans', arial;
 }
 .container-menu { 
@@ -265,6 +266,9 @@ tr.lesson-now {
 	background-image: none;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+input[type="file"].form-control {
+	background-color: #CCDFEC;
+}
 .submit {
 	font-family: 'Courier New', arial;
 	background: #466cb2;
@@ -330,9 +334,14 @@ tr.lesson-now {
 	padding: 20px;
 	margin-bottom: 10px;
 }
+.vote-not-this {
+	transform: 2s;
+}
 .vote-this {
 	background: #306B82;
+	clip-path: circle(700px at 95% 50%);
 	color: #fff;
+	transform: 2s;
 }
 .vote-this span {
 	color: #fff;

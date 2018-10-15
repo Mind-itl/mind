@@ -11,7 +11,8 @@
 			["student", "Аукцион", "/auction"],
 			["student", "Интернат", "/internat"],
 			["vospit", "Интернат", "/internat"],
-			["teacher", "Оповестить учеников", "/broadcast"]
+			["teacher", "Оповестить учеников", "/broadcast"],
+			["teacher", "Загрузить данные", "/load"]
 
 		];
 
