@@ -22,8 +22,8 @@
 					if ($f($i+1, $j) == "")
 						break;
 					$arr = [];
-					$arr["class"] = $c;
-					$arr["day"] = $denek;
+					$arr["class"] = self::format_group($c);
+					$arr["day"] = self::format_day($denek);
 					$arr["num"] = intval($f(0, $j));
 					$arr["name"] = $f($i, $j);
 					$arr["place"] = $f($i + 2, $j);
@@ -39,9 +39,18 @@
 			return $m[1]." ".$m[2].".".$m[3].".";
 		}
 
+		static function format_group(string $group): string {
+			preg_match('/(\d+)\D+?(\d+)/', $group, $m);
+			return $m[1]."-".$m[2];
+		}
+
+		static function format_day(string $day): string {
+			return today_en($day);
+		}
+
 		static function add_lesson($lesson) {
 			safe_query("
-				INSERT INTO LESSONS (
+				INSERT INTO lessons (
 					CLASS, WEEKDAY, NUMBER, LESSON, PLACE
 				) VALUES (
 					?s, ?s, ?i, ?s, ?s
