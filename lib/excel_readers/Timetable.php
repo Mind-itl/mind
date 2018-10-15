@@ -5,9 +5,14 @@
 		}
 
 		static function handle(Closure $f) {
+			static::delete_timetable($f);
 			foreach (static::process($f) as $lesson) {
 				static::add_lesson($lesson);
 			}
+		}
+
+		static function delete_timetable(CLosure $f): void {
+			safe_query("DELETE FROM lessons WHERE CLASS = ?s", self::format_group($f(0, 0)));
 		}
 
 		static function process(Closure $f): array {
