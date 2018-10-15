@@ -1,0 +1,23 @@
+{
+  "name": "mind",
+  "homepage": "https://github.com/pomah3/mind",
+  "authors": [
+    "Semenov Roman <3908441@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public_html/js/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "components-font-awesome": "^5.0.6"
+  }
+}
