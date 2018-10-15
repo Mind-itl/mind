@@ -7,5 +7,12 @@
 		"workerman/workerman": "^3.5",
 		"simplon/mysql": "^2.2",
 		"colshrapnel/safemysql": "^1.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "7"
+	},
+	"scripts": {
+		"start": "php -S localhost:8080 -t public_html public_html/route.php",
+		"test": "\"./vendor/bin/phpunit\" --bootstrap lib/utils.php tests"
 	}
 }

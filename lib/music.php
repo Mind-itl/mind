@@ -71,5 +71,10 @@
 			WHERE ID = ?i
 			", $id
 		);
+		safe_query("
+			DELETE FROM music_votes
+			WHERE ID = ?i
+			", $id
+		);
 	}
 ?>

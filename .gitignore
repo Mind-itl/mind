@@ -10,3 +10,6 @@ error_log
 # composer
 composer.phar
 /vendor/
+
+#bower
+public_html/js/bower_components
