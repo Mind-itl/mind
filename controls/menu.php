@@ -12,7 +12,7 @@
 			["student", "Интернат", "/internat"],
 			["vospit", "Интернат", "/internat"],
 			["teacher", "Оповестить учеников", "/broadcast"],
-			["teacher", "Загрузить данные", "/load"]
+			["zam", "Загрузить данные", "/load"]
 
 		];
 
