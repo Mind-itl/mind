@@ -1,3 +1,6 @@
+const React = require("react");
+const ReactDOM = require("react-dom");
+
 const e = React.createElement;
 
 class Auction extends React.Component {
@@ -6,7 +9,9 @@ class Auction extends React.Component {
 
 		this.state = {status: "closed"};
 
-		this.socket = new WebSocket('ws://itlkpfu.tw1.ru');
+		let host = window.location.origin.replace(/https?/, "ws");
+
+		this.socket = new WebSocket(host);
 
 		this.socket.onopen = function() {
 			this.setState({status: "connected"});
@@ -38,15 +43,6 @@ class Auction extends React.Component {
 		// 	return "Нет соединения с сервером";
 		// }
 
-		return [
-			e(
-				"div",
-				{id: "asd"}
-			),
-			e(
-				"div",
-				{id: "asdd"}
-			)
-		];
+		return <div>Hello!</div>;
 	}
 }

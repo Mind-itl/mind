@@ -51,9 +51,19 @@
 		else
 			no_access();
 	}));
+
+	$twig->addFunction(new Twig_Function("has_css", function(string $file_name): bool {
+		return file_exists(ROOT."/public_html/css/$file_name");
+	}));
+
+	$twig->addFunction(new Twig_Function("has_js", function(string $file_name): bool {
+		return file_exists(ROOT."/public_html/js_pages/$file_name");
+	}));
+
 	$twig->addFilter(new Twig_Filter("weekday_rus", function(string $day) {
 		return today_rus($day);
 	}));
+	
 	$twig->addFilter(new Twig_Filter("month_rus", function(string $day) {
 		return month_rus($day);
 	}));

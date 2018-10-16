@@ -1,9 +1,19 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/img/favicon.ico">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/js/bower_components/components-font-awesome/css/fontawesome-all.css">
 <script>
 	document.title += " | Mind";
 </script>
-<script src="/js/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/js/bootstrap.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+{% block css_default_link %}
+	{% if has_css(control_name ~ ".css") %}
+		<link rel="stylesheet" href="/css/{{ control_name }}.css">
+	{% endif %}
+{% endblock %}
+
+{% block js_default %}
+	{% if has_js(control_name ~ ".js") %}
+		<script src="/js_pages/{{ control_name}}.js"></script>
+	{% endif %}
+{% endblock %}

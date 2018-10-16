@@ -11,5 +11,5 @@ error_log
 composer.phar
 /vendor/
 
-#bower
-public_html/js/bower_components
+#npm
+node_modules/
