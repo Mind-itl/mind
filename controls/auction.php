@@ -12,7 +12,7 @@
 					"count" => get_curr()->get_points(),
 					"noun" => get_points_case(get_curr()->get_points()),
 				],
-				"scripts" => $this->scripts()
+				// "scripts" => $this->scripts()
 			];
 		}
 

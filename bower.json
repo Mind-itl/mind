@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "jquery": "^3.3.1",
-    "components-font-awesome": "^5.0.6"
+    "components-font-awesome": "^5.0.6",
+    "react": "^16.1.0"
   }
 }
