@@ -7,9 +7,9 @@
 	<div class="container">
 		<form action="" method="POST" enctype="multipart/form-data">
 			<select name="excel_type" class="form-control">
-				<option>Расписание</option>
-				<option>Ученики</option>
-				<option>Кружки</option>
+				{% for reader in readers %}
+				    <option>{{ reader }}</option>
+				{% endfor %}
 			</select>
 
 			<input type="file" name="excel" class="form-control">
