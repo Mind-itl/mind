@@ -41,6 +41,13 @@
 			$a = self::process($get);
 			foreach ($a as $i) {
 				safe_query("
+					DELETE FROM dutes
+					WHERE
+						BLOCK = ?s AND
+						DAY = ?s
+					", $i["block"], $i["day"]
+				)
+				safe_query("
 					INSERT INTO dutes (
 						LOGIN, BLOCK, DAY 
 					) VALUES (?s, ?s, ?s)",
