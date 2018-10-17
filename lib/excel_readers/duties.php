@@ -20,6 +20,8 @@
 					$day = $j;
 				$arr["day"] = $day;
 				$login = self::format_name($get($i, 1));
+				if ($login == "")
+					break;
 				$arr["login"] = $login;
 				$arr["block"] = trim($get($i, 2));
 				$i++;

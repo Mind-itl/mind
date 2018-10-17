@@ -4,7 +4,7 @@
 	require_once "lib/Excel_reader.php";
 	require_once "lib/excel_readers/duties.php";
 
-	final class TimetableReaderTest extends TestCase {
+	final class DutiesTest extends TestCase {
 
 		/**
 		 * @dataProvider providerFiles
