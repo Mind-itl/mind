@@ -9,21 +9,28 @@
 			return $m[1]." ".mb_strtoupper($m[2]).".".mb_strtoupper($m[3]).".";
 		}
 
+		static function format_day(string $day): string {
+			return today_en($day);
+		}
+
 		static function process(Closure $get): array {
 			$i = 1;
 			$day = "";
 			$a = [];
 			while (true) {
 				$arr = [];
-				$j = $get($i, 0);
+				$j = $get(0, $i);
 				if ($j != "")
 					$day = $j;
-				$arr["day"] = $day;
-				$login = self::format_name($get($i, 1));
+				$arr["day"] = self::format_day($day);
+				
+				$login = $get(1, $i);
 				if ($login == "")
 					break;
+				$login = self::format_name($login);
+
 				$arr["login"] = $login;
-				$arr["block"] = trim($get($i, 2));
+				$arr["block"] = trim($get(2, $i));
 				$i++;
 				$a[] = $arr;
 			}
