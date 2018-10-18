@@ -3,6 +3,7 @@
 
 	require_once __DIR__."/../lib/utils.php";
 	require_once LIBS."Control.php";
+	require_once LIBS."twig.php";
 
 	function not_found() {
 		header("HTTP/1.0 404 Not Found");
@@ -41,28 +42,6 @@
 		return file_exists($control_file);
 	}
 
-	$loader = new Twig_Loader_Filesystem(VIEWS);
-	$twig = new Twig_Environment($loader);
-
-	$twig->addFunction(new Twig_Function("controller", function(string $control_name) {
-		$control = load_control($control_name);
-		if ($control->has_access([]))
-			echo $control->get_html([]);
-		else
-			no_access();
-	}));
-	$twig->addFilter(new Twig_Filter("weekday_rus", function(string $day) {
-		return today_rus($day);
-	}));
-	$twig->addFilter(new Twig_Filter("month_rus", function(string $day) {
-		return month_rus($day);
-	}));
-
-	function get_twig() {
-		global $twig;
-		return $twig;
-	}
-
 	function has_public_file(string $url): bool {
 		$public_file = "public_html".$url;
 		return
@@ -96,7 +75,7 @@
 
 		} elseif (has_pure_page($control_name)) {
 			$control = new Control($control_name);
-			echo $control->get_html($url_arr);
+			echo Muhaeu\HtmlFormatter::format($control->get_html($url_arr));
 		} else
 			not_found();
 	}

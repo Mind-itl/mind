@@ -10,7 +10,7 @@
 		 */
 		public function __construct(string $name) {
 			$this->name = $name;
-			$this->template = get_twig()->load("$name.html");
+			$this->template = Twig_loader::get_twig()->load("$name.html");
 		}
 
 		/**

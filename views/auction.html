@@ -4,11 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-md-10 col-md-offset-1">
-		<div id="auction-off">
+	<div class="container">
+		<div id="auction-off" hidden>
 			Аукцион ещё не начался
 		</div>
-		<div id="auction-on" hidden>
+		<div id="auction-on">
+			<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
 			{# Текущий слот #}
 			<div class="now-thing">
 				<h3>
@@ -26,7 +27,7 @@
 			</div>
 
 			{# Текущая ставка #}
-			<div class="now-auction" id="curr_rate" hidden>
+			<div class="now-auction" id="curr_rate" >
 				<div class="now-rate">
 					Текущая ставка:
 					<span id="curr_rate_points">
@@ -62,9 +63,7 @@
 			</div>
 
 			{# Текущий баланс #}
-			<div class="my-points">
-				<h4>Баланс: <span class="bigger">{{ points.count }} {{ points.noun }}</span></h4>
-			</div>
+			
 		
 			{# История #}
 			<div>
