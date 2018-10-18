@@ -167,4 +167,21 @@
 				return $v['title'];
 		}
 	}
+
+	function get_teacher_by_name(string $name): ?Teacher {
+		$arr = explode(' ', $name);
+		$family_name = $arr[0];
+		$arr = explode('.', $arr[1]);
+		$first_init = $arr[0];
+		$second_init = $arr[1];
+
+		$arr = safe_query("SELECT * FROM teachers WHERE FAMILY_NAME = ?s", $family_name);
+
+		foreach ($arr as $i) {
+			if ($i["GIVEN_NAME"][0] == $first_init && $i["FATHER_NAME"][0] == $second_init) {
+				return get_user($i["LOGIN"]);
+			}
+		}
+		return null;
+	}
 ?>
