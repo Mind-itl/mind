@@ -13,3 +13,4 @@ composer.phar
 
 #npm
 node_modules/
+public_html/dist
