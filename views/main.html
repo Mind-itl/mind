@@ -4,14 +4,35 @@
 		<title>
 			{% block title %} title {% endblock %}
 		</title>
-		{{ include('links.html') }}
-		<link rel="stylesheet" href="/css/loader.css">
-		{% block css_pages %}
-			<link rel="stylesheet" href="/css/{{ control_name }}.css">
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="/img/favicon.ico">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" crossorigin="anonymous">
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/js/bootstrap.js"></script>
+
+		{% block js_default %}
+			{% if has_dist(control_name ~ ".js") %}
+				<script src="/dist/{{ control_name }}.js"></script>
+			{% else %}
+				<script src="/dist/main.js"></script>
+			{% endif %}
 		{% endblock %}
+	
+		{% if has_css(control_name ~ ".css") %}
+			{% block css_pages %}
+				<link rel="stylesheet" href="/css/{{ control_name }}.css">
+			{% endblock %}
+		{% endif %}
+		
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/loader.css">
+	
 	</head>
 	<body>
-		{{ include('loader.html') }}
+		<div class="loader pre" style="visibility: visible;">
+			<hr><hr><hr><hr>
+		</div>
 		<div class="main_container" style="display:none;">
 			<header>
 				<div class="top-menu">

@@ -1,5 +1,9 @@
-$(document).ready(function(){
-	'use strict';
+'use strict';
+
+require("../main.js");
+const $ = require("jquery");
+
+$(window).on('load', function() {
 	$(".unread-notification").mouseover(function() {
 		if (!$(this).hasClass("unread-notification"))
 			return;
@@ -18,5 +22,5 @@ $(document).ready(function(){
 				"id": id
 			}
 		})
-	});
-});
+	});	
+})

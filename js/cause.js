@@ -1,18 +1,21 @@
-(function(list) {
-	'use strict';
-	function uniq(arr) {
-		return $.grep(arr, function(v, k){
-	    	return $.inArray(v ,arr) === k;
-		});
-	}
+'use strict';
 
-	let kinds = uniq(list.map(a => a.kind));
+const $ = require("jquery");
+
+function uniq(arr) {
+	return arr.filter(function(elem, pos) {
+		return arr.indexOf(elem) == pos;
+	})
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+	let kinds = uniq(window.causes_list.map(a => a.kind));
 	kinds.forEach(el => {
 		$("#award_kind").append("<option>" + el +"</option>");
 	});
 
 	let causes = {};
-	list.forEach(el => {
+	window.causes_list.forEach(el => {
 		let kind = el['kind'];
 		causes[kind] = causes[kind] || [];
 		causes[kind].push({
@@ -36,5 +39,4 @@
 			);
 		});
 	}).change();
-
-})(causes_list);
+});
