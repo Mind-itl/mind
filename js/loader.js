@@ -1,8 +1,6 @@
-require("style-loader!css-loader!../css/loader.css");
-
 const $ = require("jquery");
 
-$(window).load(function () {
+$(window).on('load', function () {
 	$('.main_container').delay(400).fadeIn();
 	$('.loader').delay(100).fadeOut();
 });
