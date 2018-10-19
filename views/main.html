@@ -4,11 +4,15 @@
 		<title>
 			{% block title %} title {% endblock %}
 		</title>
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="/img/favicon.ico">
+
 		{{ include('links.html') }}
-		<link rel="stylesheet" href="/css/loader.css">
 	</head>
 	<body>
-		{{ include('loader.html') }}
+		<div class="loader pre" style="visibility: visible;">
+			<hr><hr><hr><hr>
+		</div>
 		<div class="main_container" style="display:none;">
 			<header>
 				<div class="top-menu">
@@ -21,4 +25,10 @@
 			{% block body %}{% endblock %}
 		</div>
 	</body>
+
+	{% block js_default %}
+		{% if has_js(control_name ~ ".js") %}
+			<script src="/dist/{{ control_name}}.js"></script>
+		{% endif %}
+	{% endblock %}
 </html>
