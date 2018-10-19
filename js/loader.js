@@ -1,4 +1,4 @@
-require("../loader.css");
+require("style-loader!css-loader!../css/loader.css");
 
 const $ = require("jquery");
 

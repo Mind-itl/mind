@@ -1,8 +1,7 @@
 'use strict';
+require("../main.js");
 
 const $ = require("jquery");
-require("../menu.js");
-require("../loader.js");
 
 $(".unread-notification").mouseover(function() {
 	if (!$(this).hasClass("unread-notification"))

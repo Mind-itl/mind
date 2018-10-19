@@ -6,8 +6,7 @@
 		</title>
 		<meta charset="UTF-8">
 		<link rel="shortcut icon" href="/img/favicon.ico">
-
-		{{ include('links.html') }}
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class="loader pre" style="visibility: visible;">
@@ -27,7 +26,7 @@
 	</body>
 
 	{% block js_default %}
-		{% if has_js(control_name ~ ".js") %}
+		{% if has_dist(control_name ~ ".js") %}
 			<script src="/dist/{{ control_name}}.js"></script>
 		{% endif %}
 	{% endblock %}
