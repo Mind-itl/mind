@@ -1,3 +1,5 @@
+require("../loader.css");
+
 const $ = require("jquery");
 
 $(window).load(function () {
