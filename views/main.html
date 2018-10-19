@@ -18,10 +18,13 @@
 				<script src="/dist/main.js"></script>
 			{% endif %}
 		{% endblock %}
-
-		{% block css_pages %}
-			<link rel="stylesheet" href="/css/{{ control_name }}.css">
-		{% endblock %}
+	
+		{% if has_css(control_name ~ ".css") %}
+			{% block css_pages %}
+				<link rel="stylesheet" href="/css/{{ control_name }}.css">
+			{% endblock %}
+		{% endif %}
+		
 		<link rel="stylesheet" href="/css/main.css">
 		<link rel="stylesheet" href="/css/loader.css">
 	
