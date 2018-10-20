@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="container">
 		<script>
-			var causes_list = {{ causes|raw }};
+			window.causes_list = {{ causes|raw }};
 		</script>
 
 		{% if result=="success" %}
@@ -30,6 +30,5 @@
 			<select name="cause" id="award_cause" class="form-control"></select>
 			<input type="submit" class="submit big-submit">
 		</form>
-		<script src="js/cause.js"></script>
 	</div>
 {% endblock %}

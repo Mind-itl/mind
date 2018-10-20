@@ -27,7 +27,9 @@
 				require_once READERS.$reader_file;
 				$cls_name = get_reader_name(substr($reader_file, 0, -4));
 
-				$arr[] = call_user_func($cls_name."::get_name");
+				$func_name = $cls_name."::get_name";
+				if (is_callable($func_name))
+					$arr[] = call_user_func($func_name);
 			}
 
 			return $arr;
