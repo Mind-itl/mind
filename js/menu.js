@@ -1,6 +1,6 @@
 'use strict';
 
-const $ = require("jquery");
+import $ from "jquery";
 
 $(".theme_link").prop("disabled", true);
 $("#" + localStorage.getItem("theme")).prop("disabled", false);
