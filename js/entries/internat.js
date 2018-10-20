@@ -3,76 +3,104 @@
 import "../main.js";
 import $ from "jquery";
 
-const get_music_elem = function(music) {
-	let cls;
-	if (music.student_vote_this)
-		music.cls = "vote-this";
-	else
-		music.cls = "vote-not-this";
+import React from "react";
+import ReactDOM from "react-dom";
 
-	let el = $("#primer_music_el").clone();
+class MusicList extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {musics: []};
+		this.loadMusic();
+	}
 
-	el.removeAttr("id");
-	el.addClass(music.cls);
-	el.find(".music-id").html(music.id);
-	el.find(".music_performer").html(music.performer);
-	el.find(".music_title").html(music.title);
-	el.find(".votes").html(music.votes_count);
-	el.addClass(music.cls);
+	loadMusic() {
+		let self = this;
+		$.ajax({
+			url: "/vote_music",
+			dataType: "json"
+		}).done(function(data) {
+			self.setState({musics: data});
+		});
+	}
 
-	return el;
+	render() {
+		let self = this;
+		return this.state.musics.sort((a,b)=>{
+			if (a.votes_count < b.votes_count)
+				return 1;
+			else if (b.votes_count < a.votes_count)
+				return -1;
+			return 0;
+		}).map(el =>
+			<Music
+				update={this.loadMusic.bind(self)}
+				id={el.id}
+				title={el.title}
+				performer={el.performer}
+				votes={el.votes_count}
+				voted={el.student_vote_this}
+			/>
+		);
+	}
 }
 
-const render = function(musics) {
-	$("#music_list").children(".music_el:not(#primer_music_el)").remove();
-	musics.sort((a,b)=>{
-		if (a.votes_count < b.votes_count)
-			return -1;
-		else if (b.votes_count < a.votes_count)
-			return 1;
-		return 0;
-	}).forEach(music => {
-		$("#music_list").prepend(get_music_elem(music));
-	});
-	$(".vote").click(function() {
-		let self = this;
-		let val = $(self).parent().parent().
-			children(".music-id").html().trim();
+class Music extends React.Component {
+	render() {
+		const vote = function() {
+			console.log(this.props.id);
+			$.ajax({
+				method: "POST",
+				url: "/vote_music",
+				data: {
+					"id": this.props.id
+				},
+				dataType: "json"
+			}).done(function(data) {
+				console.log(data);
+				this.props.update(data);
+			}.bind(this));
+		}.bind(this);
 
-		$.ajax({
-			method: "POST",
-			url: "/vote_music",
-			data: {
-				"id": val
-			},
-			dataType: "json"
-		}).done(function(data) {
-			render(data);
-		});
-	});
-	$(".remove-music").click(function() {
-		let self = this;
-		let val = $(self).parent().parent().
-			children(".music-id").html().trim();
+		const cls = this.props.voted ? "vote-this" : "vote-not-this";
+		return <div className="music_el one-music {cls}">
+			<div hidden className="music-id">
+				{this.props.id}
+			</div>
+			<div className="music_name">
+				<span className="music_performer song-singer">
+					{this.props.performer} 
+				</span>
+				<span className="music-divider"> - </span>
+				<span className="music_title song-name">
+					{this.props.title}
+				</span>
+			</div>
+			<div className="vote-info">
+				<span className="votes vote-count">
+					{this.props.votes}
+				</span>
 
-		$.ajax({
-			method: "POST",
-			url: "/vote_music",
-			data: {
-				"id": val,
-				"remove": true
-			},
-			dataType: "json"
-		}).done(function(data) {
-			render(data);
-		});
-	})
-};
+				{
+					this.props.voted ?
+						<button className="vote unvote voted-for-this" onClick={vote}>
+							&times;
+						</button>
+					:
+						<button className="vote dovote vote-for-this" onClick={vote}>
+							+
+						</button>
+				}
+				{
+					false ? 
+					<button className="remove-music voted-for-this">
+						&times;
+					</button> : null
+				}
+			</div>
+		</div>;
+	}
+}
 
-
-$.ajax({
-	url: "/vote_music",
-	dataType: "json"
-}).done(function(data) {
-	render(data);
+document.addEventListener("DOMContentLoaded", function() {
+	ReactDOM.render(<MusicList/>, document.getElementById("music_list"));
 });
