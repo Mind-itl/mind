@@ -19,7 +19,7 @@ export default class Music extends React.Component {
 		}.bind(this);
 
 		const cls = this.props.voted ? "vote-this" : "vote-not-this";
-		return <div className="music_el one-music {cls}">
+		return <div className={"music_el one-music cls " + cls}>
 			<div hidden className="music-id">
 				{this.props.id}
 			</div>
