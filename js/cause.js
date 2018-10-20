@@ -1,6 +1,6 @@
 'use strict';
 
-const $ = require("jquery");
+import $ from "jquery";
 
 function uniq(arr) {
 	return arr.filter(function(elem, pos) {

@@ -1,7 +1,7 @@
 'use strict';
 
-require("../main.js");
-const $ = require("jquery");
+import "../main.js";
+import $ from "jquery";
 
 const get_music_elem = function(music) {
 	let cls;

@@ -1,7 +1,7 @@
 'use strict';
 
-require("../main.js");
-const $ = require("jquery");
+import $ from "jquery";
+import "../main.js";
 
 $("#add-student-button").click(function() {
 	let val = $("#student_select").val();

@@ -1,9 +1,8 @@
-const React = require("react");
-const ReactDOM = require("react-dom");
+import React from "react";
 
 const e = React.createElement;
 
-class Auction extends React.Component {
+export default class Auction extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -46,3 +45,4 @@ class Auction extends React.Component {
 		return <div>Hello!</div>;
 	}
 }
+
