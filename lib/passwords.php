@@ -68,7 +68,7 @@
 			UPDATE passwords
 			SET HASH = ?s
 			WHERE LOGIN = ?s
-			", hash_password($new), get_curr()->get_login()
+			", hash_password($new_password), get_curr()->get_login()
 		);
 
 		return true;
