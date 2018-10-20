@@ -36,13 +36,13 @@ export default class Auction extends React.Component {
 	}
 
 	render() {
-		// if (this.state.status == "closed") {
-		// 	return "Аукцион пока не начался";
-		// } else if (this.state.status == "error") {
-		// 	return "Нет соединения с сервером";
-		// }
+		if (this.state.status == "closed") {
+			return "Аукцион пока не начался";
+		} else if (this.state.status == "error") {
+			return "Нет соединения с сервером";
+		}
 
-		return <div>Hello!</div>;
+		return "";
 	}
 }
 
