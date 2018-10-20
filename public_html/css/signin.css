@@ -31,5 +31,5 @@ html {
 }
 .container,
 body {
-	background: none;
+	background: none !important;
 }

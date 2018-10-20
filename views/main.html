@@ -10,6 +10,7 @@
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="/js/bootstrap.js"></script>
+		<script src="/js/banner.js"></script>
 
 		{% block js_default %}
 			{% if has_dist(control_name ~ ".js") %}
@@ -37,7 +38,8 @@
 			<header>
 				<div class="top-menu">
 					<div class="container-menu">
-						<img src="img/logo full.png" alt="">
+						<iframe src="/logo/logo.html" frameborder="0" width="1280" height="426" allowwfullscreen="allowwfullscreen"></iframe>
+						<!-- <img src="img/logo full.png" alt=""> -->
 					</div>
 				</div>
 				{{ controller("menu") }}

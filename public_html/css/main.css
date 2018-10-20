@@ -569,3 +569,7 @@ label {
 #rotator ul li.show {
 	z-index: 500;
 }
+iframe {
+	transform: scale(0.25, 0.25);
+	transform-origin: top left;
+}
