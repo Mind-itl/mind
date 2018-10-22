@@ -8,7 +8,11 @@
 	function not_found() {
 		header("HTTP/1.0 404 Not Found");
 
-		$c = new Control("404");
+		if (is_logined())
+			$c = new Control("404_logined");
+		else
+			$c = new Control("404");
+		
 		echo $c->get_html([]);
 		
 		exit();

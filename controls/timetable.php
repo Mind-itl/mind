@@ -18,6 +18,8 @@
 			$class = get_curr()->get_class();
 
 			$days = [];
+
+
 			foreach ($weekdays as $day) {
 				$r = safe_query("
 					SELECT *
@@ -29,19 +31,28 @@
 					", $class, $day
 				);
 
+
+				$last_num = -1;
 				$lessons = [];
+
 				foreach ($r as $v) {
+					if ($v["NUMBER"] == $last_num)
+						continue;
+
 					$lessons[] = [
 						"name" => $v["LESSON"],
 						"place" => $v["PLACE"],
 						"number" => $v["NUMBER"]
 					];
+
+					$last_num = $v["NUMBER"];
 				}
 
 				$days[] = [
 					"name" => today_rus($day),
 					"lessons" => $lessons
 				];
+
 			}
 
 			return [

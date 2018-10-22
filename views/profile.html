@@ -54,29 +54,32 @@
 			<h2>
 				{{ is_today ? 'Сегодня' : 'Завтра'}}:
 				<strong>
-					{{ date|date("l")|weekday_rus }}
+					{% set day = date|date("l")|weekday_rus %}
+					{{ day }}
 				</strong>,
 				{{ date|date("d.m.Y") }}
 			</h2>
-			<table class="timetable-table">
-				<tr>
-					<th></th>
-					<th>Предмет</th>
-					<th>Каб.</th>
-				</tr>
-				{% for lesson in timetable %}
-					{% if lesson.is_now %}
-						{% set cls = "lesson-now" %}
-					{% else %}
-						{% set cls = "" %}
-					{% endif %}
-					<tr class="{{ cls ?? ""}}">
-						<td>{{ lesson.number }}</td>
-						<td>{{ lesson.lesson }}</td>
-						<td>{{ lesson.place }}</td>
+			{% if day != "Воскресенье" %}
+				<table class="timetable-table">
+					<tr>
+						<th></th>
+						<th>Предмет</th>
+						<th>Каб.</th>
 					</tr>
-				{% endfor %}
-			</table>
+					{% for lesson in timetable %}
+						{% if lesson.is_now %}
+							{% set cls = "lesson-now" %}
+						{% else %}
+							{% set cls = "" %}
+						{% endif %}
+						<tr class="{{ cls ?? ""}}">
+							<td>{{ lesson.number }}</td>
+							<td>{{ lesson.lesson }}</td>
+							<td>{{ lesson.place }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+			{% endif %}
 		</div>
 		<div class="notifications">
 			{% for notif in notifications %}

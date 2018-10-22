@@ -1,4 +1,4 @@
-require("./loader.js");
-require("./menu.js");
+import "./loader.js";
+import "./menu.js";
 
 document.title += " | Mind";

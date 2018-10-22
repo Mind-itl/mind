@@ -1,0 +1,42 @@
+{% extends 'points.html' %}
+{% block title %}
+	Выписка по классу
+{% endblock %}
+
+{% block css_pages %}
+	<link rel='stylesheet' href='/css/points.css'>
+{% endblock %}
+
+{% block body %}
+	<div class="col-md-12">
+		<span class="span-point" style="font-weight: bold;">Итого по лицею:</span>
+		<span class="span-points">
+			{{ sum }}
+		</span>
+		
+		{% for class in points_by_classes %}
+			<h4>{{ class.class_name }}, всего: {{ class.sum }}</h4>
+		    
+			<table>
+				<tr>
+					<th>Имя</th>
+					<th>Баллы</th>
+					<th></th>
+				</tr>
+
+				{% for student in class.points_by_students %}
+				    <tr>
+				    	<td>{{student.name.family}} {{student.name.given}}</td>
+				    	<td>{{student.points}}</td>
+						<td>
+							<a href="/points/{{ student.login }}">Подробнее</a>
+						</td>
+				    </tr>
+				{% endfor %}
+
+			</table>
+
+		{% endfor %}
+
+	</div>
+{% endblock %}

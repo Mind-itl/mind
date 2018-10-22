@@ -1,4 +1,4 @@
-const $ = require("jquery");
+import $ from "jquery";
 
 $(window).on('load', function () {
 	$('.main_container').delay(400).fadeIn();
