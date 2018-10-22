@@ -113,8 +113,15 @@
 			);
 
 			$arr = [];
+
+			$last_num = -1;
+
 			foreach ($lessons as $lesson) {
 				$num = intval($lesson["NUMBER"]);
+
+				if ($num == $last_num)
+					continue;
+
 				if (isset(lesson_times[$num-1])) {
 					$f = "H:i";
 					$bg = DateTime::createFromFormat($f, lesson_times[$num-1][0]);
@@ -129,6 +136,8 @@
 					"is_now" => $is_now ?? false,
 					"number" => $num
 				];
+
+				$last_num = $num;
 			}
 
 			return $arr;
