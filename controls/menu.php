@@ -8,7 +8,7 @@
 				"Баллы",
 				["student", "Мои баллы", "/points"],
 				["student", "Передать баллы", "/give"],
-				["teacher", "Выдать баллы", "/award"],
+				["teacher", "Начислить баллы", "/award"],
 				["student", "Аукцион", "/auction"]
 			],
 			["classruk", "Выписка по классу", "/class"],
