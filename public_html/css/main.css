@@ -45,6 +45,8 @@ a {
 .top-menu {
 	background: #004B7E;
 	padding: 0;
+	max-height: 80px;
+	overflow: hidden;
 }
 .top-menu > .container-menu > img {
 	width: 10%; 
@@ -570,6 +572,7 @@ label {
 	z-index: 500;
 }
 iframe {
-	transform: scale(0.25, 0.25);
+	transform: scale(0.20, 0.20);
 	transform-origin: top left;
+	margin-left: -20px;
 }
