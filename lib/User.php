@@ -20,6 +20,10 @@
 		}
 
 		public function get_full_name(string $format = "fm gi ft"): string {
+			return $this->get_name($format);
+		}
+
+		public function get_name(string $format = "fm gi ft"): string {
 			$search = ["gi", "ft", "fm"];
 			$replace = [$this->given_name, $this->father_name, $this->family_name];
 
