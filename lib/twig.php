@@ -54,6 +54,12 @@
 		},
 		"month_rus" => function(string $month): string {
 			return month_rus($month);
+		},
+		"fdate" => function(DateTime $date, string $format): string {
+			$s = strftime($format, $date->getTimestamp());
+			$month = month_rus(date('n'));
+
+			return str_replace("%Q", $month, $s);
 		}
 	];
 ?>

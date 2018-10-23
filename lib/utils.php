@@ -13,8 +13,9 @@
 	
 	require_once ROOT."vendor/autoload.php";
 
+	setlocale(LC_TIME, "ru_RU.UTF-8");
 	session_start();
-	
+
 	if (isset($_SESSION["login"])) {
 		$curr_user = get_user($_SESSION['login'], $_SESSION['role']);
 	}

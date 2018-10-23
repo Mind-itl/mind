@@ -11,9 +11,7 @@
 		{% for day in trans_by_day %}
 			<div class="day">
 				<h3 class="date">
-					{{ notif.date|date("j") }}
-					{{ notif.date|date("n")|month_rus }}
-					{{ notif.date|date("Y") }}
+					{{ day.date|fdate("%e %Q %Y") }}
 				</h3>
 
 				{% for trans in day.trans %}
@@ -28,7 +26,7 @@
 								{% endif %}
 							{% endif %}
 							<span class="transaction-time">
-								в {{ trans.date|date("H:i") }}
+								в {{ trans.date|fdate("%H:%M") }}
 							</span>
 						</div>
 						<div class="cause">
