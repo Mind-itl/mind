@@ -1,7 +1,5 @@
 import React from "react";
 
-const e = React.createElement;
-
 export default class Auction extends React.Component {
 	constructor(props) {
 		super(props);
