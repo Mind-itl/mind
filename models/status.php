@@ -62,17 +62,21 @@
 
 				foreach ($r as $i) {
 					$login = $i["LOGIN"];
-					$r = safe_query("SELECT STATUS FROM student_status WHERE LOGIN=?s", $login);
+					$r = safe_query("SELECT * FROM student_status WHERE LOGIN=?s", $login);
 
-					if ($r = $r->fetch_assoc())
+					if ($r = $r->fetch_assoc()) {
 						$status = $r['STATUS'];
-					else
+						$time = $r["DATA"];
+					} else {
+						$time = "";
 						$status = "hz";
+					}
 
 					$students[] = [
 						"names" => get_user($login)->get_names(),
 						"login" => $login,
-						"status" => $status
+						"status" => $status,
+						"time" => $time
 					];
 				}
 

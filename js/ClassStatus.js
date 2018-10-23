@@ -27,7 +27,7 @@ export default class ClassStatus extends React.Component {
 					return 0;
 				}).
 				map(el =>
-					<StudentStatus names={el.names} status={el.status} login={el.login} statuses={this.props.statuses}/>
+					<StudentStatus names={el.names} status={el.status} login={el.login} time={el.time} statuses={this.props.statuses}/>
 				)
 			}
 		</tbody></table>;
@@ -37,7 +37,7 @@ export default class ClassStatus extends React.Component {
 class StudentStatus extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {status: props.status};
+		this.state = {status: props.status, time: props.time};
 	}
 
 	getName() {
@@ -46,20 +46,35 @@ class StudentStatus extends React.Component {
 
 	setStatus(status) {
 		fetch(`/api/setStatus?login=${this.props.login}&status=${status}`);
-		this.setState({status: status});
+		this.setState({status: status, time: new Date()});
+	}
+
+	getTime() {
+		if (typeof this.state.time === 'string' || this.state.time instanceof String) {
+			this.state.time = new Date(this.state.time);
+		}
+
+		let t = this.state.time;
+
+		if (t)
+			return t.getDate() + "-" + (t.getMonth() + 1) + "-" + t.getFullYear() + " " + t.getHours() + ":" + t.getMinutes();
+		return "";
 	}
 
 	render() {
 		return <tr>
 			<td>{this.getName()}</td>
 
-			{this.props.statuses.map(type => 
+			{this.props.statuses.map(type =>
 				<td>
 					<button onClick={() => this.setStatus(type)}>
 						{type == this.state.status ? '+' : '-'}
 					</button>
 				</td>
 			)}
+			<td>
+				{this.getTime()}
+			</td>
 		</tr>
 	}
 }
