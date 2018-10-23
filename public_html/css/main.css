@@ -588,7 +588,7 @@ iframe {
 	margin-left: -20px;
 }
 .one-class {
-	padding: 10px;
+	padding: 0;
 	margin-right: 15px;
 	flex-basis: 50%;
 	margin-bottom: 20px;
@@ -649,4 +649,13 @@ iframe {
 }
 .class-table a {
 	color: #004B7E;
+}
+.one-class .class-table {
+	flex-basis: 100%;
+	width: 100%;
+	background: red;
+	margin-bottom: 0;
+	background: none;
+	border-radius: 0;
+	box-shadow: none;
 }
