@@ -19,10 +19,10 @@
 					<div class="transaction">
 						<div class="from-name">
 							{% if trans.from %}
-								{% if trans.is_teacher %}
-									{{ trans.from.given }} {{ trans.from.father }}
+								{% if trans.from.is_teacher %}
+									{{ trans.from.get_full_name("gi ft") }}
 								{% else %}
-									{{ trans.from.given }} {{ trans.from.family }}
+									{{ trans.from.get_full_name("gi fm") }}
 								{% endif %}
 							{% endif %}
 							<span class="transaction-time">

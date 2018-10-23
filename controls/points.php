@@ -50,7 +50,7 @@
 			$sum = 0;
 			foreach ($student->get_transactions() as $trans) {
 				if (isset($trans["FROM_LOGIN"]))
-					$name = get_user($trans["FROM_LOGIN"])->get_names();
+					$from_user = get_user($trans["FROM_LOGIN"]);
 
 				$code = $trans["CAUSE"];
 				$cause = get_cause_title($code);
@@ -62,7 +62,7 @@
 
 				$row = [
 					'cause' => $cause,
-					'from' => $name ?? null,
+					'from' => $from_user,
 					'date' => new DateTime($trans["TIME"]),
 					'points' => $trans["POINTS"]
 				];
