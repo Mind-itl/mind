@@ -1,19 +1,22 @@
 {% extends "main.html" %}
+
+{% import "utils.html" as utils %}
+
 {% block title %}
 	Профиль
 {% endblock %}
 
 {% block body %}		
-	{% if is_student %}
-		{% set name = names.given %}
+	{% if me.is_student %}
+		{% set name = me.get_name("gi") %}
 	{% else %}
-		{% set name = names.given ~ ' ' ~ names.father %}
+		{% set name = me.get_name("gi ft") %}
 	{% endif %}
 
 	<div class="container">
 		<div class="block-information profile-information">
 			<h2>{{ daytime }}, {{ name }}!</h2>
-			{% if is_student %}
+			{% if me.is_student %}
 				<h2>
 					Баланс: <strong>
 						{{ points.count }}
@@ -25,26 +28,24 @@
 						{{ group }}
 					</strong>
 				</h3>
-				{% if clruk_name %}
+				{% if clruk %}
 					<h3>
 						Классный руководитель: <strong>
-							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
+							{{ utils.display_user(clruk) }}
 						</strong>
 					</h3>
 				{% endif %}
-				{% if vospit_name %}
+				{% if vospit %}
 					<h3>
 						Воспитатель: <strong>
-							{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
+							{{ utils.display_user(vospit) }}
 						</strong>
 					</h3>
 				{% endif %}
-				{% if night_vospit_name %}
+				{% if night_vospit %}
 					<h3>
 						Дежурит на этаже: <strong>
-						{% with { n:night_vospit_name } %}	
-							{{ n.family }} {{ n.given|first }}. {{ n.father|first }}
-						{% endwith %}
+							{{ utils.display_user(night_vospit) }}
 						</strong>
 					</h3>
 				{% endif %}
@@ -86,11 +87,7 @@
 				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
 				<div class="one-notif {{ notif_class }}">
 					<div class="from-name">
-						{% if notif.from.is_student %}
-						    {{ notif.from.given }} {{ notif.from.family }}, 
-						{% else %}
-							{{ notif.from.given }} {{ notif.from.father}}, 
-						{% endif %}
+						{{ utils.display_user(notif.from) }}
 						<span class="transaction-time">
 							{{ notif.date|date("d.m.y в H:i") }}
 						</span>

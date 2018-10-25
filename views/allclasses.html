@@ -1,4 +1,7 @@
 {% extends 'points.html' %}
+
+{% import "utils.html" as utils %}
+
 {% block title %}
 	Выписка по классу
 {% endblock %}
@@ -8,35 +11,25 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-md-12">
-		<span class="span-point" style="font-weight: bold;">Итого по лицею:</span>
-		<span class="span-points">
-			{{ sum }}
-		</span>
-		
+	<div class="container">
+		<div class="all-width-only">
+			<h2>Итого по лицею: <strong>{{ sum }}</strong> {{ points.noun }}</h2>
+		</div>
+		<div class="fifty-width-only">
 		{% for class in points_by_classes %}
-			<h4>{{ class.class_name }}, всего: {{ class.sum }}</h4>
-		    
-			<table>
-				<tr>
-					<th>Имя</th>
-					<th>Баллы</th>
-					<th></th>
-				</tr>
-
-				{% for student in class.points_by_students %}
-				    <tr>
-				    	<td>{{student.name.family}} {{student.name.given}}</td>
-				    	<td>{{student.points}}</td>
-						<td>
-							<a href="/points/{{ student.login }}">Подробнее</a>
-						</td>
-				    </tr>
-				{% endfor %}
-
-			</table>
-
-		{% endfor %}
-
+			<h3>{{ class.class_name }}, всего: <strong>{{ class.sum }}</strong></h3>
+				<div class="one-class">
+					<table class="class-table table-left">
+						{% for student in class.points_by_students %}
+							<tr>
+								<td>{{ utils.display_user(student) }}</td>
+								<td><strong>{{ student.get_points }}</strong></td>
+								<td><a href="/points/{{ student.get_login }}">Подробнее</a></td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}

@@ -63,12 +63,7 @@
 			
 			foreach ($r as $i) {
 				$user = get_user($i["LOGIN"]);
-				$students[] = [
-					"name" => $user->get_names(),
-					"login" => $i["LOGIN"],
-					"points" => $user->get_points()
-				];
-
+				$students[] = $user;
 				$sum  += $user->get_points();
 			}
 

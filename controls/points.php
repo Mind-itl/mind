@@ -20,7 +20,8 @@
 				"points" => [
 					"count" => $sum,
 					"noun" => get_points_case($sum)
-				]
+				],
+				"he" => $user
 			];
 		}
 
@@ -52,19 +53,27 @@
 				if (isset($trans["FROM_LOGIN"]))
 					$from_user = get_user($trans["FROM_LOGIN"]);
 
+				if (isset($trans["TO_LOGIN"]))
+					$to_user = get_user($trans["TO_LOGIN"]);
+
 				$code = $trans["CAUSE"];
 				$cause = get_cause_title($code);
 
+				$from_me = false;
 				if ($cause == "Передача баллов") {
-					if ($trans["POINTS"] < 0)
-						$cause .= " пользователю ".get_user($trans['TO_LOGIN'])->get_full_name("gi fm");
+					if ($trans["POINTS"] < 0) {
+						$from_me = true;
+						// $cause .= " пользователю ".get_user($trans['TO_LOGIN'])->get_full_name("gi fm");
+					}
 				}
 
 				$row = [
 					'cause' => $cause,
 					'from' => $from_user,
+					'to' => $to_user,
 					'date' => new DateTime($trans["TIME"]),
-					'points' => $trans["POINTS"]
+					'points' => $trans["POINTS"],
+					'from_me' => $from_me
 				];
 
 

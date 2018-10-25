@@ -23,20 +23,18 @@
 				"daytime" => $this->daytime(),
 				"points" => $this->points(),
 				"group" => $group,
-				"clruk_name" => $cl_ruk,
+				"clruk" => $cl_ruk,
 				"login" => get_curr()->get_login()
 			];
 		}
 
 		private function get_group_clruk(): array {
 			if (get_curr()->is_teacher())
-				return ["", ""];
+				return ["", null];
 
 			$class = get_curr()->get_class();
+			$clruk = get_curr()->get_classruk();
 
-			if ($clruk = get_curr()->get_classruk()) {
-				$clruk = $clruk->get_names();
-			}
 			return [$class, $clruk ?? null];
 		}
 

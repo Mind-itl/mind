@@ -1,13 +1,16 @@
 {% extends 'main.html' %}
 
+{% import "utils.html" as utils %}
+
 {% block title %}
 	Баллы
 {% endblock %}
 
 {% block body %}
 	<div class="container container-points">
+		<h2>{{ utils.display_user(he) }}</h2><br>
 		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
-		<a class="submit points-submit big-submit" href="/give">Передать</a>
+
 		{% for day in trans_by_day %}
 			<div class="day">
 				<h3 class="date">
@@ -19,11 +22,7 @@
 					<div class="transaction">
 						<div class="from-name">
 							{% if trans.from %}
-								{% if trans.from.is_teacher %}
-									{{ trans.from.get_name("gi ft") }}
-								{% else %}
-									{{ trans.from.get_name("gi fm") }}
-								{% endif %}
+								{{ utils.display_user(trans.from) }}
 							{% endif %}
 							<span class="transaction-time">
 								в {{ trans.date|fdate("%H:%M") }}
@@ -31,6 +30,9 @@
 						</div>
 						<div class="cause">
 							{{ trans.cause }}
+							{% if trans.from_me %}
+								пользователю {{ utils.display_user(trans.to) }}
+							{% endif %}
 							
 							{% if trans.points > 0 %}
 								<span class="points good-points">
