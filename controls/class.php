@@ -29,11 +29,7 @@
 			$sum = 0;
 
 			foreach ($this->get_students_in_class($class_name) as $student) {
-				$class[] = [
-					"points" => $student->get_points(),
-					"login" => $student->get_login(),
-					"names" => $student->get_names()
-				];
+				$class[] = $student;
 
 				$sum += $student->get_points();
 			}

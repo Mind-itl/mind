@@ -1,4 +1,7 @@
 {% extends 'points.html' %}
+
+{% import "user_macro.html" as user %}
+
 {% block title %}
 	Выписка по классу
 {% endblock %}
@@ -21,13 +24,13 @@
 			{% for student in students %}
 				<tr>
 					<td>
-						{{ student.names.family }} {{ student.names.given }}
+						{{ user.display(student) }}
 					</td>
 					<td>
-						<strong>{{ student.points }}</strong>
+						<strong>{{ student.get_points }}</strong>
 					</td>
 					<td>
-						<a href="points/{{ student.login }}">Подробнее</a>
+						<a href="points/{{ student.get_login }}">Подробнее</a>
 					</td>
 				</tr>
 			{% endfor %}
