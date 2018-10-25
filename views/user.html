@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% import "utils.html" as utils %}
+
+{% block title %}
+	Пользователь
+{% endblock %}
+
+{% block body %}
+		Имя: {{ utils.user_name(he) }} <br>
+		Логин: {{ he.get_login }} <br>
+
+		{% if he.is_student %}
+			Баллы: {{ he.get_points }} <br>
+			<a href="/points/{{ he.get_login }}">Подробнее</a>
+		{% endif %}
+{% endblock %}

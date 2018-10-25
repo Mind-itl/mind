@@ -1,0 +1,33 @@
+{
+  "name": "mind",
+  "version": "1.0.0",
+  "description": "**Mind** - проект интернет-школы для [IT-Лицея КФУ](https://kpfu.ru/it-liceum)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pomah3/mind.git"
+  },
+  "author": "Semenov Roman <3908441@gmail.com>",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/pomah3/mind/issues"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.1",
+    "jquery": "^3.3.1",
+    "npm": "^6.4.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.4",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.21.0",
+    "webpack-cli": "^3.1.2"
+  }
+}

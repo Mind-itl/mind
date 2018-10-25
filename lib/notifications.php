@@ -50,8 +50,7 @@
 
 		$nots = [];
 		foreach ($s as $v) {
-			$usr = get_user($v["FROM_USER"])->get_names();
-			$usr["is_student"] = get_user($v["FROM_USER"])->is_student();
+			$usr = get_user($v["FROM_USER"]);
 			$nots[] = [
 				"date" => $v["TIME"],
 				"message" => $v["MESSAGE"],

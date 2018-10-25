@@ -36,7 +36,16 @@
 				echo $control->get_html([]);
 			else
 				no_access();
-		}
+		},
+		"has_css" => function(string $file_name): bool {
+			return file_exists(ROOT."/public_html/css/$file_name");
+		},
+		"has_js" => function(string $file_name): bool {
+			return file_exists(ROOT."/public_html/js/$file_name");
+		},
+		"has_dist" => function(string $file_name): bool {
+			return file_exists(ROOT."/public_html/dist/$file_name");
+		},
 	];
 
 	Twig_loader::$filters = [
@@ -45,6 +54,12 @@
 		},
 		"month_rus" => function(string $month): string {
 			return month_rus($month);
+		},
+		"fdate" => function(DateTime $date, string $format): string {
+			$s = strftime($format, $date->getTimestamp());
+			$month = month_rus(date('n'));
+
+			return str_replace("%Q", $month, $s);
 		}
 	];
 ?>

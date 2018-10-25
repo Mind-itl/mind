@@ -8,10 +8,10 @@
 				"Баллы",
 				["student", "Мои баллы", "/points"],
 				["student", "Передать баллы", "/give"],
-				["teacher", "Выдать баллы", "/award"],
+				["teacher", "Начислить баллы", "/award"],
+				["classruk", "Выписка по классу", "/class"],
 				["student", "Аукцион", "/auction"]
 			],
-			["classruk", "Выписка по классу", "/class"],
 			["student", "Расписание", "/timetable"],
 			["student", "Интернат", "/internat"],
 			["vospit", "Интернат", "/internat"],

@@ -31,5 +31,10 @@ html {
 }
 .container,
 body {
-	background: none;
+	background: none !important;
+}
+.index-notification {
+	color: white;
+	font-weight: bold;
+	margin-bottom: 10px;
 }

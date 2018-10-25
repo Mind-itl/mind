@@ -1,4 +1,7 @@
 {% extends 'points.html' %}
+
+{% import "utils.html" as utils %}
+
 {% block title %}
 	Выписка по классу
 {% endblock %}
@@ -8,13 +11,10 @@
 {% endblock %}
 
 {% block body %}
-	<div class="col-md-12">
-		<span class="span-point" style="font-weight: bold;">Итого по классу:</span>
-		<span class="span-points">
-			{{ sum }}
-		</span>
+	<div class="container">
+		<h2 class="all-width-only">Баланс класса: <strong>{{ sum }}</strong> {{ points.noun }}</h2>
 
-		<table class="table table-bordered table-hover">
+		<table class="class-table">
 			<tr>
 				<th>Ученик</th>
 				<th>Баллы</th>
@@ -24,25 +24,16 @@
 			{% for student in students %}
 				<tr>
 					<td>
-						{{ student.names.family }} {{ student.names.given }}
+						{{ utils.display_user(student) }}
 					</td>
 					<td>
-						{{ student.points }}
+						<strong>{{ student.get_points }}</strong>
 					</td>
 					<td>
-						<a href="points/{{ student.login }}">Подробнее</a>
+						<a href="points/{{ student.get_login }}">Подробнее</a>
 					</td>
 				</tr>
 			{% endfor %}
-
-			<tr>
-				<td class="summ">
-					Итого:
-				</td>
-				<td class="no-right" colspan="2">
-					{{ sum }}
-				</td>
-			</tr>
 		</table>
 	</div>
 {% endblock %}

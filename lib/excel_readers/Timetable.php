@@ -41,6 +41,8 @@
 
 		static function format_name(string $name): string {
 			preg_match('/(\w+) *(\w)\.? *(\w)\.?/u', $name, $m);
+			if (!isset($m[1]))
+				echo "$name\n";
 			return $m[1]." ".mb_strtoupper($m[2]).".".mb_strtoupper($m[3]).".";
 		}
 

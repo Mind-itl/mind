@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block title %}
-    Интернат
+	Интернат
 {% endblock %}
 
 {% block body %}
@@ -21,45 +21,14 @@
 				{% endfor %}
 			</table>
 		</div>
-		<div class="vote-for-music" id="music_list">
-			<div id="primer_music_el" class="music_el one-music">
-				<div hidden class="music-id">
-					${music.id}
-				</div>
-				<div class="music_name">
-					<span class="music_performer song-singer">
-						${music.performer} 
-					</span>
-					<span class="music-divider"> - </span>
-					<span class="music_title song-name">
-						${music.title}
-					</span>
-				</div>
-				<div class="vote-info">
-					<span class="votes vote-count">
-						${music.votes_count}
-					</span>
-					<button class="vote unvote voted-for-this">
-						&times;
-					</button>
-					<button class="vote dovote vote-for-this">
-						+
-					</button>
-					{% if is_teacher %}
-						<button class="remove-music voted-for-this">
-							&times;
-						</button>
-					{% endif %}
-				</div>
+		<div class="vote-for-music">
+			<div id="music_list">
 			</div>
-			<!-- <button class="add submit">Добавить свою</button> -->
 			<form action="" method="POST"  class="add-voting">
-				<input placeholder="Название песни" class="form-control" name="song-name" id="song-name">
 				<input placeholder="Исполнитель" class="form-control" name="song-singer" id="song-singer">
+				<input placeholder="Название песни" class="form-control" name="song-name" id="song-name">
 				<input type="submit" class="submit" value="Добавить">
 			</form>
 		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="/js/internat.js"></script>
 {% endblock %}

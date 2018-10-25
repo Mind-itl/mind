@@ -46,12 +46,13 @@
 						BLOCK = ?s AND
 						DAY = ?s
 					", $i["block"], $i["day"]
-				)
+				);
 				safe_query("
 					INSERT INTO dutes (
 						LOGIN, BLOCK, DAY 
-					) VALUES (?s, ?s, ?s)",
-					$i["login"], $i["block"], $i["day"]);
+					) VALUES (?s, ?s, ?s)
+					", $i["login"], $i["block"], $i["day"]
+				);
 			}
 		}
 	}

@@ -1,0 +1,14 @@
+{% macro user_name(user, format) %}
+	{% if user.is_teacher() %}
+		{{ user.get_name(format|default("gi ft")) }}		
+	{% else %}
+		{{ user.get_name(format|default("fm gi")) }}
+	{% endif %}
+{% endmacro %}
+
+{% macro display_user(user, format) %}
+	{% import _self as utils %}
+	<a class="userlink" href="/user/{{ user.get_login() }}">
+		{{ utils.user_name(user, format) }}
+	</a>
+{% endmacro %}

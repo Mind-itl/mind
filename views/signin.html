@@ -2,9 +2,13 @@
 <html lang="ru">
 <head>
 	<title>Вход</title>
-	{{ include('links.html') }}
+	{# include('links.html') #}
+	<link rel="shortcut icon" href="/img/favicon.ico">
 	<link rel="stylesheet" href="/css/{{ control_name }}.css">
+	<link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
 </head>
 	<body>
 		<div class="plitka">
@@ -47,7 +51,7 @@
 					>
 				</div>
 				<input type="submit" class="submit" value="Войти">
-				<a href="signup" class="submit" style="padding-top: 7px;padding-bottom: 7px; margin-left: 15px;">Регистрация</a>
+				<!-- <a href="signup" class="submit" style="padding-top: 7px;padding-bottom: 7px; margin-left: 15px;">Регистрация</a> -->
 			</form>
 		</div>
 	</body>
