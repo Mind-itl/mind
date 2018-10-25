@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 
-{% import "user_macro.html" as user %}
+{% import "utils.html" as utils %}
 
 {% block title %}
 	Профиль
@@ -31,21 +31,21 @@
 				{% if clruk %}
 					<h3>
 						Классный руководитель: <strong>
-							{{ user.display(clruk) }}
+							{{ utils.display_user(clruk) }}
 						</strong>
 					</h3>
 				{% endif %}
 				{% if vospit %}
 					<h3>
 						Воспитатель: <strong>
-							{{ user.display(vospit) }}
+							{{ utils.display_user(vospit) }}
 						</strong>
 					</h3>
 				{% endif %}
 				{% if night_vospit %}
 					<h3>
 						Дежурит на этаже: <strong>
-							{{ user.display(night_vospit) }}
+							{{ utils.display_user(night_vospit) }}
 						</strong>
 					</h3>
 				{% endif %}
@@ -87,7 +87,7 @@
 				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
 				<div class="one-notif {{ notif_class }}">
 					<div class="from-name">
-						{{ user.display(notif.from) }}
+						{{ utils.display_user(notif.from) }}
 						<span class="transaction-time">
 							{{ notif.date|date("d.m.y в H:i") }}
 						</span>

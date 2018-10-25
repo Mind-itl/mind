@@ -1,6 +1,6 @@
 {% extends 'points.html' %}
 
-{% import "user_macro.html" as user %}
+{% import "utils.html" as utils %}
 
 {% block title %}
 	Выписка по классу
@@ -24,7 +24,7 @@
 			{% for student in students %}
 				<tr>
 					<td>
-						{{ user.display(student) }}
+						{{ utils.display_user(student) }}
 					</td>
 					<td>
 						<strong>{{ student.get_points }}</strong>

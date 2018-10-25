@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 
-{% import "user_macro.html" as user %}
+{% import "utils.html" as utils %}
 
 {% block title %}
 	Баллы
@@ -8,7 +8,7 @@
 
 {% block body %}
 	<div class="container container-points">
-		<h2>{{ user.display(he) }}</h2><br>
+		<h2>{{ utils.display_user(he) }}</h2><br>
 		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
 
 		{% for day in trans_by_day %}
@@ -22,7 +22,7 @@
 					<div class="transaction">
 						<div class="from-name">
 							{% if trans.from %}
-								{{ user.display(trans.from) }}
+								{{ utils.display_user(trans.from) }}
 							{% endif %}
 							<span class="transaction-time">
 								в {{ trans.date|fdate("%H:%M") }}
@@ -31,7 +31,7 @@
 						<div class="cause">
 							{{ trans.cause }}
 							{% if trans.from_me %}
-								пользователю {{ user.display(trans.to) }}
+								пользователю {{ utils.display_user(trans.to) }}
 							{% endif %}
 							
 							{% if trans.points > 0 %}
