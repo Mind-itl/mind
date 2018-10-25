@@ -7,16 +7,16 @@
 {% endblock %}
 
 {% block body %}		
-	{% if is_student %}
-		{% set name = names.given %}
+	{% if me.is_student %}
+		{% set name = me.get_name("gi") %}
 	{% else %}
-		{% set name = names.given ~ ' ' ~ names.father %}
+		{% set name = me.get_name("gi ft") %}
 	{% endif %}
 
 	<div class="container">
 		<div class="block-information profile-information">
 			<h2>{{ daytime }}, {{ name }}!</h2>
-			{% if is_student %}
+			{% if me.is_student %}
 				<h2>
 					Баланс: <strong>
 						{{ points.count }}
@@ -42,12 +42,10 @@
 						</strong>
 					</h3>
 				{% endif %}
-				{% if night_vospit_name %}
+				{% if night_vospit %}
 					<h3>
 						Дежурит на этаже: <strong>
-						{% with { n:night_vospit_name } %}	
-							{{ n.family }} {{ n.given|first }}. {{ n.father|first }}
-						{% endwith %}
+							{{ user.display(night_vospit) }}
 						</strong>
 					</h3>
 				{% endif %}
@@ -89,11 +87,7 @@
 				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
 				<div class="one-notif {{ notif_class }}">
 					<div class="from-name">
-						{% if notif.from.is_student %}
-						    {{ notif.from.given }} {{ notif.from.family }}, 
-						{% else %}
-							{{ notif.from.given }} {{ notif.from.father}}, 
-						{% endif %}
+						{{ user.display(notif.from) }}
 						<span class="transaction-time">
 							{{ notif.date|date("d.m.y в H:i") }}
 						</span>
