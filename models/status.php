@@ -43,10 +43,9 @@
 			$login = $user->get_login();
 			if (safe_query("SELECT * FROM student_status WHERE LOGIN=?s", $login)->num_rows != 0) {
 				safe_query("UPDATE student_status SET STATUS=?s, DATA=CURRENT_TIMESTAMP() WHERE LOGIN=?s", $status, $login);
-				return;
+			} else {
+				safe_query("INSERT INTO student_status (LOGIN, STATUS) VALUES (?s, ?s)", $login, $status);
 			}
-
-			safe_query("INSERT INTO student_status (LOGIN, STATUS) VALUES (?s, ?s)", $login, $status);
 		}
 
 		public static function get_students_by_classes() {
@@ -69,7 +68,7 @@
 						$time = $r["DATA"];
 					} else {
 						$time = "";
-						$status = "hz";
+						$status = "неизвестно";
 					}
 
 					$students[] = [
