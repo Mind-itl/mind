@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% import "user_macro.html" as user %}
+
 {% block title %}
 	Баллы
 {% endblock %}
@@ -19,11 +21,7 @@
 					<div class="transaction">
 						<div class="from-name">
 							{% if trans.from %}
-								{% if trans.from.is_teacher %}
-									{{ trans.from.get_name("gi ft") }}
-								{% else %}
-									{{ trans.from.get_name("gi fm") }}
-								{% endif %}
+								{{ user.display(trans.from) }}
 							{% endif %}
 							<span class="transaction-time">
 								в {{ trans.date|fdate("%H:%M") }}
@@ -31,6 +29,9 @@
 						</div>
 						<div class="cause">
 							{{ trans.cause }}
+							{% if trans.from_me %}
+								пользователю {{ user.display(trans.to) }}
+							{% endif %}
 							
 							{% if trans.points > 0 %}
 								<span class="points good-points">
