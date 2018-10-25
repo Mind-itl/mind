@@ -20,7 +20,8 @@
 				"points" => [
 					"count" => $sum,
 					"noun" => get_points_case($sum)
-				]
+				],
+				"he" => $user
 			];
 		}
 

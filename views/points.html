@@ -8,7 +8,9 @@
 
 {% block body %}
 	<div class="container container-points">
+		<h2>{{ user.display(he) }}</h2><br>
 		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
+
 		{% for day in trans_by_day %}
 			<div class="day">
 				<h3 class="date">
