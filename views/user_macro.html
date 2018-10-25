@@ -1,0 +1,9 @@
+{% macro display(user, format) %}
+	<a class="userlink" href="/user/{{ user.get_login() }}">
+		{% if user.is_teacher() %}
+			{{ user.get_name(format|default("gi ft")) }}		
+		{% else %}
+			{{ user.get_name(format|default("fm gi")) }}
+		{% endif %}
+	</a>
+{% endmacro %}

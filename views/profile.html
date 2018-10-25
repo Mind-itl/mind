@@ -1,4 +1,7 @@
 {% extends "main.html" %}
+
+{% import "user_macro.html" as user %}
+
 {% block title %}
 	Профиль
 {% endblock %}
@@ -25,17 +28,17 @@
 						{{ group }}
 					</strong>
 				</h3>
-				{% if clruk_name %}
+				{% if clruk %}
 					<h3>
 						Классный руководитель: <strong>
-							{{ clruk_name.family }} {{ clruk_name.given|first }}. {{ clruk_name.father|first }}.
+							{{ user.display(clruk) }}
 						</strong>
 					</h3>
 				{% endif %}
-				{% if vospit_name %}
+				{% if vospit %}
 					<h3>
 						Воспитатель: <strong>
-							{{ vospit_name.family }} {{ vospit_name.given|first }}. {{ vospit_name.father|first }}.
+							{{ user.display(vospit) }}
 						</strong>
 					</h3>
 				{% endif %}
