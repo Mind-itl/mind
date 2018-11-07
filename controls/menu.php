@@ -55,7 +55,7 @@
 				}
 			}
 
-			$r = safe_query("SELECT * FROM ads WHERE TILL_DATE >= CURRENT_TIMESTAMP()");
+			$r = safe_query("SELECT * FROM ads WHERE TILL_DATE >= CURRENT_TIMESTAMP() AND FROM_DATE <= CURRENT_TIMESTAMP()");
 
 			$arr = [];
 			foreach ($r as $a) {
