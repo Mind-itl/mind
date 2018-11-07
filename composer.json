@@ -6,7 +6,8 @@
 		"mihaeu/html-formatter": "^1.0",
 		"workerman/workerman": "^3.5",
 		"simplon/mysql": "^2.2",
-		"colshrapnel/safemysql": "^1.1"
+		"colshrapnel/safemysql": "^1.1",
+		"phpseclib/phpseclib": "^2.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "7"
