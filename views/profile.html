@@ -60,7 +60,7 @@
 				</strong>,
 				{{ date|date("d.m.Y") }}
 			</h2>
-			{% if day != "Воскресенье" %}
+			{% if day != "Воскресенье" and timetable %}
 				<table class="timetable-table">
 					<tr>
 						<th></th>
