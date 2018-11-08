@@ -4,45 +4,20 @@
 		<title>
 			{% block title %} title {% endblock %}
 		</title>
-		<meta charset="UTF-8">
-		<link rel="shortcut icon" href="/img/favicon.ico">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" crossorigin="anonymous">
-		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="/js/bootstrap.js"></script>
-		<script src="/js/banner.js"></script>
-
-		{% block js_default %}
-			{% if has_dist(control_name ~ ".js") %}
-				<script src="/dist/{{ control_name }}.js"></script>
-			{% else %}
-				<script src="/dist/main.js"></script>
-			{% endif %}
-		{% endblock %}
-	
-		{% if has_css(control_name ~ ".css") %}
-			{% block css_pages %}
-				<link rel="stylesheet" href="/css/{{ control_name }}.css">
-			{% endblock %}
-		{% endif %}
 		
-		<link rel="stylesheet" href="/css/main.css">
-		<link rel="stylesheet" href="/css/loader.css">
+		{{ include("headers.html") }}
 	
 	</head>
 	<body>
-		<div class="loader pre" style="visibility: visible;">
-			<hr><hr><hr><hr>
-		</div>
+
+		{{ include("loader.html") }}
+
 		<div class="main_container" style="display:none;">
 			<header>
-				<div class="top-menu">
-					<div class="container-menu">
-						<iframe src="/logo/logo.html" frameborder="0" width="1280" height="426" allowwfullscreen="allowwfullscreen"></iframe>
-						<!-- <img src="img/logo full.png" alt=""> -->
-					</div>
-				</div>
+
+				{{ include("heading.html") }}
 				{{ controller("menu") }}
+
 			</header>
 			{% block body %}{% endblock %}
 		</div>
