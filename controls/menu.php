@@ -55,8 +55,16 @@
 				}
 			}
 
+			$r = safe_query("SELECT * FROM ads WHERE TILL_DATE >= CURRENT_TIMESTAMP() AND FROM_DATE <= CURRENT_TIMESTAMP()");
+
+			$arr = [];
+			foreach ($r as $a) {
+				$arr[] = $a;
+			}
+
 			return [
-				"buttons" => $buttons_ans
+				"buttons" => $buttons_ans,
+				"ads" => $arr
 			];
 		}		
 	}

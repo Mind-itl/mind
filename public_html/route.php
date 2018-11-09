@@ -19,7 +19,11 @@
 	}
 
 	function no_access() {
-		redirect("/");
+		if (is_logined())
+			header('HTTP/1.0 403 Forbidden');
+		else
+			redirect("/");
+		exit();
 	}
 
 	function has_pure_page(string $name): bool {
