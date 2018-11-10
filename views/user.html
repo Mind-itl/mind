@@ -8,10 +8,10 @@
 
 {% block body %}
 		Имя: {{ utils.user_name(he) }} <br>
-		Логин: {{ he.get_login }} <br>
+		Логин: {{ he.get_enter_login }} <br>
 
 		{% if he.is_student %}
 			Баллы: {{ he.get_points }} <br>
-			<a href="/points/{{ he.get_login }}">Подробнее</a>
+			<a href="/points/{{ he.get_enter_login }}">Подробнее</a>
 		{% endif %}
 {% endblock %}

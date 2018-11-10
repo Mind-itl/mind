@@ -1,9 +1,10 @@
 # Changelog
 
-## (NOT RELEASE) Branch Rome
+## (NOT RELEASE) Изменения в текущей ветке
 
-### Add
+### Добавлено
 
+- Возможность поменять логин
 - Changelog-страница
 
 ## Версия 0.1.0

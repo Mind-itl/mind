@@ -36,6 +36,8 @@
 			$this->family_name = $st_assoc["FAMILY_NAME"];
 			$this->father_name = $st_assoc["FATHER_NAME"];
 
+			$this->enter_login = $st_assoc["ENTER_LOGIN"];
+
 			$r = safe_query("
 				SELECT ROLE, ARG
 				FROM teacher_roles

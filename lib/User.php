@@ -5,6 +5,7 @@
 		protected $_modified = false;
 		
 		protected $login;
+		protected $enter_login;
 		protected $given_name, $family_name, $father_name;
 
 		public function get_given_name(): string {
@@ -40,6 +41,10 @@
 
 		public function get_login(): string {
 			return $this->login;
+		}
+
+		public function get_enter_login(): string {
+			return $this->enter_login;
 		}
 
 		abstract public function has_role(string $role): bool;
