@@ -1,5 +1,11 @@
 # Changelog
 
+## (NOT RELEASE) Branch Rome
+
+### Add
+
+- Changelog-страница
+
 ## Версия 0.1.0
 
 Начальная версия.
