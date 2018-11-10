@@ -18,6 +18,21 @@ export default class Music extends React.Component {
 			}.bind(this));
 		}.bind(this);
 
+		const remove = function() {
+			$.ajax({
+				method: "POST",
+				url: "/vote_music",
+				data: {
+					id: this.props.id,
+					remove: true
+				},
+				dataType: "json"
+			}).done(function(data) {
+				console.log(data);
+				this.props.update(data);
+			}.bind(this));
+		}.bind(this);
+
 		const cls = this.props.voted ? "vote-this" : "vote-not-this";
 		return <div className={"music_el one-music cls " + cls}>
 			<div hidden className="music-id">
@@ -48,8 +63,8 @@ export default class Music extends React.Component {
 						</button>
 				}
 				{
-					false ? 
-					<button className="remove-music voted-for-this">
+					window.is_teacher ? 
+					<button className="remove-music voted-for-this" onClick={remove}>
 						&times;
 					</button> : null
 				}

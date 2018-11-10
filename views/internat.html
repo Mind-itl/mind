@@ -22,6 +22,12 @@
 			</table>
 		</div>
 		<div class="vote-for-music">
+			<h2>Голосование</h2>
+
+			<script>
+				window.is_teacher = {{ me.is_teacher() ? "true" : "false" }};
+			</script>
+
 			<div id="music_list">
 			</div>
 			<form action="" method="POST"  class="add-voting">
