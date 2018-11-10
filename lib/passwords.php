@@ -18,25 +18,25 @@
 		return $r->num_rows != 0;
 	}
 
-	function check_password(string $login, string $pass) {
+	function check_password(string $login, string $pass): User {
 		$hash = hash_password($pass);
 		$user = safe_query_assoc("
 			SELECT *
 			FROM `passwords`
-			WHERE `LOGIN` = ?s
+			WHERE `ENTER_LOGIN` = ?s
 			", $login
 		);
 
 		if ($user['HASH'] == $hash)
-			return $user["ROLE"];
+			return get_user($user['LOGIN']);
 		else
 			return false;
 	}
 
 	function enter_user(string $login, string $pass): bool {
-		if ($role = check_password($login, $pass)) {
-			$_SESSION["login"] = $login;
-			$_SESSION["role"] = $role;
+		if ($user = check_password($login, $pass)) {
+			$_SESSION["login"] = $user->get_login();
+			$_SESSION["role"] = $user->is_student() ? "student" : "teacher";
 			return true;
 		}
 		return false;
@@ -52,9 +52,10 @@
 			INSERT INTO `passwords` (
 				`LOGIN`,
 				`HASH`,
-				`ROLE`
-			) VALUES (?s, ?s, ?s)
-			", $login, $hash, $role
+				`ROLE`,
+				`ENTER_LOGIN`
+			) VALUES (?s, ?s, ?s, ?s)
+			", $login, $hash, $role, $login
 		);
 
 		return true;
