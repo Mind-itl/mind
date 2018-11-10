@@ -50,10 +50,11 @@
 			$new_login = $_POST["new_login"];
 			$password = $_POST["password"];
 
-			//todo check password
+			if (!check_password(get_curr()->get_login(), $password, false))
+				return "wrong";
 
 			$r = change_enter_login(get_curr(), $new_login);
-			return $r ? "success" : "wrong";
+			return $r ? "success" : "fail";
 		}
 	}
 ?>
