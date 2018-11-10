@@ -8,7 +8,7 @@
 
 {% macro display_user(user, format) %}
 	{% import _self as utils %}
-	<a class="userlink" href="/user/{{ user.get_login() }}">
+	<a class="userlink" href="/user/{{ user.get_enter_login() }}">
 		{{ utils.user_name(user, format) }}
 	</a>
 {% endmacro %}

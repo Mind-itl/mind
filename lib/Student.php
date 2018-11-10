@@ -16,6 +16,8 @@
 
 			$this->class_num = $st_assoc["CLASS_NUM"];
 			$this->class_lit = $st_assoc["CLASS_LIT"];
+
+			$this->enter_login = $st_assoc["ENTER_LOGIN"];
 		}
 
 		private function upload_to_bd() {

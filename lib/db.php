@@ -17,12 +17,18 @@
 	}
 
 	function assoc_user(string $table, string $login): array {
-		return safe_query_assoc("
-			SELECT *
-			FROM `$table`
-			WHERE `LOGIN` = ?s
+		$r = safe_query_assoc("
+			SELECT * FROM `$table` WHERE `LOGIN` = ?s
 			", $login
 		);
+
+		$rr = safe_query_assoc("
+			SELECT * FROM passwords WHERE LOGIN = ?s
+			", $login
+		);
+
+		$r["ENTER_LOGIN"] = $rr["ENTER_LOGIN"];
+		return $r;
 	}
 
 	function get_student_points(string $login): int {
