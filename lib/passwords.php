@@ -18,19 +18,22 @@
 		return $r->num_rows != 0;
 	}
 
-	function check_password(string $login, string $pass): User {
+	function check_password(string $login, string $pass, bool $is_enter_login=true): ?User {
 		$hash = hash_password($pass);
+
+		$login_field = $is_enter_login ? "ENTER_LOGIN" : "LOGIN";
+
 		$user = safe_query_assoc("
 			SELECT *
 			FROM `passwords`
-			WHERE `ENTER_LOGIN` = ?s
+			WHERE `$login_field` = ?s
 			", $login
 		);
 
 		if ($user['HASH'] == $hash)
 			return get_user($user['LOGIN']);
 		else
-			return false;
+			return null;
 	}
 
 	function enter_user(string $login, string $pass): bool {
@@ -62,7 +65,7 @@
 	}
 
 	function change_password(string $login, string $old_password, string $new_password): bool {
-		if (!check_password($login, $old_password))
+		if (!check_password($login, $old_password, false))
 			return false;
 
 		safe_query("
@@ -70,6 +73,23 @@
 			SET HASH = ?s
 			WHERE LOGIN = ?s
 			", hash_password($new_password), get_curr()->get_login()
+		);
+
+		return true;
+	}
+
+	function change_enter_login(User $user, string $new_login): bool {
+		$r = safe_query("
+			SELECT * FROM passwords WHERE ENTER_LOGIN=?s
+			", $new_login
+		);
+
+		if ($r->num_rows != 0)
+			return false;
+
+		safe_query("
+			UPDATE passwords SET ENTER_LOGIN=?s WHERE LOGIN=?s
+			", $new_login, $user->get_login()
 		);
 
 		return true;
