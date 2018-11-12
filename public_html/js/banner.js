@@ -3,9 +3,10 @@ function theRotator() {
 	$('div#rotator ul li').css({opacity: 0.0});
  
 	// Берем первую картинку и показываем ее (по пути включаем полную видимость)
-	$('div#rotator ul li:first').css({opacity: 1.0});
+	$('div#rotator ul li:first').css({opacity: 1.0})
+	.addClass('show');
  
-	// Вызываем функцию rotate для запуска слайдшоу, 5000 = смена картинок происходит раз в 5 секунд
+	// Вызываем функцию rotate для запуска слайдшоу, 7000 = смена картинок происходит раз в 7 секунд
 	setInterval('rotate()',7000);
 }
  
