@@ -55,7 +55,9 @@
 				WHERE
 					CLASS_LIT=?s AND
 					CLASS_NUM=?i
-				ORDER BY CLASS_NUM, CLASS_LIT
+				ORDER BY
+					FAMILY_NAME,
+					GIVEN_NAME
 				", $class_lit, $class_num
 			);
 
