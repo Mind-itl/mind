@@ -2,7 +2,7 @@
 	function get_music() {
 		$music = [];
 
-		if (is_logined() && get_curr()->is_student())
+		if (is_logined())
 			$cid = get_music_vote(get_curr());
 		else
 			$cid = -1;

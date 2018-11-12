@@ -9,7 +9,7 @@
 
 		protected function get_data(array $args): array {
 			if (isset($args[1]) && $args[1]!="")
-				$user = get_user($args[1]);
+				$user = get_user($args[1], "", true);
 			else 
 				$user = get_curr();
 

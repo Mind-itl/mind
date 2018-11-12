@@ -5,15 +5,18 @@
 	require_once LIBS."Student.php";
 	require_once LIBS."Teacher.php";
 
-	function get_user(string $login, string $role = ""): ?User {
-		if ($role == "") {
-			$role = safe_query_assoc("
-				SELECT ROLE
-				FROM `passwords`
-				WHERE LOGIN = ?s
-				", $login
-			)["ROLE"];
-		}
+	function get_user(string $login, string $role = "", bool $is_enter_login=false): ?User {
+		$login_field = $is_enter_login ? "ENTER_LOGIN" : "LOGIN";
+
+		$r = safe_query_assoc("
+			SELECT *
+			FROM `passwords`
+			WHERE `$login_field` = ?s
+			", $login
+		);
+
+		$role = $r["ROLE"];
+		$login = $r["LOGIN"];
 
 		if ($role == "teacher")
 			$user = new Teacher($login);

@@ -24,6 +24,9 @@
 			if ($type=="change_password") {
 				return $this->change_password();
 			}
+			if ($type=="change_login") {
+				return $this->change_login();
+			}
 		}
 
 		private function change_password(): string {
@@ -38,6 +41,20 @@
 				return "wrong";
 
 			return "success";
+		}
+
+		private function change_login(): string {
+			if (!isset_post_fields("new_login", "password"))
+				return "fail";
+
+			$new_login = $_POST["new_login"];
+			$password = $_POST["password"];
+
+			if (!check_password(get_curr()->get_login(), $password, false))
+				return "wrong";
+
+			$r = change_enter_login(get_curr(), $new_login);
+			return $r ? "success" : "fail";
 		}
 	}
 ?>

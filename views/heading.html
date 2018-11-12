@@ -1,0 +1,19 @@
+<div class="top-menu">
+	<div class="container-menu">
+		<iframe src="/logo/logo.html" frameborder="0" width="1280" height="426" allowwfullscreen="allowwfullscreen"></iframe>
+		<!-- <img src="img/logo full.png" alt=""> -->
+	</div>
+</div>
+<div class="container-banner">
+	<div id="rotator" class="banner-img">
+		<ul>
+			{% for ad in ads %}
+				<li>
+					<a href="{{ ad.LINK }}">
+						<img src="{{ ad.IMG_PATH }}" alt="ad" class="banner">
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

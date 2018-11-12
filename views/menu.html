@@ -1,16 +1,4 @@
-<div class="container-banner">
-	<div id="rotator" class="banner-img">
-		<ul>
-			{% for ad in ads %}
-				<li>
-					<a href="{{ ad.LINK }}">
-						<img src="{{ ad.IMG_PATH }}" alt="ad" class="banner">
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
-</div>
+{{ include("heading.html") }}
 <div class="container-menu">
 	<nav>
 		<ul class="main-menu">

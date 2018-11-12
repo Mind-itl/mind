@@ -12,6 +12,7 @@
 		{% elseif result=="wrong" %}
 			Неправильный пароль!
 		{% endif %}
+
 	    <form action="" method="POST" class="form-50">
 	    	<label>Старый пароль</label>
 	    	<input type="password" name="old_password" class="form-control">
@@ -22,5 +23,15 @@
 			<input type="submit" class="submit">
 			<input hidden name="type" value="change_password">
 	    </form>
+
+	    <form action="" method="POST" class="form-50">
+	    	<label>Пароль</label>
+	    	<input type="password" name="password" class="form-control">
+	    	<label>Новый логин</label>
+	    	<input name="new_login" id="new_login" class="form-control">
+			<input type="submit" class="submit">
+			<input hidden name="type" value="change_login">
+	    </form>
+
 	</div>
 {% endblock %}
