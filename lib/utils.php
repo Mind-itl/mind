@@ -78,30 +78,6 @@
 		exit();
 	}
 
-	function get_points_in_case($points) {
-		$noun = get_points_case($points);
-		return "$points $noun";
-	}
-
-	function get_points_case($points) {
-		$apoints = abs($points);
-		if ($apoints % 100 <= 20 && $apoints %100 >= 10)
-			$noun = "баллов";
-		elseif ($apoints % 10 == 0 || $apoints % 10 >= 5)
-			$noun = "баллов";
-		elseif ($apoints % 10 == 1)
-			$noun = "балл";
-		else
-			$noun = "балла";
-
-		return $noun;
-	}
-	
-	function check_correct(string $str): bool {
-		return strlen($str) !== 0 &&
-			   preg_match("/^[a-zA-Z0-9_]+$/", $str);
-	}
-
 	function tag(string $tag, string $html): string {
 		return "<$tag>$html</$tag>";
 	}
