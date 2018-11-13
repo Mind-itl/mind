@@ -1,7 +1,7 @@
 <?php
-	namespace Mind;
+	namespace Mind\Db;
 
-	require_once __DIR__."/../config.php";
+	require_once __DIR__."/../../config.php";
 
 	class Db {
 		public static function query(...$args) {

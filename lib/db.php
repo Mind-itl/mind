@@ -2,16 +2,16 @@
 	declare(strict_types=1);
 	require_once "causes.php";
 
+	/**
+	 * @deprecated
+	*/
 	function safe_query(...$args) {
-		$safe = new SafeMySQL([
-			'user' => DB_USER,
-			'db' => DB_NAME,
-			'pass' => DB_PASSWORD
-		]);
-
-		return $safe->query(...$args);
+		return Mind\Db\Db::query(...$args);
 	}
 
+	/**
+	 * @deprecated
+	*/
 	function safe_query_assoc(...$args) {
 		return safe_query(...$args)->fetch_assoc();
 	}
