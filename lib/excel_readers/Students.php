@@ -44,7 +44,13 @@
 						WHERE
 							LOGIN = ?s		
 					", $str)["COUNT"];
-					if (intval($a) == 0) {
+					$b = safe_query_assoc("
+						SELECT COUNT(ENTRY_LOGIN) AS COUNT FROM students
+						WHERE
+							LOGIN = ?s
+					", $str)["COUNT"];
+
+					if (intval($a) + intval($b) == 0) {
 						$arr[$i]["login"] = $str;
 						break;
 					}

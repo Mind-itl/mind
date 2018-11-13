@@ -117,7 +117,10 @@
 				FAMILY_NAME,
 				LOGIN
 			FROM students
-			ORDER BY CLASS_NUM, CLASS_LIT"
+			ORDER BY
+				CLASS_NUM, CLASS_LIT,
+				FAMILY_NAME, GIVEN_NAME
+			"
 		);
 		$classes = [];
 
