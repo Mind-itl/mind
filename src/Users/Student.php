@@ -3,11 +3,13 @@
 
 	namespace Mind\Users;
 
+	use Mind\Db\{Users, Causes, Db, Transactions};	
+
 	class Student extends User {
 		private $class_num, $class_lit;
 
 		private function download_from_bd() {
-			$st_assoc = assoc_user("students", $this->login);
+			$st_assoc = Users::get_assoc("students", $this->login);
 			
 			$this->given_name = $st_assoc["GIVEN_NAME"];
 			$this->family_name = $st_assoc["FAMILY_NAME"];			
@@ -39,15 +41,27 @@
 		}
 
 		public function get_points(): int {
-			return get_student_points($this->login);
+			$got_points = Db::query_assoc("
+				SELECT SUM(POINTS) AS SUM
+				FROM transactions
+				WHERE TO_LOGIN = ?s
+			", $this->login)["SUM"] ?? 0;	
+			
+			$given_points = Db::query_assoc("
+				SELECT SUM(`POINTS`) AS SUM
+				FROM `transactions`
+				WHERE `FROM_LOGIN`= ?s
+			", $this->login)["SUM"] ?? 0;
+
+			return $got_points - $given_points;
 		}
 
-		public function add_points(string $from_login, int $points, string $cause): bool {
-			return add_transaction($from_login, $this->login, $points, $cause);
+		public function add_points(User $from, int $points, string $cause): bool {
+			return Transactions::add($from, $this, $points, $cause);
 		}
 
 		public function get_transactions(): array {
-			return get_student_transactions($this->login);
+			return Transactions::of_student($this->login);
 		}
 
 		public function get_class(string $format="num-lit"): string {
@@ -57,12 +71,12 @@
 			return str_replace($search, $replace, $format);
 		}
 
-		public function give_points(string $to_login, int $points): bool {
-			return add_transaction($this->login, $to_login, $points, "C");
+		public function give_points(User $to, int $points): bool {
+			return Transactions::add($this->login, $to, $points, "C");
 		}
 
 		public function get_classruk(): ?Teacher {
-			$r = safe_query("
+			$r = Db::query("
 				SELECT LOGIN
 				FROM teacher_roles
 				WHERE
@@ -71,11 +85,17 @@
 				", $this->get_class()
 			);
 
+			$clruk = null;
+
 			if ($a = $r->fetch_assoc()) {
-				$clruk = get_user($a["LOGIN"]);
+				$clruk = Users::get($a["LOGIN"]);
 			}
 
-			return $clruk ?? null;
+			if (!($clruk instanceof Teacher)) {
+				return null;
+			}
+
+			return $clruk;
 		}
 	}
 ?>

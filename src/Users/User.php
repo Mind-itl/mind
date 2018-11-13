@@ -52,13 +52,5 @@
 		}
 
 		abstract public function has_role(string $role): bool;
-
-		public function is_student(): bool {
-			return $this->has_role("student");
-		}
-
-		public function is_teacher(): bool {
-			return $this->has_role("teacher");
-		}
 	}
 ?>

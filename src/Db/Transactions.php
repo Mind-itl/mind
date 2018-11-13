@@ -8,8 +8,10 @@
 			if (!$to->has_role("student"))
 				return false;
 
-			if ($from->has_role("student") && $from->get_points() < $points)
-				return false;
+			if ($from instanceof Student) {
+				if ($from->get_points() < $points)
+					return false;
+			}
 
 			Db::query(
 				"INSERT INTO `transactions` (

@@ -3,7 +3,7 @@
 	
 	namespace Mind\Users;
 	
-	use Mind\Db\{Users, Causes};
+	use Mind\Db\{Users, Causes, Db, Transactions};
 
 	class Teacher extends User {
 		/*
@@ -23,7 +23,7 @@
 
 			$this->enter_login = $st_assoc["ENTER_LOGIN"];
 
-			$r = \Mind\Db\Db::query("
+			$r = Db::query("
 				SELECT ROLE, ARG
 				FROM teacher_roles
 				WHERE LOGIN = ?s
@@ -60,18 +60,18 @@
 			return in_array($role, $this->roles); 
 		}
 
-		public function get_role_arg(string $role): string {
+		public function get_role_arg(string $role): ?string {
 			if (isset($this->role_args[$role]))
 				return $this->role_args[$role];
 			return null;
 		}
 
-		public function give_points(string $to_login, string $cause): bool {
+		public function give_points(Student $to, string $cause): bool {
 			if (!Causes::has($cause))
 				return false;
 
 			$points = Causes::get_price($cause);
-			return \Mind\Db\Transactions::add($this->login, $to_login, $points, $cause);
+			return Transactions::add($this, $to, $points, $cause);
 		}
 
 		public function get_children(): array {
@@ -80,22 +80,25 @@
 			if ($this->has_role("classruk")) {
 				$class = [];
 
-				list($class_num, $class_lit) = explode("-", $this->get_role_arg("classruk"));
+				$group_name = $this->get_role_arg("classruk");
+				if ($group_name !== null) {
+					list($class_num, $class_lit) = explode("-", $group_name);
 
-				$r = \Mind\Db\Db::query("
-					SELECT LOGIN
-					FROM `students`
-					WHERE
-						CLASS_LIT = ?s AND
-						CLASS_NUM = ?s
-					", $class_lit, $class_num
-				);
-				foreach ($r as $st) {
-					$student = Users::get($st["LOGIN"], "student");
-					$class[] = $student;
+					$r = Db::query("
+						SELECT LOGIN
+						FROM `students`
+						WHERE
+							CLASS_LIT = ?s AND
+							CLASS_NUM = ?s
+						", $class_lit, $class_num
+					);
+					foreach ($r as $st) {
+						$student = Users::get($st["LOGIN"]);
+						$class[] = $student;
+					}
+
+					$ret = $class;
 				}
-
-				$ret = $class;
 			}
 
 			return $ret;
