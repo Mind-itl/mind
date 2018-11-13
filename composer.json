@@ -17,5 +17,10 @@
 		"test": "\"./vendor/bin/phpunit\" --bootstrap lib/utils.php tests",
 		"webpack": "\"./node_modules/.bin/webpack\"",
 		"phpstan": "\"./vendor/bin/phpstan\" analyse lib tests"
+	},
+	"autoload": {
+		"psr-4": {
+			"Mind\\": "./src/"
+		}
 	}
 }
