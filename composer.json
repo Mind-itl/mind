@@ -15,11 +15,12 @@
 		"start": "php -S localhost:8080 -t public_html public_html/route.php",
 		"test": "\"./vendor/bin/phpunit\" --bootstrap lib/utils.php tests",
 		"webpack": "\"./node_modules/.bin/webpack\"",
-		"phpstan": "\"./vendor/bin/phpstan\" analyse src -l 7 > _hya"
+		"phpstan": "\"./vendor/bin/phpstan\" analyse src controls -l 7 > _hya"
 	},
 	"autoload": {
 		"psr-4": {
-			"Mind\\": "./src/"
+			"Mind\\": "./src/",
+			"Mind\\Controls\\": "./controls/"
 		}
 	}
 }

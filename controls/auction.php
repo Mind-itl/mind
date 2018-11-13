@@ -1,5 +1,7 @@
 <?php
-	class Auction_control extends Control {
+	namespace Mind\Controls;
+
+	class Auction extends Control {
 		private $row_view;
 
 		public function has_access(array $args): bool {
