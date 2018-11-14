@@ -4,7 +4,7 @@
 	use Mind\Users\{User, Teacher, Student};
 
 	class Notifications {
-		function add(User $to_user, User $from_user, string $message, int $points = -1) {		
+		static public function add(User $to_user, User $from_user, string $message, int $points = -1) {		
 			if ($points == -1)
 				Db::query(
 					"INSERT INTO notifications (
@@ -37,7 +37,7 @@
 				);
 		}
 
-		function get(User $user): array {
+		static public function get(User $user): array {
 			$login = $user->get_login();
 			$s = Db::query(
 				"SELECT

@@ -2,6 +2,7 @@
 	namespace Mind\Db;
 
 	use Mind\Users\{User, Student, Teacher};
+	use Mind\Server\Utils;
 
 	class Transactions {
 		public static function add(User $from, User $to, int $points, string $cause): bool {
@@ -24,15 +25,14 @@
 				)", $from->get_login(), $to->get_login(), $points, $cause
 			);
 
-			//TODO
-			// $points = get_points_in_case(intval($points));
+			$points = Utils::get_points_in_case(intval($points));
 
-			// add_notification(
-			// 	$to,
-			// 	$from,
-			// 	"Вам перечислили баллы",
-			// 	intval($points)
-			// );
+			Notifications::add(
+				$to,
+				$from,
+				"Вам перечислили баллы",
+				intval($points)
+			);
 
 			return true;
 		}

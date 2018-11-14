@@ -1,7 +1,22 @@
 <?php
-	class Profile_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users, Notifications, Json, Causes};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	const lesson_times = [
+		["8:00", "8:40"],
+		["8:45", "9:25"],
+		["9:40", "10:20"],
+		["10:50", "11:30"],
+		["11:40", "12:20"],
+		["12:25", "13:05"]
+	];
+
+	class Profile extends Control {
 		public function has_access(array $args): bool {
-			return is_logined();
+			return Utils::is_logined();
 		}
 
 		private $roles_r = [
@@ -24,33 +39,33 @@
 				"points" => $this->points(),
 				"group" => $group,
 				"clruk" => $cl_ruk,
-				"login" => get_curr()->get_login()
+				"login" => Utils::get_curr()->get_login()
 			];
 		}
 
 		private function get_group_clruk(): array {
-			if (get_curr()->is_teacher())
+			if (!Utils::get_curr() instanceof Student)
 				return ["", null];
 
-			$class = get_curr()->get_class();
-			$clruk = get_curr()->get_classruk();
+			$class = Utils::get_curr()->get_class();
+			$clruk = Utils::get_curr()->get_classruk();
 
 			return [$class, $clruk ?? null];
 		}
 
 		private function points(): array {
-			if (!get_curr()->is_student()) 
+			if (!Utils::get_curr() instanceof Student) 
 				return [];
 
-			$points = get_curr()->get_points();
+			$points = Utils::get_curr()->get_points();
 			return [
 				"count" => $points,
-				"noun" => get_points_case($points)
+				"noun" => Utils::get_points_case($points)
 			];
 		}
 
 		private function daytime(): string {
-			$h = (new DateTime())->format("H");
+			$h = (new \DateTime())->format("H");
 			$h = intval($h);
 
 			$night   = "Доброй ночи" ;
@@ -71,13 +86,13 @@
 		}
 
 		private function notifications(): array {			
-			$nots = get_notifications(get_curr());
+			$nots = Notifications::get(Utils::get_curr());
 			return $nots;
 		}
 
-		private function table_date(): DateTime {
-			$today = new DateTime();
-			$tomorrow = new DateTime('tomorrow');
+		private function table_date(): \DateTime {
+			$today = new \DateTime();
+			$tomorrow = new \DateTime('tomorrow');
 
 			$h = $today->format('H');
 			$h = intval($h);
@@ -90,17 +105,17 @@
 
 		private function is_today(): bool {
 			$a = $this->table_date();
-			return $a->format("l") == (new DateTime())->format("l");
+			return $a->format("l") == (new \DateTime())->format("l");
 		}
 
 		private function timetable(): array {
-			if (get_curr()->is_teacher())
+			if (!Utils::get_curr() instanceof Student)
 				return [];
 
 			$day = $this->table_date()->format("l");
-			$class = get_curr()->get_class();
+			$class = Utils::get_curr()->get_class();
 
-			$lessons = safe_query(
+			$lessons = Db::query(
 				"SELECT LESSON, PLACE, NUMBER
 				FROM lessons
 				WHERE
@@ -122,10 +137,10 @@
 
 				if (isset(lesson_times[$num-1])) {
 					$f = "H:i";
-					$bg = DateTime::createFromFormat($f, lesson_times[$num-1][0]);
-					$end = DateTime::createFromFormat($f, lesson_times[$num-1][1]);
+					$bg = \DateTime::createFromFormat($f, lesson_times[$num-1][0]);
+					$end = \DateTime::createFromFormat($f, lesson_times[$num-1][1]);
 
-					$is_now = $bg <= (new DateTime()) && (new DateTime()) <= $end;
+					$is_now = $bg <= (new \DateTime()) && (new \DateTime()) <= $end;
 				}
 
 				$arr[] = [

@@ -1,18 +1,24 @@
 <?php
-	class Award_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Award extends Control {
 		public function has_access(array $args): bool {
-			return is_logined() && get_curr()->has_role("teacher");
+			return Utils::is_logined() && Utils::get_curr() instanceof Teacher;
 		}
 
 		protected function get_data(array $args): array {
-			if (isset_post_fields("login", "cause")) {
+			if (Utils::isset_post_fields("login", "cause")) {
 				$student_login = $_POST["login"];
 				$cause = $_POST['cause'];
 
-				if (is_incorrect($student_login, $cause))
+				if (Utils::is_incorrect($student_login, $cause))
 					$result = false;
 				else
-					$result = get_curr()->give_points($student_login, $cause);
+					$result = Utils::get_curr()->give_points($student_login, $cause);
 
 				if ($result) {
 					$result = "success";

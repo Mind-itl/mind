@@ -33,14 +33,14 @@
 		public static function get_control_class_name(string $c): string {
 			$x = strtoupper(substr($c, 0, 1));
 			$xs = substr($c, 1);
-			return "$x{$xs}_control";
+			return "\\Mind\\Controls\\$x{$xs}";
 		}
 
 		public static function load_control(string $name): Control {
 
 			require_once Utils::CONTROLS."$name.php";
 
-			$c = static::get_control_class_name($name);
+			$c = self::get_control_class_name($name);
 			return new $c($name);
 		}
 
@@ -57,8 +57,11 @@
 		}
 
 		public static function main() {
+			setlocale(LC_TIME, "ru_RU.UTF-8");
+			session_start();
+			
 			$url = $_SERVER['REQUEST_URI'];
-			if (static::has_public_file($url))
+			if (self::has_public_file($url))
 				return false;
 
 			$url = explode('?', $url)[0];
@@ -72,20 +75,20 @@
 					$control_name = "signin"; 
 			}
 
-			if (static::has_control($control_name)) {
-				$control = static::load_control($control_name);
+			if (self::has_control($control_name)) {
+				$control = self::load_control($control_name);
 
 				if ($control->has_access($url_arr))
 					echo $control->get_html($url_arr);
 				else
-					static::no_access();
+					self::no_access();
 
-			} elseif (static::has_pure_page($control_name)) {
+			} elseif (self::has_pure_page($control_name)) {
 				$control = new Control($control_name);
 				$html = $control->get_html($url_arr);
 				echo $html;
 			} else
-				static::not_found();
+				self::not_found();
 		}
 	}
 ?>

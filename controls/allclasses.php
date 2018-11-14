@@ -72,7 +72,7 @@
 			foreach ($r as $i) {
 				$user = Users::get($i["LOGIN"]);
 
-				if ($user === null || !($user instanceof Student))
+				if (!($user instanceof Student))
 					continue;
 
 				$students[] = $user;

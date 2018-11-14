@@ -6,19 +6,16 @@
 
 	class Utils {
 		const ROOT = __DIR__."/../../";
-		const CONTROLS = ROOT."controls/";
-		const VIEWS = ROOT."views/";
-		const LIBS = ROOT."lib/";
+		const CONTROLS = self::ROOT."controls/";
+		const VIEWS = self::ROOT."views/";
+		const LIBS = self::ROOT."lib/";
 
 		public static function is_logined(): bool {
 			return isset($_SESSION['login']);
 		}
 
-		public static function get_curr(): ?User {
-			if (isset($_SESSION["login"]))
-				return Users::get($_SESSION['login']);
-
-			return null;
+		public static function get_curr(): User {
+			return Users::get($_SESSION['login']);
 		}
 
 		public static function redirect($url) {
@@ -73,7 +70,7 @@
 		}
 
 		public static function get_points_in_case($points) {
-			$noun = get_points_case($points);
+			$noun = static::get_points_case($points);
 			return "$points $noun";
 		}
 
@@ -94,6 +91,35 @@
 		public static function check_correct(string $str): bool {
 			return strlen($str) !== 0 &&
 				   preg_match("/^[a-zA-Z0-9_]+$/", $str);
+		}
+
+		public static function is_incorrect(string ...$strs): bool {
+			foreach ($strs as $str) {
+				if (!static::check_correct($str)) {
+					error_log($str);
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public static function isset_get_fields(string ...$fields) {
+			foreach ($fields as $field) {
+				if (!isset($_GET[$field]))
+					return false;
+			}
+
+			return true;
+		}
+
+		public static function isset_post_fields(string ...$fields) {
+			foreach ($fields as $field) {
+				if (!isset($_POST[$field]))
+					return false;
+			}
+
+			return true;
 		}
 	}
 
