@@ -1,5 +1,11 @@
 <?php
-	class Allclasses_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users};
+	use Mind\Server\Control;
+	use Mind\Users\{User, Teacher, Student};
+
+	class Allclasses extends Control {
 		// public function has_access(array $args): bool {
 		// 	return is_logined() && get_curr()->has_role("zam");
 		// }
@@ -33,7 +39,7 @@
 		public function get_classes(): array {
 			$classes = [];
 
-			$r = safe_query("
+			$r = Db::query("
 				SELECT
 					CLASS_NUM, CLASS_LIT
 				FROM students
@@ -50,7 +56,7 @@
 		public function get_points_by_students(string $class_num, string $class_lit): array {
 			$students = [];
 
-			$r = safe_query("
+			$r = Db::query("
 				SELECT * FROM students
 				WHERE
 					CLASS_LIT=?s AND
@@ -64,11 +70,14 @@
 			$sum = 0;
 			
 			foreach ($r as $i) {
-				$user = get_user($i["LOGIN"]);
-				$students[] = $user;
-				$sum  += $user->get_points();
-			}
+				$user = Users::get($i["LOGIN"]);
 
+				if (!($user instanceof Student))
+					continue;
+
+				$students[] = $user;
+				$sum += $user->get_points();
+			}
 
 			return [$students, $sum];
 		} 

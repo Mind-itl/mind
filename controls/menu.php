@@ -1,5 +1,11 @@
 <?php
-	class Menu_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users, Notifications, Json};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Menu extends Control {
 		private $button_view;
 		private $buttons = [
 			// [role, title, url, class (maybe)]
@@ -30,7 +36,7 @@
 						if (is_string($but))
 							continue;
 
-						if ($but[0]=="all" || get_curr()->has_role($but[0]))
+						if ($but[0]=="all" || Utils::get_curr()->has_role($but[0]))
 						$buts[] = [
 							"title" => $but[1],
 							"url" => $but[2],
@@ -46,7 +52,7 @@
 					}
 
 				} else {
-					if ($buttons[0]=="all" || get_curr()->has_role($buttons[0]))
+					if ($buttons[0]=="all" || Utils::get_curr()->has_role($buttons[0]))
 						$buttons_ans[] = [
 							"title" => $buttons[1],
 							"url" => $buttons[2],
@@ -55,7 +61,7 @@
 				}
 			}
 
-			$r = safe_query("SELECT * FROM ads WHERE TILL_DATE >= CURRENT_TIMESTAMP() AND FROM_DATE <= CURRENT_TIMESTAMP()");
+			$r = Db::query("SELECT * FROM ads WHERE TILL_DATE >= CURRENT_TIMESTAMP() AND FROM_DATE <= CURRENT_TIMESTAMP()");
 
 			$arr = [];
 			foreach ($r as $a) {

@@ -1,19 +1,25 @@
 <?php
-	class Give_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users, Notifications, Json};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Give extends Control {
 		public function has_access(array $args): bool {
-			return is_logined() && get_curr()->has_role("student");
+			return Utils::is_logined() && Utils::get_curr() instanceof Student;
 		}
 
 		protected function get_data(array $args): array {
-			if (isset_post_fields("login", "points")) {
+			if (Utils::isset_post_fields("login", "points")) {
 				$login = $_POST['login'];
 				$points = $_POST['points'];
 
-				if (is_incorrect($login, $points) || $login == get_curr()->get_login()) {
+				if (Utils::is_incorrect($login, $points) || $login == Utils::get_curr()->get_login()) {
 					error_log('incorrect $login $points in give.php:11');
 					$result = false;
 				} else {
-					$result = get_curr()->give_points($login, intval($points));
+					$result = Utils::get_curr()->give_points($login, intval($points));
 				}
 
 				if ($result) {
@@ -26,8 +32,8 @@
 			return [
 				"result" => $result ?? "",
 				"points" => [
-					"count" => get_curr()->get_points(),
-					"noun" => get_points_case(get_curr()->get_points())
+					"count" => Utils::get_curr()->get_points(),
+					"noun" => Utils::get_points_case(Utils::get_curr()->get_points())
 				]
 			];
 		}

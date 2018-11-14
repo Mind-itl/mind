@@ -1,7 +1,13 @@
 <?php
-	const API = ROOT."api/";
+	namespace Mind\Controls;
 
-	class Api_control extends Control {
+	use Mind\Db\{Db, Users};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	const API = Utils::ROOT."api/";
+
+	class Api extends Control {
 		public function __construct(string $name) {}
 
 		public function has_access(array $args): bool {
@@ -18,7 +24,12 @@
 		public function get_html(array $args): string {
 			$obj = $this->handle($args);
 			header('Content-Type: application/json');
-			return json_encode($obj);
+			$json = json_encode($obj);
+
+			if ($json === false)
+				return "";
+
+			return $json;
 		}
 
 		private function handle($args): array {
@@ -33,6 +44,7 @@
 			}
 
 			require_once $file;
+
 			$func = "api_".$args[1];
 
 			return $func();
