@@ -1,16 +1,20 @@
 <?php
-	require_once LIBS."passwords.php";
+	namespace Mind\Controls;
 
-	class Broadcast_control extends Control {
+	use Mind\Db\{Db, Users, Notifications, Json};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Broadcast extends Control {
 		public function has_access(array $args): bool {
-			return is_logined() && get_curr()->has_role("teacher");
+			return Utils::is_logined() && Utils::get_curr() instanceof Teacher;
 		}
 
 		protected function get_data(array $args): array {
-			if (isset_post_fields("selector", "message")) {
+			if (Utils::isset_post_fields("selector", "message")) {
 
 				$student_logins = $_POST['selector'];
-				$message       = $_POST['message'];
+				$message        = $_POST['message'];
 
 				foreach (explode("\n", $student_logins) as $student_login) {
 					$student_login = trim($student_login);
@@ -18,11 +22,11 @@
 					if ($student_login === "")
 						continue;
 
-					if (is_incorrect($student_login) || !has_login($student_login))
+					if (Utils::is_incorrect($student_login) || !Users::has_login($student_login))
 						$result = false;
 					else {
-						$student = get_user($student_login);
-						add_notification($student, get_curr(), $message);
+						$student = Users::get($student_login);
+						Notifications::add($student, Utils::get_curr(), $message);
 
 						$result = true;
 					}
@@ -38,7 +42,7 @@
 
 			return [
 				"result" => $result ?? "not_set",
-				"classes" => get_classes_json()
+				"classes" => Json::get_classes()
 			];
 		}
 	}

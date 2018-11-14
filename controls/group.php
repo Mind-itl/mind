@@ -1,19 +1,25 @@
 <?php
-	class Class_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users, Notifications, Json};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Group extends Control {
 		private $row_view;
 
 		public function has_access(array $args): bool {
-			if (!is_logined())
+			if (!Utils::is_logined())
 				return false;
 
 			if (isset($args[1]) && $args[1] != "")
 				return true;
 			else
-				return get_curr()->has_role("classruk");
+				return Utils::get_curr()->has_role("classruk");
 		}
 
 		protected function get_data(array $args): array {
-			$class_name = $args[1] ?? get_curr()->get_role_arg("classruk");
+			$class_name = $args[1] ?? Utils::get_curr()->get_role_arg("classruk");
 		
 			list($class, $sum) = $this->get_sum_class($class_name);
 
@@ -42,7 +48,7 @@
 
 			list($class_num, $class_lit) = explode("-", $class_name);
 
-			$r = safe_query("
+			$r = Db::query("
 				SELECT LOGIN
 				FROM `students`
 				WHERE
@@ -55,7 +61,7 @@
 			);
 
 			foreach ($r as $st) {
-				$student = get_user($st["LOGIN"], "student");
+				$student = Users::get($st["LOGIN"]);
 				$class[] = $student;
 			}
 

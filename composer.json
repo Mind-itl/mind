@@ -3,17 +3,24 @@
 		"php":">=7.2.0",
 		"phpoffice/phpspreadsheet": "^1.4",
 		"twig/twig": "^2.5",
-		"mihaeu/html-formatter": "^1.0",
 		"workerman/workerman": "^3.5",
 		"simplon/mysql": "^2.2",
 		"colshrapnel/safemysql": "^1.1"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "7"
+		"phpunit/phpunit": "7",
+		"phpstan/phpstan": "^0.10.5"
 	},
 	"scripts": {
 		"start": "php -S localhost:8080 -t public_html public_html/route.php",
 		"test": "\"./vendor/bin/phpunit\" --bootstrap lib/utils.php tests",
-		"webpack": "\"./node_modules/.bin/webpack\""
+		"webpack": "\"./node_modules/.bin/webpack\"",
+		"analyse": "\"./vendor/bin/phpstan\" analyse src controls -l 7 > error_log"
+	},
+	"autoload": {
+		"psr-4": {
+			"Mind\\": "./src/",
+			"Mind\\Controls\\": "./controls/"
+		}
 	}
 }

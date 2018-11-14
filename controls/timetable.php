@@ -1,7 +1,13 @@
 <?php
-	class Timetable_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users, Notifications, Json, Causes};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Timetable extends Control {
 		public function has_access(array $args): bool {
-			return is_logined() && get_curr()->has_role("student");
+			return Utils::is_logined() && Utils::get_curr()->has_role("student");
 		}
 
 		protected function get_data(array $args): array {
@@ -15,13 +21,12 @@
 				"Saturday", 
 			];
 
-			$class = get_curr()->get_class();
+			$class = Utils::get_curr()->get_class();
 
 			$days = [];
 
-
 			foreach ($weekdays as $day) {
-				$r = safe_query("
+				$r = Db::query("
 					SELECT *
 					FROM lessons
 					WHERE
@@ -49,7 +54,7 @@
 				}
 
 				$days[] = [
-					"name" => today_rus($day),
+					"name" => Utils::today_rus($day),
 					"lessons" => $lessons
 				];
 

@@ -1,14 +1,21 @@
 <?php
-	require_once LIBS."Excel_reader.php";
-	const READERS = LIBS."excel_readers/";
+	namespace Mind\Controls;
 
-	class Load_control extends Control {
+	use Mind\Db\{Db, Users, Notifications, Json, Music};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	use Mind\Db\Excel\Reader;
+
+	const READERS = Utils::LIBS."excel_readers/";
+
+	class Load extends Control {
 		public function has_access(array $args): bool {
-			return is_logined() && get_curr()->is_teacher();
+			return Utils::is_logined() && Utils::get_curr() instanceof Teacher;
 		}
 
 		protected function get_data(array $args): array {
-			if (isset_post_fields("excel_type")) {
+			if (Utils::isset_post_fields("excel_type")) {
 				$this->post_handle();
 			}
 
@@ -25,7 +32,7 @@
 					continue;
 
 				require_once READERS.$reader_file;
-				$cls_name = get_reader_name(substr($reader_file, 0, -4));
+				$cls_name = Reader::get_reader_name(substr($reader_file, 0, -4));
 
 				$func_name = $cls_name."::get_name";
 				if (is_callable($func_name))
@@ -43,7 +50,7 @@
 					continue;
 
 				require_once READERS.$reader_file;
-				$cls_name = get_reader_name(substr($reader_file, 0, -4));
+				$cls_name = Reader::get_reader_name(substr($reader_file, 0, -4));
 
 				$name = call_user_func($cls_name."::get_name");
 

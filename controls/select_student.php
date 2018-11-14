@@ -1,8 +1,14 @@
 <?php
-	class Select_student_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Db\{Db, Users, Notifications, Json, Causes};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Select extends Control {
 		protected function get_data(array $args): array {
 			return [
-				"classes" => get_classes_json()
+				"classes" => Json::get_classes()
 			];
 		}
 	}

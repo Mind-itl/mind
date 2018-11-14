@@ -1,15 +1,19 @@
 <?php
-	require_once LIBS."passwords.php";
+	namespace Mind\Controls;
 
-	class Settings_control extends Control {
+	use Mind\Db\{Db, Users, Notifications, Json, Causes, Passwords};
+	use Mind\Server\{Control, Utils};
+	use Mind\Users\{User, Teacher, Student};
+
+	class Settings extends Control {
 		public function has_access(array $args): bool {
-			return is_logined();
+			return Utils::is_logined();
 		}
 
 		protected function get_data(array $args): array {
 			$result = "not_stated";
 
-			if (isset_post_fields("type")) {
+			if (Utils::isset_post_fields("type")) {
 				$result = $this->post_handle();
 			}
 
@@ -30,30 +34,30 @@
 		}
 
 		private function change_password(): string {
-			if (!isset_post_fields("old_password", "new_password"))
+			if (!Utils::isset_post_fields("old_password", "new_password"))
 				return "fail";
 
 			$old = $_POST["old_password"];
 			$new = $_POST["new_password"];
-			$login = get_curr()->get_login();
+			$login = Utils::get_curr()->get_login();
 
-			if (!change_password($login, $old, $new))
+			if (!Passwords::change_password($login, $old, $new))
 				return "wrong";
 
 			return "success";
 		}
 
 		private function change_login(): string {
-			if (!isset_post_fields("new_login", "password"))
+			if (!Utils::isset_post_fields("new_login", "password"))
 				return "fail";
 
 			$new_login = $_POST["new_login"];
 			$password = $_POST["password"];
 
-			if (!check_password(get_curr()->get_login(), $password, false))
+			if (!Passwords::check_password(Utils::get_curr()->get_login(), $password, false))
 				return "wrong";
 
-			$r = change_enter_login(get_curr(), $new_login);
+			$r = Passwords::change_enter_login(Utils::get_curr(), $new_login);
 			return $r ? "success" : "fail";
 		}
 	}

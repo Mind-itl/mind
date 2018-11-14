@@ -1,7 +1,11 @@
 <?php
-	class Status_control extends Control {
+	namespace Mind\Controls;
+
+	use Mind\Server\{Control, Utils};
+
+	class Status extends Control {
 		public function has_access(array $args): bool {
-			return is_logined();
+			return Utils::is_logined();
 		}
 	}
 ?>
