@@ -15,7 +15,7 @@
 		"start": "php -S localhost:8080 -t public_html public_html/route.php",
 		"test": "\"./vendor/bin/phpunit\" --bootstrap lib/utils.php tests",
 		"webpack": "\"./node_modules/.bin/webpack\"",
-		"phpstan": "\"./vendor/bin/phpstan\" analyse src controls -l 7 > _hya"
+		"analyse": "\"./vendor/bin/phpstan\" analyse src controls -l 7 > error_log"
 	},
 	"autoload": {
 		"psr-4": {
