@@ -1,24 +1,28 @@
 <?php
-	require_once API."checkLogin.php";
-	require_once LIBS."passwords.php";
+	namespace Mind\Api;
 
-	function api_checkLogin() {
-		if (!isset_get_fields("password", "login")) {
+	use Mind\Server\{Api_method, Utils};
+	use Mind\Db\Passwords;
+
+	class CheckLogin extends Api_method {
+		public static function handle(): array {
+			if (!Utils::isset_get_fields("password", "login")) {
+				return [
+					"status" => "error"
+				];
+			}
+
+			$login = $_GET['login'];
+			$password = $_GET['password'];
+
+			if (!Passwords::check_password($login, $password))
+				$status = false;
+			else
+				$status = true;
+
 			return [
-				"status" => "error"
+				"status" => $status
 			];
-		}
-
-		$login = $_GET['login'];
-		$password = $_GET['password'];
-
-		if (!check_password($login, $password))
-			$status = false;
-		else
-			$status = true;
-
-		return [
-			"status" => $status
-		];
-	}	
+		}	
+	}
 ?>

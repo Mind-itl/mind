@@ -42,11 +42,13 @@
 			return $user;
 		}
 
-		public static function has_login(string $login): bool {
+		public static function has_login(string $login, bool $is_enter_login=false): bool {
+			$login_field = $is_enter_login ? "ENTER_LOGIN" : "LOGIN";
+
 			$r = Db::query("
 				SELECT *
 				FROM `passwords`
-				WHERE `LOGIN` = ?s
+				WHERE `$login_field` = ?s
 				", $login
 			);
 

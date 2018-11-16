@@ -2,7 +2,7 @@
 	namespace Mind\Controls;
 
 	use Mind\Db\{Db, Users};
-	use Mind\Server\{Control, Utils};
+	use Mind\Server\{Control, Utils, Api_method};
 	use Mind\Users\{User, Teacher, Student};
 
 	const API = Utils::ROOT."api/";
@@ -13,12 +13,8 @@
 		public function has_access(array $args): bool {
 			if (!isset($_GET['token']))
 				return false;
-			if ($_GET['token'] === "android_mind_key_2")
-				return true;
-			if ($_GET['token'] === "site_mind_key_3")
-				return true;
 
-			return false;
+			return Api_method::check_token($_GET['token']);
 		}
 
 		public function get_html(array $args): string {
@@ -33,21 +29,14 @@
 		}
 
 		private function handle($args): array {
-			$file = API.$args[1].".php";
-			if (!file_exists($file)) {
-				return [
-					"status" => "error",
-					"error" => [
-						"message" => "No such method"
-					]
-				];
-			}
+			$r = Api_method::handle_method($args[1]);
 
-			require_once $file;
-
-			$func = "api_".$args[1];
-
-			return $func();
+			return $r ?? [
+				"status" => "error",
+				"error" => [
+					"message" => "No such method"
+				]
+			];
 		}
 	}
 ?>

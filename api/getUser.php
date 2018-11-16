@@ -1,48 +1,53 @@
 <?php
-	require_once LIBS."passwords.php";
+	namespace Mind\Api;
 
-	function api_getUser() {
-		if (!isset_get_fields("login"))
-			return [
-				"status" => "error",
-				"error" => [
-					"message" => "No `login` argument"
-				]
+	use Mind\Server\{Api_method, Utils};
+	use Mind\Db\{Passwords, Users};
+
+	class getUser extends Api_method {
+		public static function handle(): array {
+			if (!Utils::isset_get_fields("login"))
+				return [
+					"status" => "error",
+					"error" => [
+						"message" => "No `login` argument"
+					]
+				];
+
+			if (!Users::has_login($_GET['login'], true))
+				return [
+					"status" => "error",
+					"error" => [
+						"message" => "No such user"
+					]
+				];
+
+			$user = Users::get($_GET['login'], true);
+
+			$ret = [
+				"login" => $user->get_login(),
+				"is_student" => $user->has_role("student"),
+				"names" => [
+					"given" => $user->get_given_name(),
+					"family" => $user->get_family_name(),
+					"father" => $user->get_father_name(),
+				],
 			];
 
-		if (!has_login($_GET['login']))
-			return [
-				"status" => "error",
-				"error" => [
-					"message" => "No such user"
-				]
-			];
+			if ($user->has_role("teacher")) {
+				$ret["roles"] = $user->get_roles();
+				$ret["roles_args"] = [];
 
-		$user = get_user($_GET['login']);
-
-		$ret = [
-			"login" => $user->get_login(),
-			"is_student" => $user->is_student(),
-			"names" => [
-				"given" => $user->get_given_name(),
-				"family" => $user->get_family_name(),
-				"father" => $user->get_father_name(),
-			],
-		];
-
-		if ($user->is_teacher()) {
-			$ret["roles"] = $user->get_roles();
-			$ret["roles_args"] = [];
-
-			foreach ($user->get_roles() as $role) {
-				$role_arg = $user->get_role_arg($role);
-				if (isset($role_arg))
-					$ret["role_args"][$role] = $role_arg;
+				foreach ($user->get_roles() as $role) {
+					$role_arg = $user->get_role_arg($role);
+					if (isset($role_arg))
+						$ret["role_args"][$role] = $role_arg;
+				}
+			} else {
+				$ret["points"] = $user->get_points();
 			}
-		} else {
-			$ret["points"] = $user->get_points();
-		}
 
-		return $ret;
+			return $ret;
+		}	
 	}
 ?>
