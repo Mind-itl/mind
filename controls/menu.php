@@ -16,13 +16,17 @@
 				["student", "Передать баллы", "/give"],
 				["teacher", "Начислить баллы", "/award"],
 				["classruk", "Выписка по классу", "/class"],
+				["zam", "Общая ведомость", "/allclasses"],
+				["diric", "Общая ведомость", "/allclasses"],
+				["pedorg", "Общая ведомость", "/allclasses"],
 				["student", "Аукцион", "/auction"]
 			],
 			["student", "Расписание", "/timetable"],
 			["student", "Интернат", "/internat"],
 			["vospit", "Интернат", "/internat"],
 			["teacher", "Оповестить учеников", "/broadcast"],
-			["zam", "Загрузить данные", "/load"]
+			["zam", "Загрузить данные", "/load"],
+			["all", "Документы", "https://kpfu.ru/it-liceum/dokumenty-38501"]
 		];
 
 		protected function get_data(array $args): array {
