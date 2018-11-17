@@ -20,7 +20,8 @@
 	"autoload": {
 		"psr-4": {
 			"Mind\\": "./src/",
-			"Mind\\Controls\\": "./controls/"
+			"Mind\\Controls\\": "./controls/",
+			"Mind\\Api\\": "./api/"
 		}
 	}
 }

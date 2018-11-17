@@ -1,25 +1,30 @@
 <?php
-	require_once __DIR__."/../lib/utils.php";
-	require_once LIBS."music.php";
+	require __DIR__."/../vendor/autoload.php";
+
+	use Mind\Db\{Music};
+	use Mind\Server\{Utils};
+
+	setlocale(LC_TIME, "ru_RU.UTF-8");
+	session_start();
 
 	function vote(int $id) {
-		$curr_vote = get_music_vote(get_curr());
+		$curr_vote = Music::get_vote(Utils::get_curr());
 
 		if ($curr_vote === -1) {
-			add_music_vote(get_curr(), $id);
+			Music::add_vote(Utils::get_curr(), $id);
 			return;
 		}
 
 		if ($curr_vote == $id)
-			remove_music_vote(get_curr());
+			Music::remove_vote(Utils::get_curr());
 		else {
-			remove_music_vote(get_curr());
-			add_music_vote(get_curr(), $id);
+			Music::remove_vote(Utils::get_curr());
+			Music::add_vote(Utils::get_curr(), $id);
 		}
 	}
 
 	function remove(int $id) {
-		remove_music($id);
+		Music::remove($id);
 	}
 
 	if (isset($_POST['id']) && is_logined()) {
@@ -29,5 +34,5 @@
 			vote($_POST['id']);
 	}
 
-	echo json_encode(get_music());
+	echo json_encode(Music::get());
 ?>

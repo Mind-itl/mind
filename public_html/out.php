@@ -1,7 +1,10 @@
 <?php
-	require_once __DIR__."/../lib/utils.php";
+	require __DIR__."/../vendor/autoload.php";
+
+	setlocale(LC_TIME, "ru_RU.UTF-8");
+	session_start();
 
 	$_SESSION['login'] = null;
 
-	redirect("/");
+	\Mind\Server\Utils::redirect("/");
 ?>
