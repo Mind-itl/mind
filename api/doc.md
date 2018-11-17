@@ -15,6 +15,10 @@
 	"roles": Role[] | null,
 	"role_args": string[Role] | null,
 	"points": int | null,
+	"group": {
+		"par": int,
+		"lit": string
+	} | null
 }
 ```
 
