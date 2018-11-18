@@ -36,7 +36,7 @@
 
 			if ($user->has_role("teacher")) {
 				$ret["roles"] = $user->get_roles();
-				$ret["roles_args"] = [];
+				$ret["role_args"] = [];
 
 				foreach ($user->get_roles() as $role) {
 					$role_arg = $user->get_role_arg($role);
