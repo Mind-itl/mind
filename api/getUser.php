@@ -25,7 +25,7 @@
 			$user = Users::get($_GET['login'], true);
 
 			$ret = [
-				"login" => $user->get_login(),
+				"login" => $user->get_enter_login(),
 				"is_student" => $user->has_role("student"),
 				"names" => [
 					"given" => $user->get_given_name(),
