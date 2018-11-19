@@ -7,7 +7,7 @@
 
 	use Mind\Db\Excel\Reader;
 
-	const READERS = Utils::LIBS."excel_readers/";
+	const READERS = Utils::ROOT."src/Db/Excel/Readers/";
 
 	class Load extends Control {
 		public function has_access(array $args): bool {

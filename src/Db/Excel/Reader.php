@@ -44,7 +44,7 @@
 			$x = $name[0];
 			$xs = substr($name, 1);
 
-			return strtoupper($x).$xs."_excel_reader";
+			return "Mind\\Db\Excel\\Readers\\".strtoupper($x).$xs;
 		}
 	}
 
