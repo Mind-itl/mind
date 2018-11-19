@@ -1,6 +1,8 @@
 <?php
 	namespace Mind\Db;
 
+	use Mind\Users\{User, Teacher, Student};
+
 	class Statuses {
 		public static function get_types(): array {
 			$r = Db::query_assoc("
