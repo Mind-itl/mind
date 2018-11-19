@@ -1,7 +1,11 @@
 <?php
-	class Status_model {
-		public static function get_status_types(): array {
-			$r = safe_query_assoc("
+	namespace Mind\Db;
+
+	use Mind\Users\{User, Teacher, Student};
+
+	class Statuses {
+		public static function get_types(): array {
+			$r = Db::query_assoc("
 				SELECT COLUMN_TYPE
 				FROM INFORMATION_SCHEMA.COLUMNS
 				WHERE 
@@ -25,7 +29,7 @@
 		public static function get_classes(): array {
 			$classes = [];
 
-			$r = safe_query("
+			$r = Db::query("
 				SELECT
 					CLASS_NUM, CLASS_LIT
 				FROM students
@@ -39,12 +43,12 @@
 			return $classes;
 		}
 
-		public static function set_status(Student $user, string $status): void {
+		public static function set(Student $user, string $status): void {
 			$login = $user->get_login();
-			if (safe_query("SELECT * FROM student_status WHERE LOGIN=?s", $login)->num_rows != 0) {
-				safe_query("UPDATE student_status SET STATUS=?s, DATA=CURRENT_TIMESTAMP() WHERE LOGIN=?s", $status, $login);
+			if (Db::query("SELECT * FROM student_status WHERE LOGIN=?s", $login)->num_rows != 0) {
+				Db::query("UPDATE student_status SET STATUS=?s, DATA=CURRENT_TIMESTAMP() WHERE LOGIN=?s", $status, $login);
 			} else {
-				safe_query("INSERT INTO student_status (LOGIN, STATUS) VALUES (?s, ?s)", $login, $status);
+				Db::query("INSERT INTO student_status (LOGIN, STATUS) VALUES (?s, ?s)", $login, $status);
 			}
 		}
 
@@ -53,7 +57,7 @@
 			foreach (static::get_classes() as $class) {
 				$students = [];
 
-				$r = safe_query(
+				$r = Db::query(
 					"SELECT LOGIN FROM students WHERE CLASS_NUM=?i AND CLASS_LIT=?s",
 					intval($class[0]),
 					$class[1]
@@ -61,7 +65,7 @@
 
 				foreach ($r as $i) {
 					$login = $i["LOGIN"];
-					$r = safe_query("SELECT * FROM student_status WHERE LOGIN=?s", $login);
+					$r = Db::query("SELECT * FROM student_status WHERE LOGIN=?s", $login);
 
 					if ($r = $r->fetch_assoc()) {
 						$status = $r['STATUS'];
@@ -72,7 +76,7 @@
 					}
 
 					$students[] = [
-						"names" => get_user($login)->get_names(),
+						"names" => Users::get($login)->get_names(),
 						"login" => $login,
 						"status" => $status,
 						"time" => $time

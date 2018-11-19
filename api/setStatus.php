@@ -1,9 +1,14 @@
 <?php
-	require_once ROOT."models/status.php";
+	namespace Mind\Api;
 
-	function api_setStatus() {
-		$user = get_user($_GET['login']);
-		Status_model::set_status($user, $_GET['status']);
-		return [];
+	use Mind\Server\{Api_method, Utils};
+	use Mind\Db\{Statuses, Users};
+
+	class setStatus extends Api_method {
+		public static function handle(): array {
+			$user = Users::get($_GET['login']);
+			Statuses::set($user, $_GET['status']);
+			return [];
+		}
 	}
 ?>
