@@ -5,6 +5,8 @@
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
+	require_once Utils::ROOT."causes.php";
+
 	class Award extends Control {
 		public function has_access(array $args): bool {
 			return Utils::is_logined() && Utils::get_curr() instanceof Teacher;
@@ -18,7 +20,7 @@
 				if (Utils::is_incorrect($student_login, $cause))
 					$result = false;
 				else
-					$result = Utils::get_curr()->give_points($student_login, $cause);
+					$result = Utils::get_curr()->give_points(Users::get($student_login), $cause);
 
 				if ($result) {
 					$result = "success";

@@ -5,7 +5,7 @@
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
-	class Select extends Control {
+	class Select_student extends Control {
 		protected function get_data(array $args): array {
 			return [
 				"classes" => Json::get_classes()
