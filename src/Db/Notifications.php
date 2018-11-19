@@ -68,5 +68,14 @@
 
 			return $nots;
 		}
+
+		static public function read(int $id) {
+			Db::query("
+				UPDATE notifications
+				SET READED=1
+				WHERE ID=?i
+				", $id
+			);
+		}
 	}
 ?>

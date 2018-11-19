@@ -16,10 +16,11 @@ $(window).on('load', function() {
 		id = parseInt(id);
 
 		$.ajax({
-			method: "POST",
-			url: "read_notification",
+			method: "GET",
+			url: "/api/readNotification",
 			data: {
-				"id": id
+				id: id,
+				token: "site_mind_key_3"
 			}
 		})
 	});	
