@@ -3,6 +3,8 @@
 
 	namespace Mind\Db\Excel;
 
+	use Mind\Server\Utils;
+
 	class Formatter {
 		/**
 		 * @param string $name - $name in format like 'Petrov P.P.'
@@ -16,6 +18,24 @@
 			$m[1] = static::upper_first($m[1]);
 
 			return $m[1]." ".static::upper($m[2]).".".static::upper($m[3]).".";
+		}
+
+		static function day(string $day): string {
+			$day = trim($day);
+
+			$day = static::lower($day);
+			$day = static::upper_first($day);
+			return Utils::today_en($day);
+		}
+
+		public static function group(string $group): string {
+			preg_match('/(\d+)\D+?(\d+)/', $group, $m);
+			return $m[1]."-".$m[2];
+		}
+
+		public static function time(string $group): string {
+			preg_match('/(\d+)\D+?(\d+)/', $group, $m);
+			return $m[1].":".$m[2];
 		}
 
 		public static function upper(string $str): string {

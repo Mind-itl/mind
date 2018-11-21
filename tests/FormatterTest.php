@@ -30,5 +30,83 @@
 			}
 			return $ret;
 		}
+
+		/**
+		 * @dataProvider providerGroups
+		 */
+		public function testGroup(string $group, string $need): void {
+			$this->assertEquals(
+				$need,
+				Formatter::group($group)
+			);
+		}
+
+		public function providerGroups(): array {
+			$right = "10-4";
+			$variants = [
+				$right,
+				"10.4",
+				"  10  . 4   ",
+				"Класс 10 4.",
+				"10 - 4",
+				"10 . 4",
+				"10. 4"
+			];
+
+			$ret = [];
+			foreach ($variants as $v) {
+				$ret[] = [$v, $right];
+			}
+			return $ret;
+		}
+
+		/**
+		 * @dataProvider providerDays
+		 */
+		public function testDay(string $day, string $need): void {
+			$this->assertEquals(
+				$need,
+				Formatter::day($day)
+			);
+		}
+
+		public function providerDays(): array {
+			$right = "Monday";
+			$variants = [
+				"понедельник",
+				"   пОнЕдЕльник "
+			];
+
+			$ret = [];
+			foreach ($variants as $v) {
+				$ret[] = [$v, $right];
+			}
+			return $ret;
+		}
+
+		/**
+		 * @dataProvider providerTimes
+		 */
+		public function testTime(string $time, string $need): void {
+			$this->assertEquals(
+				$need,
+				Formatter::time($time)
+			);
+		}
+
+		public function providerTimes(): array {
+			$right = "10:59";
+			$variants = [
+				$right,
+				"10.59",
+				"   10   59 "
+			];
+
+			$ret = [];
+			foreach ($variants as $v) {
+				$ret[] = [$v, $right];
+			}
+			return $ret;
+		}
 	}
 ?>
