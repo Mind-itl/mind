@@ -1,12 +1,13 @@
 <?php
 	use PHPUnit\Framework\TestCase;
+	use Mind\Server\Utils;
 
 	final class UtilsTest extends TestCase {
 		/**
 		 * @dataProvider providerPoints
 		 */
 		public function testPoints(int $points, string $expected_noun): void {
-			$this->assertEquals($expected_noun, get_points_case($points));
+			$this->assertEquals($expected_noun, Utils::get_points_case($points));
 		}
 
 		public function providerPoints() {

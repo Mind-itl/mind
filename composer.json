@@ -13,7 +13,7 @@
 	},
 	"scripts": {
 		"start": "php -S localhost:8080 -t public_html public_html/route.php",
-		"test": "\"./vendor/bin/phpunit\" --bootstrap lib/utils.php tests",
+		"test": "\"./vendor/bin/phpunit\" tests",
 		"webpack": "\"./node_modules/.bin/webpack\"",
 		"analyse": "\"./vendor/bin/phpstan\" analyse src controls -l 7 > error_log"
 	},
