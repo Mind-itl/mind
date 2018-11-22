@@ -65,7 +65,7 @@
 				}
 			}
 
-			$r = Db::query("SELECT * FROM ads WHERE TILL_DATE >= CURRENT_TIMESTAMP() AND FROM_DATE <= CURRENT_TIMESTAMP()");
+			$r = Db::query("SELECT * FROM ads WHERE TILL_DATE >= CURDATE() AND FROM_DATE <= CURDATE()");
 
 			$arr = [];
 			foreach ($r as $a) {
