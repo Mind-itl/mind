@@ -1,5 +1,10 @@
 import React from "react";
 
+const moment = require("moment");
+
+moment.locale('ru');
+
+const time_format = "D MMMM YYYY";
 const student_name_format = "family given father";
 const get_name = student => student_name_format.split(' ').map(el => student.names[el]).join(' ')
  
@@ -9,7 +14,7 @@ export default class ClassStatus extends React.Component {
 	}
 
 	render() {
-		return <table><tbody>
+		return <table className="classStatus"><tbody>
 			<tr>
 				<th>Ученик</th>
 				{this.props.statuses.map(el => 
@@ -57,22 +62,23 @@ class StudentStatus extends React.Component {
 		let t = this.state.time;
 
 		if (t)
-			return t.getDate() + "-" + (t.getMonth() + 1) + "-" + t.getFullYear() + " " + t.getHours() + ":" + t.getMinutes();
+			return moment(this.state.time).format(time_format);
+
 		return "";
 	}
 
 	render() {
-		return <tr>
+		return <tr className="studentStatus">
 			<td>{this.getName()}</td>
 
 			{this.props.statuses.map(type =>
-				<td>
+				<td className={type == this.state.status ? 'type-it' : 'type-not-it'}>
 					<button onClick={() => this.setStatus(type)}>
 						{type == this.state.status ? '+' : '-'}
 					</button>
 				</td>
 			)}
-			<td>
+			<td className="status-time">
 				{this.getTime()}
 			</td>
 		</tr>
