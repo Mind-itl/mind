@@ -15,9 +15,9 @@
 
 		protected function get_data(array $args): array {
 			if (isset($args[1]) && $args[1]!="")
-				$user = Users::get($args[1], true);
+				$user = Users::student($args[1], true);
 			else 
-				$user = Utils::get_curr();
+				$user = Utils::curr_student();
 
 			[$trans, $sum] = $this->trans($user);
 

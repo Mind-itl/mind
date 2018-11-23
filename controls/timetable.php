@@ -7,7 +7,7 @@
 
 	class Timetable extends Control {
 		public function has_access(array $args): bool {
-			return Utils::is_logined() && Utils::get_curr()->has_role("student");
+			return Utils::is_logined() && Utils::get_curr() instanceof Student;
 		}
 
 		protected function get_data(array $args): array {
@@ -21,7 +21,7 @@
 				"Saturday", 
 			];
 
-			$class = Utils::get_curr()->get_class();
+			$class = Utils::curr_student()->get_class();
 
 			$days = [];
 

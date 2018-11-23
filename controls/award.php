@@ -20,7 +20,7 @@
 				if (Utils::is_incorrect($student_login, $cause))
 					$result = false;
 				else
-					$result = Utils::get_curr()->give_points(Users::get($student_login), $cause);
+					$result = Utils::curr_teacher()->give_points(Users::student($student_login), $cause);
 
 				if ($result) {
 					$result = "success";

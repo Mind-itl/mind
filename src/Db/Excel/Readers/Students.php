@@ -90,7 +90,7 @@
 			);
 			Passwords::register_user($i["login"], $pas, "student");
 
-			$user = Users::get($i["login"]);
+			$user = Users::student($i["login"]);
 			$teacher = $user->get_classruk();
 
 			if ($teacher) {

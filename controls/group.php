@@ -19,7 +19,7 @@
 		}
 
 		protected function get_data(array $args): array {
-			$class_name = $args[1] ?? Utils::get_curr()->get_role_arg("classruk");
+			$class_name = $args[1] ?? Utils::curr_teacher()->get_role_arg("classruk");
 		
 			[$class, $sum] = $this->get_sum_class($class_name);
 

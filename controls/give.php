@@ -19,7 +19,7 @@
 					error_log('incorrect $login $points in give.php:11');
 					$result = false;
 				} else {
-					$result = Utils::get_curr()->give_points($login, intval($points));
+					$result = Utils::curr_student()->give_points($login, intval($points));
 				}
 
 				if ($result) {
@@ -32,8 +32,8 @@
 			return [
 				"result" => $result ?? "",
 				"points" => [
-					"count" => Utils::get_curr()->get_points(),
-					"noun" => Utils::get_points_case(Utils::get_curr()->get_points())
+					"count" => Utils::curr_student()->get_points(),
+					"noun" => Utils::get_points_case(Utils::curr_student()->get_points())
 				]
 			];
 		}
