@@ -28,7 +28,7 @@
 				$classes[$class][] = $student;
 			}
 
-			return json_encode($classes);
+			return static::json_encode($classes);
 		}
 
 		public static function get_events(): string {
@@ -39,7 +39,16 @@
 				$events[] = $event;
 			}
 
-			return json_encode($events);
+			return static::json_encode($events);
+		}
+
+		public static function json_encode(array $a): string {
+			$a = json_encode($a);
+
+			if ($a === false)
+				throw new \Exception("JSON ERROR");
+
+			return $a;
 		}
 	}
 ?>

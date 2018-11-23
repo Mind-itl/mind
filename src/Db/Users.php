@@ -22,6 +22,9 @@
 		public static function get(string $login, bool $is_enter_login=false): User {
 			$login_field = $is_enter_login ? "ENTER_LOGIN" : "LOGIN";
 
+			if (!static::has_login($login, $is_enter_login))
+				throw new \Exception("No user with this login");
+
 			$r = Db::query_assoc("
 				SELECT *
 				FROM `passwords`
@@ -38,6 +41,8 @@
 				$user = new Teacher($login);
 			elseif ($role == "student")
 				$user = new Student($login);
+			else
+				throw new \Exception("User has incorrect role");
 
 			return $user;
 		}

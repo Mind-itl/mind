@@ -117,7 +117,7 @@
 
 			Notifications::add(
 				$user,
-				Utils::get_user($i["login"]),
+				Users::get($i["login"]),
 				"Пользователь зарегестрировался. Логин: ".$i["login"]." Пароль: $pas"
 			);
 		}
