@@ -4,7 +4,7 @@
 	use Mind\Users\{User, Teacher, Student};
 	use Mind\Server\Utils;
 
-	class Votings {
+	class Voting {
 		private $title, $desc, $till, $id;
 
 		public function __construct(int $id) {
@@ -38,7 +38,7 @@
 					"id" => $id,
 					"title" => $v["TITLE"],
 					"count" => $count
-				]
+				];
 			}
 
 			return $ret;
