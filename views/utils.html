@@ -1,5 +1,5 @@
 {% macro user_name(user, format) %}
-	{% if user.is_teacher() %}
+	{% if user.has_role("teacher") %}
 		{{ user.get_name(format|default("gi ft")) }}		
 	{% else %}
 		{{ user.get_name(format|default("fm gi")) }}
