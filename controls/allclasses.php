@@ -11,7 +11,7 @@
 		// }
 
 		public function get_data(array $args): array {
-			list($arr, $sum) = $this->get_points_by_classes();
+			[$arr, $sum] = $this->get_points_by_classes();
 			return [
 				"points_by_classes" => $arr,
 				"sum" => $sum
@@ -22,7 +22,7 @@
 			$arr = [];
 			$ssum = 0;
 			foreach ($this->get_classes() as $class) {
-				list($students, $sum) = $this->get_points_by_students(...$class);
+				[$students, $sum] = $this->get_points_by_students(...$class);
 
 				$ssum += $sum;
 

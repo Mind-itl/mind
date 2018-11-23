@@ -19,7 +19,7 @@
 			else 
 				$user = Utils::get_curr();
 
-			list($trans, $sum) = $this->trans($user);
+			[$trans, $sum] = $this->trans($user);
 
 			return [
 				"trans_by_day" => $this->group_by_days($trans),

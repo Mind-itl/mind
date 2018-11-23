@@ -33,7 +33,7 @@
 				$arr[$i]["father_name"] = $f(3, $i);
 
 				$class = $f(4, $i);
-				list($aaa, $bbb) = explode('-', $class);
+				[$aaa, $bbb] = explode('-', $class);
 				$arr[$i]["num"] = $aaa;
 				$arr[$i]["lit"] = $bbb;
 

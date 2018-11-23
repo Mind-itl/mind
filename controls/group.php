@@ -21,7 +21,7 @@
 		protected function get_data(array $args): array {
 			$class_name = $args[1] ?? Utils::get_curr()->get_role_arg("classruk");
 		
-			list($class, $sum) = $this->get_sum_class($class_name);
+			[$class, $sum] = $this->get_sum_class($class_name);
 
 			return [
 				"class" => $class_name,
@@ -46,7 +46,7 @@
 		private function get_students_in_class(string $class_name): array {
 			$class = [];
 
-			list($class_num, $class_lit) = explode("-", $class_name);
+			[$class_num, $class_lit] = explode("-", $class_name);
 
 			$r = Db::query("
 				SELECT LOGIN

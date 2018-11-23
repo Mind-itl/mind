@@ -28,7 +28,7 @@
 		];
 
 		protected function get_data(array $args): array {
-			list($group, $cl_ruk) = $this->get_group_clruk();
+			[$group, $cl_ruk] = $this->get_group_clruk();
 
 			return [
 				"date" => $this->table_date(),
