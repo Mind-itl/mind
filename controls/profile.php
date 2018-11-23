@@ -5,15 +5,6 @@
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
-	const lesson_times = [
-		["8:00", "8:40"],
-		["8:45", "9:25"],
-		["9:40", "10:20"],
-		["10:50", "11:30"],
-		["11:40", "12:20"],
-		["12:25", "13:05"]
-	];
-
 	class Profile extends Control {
 		public function has_access(array $args): bool {
 			return Utils::is_logined();
@@ -116,7 +107,7 @@
 			$class = Utils::get_curr()->get_class();
 
 			$lessons = Db::query(
-				"SELECT LESSON, PLACE, NUMBER
+				"SELECT *
 				FROM lessons
 				WHERE
 					CLASS = ?s AND
@@ -135,11 +126,10 @@
 				if ($num == $last_num)
 					continue;
 
-				if (isset(lesson_times[$num-1])) {
-					$f = "H:i";
-					$bg = \DateTime::createFromFormat($f, lesson_times[$num-1][0]);
-					$end = \DateTime::createFromFormat($f, lesson_times[$num-1][1]);
-
+				if (isset($lesson["TIME_FROM"]) && isset($lesson["TIME_UNTIL"])) {
+					$bg = new \DateTime($lesson["TIME_FROM"]);
+					$end = new \DateTime($lesson["TIME_UNTIL"]);
+					
 					$is_now = $bg <= (new \DateTime()) && (new \DateTime()) <= $end;
 				}
 
