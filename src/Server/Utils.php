@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Server;
 
-	use Mind\Users\User;
+	use Mind\Users\{User, Teacher, Student};
 	use Mind\Db\Users;
 
 	class Utils {
@@ -16,6 +16,14 @@
 
 		public static function get_curr(): User {
 			return Users::get($_SESSION['login']);
+		}
+
+		public static function curr_teacher(): Teacher {
+			return Users::teacher($_SESSION['login']);
+		}
+
+		public static function curr_student(): Student {
+			return Users::student($_SESSION['login']);
 		}
 
 		public static function redirect($url) {

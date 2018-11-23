@@ -59,6 +59,20 @@
 
 			return $r->num_rows != 0;
 		}
+
+		public static function student(string $login, bool $is_enter_login=false): Student {
+			$user = static::get($login);
+
+			if (!$user instanceof Student)
+				throw new \Exception("No student with that login");
+		}
+
+		public static function teacher(string $login, bool $is_enter_login=false): Teacher {
+			$user = static::get($login);
+
+			if (!$user instanceof Teacher)
+				throw new \Exception("No teacher with that login");
+		}
 	}
 
 ?>
