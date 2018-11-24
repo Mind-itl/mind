@@ -7,7 +7,7 @@
 
 	class Changelog extends Control {
 		public function has_access(array $args): bool {
-			return Utils::is_logined();
+			return true;
 		}
 
 		protected function get_data(array $args): array {
