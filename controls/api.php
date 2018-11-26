@@ -11,10 +11,10 @@
 		public function __construct(string $name) {}
 
 		public function has_access(array $args): bool {
-			if (!isset($_GET['token']))
-				return false;
+			if (isset($_GET['token']))
+				return Api_method::check_token($_GET['token']);
 
-			return Api_method::check_token($_GET['token']);
+			return Utils::is_logined();
 		}
 
 		public function get_html(array $args): string {

@@ -50,7 +50,7 @@ class StudentStatus extends React.Component {
 	}
 
 	setStatus(status) {
-		fetch(`/api/setStatus?login=${this.props.login}&status=${status}&token=site_mind_key_3`).catch(e=>console.log(e));
+		fetch(`/api/setStatus?login=${this.props.login}&status=${status}`).catch(e=>console.log(e));
 		this.setState({status: status, time: new Date()});
 	}
 

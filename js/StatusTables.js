@@ -11,8 +11,8 @@ export default class StatusTables extends React.Component {
 
 	load() {
 		Promise.all([
-			fetch('/api/getStatus?token=site_mind_key_3'),
-			fetch('/api/getStatusTypes?token=site_mind_key_3')
+			fetch('/api/getStatus'),
+			fetch('/api/getStatusTypes')
 		]).then(([data1, data2]) => 
 			Promise.all([data1.json(), data2.json()])
 		).then(([classes, statuses]) => 
