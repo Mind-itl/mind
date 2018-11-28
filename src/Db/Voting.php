@@ -44,6 +44,16 @@
 			return $ret;
 		}
 
+		public function get_id(): int {
+			return $this->id;
+		}
+		public function get_title(): string {
+			return $this->title;
+		}
+		public function get_description(): string {
+			return $this->desc;
+		}
+
 		public function get_variant_votes_count(int $var_id): int {
 			return intval(
 				Db::query_assoc("
@@ -78,16 +88,21 @@
 		}
 
 		public static function create(string $title, string $desc, \DateTime $till, array $variants): Voting {
-			$id = Db::query_assoc("
+			Db::query("
 				INSERT INTO votings (
 					TITLE, DESCRIPTION, TILL_DATE
 				) VALUES (
 					?s, ?s, ?i
-				);
-
-				SELECT LAST_INSERT_ID() as ID FROM votings;
+				)
 				", $title, $desc, $till->format('U')
-			)["ID"];
+			);
+
+			$id = Db::query_assoc("
+				SELECT ID
+				FROM votings
+				ORDER BY ID DESC
+				LIMIT 1
+			")["ID"];
 
 			$v = static::get($id);
 

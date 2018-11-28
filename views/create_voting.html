@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block title %}
+	Передать баллы
+{% endblock %}
+
+{% block body %}
+	{% if res_link %}
+		{{ res_link }}
+	{% endif %}	
+
+	<div class="container container-points">
+		<form action="" method="POST">
+			<input type="text" placeholder="title" name="title"><br>
+			<input type="text" placeholder="description" name="desc"><br>
+			till date <input type="date" name="till"><br>
+			<input type="text" placeholder="variants splitted by semicolon" name="variants">
+			<input type="submit">
+		</form>
+	</div>
+{% endblock %}

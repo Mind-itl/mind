@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block title %}
+	load
+{% endblock %}
+
+{% block body %}
+	title: {{ voting.title }} <br>
+	description: {{ voting.description }} <br>
+	
+	{% for var in voting.variants %}
+		Вариант "{{ var.title }}" Количество голосов {{ var.count }} <br>
+	{% endfor %}
+	
+
+{% endblock %}
