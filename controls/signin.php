@@ -22,7 +22,11 @@
 					$result = "incorrect";
 				} elseif (Passwords::enter_user($login, $password)) {
 					$result = "right";
-					Utils::redirect("/");
+
+					if (isset($_GET["from"]))
+						Utils::redirect($_GET["from"]);
+					else
+						Utils::redirect("/");
 				} else {
 					$result = "wrong";
 				}

@@ -27,6 +27,9 @@
 		}
 
 		public static function redirect($url) {
+			if ($url === "/" && $_SERVER["REQUEST_URI"] != "/out")
+				$url .= "?from=" . $_SERVER['REQUEST_URI'];
+
 			?>
 			<script>
 				window.location="<?=$url?>";
