@@ -3,6 +3,7 @@
 
 	use Mind\Server\{Api_method, Utils};
 	use Mind\Db\{Passwords, Users};
+	use Mind\Users\{Teacher, Student};
 
 	class getUser extends Api_method {
 		public static function handle(): array {
@@ -34,7 +35,7 @@
 				],
 			];
 
-			if ($user->has_role("teacher")) {
+			if ($user instanceof Teacher) {
 				$ret["roles"] = $user->get_roles();
 				$ret["role_args"] = [];
 
@@ -43,7 +44,7 @@
 					if (isset($role_arg))
 						$ret["role_args"][$role] = $role_arg;
 				}
-			} else {
+			} elseif ($user instanceof Student) {
 				$ret["points"] = $user->get_points();
 				$ret["group"] = [
 					"par" => intval($user->get_class("num")),
