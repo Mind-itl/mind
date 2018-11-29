@@ -1,8 +1,10 @@
 <?php
 	namespace Mind\Controls;
 
-	use Mind\Db\{Users, Voting as Voting_obj};
+	use Mind\Db\Users;
 	use Mind\Server\{Control, Utils};
+	use Mind\Db\Votings\{Variant, Voting as Voting_obj};
+
 
 	class Voting extends Control {
 		public function has_access(array $args): bool {
@@ -17,12 +19,7 @@
 			$voting = Voting_obj::get($id);
 
 			return [
-				"voting" => [
-					"id" => $id,
-					"title" => $voting->get_title(),
-					"description" => $voting->get_description(),
-					"variants" => $voting->get_variants()
-				]
+				"voting" => $voting
 			];
 		}
 	}

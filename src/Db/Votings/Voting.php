@@ -1,6 +1,7 @@
 <?php
-	namespace Mind\Db;
+	namespace Mind\Db\Votings;
 
+	use Mind\Db\Db;
 	use Mind\Users\{User, Teacher, Student};
 	use Mind\Server\Utils;
 
@@ -20,6 +21,9 @@
 			$this->id = $id;
 		}
 
+		/**
+		 * @return array<Variant>
+		*/
 		public function get_variants(): array {
 			$ret = [];
 
@@ -30,18 +34,53 @@
 				", $this->id
 			);
 
-			foreach ($r as $v) {
-				$id = intval($v["VARIANT_ID"]);
-				$count = $this->get_variant_votes_count($id);
-
-				$ret[] = [
-					"id" => $id,
-					"title" => $v["TITLE"],
-					"count" => $count
-				];
-			}
+			foreach ($r as $v)
+				$ret[] = new Variant($this, intval($v["VARIANT_ID"]));
 
 			return $ret;
+		}
+
+		public function vote(User $user, Variant $var): void {
+			assert($var->get_voting()->get_id() === $this->id);
+
+			if ($this->get_vote_variant($user))
+				$this->unvote($user);
+
+			Db::query("
+				INSERT INTO votes (
+					LOGIN, VOTING_ID, VARIANT_ID
+				) VALUES (
+					?s, ?i, ?i
+				)
+				", $user->get_login(), $this->id, $var->get_id()
+			);
+		}
+
+		public function unvote(User $user): void {
+			Db::query("
+				DELETE FROM votes
+				WHERE
+					VOTING_ID = ?i AND
+					LOGIN = ?s
+				", $this->id, $user->get_login()
+			);
+		}
+
+		public function get_vote_variant(User $user): ?Variant {
+			$r = Db::query("
+				SELECT VARIANT_ID
+				FROM votes
+				WHERE
+					VOTING_ID = ?i AND
+					LOGIN = ?s
+				", $this->id, $user->get_login()
+			);
+
+			if ($r->num_rows === 0)
+				return null;
+
+			$id = $r->fetch_assoc()["VARIANT_ID"];
+			return new Variant($this, $id);
 		}
 
 		public function get_id(): int {
@@ -52,19 +91,6 @@
 		}
 		public function get_description(): string {
 			return $this->desc;
-		}
-
-		public function get_variant_votes_count(int $var_id): int {
-			return intval(
-				Db::query_assoc("
-					SELECT COUNT(*) AS COUNT
-					FROM votes
-					WHERE
-						VOTING_ID = ?i AND
-						VARIANT_ID = ?i 
-					", $this->id, $var_id
-				)["COUNT"]
-			);
 		}
 
 		public function add_variant(string $str): void {
@@ -87,6 +113,9 @@
 			);
 		}
 
+		/**
+		 * @param array<string> $variants
+		*/
 		public static function create(string $title, string $desc, \DateTime $till, array $variants): Voting {
 			Db::query("
 				INSERT INTO votings (

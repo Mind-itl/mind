@@ -4,12 +4,31 @@
 {% endblock %}
 
 {% block body %}
-	title: {{ voting.title }} <br>
-	description: {{ voting.description }} <br>
+	title: {{ voting.get_title }} <br>
+	description: {{ voting.get_description }} <br>
 	
-	{% for var in voting.variants %}
-		Вариант "{{ var.title }}" Количество голосов {{ var.count }} <br>
+	{% for var in voting.get_variants %}
+		<div>
+			<div class="var-id" hidden>{{ var.get_id }}</div>
+			Вариант "{{ var.get_title }}" Количество голосов {{ var.get_count }} <button class="vote">{{var.voted_by(me) ? "-" : "+"}}</button><br>
+		</div>
 	{% endfor %}
 	
+	<script>
+		$(".vote").click(function(){
+			let id = $(this).parent().children(".var-id").html();
+			$.ajax({
+				method: "GET",
+				url: "/api/vote",
+				data: {
+					voting_id: 9,
+					variant_id: id
+				},
+				dataType: "json"
+			}).done(function(data) {
+				document.location.reload();
+			});
+		});
+	</script>
 
 {% endblock %}

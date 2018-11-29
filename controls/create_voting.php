@@ -1,9 +1,10 @@
 <?php
 	namespace Mind\Controls;
 
-	use Mind\Db\{Db, Users, Voting};
+	use Mind\Db\{Db, Users};
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
+	use Mind\Db\Votings\{Variant, Voting};
 
 	class Create_voting extends Control {
 		public function has_access(array $args): bool {
