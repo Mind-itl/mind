@@ -36,7 +36,9 @@
 				$ext = pathinfo($_FILES['img']['name'])["extension"];
 
 				if (!in_array($ext, ["jpg", "png", "gif", "jpeg"])) {
-					return "error"; //todo
+					return [
+						"result" => "error"
+					];
 				}
 
 				move_uploaded_file($_FILES['img']['tmp_name'], BANNERS."$last_id.$ext");

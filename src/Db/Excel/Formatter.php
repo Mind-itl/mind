@@ -12,6 +12,8 @@
 		public static function abbr_name(string $name): string {
 			$name = static::lower($name);
 			$name = preg_replace("/ё/u", "е", $name);
+			
+			assert($name !== null);
 
 			preg_match('/(\w+) *(\w)\.? *(\w)\.?/u', $name, $m);
 

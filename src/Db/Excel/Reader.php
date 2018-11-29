@@ -18,7 +18,12 @@
 
 				if ($range = $cell->getMergeRange()) {
 					$range = Coordinate::splitRange($range)[0][0];
-					return $sheet->getCell($range)->getValue() ?? "";
+					$cell = $sheet->getCell($range);
+
+					if ($cell === null)
+						return "";
+					
+					return $cell->getValue() ?? "";
 				}
 
 				return $cell->getValue() ?? "";

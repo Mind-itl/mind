@@ -27,7 +27,10 @@
 		private function get_readers(): array {
 			$arr = [];
 
-			foreach (scandir(READERS) as $reader_file) {
+			$files = scandir(READERS);
+			$files = $files ? $files : [];
+
+			foreach ($files as $reader_file) {
 				if ($reader_file == "." || $reader_file == "..")
 					continue;
 
@@ -45,16 +48,22 @@
 		private function get_readers_assoc(): array {
 			$arr = [];
 
-			foreach (scandir(READERS) as $reader_file) {
+			$files = scandir(READERS);
+			$files = $files ? $files : [];
+
+			foreach ($files as $reader_file) {
 				if ($reader_file == "." || $reader_file == "..")
 					continue;
 
 				require_once READERS.$reader_file;
 				$cls_name = Reader::get_reader_name(substr($reader_file, 0, -4));
 
-				$name = call_user_func($cls_name."::get_name");
+				$func_name = $cls_name."::get_name";
+				if (is_callable($func_name)) {
+					$name = call_user_func($func_name);
+					$arr[$name] = $cls_name;
+				}
 
-				$arr[$name] = $cls_name;
 			}
 
 			return $arr;
@@ -70,7 +79,9 @@
 			$readers = $this->get_readers_assoc();
 			$cls_name = $readers[$type];
 
-			call_user_func($cls_name."::load", $_FILES["excel"]["tmp_name"]);
+			$func_name = $cls_name."::load";
+			if (is_callable($func_name))
+				call_user_func($func_name, $_FILES["excel"]["tmp_name"]);
 		}
 	}
 ?>
