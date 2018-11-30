@@ -56,10 +56,16 @@
 				is_file($public_file);
 		}
 
-		public static function main() {
+		public static function init(): void {
+			require_once dirname(__DIR__, 2)."/config.php";
+
 			setlocale(LC_TIME, "ru_RU.UTF-8");
 			session_start();
-			
+		}
+
+		public static function main() {
+			static::init();
+
 			$url = $_SERVER['REQUEST_URI'];
 			if (self::has_public_file($url))
 				return false;

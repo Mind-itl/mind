@@ -1,11 +1,9 @@
 <?php
 	require __DIR__."/../vendor/autoload.php";
+	\Mind\Server\Route::init();
 
 	use Mind\Db\{Music};
 	use Mind\Server\{Utils};
-
-	setlocale(LC_TIME, "ru_RU.UTF-8");
-	session_start();
 
 	function vote(int $id) {
 		$curr_vote = Music::get_vote(Utils::get_curr());
