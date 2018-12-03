@@ -21,6 +21,8 @@
 			$this->family_name = $st_assoc["FAMILY_NAME"];
 			$this->father_name = $st_assoc["FATHER_NAME"];
 
+			$this->email = $st_assoc["EMAIL"];
+
 			$this->enter_login = $st_assoc["ENTER_LOGIN"];
 
 			$r = Db::query("
