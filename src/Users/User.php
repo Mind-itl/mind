@@ -10,7 +10,11 @@
 		
 		protected $login;
 		protected $enter_login;
-		protected $given_name, $family_name, $father_name;
+		protected $given_name, $family_name, $father_name, $email;
+
+		public function get_email(): ?string {
+			return $this->email;
+		}
 
 		public function get_given_name(): string {
 			return $this->given_name;

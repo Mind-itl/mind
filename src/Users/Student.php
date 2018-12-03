@@ -15,6 +15,8 @@
 			$this->family_name = $st_assoc["FAMILY_NAME"];			
 			$this->father_name = $st_assoc["FATHER_NAME"];
 
+			$this->email = $st_assoc["EMAIL"];
+
 			$this->class_num = $st_assoc["CLASS_NUM"];
 			$this->class_lit = $st_assoc["CLASS_LIT"];
 
