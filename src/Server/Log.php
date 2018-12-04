@@ -54,12 +54,11 @@
 			$mess
 				->setFrom([MAIL_FROM_EMAIL => MAIL_FROM_NAME])
 				->setTo([MAIL_DEBUG_EMAIL])
-				->setBody("Mind error");
-
+				->setContentType("text/html");
 
 			$handler = new SwiftMailerHandler(\Mind\Db\Email::get_mailer(), $mess);
-			// $formatter = new HtmlFormatter();
-			// $handler->setFormatter($formatter);
+			$formatter = new HtmlFormatter();
+			$handler->setFormatter($formatter);
 			$logger->pushHandler($handler);
 
 			ErrorHandler::register($logger);
