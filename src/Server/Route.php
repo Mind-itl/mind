@@ -61,6 +61,9 @@
 
 			setlocale(LC_TIME, "ru_RU.UTF-8");
 			session_start();
+
+			Log::init();
+			Log::info("start");
 		}
 
 		public static function main() {
