@@ -1,56 +1,13 @@
 <?php
 	use PHPUnit\Framework\TestCase;
-
-	require_once "lib/Excel_reader.php";
-	require_once "lib/excel_readers/Timetable.php";
+	use Mind\Db\Excel\Readers\Timetable;
 
 	final class TimetableReaderTest extends TestCase {
 		/**
-		 * @dataProvider providerNames
-		 */
-		public function testFormatName(string $name, string $expected): void {
-			$this->assertEquals(
-				Timetable_excel_reader::format_name($name),
-				$expected
-			);
-		}
-
-		public function providerNames(): array {
-			$name = "Митясова Е.А.";
-			return [
-				["Митясова Е. А", $name],
-				["Митясова Е А", $name],
-				["Митясова Е   А", $name],
-				["Митясова е а", $name]
-			];
-		}
-
-		/**
-		 * @dataProvider providerGroups
-		 */
-		public function testGroupName(string $group, string $expected): void {
-			$this->assertEquals(
-				Timetable_excel_reader::format_group($group),
-				$expected
-			);
-		}
-
-		public function providerGroups(): array {
-			$group = "10-4";
-			return [
-				["10.4", $group],
-				["10-4", $group],
-				["10   4", $group],
-				["10 - 4", $group]
-			];
-		}
-
-		/**
-		 * @depends testFormatName
 		 * @dataProvider providerFiles
 		 */
 		public function testExcel($file_name, $need): void {
-			$assoc = Timetable_excel_reader::load_assoc($file_name);
+			$assoc = Timetable::load_assoc($file_name);
 			$this->assertEquals($assoc, $need);
 		}
 
@@ -66,7 +23,7 @@
 				["teacher"=>"Фадеев А.В.", "day"=>"Monday", "class"=>"10-4", "num"=>6, "name"=>"Математика", "place"=>"310"]
 			];
 			return [
-				["tests/timetable.xlsx", $res]
+				["tests/excel/timetable.xlsx", $res]
 			];
 		}
 	}
