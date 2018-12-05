@@ -16,11 +16,12 @@
 
 		protected function get_data(array $args): array {
 			if (Utils::isset_post_fields("excel_type")) {
-				$this->post_handle();
+				$status = $this->post_handle();
 			}
 
 			return [
-				"readers" => $this->get_readers()
+				"readers" => $this->get_readers(),
+				"status" => $status ?? null
 			];
 		}
 
@@ -69,12 +70,15 @@
 			return $arr;
 		}
 
-		private function post_handle() {
+		private function post_handle(): string {
 			$type = $_POST["excel_type"];
 			$readers = $this->get_readers();
 
 			if (!in_array($type, $readers))
-				return;
+				return "error";
+
+			if (!file_exists($_FILES["excel"]["tmp_name"]))
+				return "error";
 
 			$readers = $this->get_readers_assoc();
 			$cls_name = $readers[$type];
@@ -82,6 +86,8 @@
 			$func_name = $cls_name."::load";
 			if (is_callable($func_name))
 				call_user_func($func_name, $_FILES["excel"]["tmp_name"]);
+
+			return "success";
 		}
 	}
 ?>
