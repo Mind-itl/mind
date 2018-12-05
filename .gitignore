@@ -11,6 +11,11 @@ error_log
 composer.phar
 /vendor/
 
-#npm
+# npm
 node_modules/
 public_html/dist
+
+# codeception
+_generated
+_output
+_data
