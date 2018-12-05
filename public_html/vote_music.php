@@ -25,7 +25,7 @@
 		Music::remove($id);
 	}
 
-	if (isset($_POST['id']) && is_logined()) {
+	if (isset($_POST['id']) && Utils::is_logined()) {
 		if (isset($_POST['remove']))
 			remove($_POST['id']);
 		else
