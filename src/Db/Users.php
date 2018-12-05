@@ -65,6 +65,8 @@
 
 			if (!$user instanceof Student)
 				throw new \Exception("No student with that login");
+
+			return $user;
 		}
 
 		public static function teacher(string $login, bool $is_enter_login=false): Teacher {
@@ -72,6 +74,8 @@
 
 			if (!$user instanceof Teacher)
 				throw new \Exception("No teacher with that login");
+
+			return $user;
 		}
 	}
 
