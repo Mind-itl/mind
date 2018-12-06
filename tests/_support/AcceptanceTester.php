@@ -16,6 +16,9 @@
  *
  * @SuppressWarnings(PHPMD)
 */
+
+require_once dirname(__DIR__, 2)."/config.php";
+
 class AcceptanceTester extends \Codeception\Actor {
 	use _generated\AcceptanceTesterActions;
 

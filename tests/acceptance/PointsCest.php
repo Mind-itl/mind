@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/config.php";
-
 class PointsCest {
 	public function _before(AcceptanceTester $I) {
 		$I->loginAsStudent();
