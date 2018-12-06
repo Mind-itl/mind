@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>Вход</title>
+	<title>Войти</title>
 	{# include('links.html') #}
 	<link rel="shortcut icon" href="/img/favicon.ico">
 	<link rel="stylesheet" href="/css/{{ control_name }}.css">
@@ -14,7 +14,7 @@
 		<div class="plitka">
 			{% if result=="incorrect" %}
 				<h3 class="index-notification">
-					Пароль и логин могут содержать только латинские буквы, цифры и знак подчёркивания
+					Пароль и логин могут содержать только латинские буквы, цифры и знаки подчёркивания
 				</h3>
 			{% endif %}
 			{% if result=="wrong" %}

@@ -6,10 +6,20 @@
 	use Mind\Db\Db;
 
 	abstract class User {
-		protected $_modified = false;
-		
+		/**
+		 * @var string $login
+		 */
 		protected $login;
+		/**
+		 * @var string $enter_login
+		 */
 		protected $enter_login;
+		/**
+		 * @var string $given_name
+		 * @var string $family_name
+		 * @var string $father_name
+		 * @var string $email
+		 */
 		protected $given_name, $family_name, $father_name, $email;
 
 		public function get_email(): ?string {

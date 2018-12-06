@@ -6,6 +6,10 @@
 	use Mind\Db\{Users, Causes, Db, Transactions};	
 
 	class Student extends User {
+		/**
+		 * @var string $class_num
+		 * @var string $class_lit
+		 */
 		private $class_num, $class_lit;
 
 		private function download_from_bd() {
@@ -63,7 +67,7 @@
 		}
 
 		public function get_transactions(): array {
-			return Transactions::of_student($this->login);
+			return Transactions::of_student($this);
 		}
 
 		public function get_class(string $format="num-lit"): string {
@@ -74,7 +78,7 @@
 		}
 
 		public function give_points(User $to, int $points): bool {
-			return Transactions::add($this->login, $to, $points, "C");
+			return Transactions::add($this, $to, $points, "C");
 		}
 
 		public function get_classruk(): ?Teacher {

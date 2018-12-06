@@ -15,7 +15,7 @@
 				["student", "Мои баллы", "/points"],
 				["student", "Передать баллы", "/give"],
 				["teacher", "Начислить баллы", "/award"],
-				["classruk", "Выписка по классу", "/class"],
+				["classruk", "Выписка по классу", "/group"],
 				["zam", "Общая ведомость", "/allclasses"],
 				["diric", "Общая ведомость", "/allclasses"],
 				["pedorg", "Общая ведомость", "/allclasses"],

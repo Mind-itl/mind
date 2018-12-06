@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}		
-	{% if me.is_student %}
+	{% if me.has_role("student") %}
 		{% set name = me.get_name("gi") %}
 	{% else %}
 		{% set name = me.get_name("gi ft") %}
@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="block-information profile-information">
 			<h2>{{ daytime }}, {{ name }}!</h2>
-			{% if me.is_student %}
+			{% if me.has_role("student") %}
 				<h2>
 					Баланс: <strong>
 						{{ points.count }}
@@ -24,7 +24,7 @@
 					{{ points.noun }}
 				</h2>
 				<h3>
-					Класс: <strong>
+					Класс: <strong>	
 						{{ group }}
 					</strong>
 				</h3>
