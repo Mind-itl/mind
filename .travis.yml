@@ -1,3 +1,10 @@
 language: php
 php:
   - '7.1'
+
+install:
+  - composer install; composer update
+  - echo "<?php" > config.php 
+
+script:
+  - composer analyse

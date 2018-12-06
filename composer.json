@@ -19,7 +19,7 @@
 		"unittest": "\"./vendor/bin/phpunit\" tests/phpunit",
 		"acceptance": "\"./vendor/bin/codecept\" run acceptance",
 		"webpack": "\"./node_modules/.bin/webpack\"",
-		"analyse": "\"./vendor/bin/phpstan\" analyse src controls api -l 7 > error_log"
+		"analyse": "\"./vendor/bin/phpstan\" analyse src controls api -l 7"
 	},
 	"autoload": {
 		"psr-4": {
