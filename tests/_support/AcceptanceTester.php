@@ -16,11 +16,20 @@
  *
  * @SuppressWarnings(PHPMD)
 */
-class AcceptanceTester extends \Codeception\Actor
-{
-    use _generated\AcceptanceTesterActions;
+class AcceptanceTester extends \Codeception\Actor {
+	use _generated\AcceptanceTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+	public function loginAsStudent() {
+		$this->amOnPage("/");
+		$this->fillField("login", TEST_STUDENT_LOGIN);
+		$this->fillField("password", TEST_STUDENT_PASSWORD);
+		$this->click("Войти");
+	}
+
+	public function loginAsTeacher() {
+		$this->amOnPage("/");
+		$this->fillField("login", TEST_TEACHER_LOGIN);
+		$this->fillField("password", TEST_TEACHER_PASSWORD);
+		$this->click("Войти");
+	}
 }
