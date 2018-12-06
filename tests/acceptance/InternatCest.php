@@ -8,7 +8,7 @@ class InternatCest {
 		$I->fillField("login", TEST_RIGHT_LOGIN);
 		$I->fillField("password", TEST_RIGHT_PASSWORD);
 		$I->click("Войти");
-		$I->amOnPage("/internat");
+		$I->click("Интернат");
 	}
 
 	public function pageWorks(AcceptanceTester $I) {
