@@ -21,7 +21,7 @@
 			if (Utils::is_logined())
 				header('HTTP/1.0 403 Forbidden');
 			else
-				Utils::redirect("/");
+				Utils::redirect("/?from=".$_SERVER["REQUEST_URI"]);
 			exit();
 		}
 
