@@ -25,14 +25,19 @@
 
 			$login_field = $is_enter_login ? "ENTER_LOGIN" : "LOGIN";
 
-			$user = Db::query_assoc("
+			$user = Db::query("
 				SELECT *
 				FROM `passwords`
 				WHERE `$login_field` = ?s
 				", $login
 			);
 
-			if ($user['HASH'] == $hash)
+			if ($user->num_rows == 0)
+				return null;
+
+			$user = $user->fetch_assoc();
+
+			if ($user['HASH'] == $hash && isset($user['LOGIN']))
 				return Users::get($user['LOGIN']);
 			else
 				return null;
