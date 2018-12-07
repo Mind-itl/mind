@@ -14,7 +14,6 @@
 	{% endif %}
 
 	<div class="container">
-		
 		<div class="block-information profile-information">
 			<h2>{{ daytime }}, {{ name }}!</h2>
 			{% if me.has_role("student") %}
@@ -52,7 +51,6 @@
 				{% endif %}
 			{% endif %}
 		</div>
-
 		<div class="block-information timetable">
 			<h2>
 				{{ is_today ? 'Сегодня' : 'Завтра'}}:
@@ -84,7 +82,6 @@
 				</table>
 			{% endif %}
 		</div>
-
 		<div class="notifications">
 			{% for notif in notifications %}
 				{% set notif_class = notif.read ? "read-notification" : "unread-notification" %}
@@ -113,6 +110,5 @@
 				</div>
 			{% endfor %}
 		</div>
-		
 	</div>
 {% endblock %}

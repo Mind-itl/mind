@@ -5,7 +5,6 @@
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
-	color: black;
 }
 h3 {
 	margin-bottom: 10px;
@@ -20,13 +19,8 @@ body {
 	width: 100%; 
 	max-width: 1080px; 
 	padding: 0; 
-	margin: 0 auto; 
+	margin: auto; 
 }
-
-#rotator ul {
-	margin-top: 0;
-}
-
 header > .container-menu {
 	margin-top: 120px;
 }
@@ -42,7 +36,7 @@ li {
 	list-style: none; 
 }
 a { 
-	color: inherit !important; 
+	color: inherit; 
 	text-decoration: none;   
 }
 .header { 
@@ -55,6 +49,7 @@ a {
 	background: #004B7E;
 	padding: 0;
 	max-height: 80px;
+	overflow: hidden;
 }
 .top-menu > .container-menu > img {
 	width: 10%; 
@@ -88,7 +83,6 @@ nav > ul > li a {
 	padding: 10px;
 	transition: 0.5s;
 	cursor: pointer;
-	text-decoration: none !important;
 }
 nav > ul > li > a:hover {
 	background: rgba(0, 55, 106, .9);
@@ -100,33 +94,26 @@ nav > ul > li > a:hover {
 	text-shadow: 0 0 3px #555;
 }
 nav > ul > li.active { 
-	background: #002C4A !important;
+	background: #002C4A;
 }
 .main-menu {
-	background: #004B7E ;
-
+	background: #004B7E;
 }
 ul.dropdown-menu {
 	border-radius: 0;
 	border: 0;
-	z-index: 2000;
 }
 ul.dropdown-menu li {
 	padding: 5px 0;
 	transition: .5s;
 }
-
-ul.dropdown-menu a {
-	color: black !important;
-}
-
 ul.dropdown-menu,
 ul.dropdown-menu li {
-	background: #CCDFEC !important;
+	background: #CCDFEC;
 }
 
 ul.dropdown-menu li:hover {
-	background: #B3C8E6 !important;
+	background: #B3C8E6;
 }
 .container { 
 	width: 100%; 
@@ -134,13 +121,10 @@ ul.dropdown-menu li:hover {
 	padding: 20px; 
 	margin: auto; 
 	background: #CCDFEC;
-	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
-
-
 .container-points {
 	display: block;
 }
@@ -150,21 +134,20 @@ ul.dropdown-menu li:hover {
 .container-internat {
 	align-items: flex-start;
 }
-
 .block-information {
-	width: 50%;
 	padding: 20px;
 	background: #93BAC8;
 	margin-bottom: 20px;
 }
 .profile-information {
-	min-height: 50px;
+	width: 50%;
 }
 .profile-information h3 {
 	margin-top: 10px;
 }
 .timetable {
-	width: 49%;
+	width: 48%;
+	float: right;
 	margin-bottom: 20px;
 }
 .timetable h2 {
@@ -198,15 +181,14 @@ tr.lesson-now {
 	background: #CCDFEC;
 }
 .notifications { 
-	float: left;
-	width: 50%;
 	display: flex;
 	flex-wrap: wrap;
+	width: 100%;
 }
 .notifications .one-notif { 
 	padding: 10px;
 	margin-right: 15px;
-	width: 100%;
+	flex-basis: 50%;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 4px #777;
@@ -226,18 +208,14 @@ tr.lesson-now {
 	font: 15px/1.5 "Open Sans", arial;
 }
 .notifications .cause {
-	position: relative;
 	color: #000;
 	font: 500 17px/1.5 "Open Sans", arial;
 }
 .notifications .points {
-	display: block;
-	position: absolute;
-	bottom: -5px;
-	right: 0;
-	font: 700 25px/1.5 "Open Sans", arial;
+	font: 700 27px/1.5 "Open Sans", arial;
 	float: right;
 	align-self: center;
+	margin-top: -15px;
 }
 .notifications .good-points {
 	color: #007800;
@@ -429,10 +407,8 @@ input[type="file"].form-control {
 .add-voting {
 	margin-top: 20px;
 }
-a.dropdown-toggle {
+.dropdown {
   position: relative;
-  background: #004B7E !important;
-  height: ;
 }
 .dropdown-toggle:focus {
   outline: 0;
@@ -448,7 +424,6 @@ a.dropdown-toggle {
 }
 .open > .dropdown-menu {
   display: block;
-  z-index: 2000;
 }
 .dropdown .caret {
   border-top: 0;
@@ -479,7 +454,18 @@ a.dropdown-toggle {
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 	background-clip: padding-box;
 }
-
+.caret {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 2px;
+	vertical-align: middle;
+	border-color: #fff;
+	border-top: 4px dashed;
+	border-top: 4px solid;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
 .profile-photo {
 	width: 10px;
 	height: 10px;
