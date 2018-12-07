@@ -17,7 +17,7 @@
 	"scripts": {
 		"start": "php -S localhost:8080 -t public_html public_html/route.php",
 		"unittest": "\"./vendor/bin/phpunit\" tests/phpunit",
-		"acceptance": "\"./vendor/bin/codecept\" run acceptance",
+		"acceptance": "\"./vendor/bin/codecept\" run acceptance --html & start tests/_output/report.html",
 		"webpack": "\"./node_modules/.bin/webpack\"",
 		"analyse": "\"./vendor/bin/phpstan\" analyse src controls api -l 7 > error_log"
 	},

@@ -35,4 +35,11 @@ class AcceptanceTester extends \Codeception\Actor {
 		$this->fillField("password", TEST_TEACHER_PASSWORD);
 		$this->click("Войти");
 	}
+
+	public function loginAsZam() {
+		$this->amOnPage("/");
+		$this->fillField("login", TEST_ZAM_LOGIN);
+		$this->fillField("password", TEST_ZAM_PASSWORD);
+		$this->click("Войти");
+	}
 }

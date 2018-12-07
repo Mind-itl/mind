@@ -6,6 +6,10 @@
 	use Mind\Users\{User, Teacher, Student};
 
 	class Menu extends Control {
+		public function has_access(array $args): bool {
+			return Utils::is_logined();
+		}
+
 		private $button_view;
 		private $buttons = [
 			// [role, title, url, class (maybe)]
@@ -26,6 +30,7 @@
 			["vospit", "Интернат", "/internat"],
 			["teacher", "Оповестить учеников", "/broadcast"],
 			["zam", "Загрузить данные", "/load"],
+			["zam", "Добавить голосование", "/create_voting"],
 			["all", "Документы", "https://kpfu.ru/it-liceum/dokumenty-38501"]
 		];
 
