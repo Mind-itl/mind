@@ -11,11 +11,22 @@
 				'pass' => DB_PASSWORD
 			]);
 
-			return $sql->query(...$args);
+			/** @var mixed */
+			$r = $sql->query(...$args);
+
+			if ($r === false)
+				throw new \Exception("Wrong sql connection");
+
+			return $r;
 		}
 
 		public static function query_assoc(...$args): array {
-			return static::query(...$args)->fetch_assoc();
+			$r = static::query(...$args)->fetch_assoc();
+
+			if ($r === null)
+				throw new \Exception("Wrong assoc sql query");
+
+			return $r;
 		}
 	}
 ?>
