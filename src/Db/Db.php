@@ -4,7 +4,7 @@
 	require_once __DIR__."/../../config.php";
 
 	class Db {
-		public static function query(...$args) {
+		public static function query(...$args): \mysqli_result {
 			$sql = new \SafeMySQL([
 				'user' => DB_USER,
 				'db' => DB_NAME,
@@ -14,7 +14,7 @@
 			return $sql->query(...$args);
 		}
 
-		public static function query_assoc(...$args) {
+		public static function query_assoc(...$args): array {
 			return static::query(...$args)->fetch_assoc();
 		}
 	}

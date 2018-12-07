@@ -2,7 +2,7 @@
 	namespace Mind\Controls;
 
 	use Mind\Db\{Db, Users, Notifications, Json};
-	use Mind\Server\{Control, Utils};
+	use Mind\Server\{Control, Utils, Route};
 	use Mind\Users\{User, Teacher, Student};
 
 	class Group extends Control {
@@ -20,14 +20,36 @@
 
 		protected function get_data(array $args): array {
 			$class_name = $args[1] ?? Utils::curr_teacher()->get_role_arg("classruk");
-		
+			
+			if (!$this->class_exists($class_name))
+				Route::not_found();
+
 			[$class, $sum] = $this->get_sum_class($class_name);
 
 			return [
-				"class" => $class_name,
-				"sum" => $sum,
+				"group" => $class_name,
+				"points" => [
+					"count" => $sum,
+					"noun" => Utils::get_points_case($sum)
+				],
 				"students" => $class,
 			];
+		}
+
+		private function class_exists(string $class): bool {
+			if (strpos($class, "-") === false)
+				return false;
+
+			[$class_num, $class_lit] = explode("-", $class);
+
+			return Db::query_assoc("
+				SELECT COUNT(*) AS COUNT
+				FROM students
+				WHERE
+					CLASS_LIT = ?s AND
+					CLASS_NUM = ?s
+				", $class_lit, intval($class_num)
+			)["COUNT"] > 0;
 		}
 
 		private function get_sum_class(string $class_name) {
