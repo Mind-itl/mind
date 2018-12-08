@@ -3,7 +3,7 @@
 {% import "utils.html" as utils %}
 
 {% block title %}
-	Пользователь
+	{{ he.get_enter_login }}
 {% endblock %}
 
 {% block body %}
@@ -11,9 +11,10 @@
 		<h3>Имя: <strong>{{ utils.user_name(he) }}</strong></h3>
 		<h3>Логин: <strong>{{ he.get_enter_login }}</strong></h3>
 
-		{% if he.is_student %}
+		{% if he.has_role("student") %}
 			<h3>Баллы: <strong>{{ he.get_points }}</strong></h3>
-			<a href="/points/{{ he.get_enter_login }}" class="submit">Выписка по баллам</a>
+			<h3>Класс: <strong>{{ he.get_class }}</strong></h3>
+			<a href="/points/{{ he.get_enter_login }}" class="submit">Выписка по баллам</a><br>
 		{% endif %}
 	</div>
 {% endblock %}
