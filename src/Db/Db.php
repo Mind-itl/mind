@@ -4,7 +4,7 @@
 	require_once __DIR__."/../../config.php";
 
 	class Db {
-		public static function query(...$args): \mysqli_result {
+		public static function query(...$args) {
 			$sql = new \SafeMySQL([
 				'user' => DB_USER,
 				'db' => DB_NAME,
@@ -16,6 +16,9 @@
 
 			if ($r === false)
 				throw new \Exception("Wrong sql connection");
+
+			if ($r === true)
+				return null;
 
 			return $r;
 		}

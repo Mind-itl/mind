@@ -31,5 +31,6 @@
 		}
 	}
 
-	Email::init();
+	if (MAIL)
+		Email::init();
 ?>

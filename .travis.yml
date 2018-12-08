@@ -8,7 +8,8 @@ services:
 install:
   - composer install
   - cat test_config.php > config.php
-  - mysql < sql.sql
+  - mysql < tests/dump.sql
+  - php -S localhost:8080 -t public_html public_html/route.php &
 
 script:
   - vendor/bin/phpunit tests/phpunit
