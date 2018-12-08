@@ -16,11 +16,30 @@
  *
  * @SuppressWarnings(PHPMD)
 */
-class AcceptanceTester extends \Codeception\Actor
-{
-    use _generated\AcceptanceTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+require_once dirname(__DIR__, 2)."/config.php";
+
+class AcceptanceTester extends \Codeception\Actor {
+	use _generated\AcceptanceTesterActions;
+
+	public function loginAsStudent() {
+		$this->amOnPage("/");
+		$this->fillField("login", TEST_STUDENT_LOGIN);
+		$this->fillField("password", TEST_STUDENT_PASSWORD);
+		$this->click("Войти");
+	}
+
+	public function loginAsTeacher() {
+		$this->amOnPage("/");
+		$this->fillField("login", TEST_TEACHER_LOGIN);
+		$this->fillField("password", TEST_TEACHER_PASSWORD);
+		$this->click("Войти");
+	}
+
+	public function loginAsZam() {
+		$this->amOnPage("/");
+		$this->fillField("login", TEST_ZAM_LOGIN);
+		$this->fillField("password", TEST_ZAM_PASSWORD);
+		$this->click("Войти");
+	}
 }

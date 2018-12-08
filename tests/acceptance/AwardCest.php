@@ -1,18 +1,21 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/config.php";
-
 class AwardCest {
-	public function _before(AcceptanceTester $I) {
-		$I->amOnPage("/");
-		$I->fillField("login", TEST_TEACHER_LOGIN);
-		$I->fillField("password", TEST_TEACHER_PASSWORD);
-		$I->click("Войти");
+	public function pageWorksWhenTeacher(AcceptanceTester $I) {
+		$I->loginAsTeacher();
 		$I->click("Начислить баллы");
-	}
-
-	public function pageWorks(AcceptanceTester $I) {
 		$I->seeInTitle("Начислить баллы");
 		$I->see("Выберите ученика");
+	}
+
+	public function pageDoesntWorkWhenStudent(AcceptanceTester $I) {
+		$I->loginAsStudent();
+		$I->amOnPage("/award");
+		$I->seeResponseCodeIs(403);
+	}
+
+	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {
+		$I->amOnPage("/award");
+		$I->seeInTitle("Войти");
 	}
 }

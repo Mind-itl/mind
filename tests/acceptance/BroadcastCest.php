@@ -1,19 +1,22 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/config.php";
-
 class BroadcastCest {
-	public function _before(AcceptanceTester $I) {
-		$I->amOnPage("/");
-		$I->fillField("login", TEST_TEACHER_LOGIN);
-		$I->fillField("password", TEST_TEACHER_PASSWORD);
-		$I->click("Войти");
+	public function pageWorksWhenTeacher(AcceptanceTester $I) {
+		$I->loginAsTeacher();
 		$I->click("Оповестить учеников");
-	}
-
-	public function pageWorks(AcceptanceTester $I) {
 		$I->seeInTitle("Оповестить учеников");
 		$I->see("Добавить учеников");
 		$I->see("Введите сообщение");
+	}
+
+	public function pageDoesntWorkWhenStudent(AcceptanceTester $I) {
+		$I->loginAsStudent();
+		$I->amOnPage("/broadcast");
+		$I->seeResponseCodeIs(403);
+	}
+
+	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {
+		$I->amOnPage("/broadcast");
+		$I->seeInTitle("Войти");
 	}
 }

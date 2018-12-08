@@ -61,19 +61,19 @@
 		}
 
 		public static function student(string $login, bool $is_enter_login=false): Student {
-			$user = static::get($login);
+			$user = static::get($login, $is_enter_login);
 
 			if (!$user instanceof Student)
-				throw new \Exception("No student with that login");
+				throw new \Exception("No student with that login: $login");
 
 			return $user;
 		}
 
 		public static function teacher(string $login, bool $is_enter_login=false): Teacher {
-			$user = static::get($login);
+			$user = static::get($login, $is_enter_login);
 
 			if (!$user instanceof Teacher)
-				throw new \Exception("No teacher with that login");
+				throw new \Exception("No teacher with that login: $login");
 
 			return $user;
 		}

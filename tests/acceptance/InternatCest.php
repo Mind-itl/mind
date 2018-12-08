@@ -1,19 +1,22 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/config.php";
-
 class InternatCest {
-	public function _before(AcceptanceTester $I) {
-		$I->amOnPage("/");
-		$I->fillField("login", TEST_RIGHT_LOGIN);
-		$I->fillField("password", TEST_RIGHT_PASSWORD);
-		$I->click("Войти");
+	public function pageWorksWhenStudent(AcceptanceTester $I) {
+		$I->loginAsStudent();
 		$I->click("Интернат");
-	}
-
-	public function pageWorks(AcceptanceTester $I) {
 		$I->seeInTitle("Интернат");
 		$I->see("Сегодня дежурят");
 		$I->see("Голосование");		
+	}
+
+	public function pageDoesntWorkWhenTeacher(AcceptanceTester $I) {
+		$I->loginAsTeacher();
+		$I->amOnPage("/internat");
+		$I->seeResponseCodeIs(403);
+	}
+
+	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {
+		$I->amOnPage("/internat");
+		$I->seeInTitle("Войти");
 	}
 }
