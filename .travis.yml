@@ -7,4 +7,4 @@ install:
   - echo "<?php" > config.php 
 
 script:
-  - composer analyse
+  - vendor/bin/phpunit tests/phpunit
