@@ -1,14 +1,22 @@
 <?php
 
 class AllclassesCest {
-	public function _before(AcceptanceTester $I) {
+	public function pageWorks(AcceptanceTester $I) {
 		$I->loginAsZam();
 		$I->click("Общая ведомость");
-	}
-
-	public function pageWorks(AcceptanceTester $I) {
 		$I->seeInTitle("Общая ведомость");
 		$I->see("Итого по лицею");
 		$I->see(TEST_STUDENT_GROUP);
+	}
+
+	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {
+		$I->amOnPage("/allclasses");
+		$I->seeInTitle("Войти");
+	}
+
+	public function pageDoesntWorkWhenStudent(AcceptanceTester $I) {
+		$I->loginAsStudent();
+		$I->amOnPage("/allclasses");
+		$I->seeResponseCodeIs(403);
 	}
 }
