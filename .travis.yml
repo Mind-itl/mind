@@ -2,9 +2,14 @@ language: php
 php:
   - '7.1'
 
+services:
+  - mysql
+
 install:
-  - composer install; composer update
-  - echo "<?php" > config.php 
+  - composer install
+  - cat test_config.php > config.php
+  - mysql < sql.sql
 
 script:
   - vendor/bin/phpunit tests/phpunit
+  - vendor/bin/codecept run acceptance
