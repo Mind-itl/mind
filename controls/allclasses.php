@@ -2,13 +2,17 @@
 	namespace Mind\Controls;
 
 	use Mind\Db\{Db, Users};
-	use Mind\Server\Control;
+	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
 	class Allclasses extends Control {
-		// public function has_access(array $args): bool {
-		// 	return is_logined() && get_curr()->has_role("zam");
-		// }
+		public function has_access(array $args): bool {
+			return Utils::is_logined() && (
+				Utils::get_curr()->has_role("zam") ||
+				Utils::get_curr()->has_role("pedorg") ||
+				Utils::get_curr()->has_role("diric")
+			);
+		}
 
 		public function get_data(array $args): array {
 			[$arr, $sum] = $this->get_points_by_classes();

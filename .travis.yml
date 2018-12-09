@@ -1,0 +1,16 @@
+language: php
+php:
+  - '7.1'
+
+services:
+  - mysql
+
+install:
+  - composer install
+  - cat test_config.php > config.php
+  - mysql < tests/dump.sql
+  - php -S localhost:8080 -t public_html public_html/route.php &
+
+script:
+  - vendor/bin/phpunit tests/phpunit
+  - vendor/bin/codecept run acceptance

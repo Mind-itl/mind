@@ -49,17 +49,19 @@
 			$handler = new StreamHandler(Utils::ROOT.'/errors.log', Logger::NOTICE);
 			$handler->setFormatter($formatter);
 			$logger->pushHandler($handler);
-			
-			$mess = new \Swift_Message("Mind error");
-			$mess
-				->setFrom([MAIL_FROM_EMAIL => MAIL_FROM_NAME])
-				->setTo([MAIL_DEBUG_EMAIL])
-				->setContentType("text/html");
 
-			$handler = new SwiftMailerHandler(\Mind\Db\Email::get_mailer(), $mess);
-			$formatter = new HtmlFormatter();
-			$handler->setFormatter($formatter);
-			$logger->pushHandler($handler);
+			if (MAIL) {
+				$mess = new \Swift_Message("Mind error");
+				$mess
+					->setFrom([MAIL_FROM_EMAIL => MAIL_FROM_NAME])
+					->setTo([MAIL_DEBUG_EMAIL])
+					->setContentType("text/html");
+
+				$handler = new SwiftMailerHandler(\Mind\Db\Email::get_mailer(), $mess);
+				$formatter = new HtmlFormatter();
+				$handler->setFormatter($formatter);
+				$logger->pushHandler($handler);
+			}
 
 			ErrorHandler::register($logger);
 
