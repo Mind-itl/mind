@@ -1,0 +1,53 @@
+.container {
+	display: block;
+}
+.voting-variant {
+	background: #93BAC8;
+	padding: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.voting-variant-me {
+	background: #306B82;
+	color: #fff;
+}
+
+.voting-variants, .voting-desc {
+	max-width: 500px;
+}
+
+.voting-variant *:not(.variant-id) {
+	display: inline;
+}
+
+.variant-info {
+	float: right;
+	position: relative;
+	bottom: 5px;
+}
+
+.variant-vote {
+	padding: 3px 7px;
+	margin-left: 5px;
+	background: #CCDFEC;
+	border: 0;
+	font-size: 20px;
+	color: #004B7E;
+
+}
+
+.voting-variant-me .variant-vote {
+	color: #CCDFEC;
+	background: #004B7E;
+}
+
+.variant-count {
+	font-size: 17px;
+	font-weight: 700; 
+}
+
+.voting-desc {
+	padding-top: 10px;
+	padding-bottom: 20px;
+}

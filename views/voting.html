@@ -4,31 +4,45 @@
 {% endblock %}
 
 {% block body %}
-	title: {{ voting.get_title }} <br>
-	description: {{ voting.get_description }} <br>
-	
-	{% for var in voting.get_variants %}
-		<div>
-			<div class="var-id" hidden>{{ var.get_id }}</div>
-			Вариант "{{ var.get_title }}" Количество голосов {{ var.get_count }} <button class="vote">{{var.voted_by(me) ? "-" : "+"}}</button><br>
+	<div class="container">
+		<h1 class="voting-title">{{ voting.get_title }}</h1>
+		<div class="voting-desc">
+			{{ voting.get_description }}
 		</div>
-	{% endfor %}
 	
-	<script>
-		$(".vote").click(function(){
-			let id = $(this).parent().children(".var-id").html();
-			$.ajax({
-				method: "GET",
-				url: "/api/vote",
-				data: {
-					voting_id: 9,
-					variant_id: id
-				},
-				dataType: "json"
-			}).done(function(data) {
-				document.location.reload();
-			});
-		});
-	</script>
+		<div class="voting-variants">
+			{% for var in voting.get_variants %}
+				{% set ya = var.voted_by(me) %}
+				<div class="voting-variant {{ya ? "voting-variant-me" : "voting-variant-not-me"}}">
+					<div class="variant-id" hidden>{{ var.get_id }}</div>
+					<div class="variant-title">{{ var.get_title }}</div>
+					<div class="variant-info">
+						<div class="variant-count">{{ var.get_count }}</div>
+						<button class="variant-vote">
+							{{ya ? "&times;" : "+"}}
+						</button>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 
+		<script>
+			$(".variant-vote").click(function(){
+				let id = $(this).parent().parent().children(".variant-id").html();
+				$.ajax({
+					method: "GET",
+					url: "/api/vote",
+					data: {
+						voting_id: 9,
+						variant_id: id
+					},
+					dataType: "json"
+				}).done(function(data) {
+					document.location.reload();
+				}).fail(function(error) {
+					console.log(error);
+				});
+			});
+		</script>
+	</div>
 {% endblock %}
