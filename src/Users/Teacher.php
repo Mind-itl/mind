@@ -6,14 +6,6 @@
 	use Mind\Db\{Users, Causes, Db, Transactions};
 
 	class Teacher extends User {
-		/*
-			array of enum {
-				diric, classruk(class), vospit(class), zam, admin, predmet(subject)
-			}
-		*/
-		private $roles;
-		private $role_args;
-
 		private function download_from_bd() {
 			$st_assoc = Users::get_assoc("teachers", $this->login);
 
@@ -38,6 +30,8 @@
 				$this->roles[] = $role["ROLE"];
 				$this->role_args[$role["ROLE"]] = $role["ARG"];
 			}
+
+			$this->roles[] = "teacher";
 		}
 		
 		private function upload_to_bd() {
@@ -53,19 +47,6 @@
 
 		public function __destruct() {
 
-		}
-
-		public function has_role(string $role): bool {
-			if ($role == "teacher")
-				return true;
-
-			return in_array($role, $this->roles); 
-		}
-
-		public function get_role_arg(string $role): ?string {
-			if (isset($this->role_args[$role]))
-				return $this->role_args[$role];
-			return null;
 		}
 
 		public function give_points(Student $to, string $cause): bool {
@@ -104,10 +85,6 @@
 			}
 
 			return $ret;
-		}
-
-		public function get_roles(): array {
-			return $this->roles;
 		}
 	}
 ?>

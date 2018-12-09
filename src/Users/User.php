@@ -22,6 +22,16 @@
 		 */
 		protected $given_name, $family_name, $father_name, $email;
 
+		/**
+		 * @var array<int, string>
+		 */
+		protected $roles;
+
+		/**
+		 * @var array<string, string>
+		 */
+		protected $role_args;
+
 		public function get_email(): ?string {
 			return $this->email;
 		}
@@ -65,6 +75,21 @@
 			return $this->enter_login;
 		}
 
-		abstract public function has_role(string $role): bool;
+		public function has_role(string $role): bool {
+			return in_array($role, $this->roles); 
+		}
+
+		public function get_role_arg(string $role): ?string {
+			if (isset($this->role_args[$role]))
+				return $this->role_args[$role];
+			return null;
+		}
+
+		/**
+		 * @return array<int, string>
+		 */
+		public function get_roles(): array {
+			return $this->roles;
+		}
 	}
 ?>
