@@ -422,6 +422,9 @@ input[type="file"].form-control {
   color: #333333;
   white-space: nowrap;
 }
+.open {
+	position: relative;
+}
 .open > .dropdown-menu {
   display: block;
 }
@@ -438,21 +441,24 @@ input[type="file"].form-control {
 }
 .dropdown-menu {
 	position: absolute;
-	z-index: 1000;
-	display: none;
-	float: left;
-	min-width: 160px;
-	padding: 5px 0;
-	margin: 5px 0 0;
-	list-style: none;
-	font-size: 14px;
-	text-align: left;
-	background-color: #ffffff;
-	border: 1px solid #cccccc;
-	border: 1px solid rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-	background-clip: padding-box;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 130px;
+    padding: 5px 0;
+    margin: 5px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    left: auto;
+    right: 0;
+    top: 18px;
 }
 .caret {
 	display: inline-block;
