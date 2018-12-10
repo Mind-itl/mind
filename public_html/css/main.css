@@ -565,13 +565,16 @@ input[type="file"].form-control {
 }
 .form {
 	flex-basis: 60%;
+	width: 60%;
 }
 .form-50 {
 	flex-basis: 50%;
+	width: 50%;
 }
 .form-40 {
 	flex-basis: 40%;
 	margin-right: 10%;
+	width: 40%;
 }
 label {
 	margin-bottom: 50px;
