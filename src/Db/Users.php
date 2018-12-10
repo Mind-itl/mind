@@ -4,6 +4,14 @@
 	use Mind\Users\{User, Teacher, Student};
 
 	class Users {
+		/**
+		 * @var array<string, array<string,User>>
+		 */
+		private static $_user_cache = [
+			"ENTER_LOGIN" => [],
+			"LOGIN" => []
+		];
+
 		public static function get_assoc(string $table, string $login): array {
 			$r = Db::query_assoc("
 				SELECT * FROM `$table` WHERE `LOGIN` = ?s
@@ -21,6 +29,9 @@
 
 		public static function get(string $login, bool $is_enter_login=false): User {
 			$login_field = $is_enter_login ? "ENTER_LOGIN" : "LOGIN";
+
+			if (isset(static::$_user_cache[$login_field][$login]))
+				return static::$_user_cache[$login_field][$login];
 
 			if (!static::has_login($login, $is_enter_login))
 				throw new \Exception("No user with this login");
@@ -43,6 +54,9 @@
 				$user = new Student($login);
 			else
 				throw new \Exception("User has incorrect role");
+
+			static::$_user_cache["ENTER_LOGIN"][$user->get_enter_login()] = $user;
+			static::$_user_cache["LOGIN"][$user->get_login()] = $user;
 
 			return $user;
 		}

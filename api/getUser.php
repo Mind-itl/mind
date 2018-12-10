@@ -47,8 +47,8 @@
 			} elseif ($user instanceof Student) {
 				$ret["points"] = $user->get_points();
 				$ret["group"] = [
-					"par" => intval($user->get_class("num")),
-					"lit" => $user->get_class("lit")
+					"par" => intval($user->get_group_name("num")),
+					"lit" => $user->get_group_name("lit")
 				];
 			}
 

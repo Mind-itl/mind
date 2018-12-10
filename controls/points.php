@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Controls;
 
-	use Mind\Db\{Db, Users, Notifications, Json, Causes};
+	use Mind\Db\{Db, Users, Notifications, Json, Causes, Transactions};
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
@@ -55,7 +55,7 @@
 		protected function trans(Student $student): array {
 			$table = [];
 			$sum = 0;
-			foreach ($student->get_transactions() as $trans) {
+			foreach (Transactions::of_student($student) as $trans) {
 				$from_user = null;
 				$to_user = null;
 
