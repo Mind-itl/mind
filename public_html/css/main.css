@@ -458,7 +458,9 @@ input[type="file"].form-control {
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     background-clip: padding-box;
-    left: auto;
+}
+.right-dropdown-menu {
+	left: auto;
     right: 0;
     top: 18px;
 }
