@@ -12,7 +12,7 @@
 		<h3>Логин: <strong>{{ he.get_enter_login }}</strong></h3>
 
 		{% if he.has_role("student") %}
-			<h3>Класс: <strong>{{ he.get_class }}</strong></h3>
+			<h3>Класс: <strong>{{ he.get_group_name }}</strong></h3>
 			<h3>Баллы: <strong>{{ he.get_points }}</strong></h3>
 			<a href="/points/{{ he.get_enter_login }}" class="submit">Выписка по баллам</a><br>
 		{% endif %}
