@@ -1,0 +1,80 @@
+.voting_container {
+	max-width: 500px;
+	margin: 10px auto;
+	line-height: 39px;
+}
+
+.voting_container input {
+	width: 100%;
+	height: 40px;
+	margin-bottom: 5px;
+	font-size: 16px;
+	font-family: 'Courier New', arial;
+	border-style: none;
+	border: 1px solid rgb(0, 75, 126);
+	padding: .5em 1.1em;
+	-webkit-appearance: none  ;
+	border-radius: 0px;
+}
+
+
+.voting_container form {
+	width: 100%;
+	font-size: 16px;
+	position: relative;
+}
+
+.voting_container form p {
+	font-family: 'Courier New', arial;
+	font-size: 16px;
+	width: 40%;
+	border: 1px solid rgb(0, 75, 126);
+	border-right: none;
+	display: inline-block;
+	position: relative;
+	top: -1px;
+	background: white;
+	padding-left: 15px;
+}
+
+.voting_container input[type="date"] {
+	width: 60%;
+	float: right;
+	border-left: none;
+}
+
+input::placeholder {
+	color: black;
+	margin-left: 10px;
+}
+
+input[type="submit"] {
+	background-color: rgb(0, 75, 126);
+	color: white;
+	letter-spacing: 1px;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    -webkit-appearance: none;
+    border: 1px solid rgb(0, 75, 126);
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover,
+input[type="date"]:hover #date-field {
+}
+
+input[type="submit"]:hover {
+	background: #005687;
+}
+
+input[type="submit"]:active {
+	background: #004167;
+}

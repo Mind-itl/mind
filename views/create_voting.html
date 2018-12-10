@@ -9,12 +9,15 @@
 	{% endif %}	
 
 	<div class="container container-points">
+		<div class="voting_container">
 		<form action="" method="POST">
-			<input type="text" placeholder="title" name="title"><br>
-			<input type="text" placeholder="description" name="desc"><br>
-			till date <input type="date" name="till"><br>
-			<input type="text" placeholder="variants splitted by semicolon" name="variants">
-			<input type="submit">
+			<input type="text" placeholder="Название" name="title" required><br>
+			<input type="text" placeholder="Описание" name="desc" required><br>
+			<p id="date-field">До какого числа</p> <input type="date" name="till"  required><br>
+			<input type="text" placeholder="Варианты через точку с запятой" name="variants" required>
+			<input type="submit"name="submit">
 		</form>
+		</div>
+		</div>
 	</div>
 {% endblock %}
