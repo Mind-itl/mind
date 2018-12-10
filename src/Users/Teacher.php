@@ -19,33 +19,31 @@
 		}
 
 		public function get_children(): array {
-			$ret = [];
+			if (!$this->has_role("classruk"))
+				return [];
 
-			if ($this->has_role("classruk")) {
-				$class = [];
+			$group_name = $this->get_role_arg("classruk");
+			if ($group_name === null || $group_name === "")
+				return [];
 
-				$group_name = $this->get_role_arg("classruk");
-				if ($group_name !== null) {
-					list($class_num, $class_lit) = explode("-", $group_name);
+			list($class_num, $class_lit) = explode("-", $group_name);
 
-					$r = Db::query("
-						SELECT LOGIN
-						FROM `students`
-						WHERE
-							CLASS_LIT = ?s AND
-							CLASS_NUM = ?s
-						", $class_lit, $class_num
-					);
-					foreach ($r as $st) {
-						$student = Users::get($st["LOGIN"]);
-						$class[] = $student;
-					}
+			$r = Db::query("
+				SELECT LOGIN
+				FROM `students`
+				WHERE
+					CLASS_LIT = ?s AND
+					CLASS_NUM = ?s
+				", $class_lit, $class_num
+			);
 
-					$ret = $class;
-				}
+			$group = [];
+			foreach ($r as $st) {
+				$student = Users::get($st["LOGIN"]);
+				$group[] = $student;
 			}
 
-			return $ret;
+			return $group;
 		}
 	}
 ?>

@@ -38,7 +38,7 @@
 			if (!Utils::get_curr() instanceof Student)
 				return ["", null];
 
-			$class = Utils::get_curr()->get_class();
+			$class = Utils::get_curr()->get_group_name();
 			$clruk = Utils::get_curr()->get_classruk();
 
 			return [$class, $clruk ?? null];
@@ -104,7 +104,7 @@
 				return [];
 
 			$day = $this->table_date()->format("l");
-			$class = Utils::get_curr()->get_class();
+			$class = Utils::get_curr()->get_group_name();
 
 			$lessons = Db::query(
 				"SELECT *

@@ -7,10 +7,10 @@
 
 	class Student extends User {
 		/**
-		 * @var string $class_num
-		 * @var string $class_lit
+		 * @var int $group_num
+		 * @var string $group_lit
 		 */
-		private $class_num, $class_lit;
+		private $group_num, $group_lit;
 
 		public function __construct(string $login) {
 			$this->login = $login;
@@ -18,8 +18,8 @@
 			$st_assoc = Users::get_assoc("students", $this->login);
 			$this->from_assoc($st_assoc);
 
-			$this->class_num = $st_assoc["CLASS_NUM"];
-			$this->class_lit = $st_assoc["CLASS_LIT"];
+			$this->group_num = intval($st_assoc["CLASS_NUM"]);
+			$this->group_lit = $st_assoc["CLASS_LIT"];
 
 			if (!in_array("student", $this->roles))
 				$this->roles[] = "student";
@@ -41,9 +41,9 @@
 			return $got_points - $given_points;
 		}
 
-		public function get_class(string $format="num-lit"): string {
+		public function get_group_name(string $format="num-lit"): string {
 			$search = array("num", "lit");
-			$replace = array($this->class_num, $this->class_lit);
+			$replace = array($this->group_num, $this->group_lit);
 
 			return str_replace($search, $replace, $format);
 		}
@@ -55,7 +55,7 @@
 				WHERE
 					ROLE = 'classruk' AND
 					ARG = ?s
-				", $this->get_class()
+				", $this->get_group_name()
 			);
 
 			$clruk = null;
