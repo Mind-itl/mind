@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Controls;
 
-	use Mind\Db\{Db, Users, Notifications, Json};
+	use Mind\Db\{Db, Users, Notifications, Json, Transactions};
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
@@ -19,7 +19,12 @@
 					error_log('incorrect $login $points in give.php:11');
 					$result = false;
 				} else {
-					$result = Utils::curr_student()->give_points($login, intval($points));
+					$result = Transactions::add(
+						Utils::curr_student(),
+						Users::student($login),
+						"C",
+						intval($points)
+					);
 				}
 
 				if ($result) {

@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Controls;
 
-	use Mind\Db\{Db, Users};
+	use Mind\Db\{Db, Users, Transactions};
 	use Mind\Server\{Control, Utils};
 	use Mind\Users\{User, Teacher, Student};
 
@@ -20,7 +20,11 @@
 				if (Utils::is_incorrect($student_login, $cause))
 					$result = false;
 				else
-					$result = Utils::curr_teacher()->give_points(Users::student($student_login), $cause);
+					$result = Transactions::add(
+						Utils::curr_teacher(),
+						Users::student($student_login),
+						$cause
+					);
 
 				if ($result) {
 					$result = "success";

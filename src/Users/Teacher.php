@@ -18,14 +18,6 @@
 				$this->roles[] = "teacher";
 		}
 
-		public function give_points(Student $to, string $cause): bool {
-			if (!Causes::has($cause))
-				return false;
-
-			$points = Causes::get_price($cause);
-			return Transactions::add($this, $to, $points, $cause);
-		}
-
 		public function get_children(): array {
 			$ret = [];
 
