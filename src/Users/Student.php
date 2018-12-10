@@ -12,50 +12,17 @@
 		 */
 		private $class_num, $class_lit;
 
-		private function download_from_bd() {
-			$st_assoc = Users::get_assoc("students", $this->login);
-			
-			$this->given_name = $st_assoc["GIVEN_NAME"];
-			$this->family_name = $st_assoc["FAMILY_NAME"];			
-			$this->father_name = $st_assoc["FATHER_NAME"];
+		public function __construct(string $login) {
+			$this->login = $login;
 
-			$this->email = $st_assoc["EMAIL"];
+			$st_assoc = Users::get_assoc("students", $this->login);
+			$this->from_assoc($st_assoc);
 
 			$this->class_num = $st_assoc["CLASS_NUM"];
 			$this->class_lit = $st_assoc["CLASS_LIT"];
 
-			$this->enter_login = $st_assoc["ENTER_LOGIN"];
-
-			$r = Db::query("
-				SELECT ROLE, ARG
-				FROM teacher_roles
-				WHERE LOGIN = ?s
-			", $this->login);
-
-			$this->roles = [];
-			$this->role_args = [];
-
-			foreach ($r as $role) {
-				$this->roles[] = $role["ROLE"];
-				$this->role_args[$role["ROLE"]] = $role["ARG"];
-			}
-
-			$this->roles[] = "student";
-		}
-
-		private function upload_to_bd() {
-
-		}	
-
-		public function __construct(string $login, bool $load = true) {
-			$this->login = $login;
-
-			if ($load)
-				$this->download_from_bd();
-		}
-
-		public function __destruct() {
-
+			if (!in_array("student", $this->roles))
+				$this->roles[] = "student";
 		}
 
 		public function get_points(): int {
