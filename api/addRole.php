@@ -54,6 +54,8 @@
 						?s, ?s, ?s
 					)", $user->get_login(), $role, $role_arg
 				);
+
+			return [];
 		}	
 	}
 ?>
