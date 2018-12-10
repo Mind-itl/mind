@@ -9,12 +9,13 @@
 	{% endif %}	
 
 	<div class="container container-points">
-		<form action="" method="POST">
-			<input type="text" placeholder="title" name="title"><br>
-			<input type="text" placeholder="description" name="desc"><br>
-			till date <input type="date" name="till"><br>
-			<input type="text" placeholder="variants splitted by semicolon" name="variants">
-			<input type="submit">
+		<form action="" method="POST" class="form-40">
+			<input type="text" class="form-control" placeholder="Название голосования" name="title">
+			<input type="text" class="form-control" placeholder="Описаниие голосования" name="desc">
+			<label for="date">Голосование будет доступно до:</label>
+			<input type="date" class="form-control" name="till" id="date">
+			<input type="text" class="form-control" placeholder="Перечислите варианты через точку с запятой (;)" name="variants">
+			<input type="submit" class="submit big-submit">
 		</form>
 	</div>
 {% endblock %}
