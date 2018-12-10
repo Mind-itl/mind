@@ -57,6 +57,15 @@
 		"has_dist" => function(string $file_name): bool {
 			return file_exists(Utils::ROOT."/public_html/dist/$file_name");
 		},
+		"get_role_name" => function(string $role): string {
+			return \Mind\Users\Role::get_role_name($role);
+		},
+		"get_role_arg_name" => function(string $role): string {
+			return \Mind\Users\Role::get_role_arg_name($role);
+		},
+		"get_roles" => function() {
+			return \Mind\Users\Role::get_roles();
+		}
 	];
 
 	Twig_loader::$filters = [

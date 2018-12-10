@@ -1,0 +1,22 @@
+.roles {
+	background-color: #FFFFFF;
+	margin-top: 10px;
+}
+.role {
+	padding-left: 4px;
+}
+.role *:not(.id) {
+	display: inline;
+}
+.has {
+	color: #bed5ff;
+	background-color: #466cb2;
+}
+
+.role-arg {
+
+}
+
+.role-arg-wrong {
+	background-color: red;
+}
