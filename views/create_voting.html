@@ -14,10 +14,72 @@
 			<input type="text" placeholder="Название" name="title" required><br>
 			<input type="text" placeholder="Описание" name="desc" required><br>
 			<p id="date-field">До какого числа</p> <input type="date" name="till"  required><br>
-			<input type="text" placeholder="Варианты через точку с запятой" name="variants" required>
-			<input type="submit"name="submit">
+			<div class="vars_container">
+				<div class="vars">
+					<div class="variant">
+						<input type="text" required>
+						<div class="removalArea">
+							<div class="removeX"></div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="add-var fakeinput">Добавить вариант</div>
+
+			</div>
+			<input type="submit"name="submit" class="submit">
+			<input type="text" hidden name="variants" id="data">
 		</form>
 		</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		
+		$(".add-var").click( function () {
+    var variants = document.querySelector('.vars');
+
+    var element = document.createElement("div");
+    element.classList.add("variant");
+
+    var input = document.createElement("input")
+    input.setAttribute("type", "text");
+    input.setAttribute("required", "required");
+    element.appendChild(input);
+
+    var area = document.createElement("div");
+    area.classList.add("removalArea");
+    $(area).click(function() {
+        var element = this;
+        var remove = element.closest(".variant");
+        remove.parentNode.removeChild(remove);
+    });
+
+    var x = document.createElement("div");
+    x.classList.add("removeX");
+
+    area.appendChild(x);
+    element.appendChild(area);
+    variants.appendChild(element);
+});
+
+	$(".removalArea").click(function() {
+		var element = this;
+		var remove = element.closest(".variant");
+		remove.parentNode.removeChild(remove);
+	});
+
+	$(".submit").click(function() {
+			var string = "";
+			$(".variant input").each(function() {
+				
+				var text = $(this).val() + ";" ;
+				string += text;
+			});
+			var element = document.getElementById("data");
+			element.value = string;
+			console.log(element.value); 
+		});
+
+	</script>
 {% endblock %}

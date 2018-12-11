@@ -1,12 +1,12 @@
 .voting_container {
 	max-width: 500px;
 	margin: 10px auto;
-	line-height: 39px;
+	line-height: 29px;
 }
 
 .voting_container input {
 	width: 100%;
-	height: 40px;
+	height: 30px;
 	margin-bottom: 5px;
 	font-size: 16px;
 	font-family: 'Courier New', arial;
@@ -15,6 +15,7 @@
 	padding: .5em 1.1em;
 	-webkit-appearance: none  ;
 	border-radius: 0px;
+	line-height: 15px;
 }
 
 
@@ -43,9 +44,70 @@
 	border-left: none;
 }
 
-input::placeholder {
-	color: black;
-	margin-left: 10px;
+.variant input[type="text"] {
+	width: 95%;
+	border-right: none;
+
+}
+
+.variant .removalArea {
+	width: 5%;
+	height: 30.5px;
+	margin-left: 0px;
+	background-color: white;
+	border: 1px solid rgb(0, 75, 126);
+	border-left: none;
+	float: right;
+	margin-top: 0px;
+	position: relative;
+}
+
+.variant:hover > .removalArea > .removeX::before {
+	opacity: 1;
+}
+
+.variant:hover > .removalArea > .removeX::after {
+	opacity: 1;
+}
+
+
+.removalArea .removeX {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	cursor: pointer;
+}
+
+.removalArea .removeX::before,
+.removalArea .removeX::after {
+	content: "";
+	width: 50%;
+	height: 2px;
+	background: #ccc;
+	display: block;
+	position: absolute;
+	opacity: 0;	
+	transition: opacity 0.5s ease-in-out ;
+}
+
+.removalArea .removeX::before {
+	top: 50%;
+    transform: rotate(45deg);
+    left: 20%;
+}
+
+.removalArea .removeX::after {
+	bottom: 42%;
+    transform: rotate(-45deg);
+    left: 20%;
+}
+
+.removalArea:hover > .removeX::before {
+	background: black;
+}
+
+.removalArea:hover > .removeX::after {
+	background: black;
 }
 
 input[type="submit"] {
@@ -59,6 +121,12 @@ input[type="submit"] {
     outline: none;
     -webkit-appearance: none;
     border: 1px solid rgb(0, 75, 126);
+
+}
+
+.vars .variant:nth-child(2n) .removalArea {
+	height: 30px;
+	margin-top: 1px
 }
 
 :active, :hover, :focus {
@@ -78,3 +146,28 @@ input[type="submit"]:hover {
 input[type="submit"]:active {
 	background: #004167;
 }
+
+.fakeinput {
+	width: 100%;
+	height: 30px;
+	line-height: 29px;
+	background-color: #00407E;
+	border: 1px solid #00407E;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+	cursor: pointer ;
+	padding-left: 3%;
+	font-family: 'Courier New', arial;
+	color: #fff;
+	transition: 0.5s;
+}
+
+.fakeinput:hover {
+	background-color: #005687;
+}
+
+.fakeinput:active {
+	background: #004167;
+}
+
