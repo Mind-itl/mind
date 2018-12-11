@@ -1,0 +1,49 @@
+@media all and (max-width: 510px ) {
+	.profile-information {
+		width: 100% !important;
+	}
+
+	.timetable {
+		width: 100% !important;
+	}
+
+	.one-notif {
+		width: 100% !important;
+		flex-basis: 100% !important;
+		margin: 0px auto;
+	}
+
+	.notifications {
+		display: block !important;
+	}	
+
+	#rotator img {
+		margin-bottom: 0px !important;
+	}
+
+	.container-menu {
+		margin-top: 80px !important;
+	}
+
+	body > div.main_container > header > div.top-menu > div {
+		margin-top: 0px !important;
+	}
+
+	/*create_voting*/
+	
+	.voting_container form input[type="text"], .voting_container
+	input[type="date"] {
+	font-size: 12px;
+	}
+
+	.voting_container form p {
+	font-size: 12px !important;
+	top: -2px !important;
+	line-height: 40px;
+	padding-left: 10px;
+	height: 40px;
+	}
+	.voting_container form input[type="date"] {
+
+	}
+}
