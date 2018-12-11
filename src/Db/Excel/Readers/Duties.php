@@ -45,15 +45,10 @@
 		}
 
 		static function handle(\Closure $get) {
+			Db::query("DELETE FROM dutes");
+
 			$a = self::process($get);
 			foreach ($a as $i) {
-				Db::query("
-					DELETE FROM dutes
-					WHERE
-						BLOCK = ?s AND
-						DAY = ?s
-					", $i["block"], $i["day"]
-				);
 				Db::query("
 					INSERT INTO dutes (
 						LOGIN, BLOCK, DAY 
