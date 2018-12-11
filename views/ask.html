@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% block title %}
+	Задать вопрос
+{% endblock %}
+
+{% import "utils.html" as utils %}
+
+{% block body %}
+	<div class="container">
+		<form action="" method="POST">
+			<textarea name="question" required placeholder="Вопрос"></textarea>
+			<input type="submit" value="Задать вопрос">
+		</form>
+
+		{% for q in questions %}
+		    <div class="question">
+		    	<div class="question-id">
+		    		{{- q.id -}}
+		    	</div>
+
+		    	<div class="question-text">
+		    		{{ q.text }}
+		    	</div>
+				<div class="from">
+					{{ utils.display_user(q.from) }}
+				</div>
+
+				{%- if can_remove -%}
+					<button class="question-remove">&times;</button>
+				{%- endif -%}
+
+		    </div>
+		{% endfor %}
+		
+		{%- if can_remove -%}
+			<script>
+				$(".question-remove").click(function() {
+					let id = $(this).parent().children(".question-id").html();
+					$.ajax({
+						method: "POST",
+						url: "",
+						data: {
+							remove_id: id,
+						}
+					}).done(function(data) {
+						document.location.reload();
+					}).fail(function(error) {
+						console.log(error);
+					});
+				});
+			</script>
+		{%- endif -%}
+
+	</div>
+{% endblock %}
