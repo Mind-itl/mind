@@ -6,6 +6,62 @@
 
 {% block body %}
 	<div class="container">
-		<div id="statuses"></div>
+		<div id="statuses">
+
+			{% for group in groups %}
+
+				<div class="group-status">
+					<h1 class="group-name">
+						Класс: {{ group.name }}
+					</h1>
+					
+					<table class="group-students">
+						<tr>
+							<th></th>
+							{% for status in statuses %}
+								<th>{{ status }}</th>
+							{% endfor %}
+						</tr>
+
+						{% for student in group.students %}
+						    <tr class="group-student">
+						    	<td class="group-student-name">{{ student.get_name("fm gi") }}</td>
+						    </tr>
+							
+							{% for status in statuses %}
+								{% set has = has_status(student, status) %}
+								{% set style_class = has ? "status-has" : "status-hasnt" %}
+								{% set button_class = has ? "status-set-has" : "status-set-hasnt" %}
+								<td class="status {{ style_class }}">
+									<button "status-set-button {{ button_class }}">
+										{{ has ? "+" : "-" }}
+									</button>
+								</td>
+							{% endfor %}
+
+						{% endfor %}
+					</table>
+
+				</div>
+			    
+			{% endfor %}
+
+			<script>
+				$("status-set-button").click(function() {
+					if ($(this).hasClass("status-set-has"))
+						return;
+
+					$(this).parent().parent()
+						.find("status-set-has")
+						.toggleClass("status-set-has")
+						.toggleClass("status-set-hasnt");
+
+					$(this).toggleClass("status-set-has");
+
+					// todo ajax
+				});
+			</script>
+
+		</div>
 	</div>
 {% endblock %}
