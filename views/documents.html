@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block title %}
+	Протоколы
+{% endblock %}
+
+{% import "utils.html" as utils %}
+
+{% block body %}
+	<div class="container">
+		<ul>
+			{% for file in files %}
+				<li>
+					<a href="{{ file.url }}">
+						{{ file.title }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+
+		{% if can_edit %}
+
+			{% if status=="success" %}
+				<a href="{{ link }}">{{ link }}</a>
+			{% elseif status == "fail" %}
+				Ошибка
+			{% elseif status == "already" %}
+				Название занято
+			{% endif %}
+
+			<form action="" method="POST" enctype="multipart/form-data">
+				<input required name="file" type="file"><br>
+				<input required name="title" type="text" placeholder="Название">
+				<input required name="path" type="text"
+					placeholder="Имя файла для ссылки (английские буквы без пробелов с расширением)"
+				>
+				<input type="submit">
+			</form>
+		{% endif %}
+
+	</div>
+{% endblock %}
