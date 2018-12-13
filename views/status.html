@@ -39,9 +39,15 @@
 										<div hidden class="status-id">
 											{{- status -}}
 										</div>
-										<button class="status-set-button {{ button_class }}">
-											{{- has ? "+" : "-" -}}
-										</button>
+										{% if group.can_edit %}
+											<button class="status-set-button {{ button_class }}">
+												{{- has ? "+" : "-" -}}
+											</button>
+										{% else %}
+											<div class="{{ button_class }}">
+												{{- has ? "+" : "-" -}}
+											</div>
+										{% endif %}
 									</td>
 								{% endfor %}
 								
