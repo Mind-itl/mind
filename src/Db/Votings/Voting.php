@@ -94,14 +94,25 @@
 		}
 
 		public function add_variant(string $str): void {
-			$last_var_id = Db::query_assoc("
+			$str = trim($str);
+
+			if ($str === "")
+				return;
+
+			$last_var_id = Db::query("
 				SELECT VARIANT_ID
 				FROM voting_variants
 				WHERE VOTING_ID = ?i
 				ORDER BY VARIANT_ID DESC
 				LIMIT 1
 				", $this->id
-			)["VARIANT_ID"];
+			);
+
+			if ($last_var_id === false)
+				$last_var_id = 0;
+			else
+				$last_var_id = intval($last_var_id->fetch_assoc()["VARIANT_ID"]) + 1;
+
 			$last_var_id = intval($last_var_id);
 
 			Db::query("
@@ -144,6 +155,17 @@
 
 		public static function get(int $id): Voting {
 			return new Voting($id);
+		}
+
+		public static function has(int $id): bool {
+			return intval(
+				Db::query_assoc("
+					SELECT COUNT(*) AS COUNT
+					FROM votings
+					WHERE ID=?i
+					", $id
+				)["COUNT"]
+			) > 0;
 		}
 	}
 ?>
