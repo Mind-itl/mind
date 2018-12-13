@@ -31,7 +31,7 @@
 			["teacher", "Оповестить учеников", "/broadcast"],
 			["zam", "Загрузить данные", "/load"],
 			["zam", "Добавить голосование", "/create_voting"],
-			["all", "Документы", "https://kpfu.ru/it-liceum/dokumenty-38501"]
+			["all", "Документы", "/documents"]
 		];
 
 		protected function get_data(array $args): array {
