@@ -4,6 +4,8 @@
 	Баллы
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	<div class="container">
 		<div id="statuses">
@@ -25,20 +27,29 @@
 
 						{% for student in group.students %}
 						    <tr class="group-student">
-						    	<td class="group-student-name">{{ student.get_name("fm gi") }}</td>
-						    </tr>
-							
-							{% for status in statuses %}
-								{% set has = has_status(student, status) %}
-								{% set style_class = has ? "status-has" : "status-hasnt" %}
-								{% set button_class = has ? "status-set-has" : "status-set-hasnt" %}
-								<td class="status {{ style_class }}">
-									<button "status-set-button {{ button_class }}">
-										{{ has ? "+" : "-" }}
-									</button>
+						    	<td hidden class="student-login">
+						    		{{- student.person.get_login() -}}
+						    	</td>
+						    	<td class="group-student-name">{{ utils.display_user(student.person) }}</td>
+								{% for status in statuses %}
+									{% set has = student.status == status %}
+									{% set style_class = has ? "status-has" : "status-hasnt" %}
+									{% set button_class = has ? "status-set-has" : "status-set-hasnt" %}
+									<td class="status {{ style_class }}">
+										<div hidden class="status-id">
+											{{- status -}}
+										</div>
+										<button class="status-set-button {{ button_class }}">
+											{{- has ? "+" : "-" -}}
+										</button>
+									</td>
+								{% endfor %}
+								
+								<td class="group-student-time">
+									{{- student.time -}}
 								</td>
-							{% endfor %}
 
+							</tr>
 						{% endfor %}
 					</table>
 
@@ -47,16 +58,39 @@
 			{% endfor %}
 
 			<script>
-				$("status-set-button").click(function() {
+				$(".status-set-button").click(function() {
 					if ($(this).hasClass("status-set-has"))
 						return;
 
 					$(this).parent().parent()
-						.find("status-set-has")
+						.find(".status-set-has")
 						.toggleClass("status-set-has")
-						.toggleClass("status-set-hasnt");
+						.toggleClass("status-set-hasnt")
+						.html("-");
 
-					$(this).toggleClass("status-set-has");
+					$(this).toggleClass("status-set-has").html("+");
+
+					let status = $(this).parent()
+						.children(".status-id").html().trim();
+
+					let login = $(this).parent().parent()
+						.children(".student-login").html().trim();
+
+					let data = {
+						status: status,
+						login: login
+					};
+
+					console.log(data);
+
+					$.ajax({
+						method: "GET",
+						url: "/api/setStatus",
+						data: data,
+						dataType: "json"
+					}).fail(function(error) {
+						console.log(error);
+					});
 
 					// todo ajax
 				});

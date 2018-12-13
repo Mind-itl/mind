@@ -76,8 +76,7 @@
 					}
 
 					$students[] = [
-						"names" => Users::get($login)->get_names(),
-						"login" => $login,
+						"person" => Users::get($login),
 						"status" => $status,
 						"time" => $time
 					];
