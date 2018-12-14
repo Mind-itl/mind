@@ -6,8 +6,14 @@
 
 	class Transactions {
 		public static function add(User $from, User $to, string $cause, int $points=0): bool {
-			if ($points == 0)
+			if ($cause != "C" && !Causes::has($cause))
+				return false;
+
+			if ($points == 0) {
+				if ($cause == "C")
+					return false;
 				$points = Causes::get_price($cause);
+			}
 
 			if (!$to->has_role("student"))
 				return false;
