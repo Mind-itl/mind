@@ -15,6 +15,13 @@
 			// [role, title, url, class (maybe)]
 			["all", "Профиль", "/"],
 			[
+				"Администрирование",
+				["zam", "Добавить голосование", "/create_voting"],
+				["zam", "Загрузить данные", "/load"],
+				["zam", "Загрузить баннеры", "/load_ad"],
+				["zam", "Документы", "/documents"],
+			],
+			[
 				"Баллы",
 				["student", "Мои баллы", "/points"],
 				["student", "Передать баллы", "/give"],
@@ -25,13 +32,13 @@
 				["pedorg", "Общая ведомость", "/allclasses"],
 				["student", "Аукцион", "/auction"]
 			],
+			["teacher", "Ученики", "/status"],
 			["student", "Расписание", "/timetable"],
 			["student", "Интернат", "/internat"],
 			["vospit", "Интернат", "/internat"],
 			["teacher", "Оповестить учеников", "/broadcast"],
-			["zam", "Загрузить данные", "/load"],
-			["zam", "Добавить голосование", "/create_voting"],
-			["all", "Документы", "/documents"]
+			["all", "Вопросы", "/ask"],
+			["!zam", "Документы", "/documents"]
 		];
 
 		protected function get_data(array $args): array {
@@ -45,11 +52,21 @@
 						if (is_string($but))
 							continue;
 
-						if ($but[0]=="all" || Utils::get_curr()->has_role($but[0]))
-						$buts[] = [
-							"title" => $but[1],
-							"url" => $but[2],
-						];
+						if ($but[0][0]=="!") {
+							$but[0] = substr($but[0], 1);
+							if ($but[0]!="all" && !Utils::get_curr()->has_role($but[0]))
+								$buts[] = [
+									"title" => $but[1],
+									"url" => $but[2],
+								];
+						} else {
+							if ($but[0]=="all" || Utils::get_curr()->has_role($but[0]))
+								$buts[] = [
+									"title" => $but[1],
+									"url" => $but[2],
+								];
+						}
+
 					}
 
 					if (count($buts) > 0) {
@@ -61,12 +78,22 @@
 					}
 
 				} else {
-					if ($buttons[0]=="all" || Utils::get_curr()->has_role($buttons[0]))
-						$buttons_ans[] = [
-							"title" => $buttons[1],
-							"url" => $buttons[2],
-							"menu" => false
-						];
+					if ($buttons[0][0]=="!") {
+						$buttons[0] = substr($buttons[0], 1);
+						if ($buttons[0]!="all" && !Utils::get_curr()->has_role($buttons[0]))
+							$buttons_ans[] = [
+								"title" => $buttons[1],
+								"url" => $buttons[2],
+								"menu" => false
+							];
+					} else {
+						if ($buttons[0]=="all" || Utils::get_curr()->has_role($buttons[0]))
+							$buttons_ans[] = [
+								"title" => $buttons[1],
+								"url" => $buttons[2],
+								"menu" => false
+							];
+					}
 				}
 			}
 
