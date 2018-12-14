@@ -16,4 +16,10 @@ class PointsCest {
 		$I->see(TEST_STUDENT_NAME);
 		$I->see("Баланс");
 	}
+
+	public function wrongStudent404(AcceptanceTester $I) {
+		$I->loginAsStudent();
+		$I->amOnPage("/points/wroonguuseer123qwe");
+		$I->seeResponseCodeIs(404);
+	}
 }
