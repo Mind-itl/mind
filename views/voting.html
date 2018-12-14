@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block body %}
+	<div id="voting-id" hidden>
+		{{ voting.get_id }}
+	</div>
 	<div class="container">
 		<h1 class="voting-title">{{ voting.get_title }}</h1>
 		<div class="voting-desc">
@@ -33,7 +36,7 @@
 					method: "GET",
 					url: "/api/vote",
 					data: {
-						voting_id: 9,
+						voting_id: $("#voting-id").html().trim(),
 						variant_id: id
 					},
 					dataType: "json"

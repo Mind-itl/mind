@@ -2,7 +2,7 @@
 	namespace Mind\Controls;
 
 	use Mind\Db\Users;
-	use Mind\Server\{Control, Utils};
+	use Mind\Server\{Control, Utils, Route};
 	use Mind\Db\Votings\{Variant, Voting as Voting_obj};
 
 
@@ -15,6 +15,9 @@
 
 		protected function get_data(array $args): array {
 			$id = intval($args[1]);
+
+			if (!Voting_obj::has($id))
+				Route::not_found();
 
 			$voting = Voting_obj::get($id);
 

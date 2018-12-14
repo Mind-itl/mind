@@ -9,13 +9,76 @@
 	{% endif %}	
 
 	<div class="container container-points">
-		<form action="" method="POST" class="form-40">
-			<input type="text" class="form-control" placeholder="Название голосования" name="title">
-			<input type="text" class="form-control" placeholder="Описаниие голосования" name="desc">
-			<label for="date">Голосование будет доступно до:</label>
-			<input type="date" class="form-control" name="till" id="date">
-			<input type="text" class="form-control" placeholder="Перечислите варианты через точку с запятой (;)" name="variants">
-			<input type="submit" class="submit big-submit">
-		</form>
+		<div class="voting_container">
+			<form action="" method="POST" class="form-50">
+				<input type="text" class="form-control" placeholder="Название голосования" name="title" required>
+				<input type="text" class="form-control" placeholder="Описание голосования" name="desc" required>
+				<label for="date">Голосование будет доступно до:</label> <input type="date" name="till" id="date" required>
+				<div class="vars_container">
+					<div class="vars">
+						<div class="variant">
+							<input type="text" placeholder="Вариант" required class="variants">
+							<div class="removalArea">
+								<div class="removeX"></div>
+							</div>
+						</div>
+					</div>
+					<div class="add-var">+ Добавить вариант</div>
+				</div>
+				<input type="submit"name="submit" class="submit">
+				<input type="text" hidden name="variants" id="data">
+			</form>
+		</div>
 	</div>
+
+	<script type="text/javascript">
+		
+		$(".add-var").click( function () {
+    var variants = document.querySelector('.vars');
+
+    var element = document.createElement("div");
+    element.classList.add("variant");
+
+    var input = document.createElement("input")
+    input.setAttribute("type", "text");
+    input.setAttribute("required", "required");
+    input.setAttribute("placeholder", "Вариант");
+    input.setAttribute("class", "variants");
+    element.appendChild(input);
+
+    var area = document.createElement("div");
+    area.classList.add("removalArea");
+    $(area).click(function() {
+        var element = this;
+        var remove = element.closest(".variant");
+        remove.parentNode.removeChild(remove);
+    });
+
+    var x = document.createElement("div");
+    x.classList.add("removeX");
+
+    area.appendChild(x);
+    element.appendChild(area);
+    variants.appendChild(element);
+});
+
+	$(".removalArea").click(function() {
+		var element = this;
+		var remove = element.closest(".variant");
+		remove.parentNode.removeChild(remove);
+	});
+
+	$(".submit").click(function() {
+			var string = "";
+			$(".variant input").each(function() {
+				
+				var text = $(this).val() + ";" ;
+				string += text;
+			});
+			var element = document.getElementById("data");
+			element.value = string;
+			console.log(element.value); 
+		});
+
+	</script>
 {% endblock %}

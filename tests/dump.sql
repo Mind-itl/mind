@@ -209,34 +209,76 @@ CREATE TABLE IF NOT EXISTS `votes` (
   `VARIANT_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-INSERT INTO `votes` (`ID`, `LOGIN`, `VOTING_ID`, `VARIANT_ID`) VALUES
-(7, '0000', 9, 1),
-(11, '3243', 9, 4);
+
 CREATE TABLE IF NOT EXISTS `votings` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `TITLE` text NOT NULL,
   `DESCRIPTION` text NOT NULL,
   `TILL_DATE` date NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `votings`
+--
+
 INSERT INTO `votings` (`ID`, `TITLE`, `DESCRIPTION`, `TILL_DATE`) VALUES
-(9, 'Название', 'Описание', '0000-00-00'),
-(8, 'Название', 'Описание', '0000-00-00');
+(24, 'Твикс', 'А какую палочку выберешь ты?', '0000-00-00');
+
 CREATE TABLE IF NOT EXISTS `voting_variants` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `VOTING_ID` int(11) NOT NULL,
   `VARIANT_ID` int(11) NOT NULL,
   `TITLE` text NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `voting_variants`
+--
+
 INSERT INTO `voting_variants` (`ID`, `VOTING_ID`, `VARIANT_ID`, `TITLE`) VALUES
-(18, 8, 5, 'пять'),
-(17, 8, 4, 'четыре'),
-(16, 8, 3, 'три'),
-(15, 8, 2, 'два'),
-(14, 8, 1, 'один'),
-(19, 9, 1, 'один'),
-(20, 9, 2, 'два'),
-(21, 9, 3, 'три'),
-(22, 9, 4, 'четыре'),
-(23, 9, 5, 'пять');
+(30, 24, 4, 'Правую'),
+(29, 24, 2, 'Левую');
+
+--
+-- Структура таблицы `files`
+--
+
+CREATE TABLE IF NOT EXISTS `files` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `TITLE` varchar(60) NOT NULL,
+  `PATH` varchar(60) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `files`
+--
+
+INSERT INTO `files` (`ID`, `TITLE`, `PATH`) VALUES
+(1, 'ПС-001, 07.12.18', 'ps001.pdf'),
+(2, 'Положение о Совете лицеистов', 'soviet.docx');
+
+CREATE TABLE IF NOT EXISTS `questions` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LOGIN` varchar(60) NOT NULL,
+  `QUESTION` text NOT NULL,
+  `ANSWER` text,
+  `ANSWERER_LOGIN` varchar(60) DEFAULT NULL,
+  `TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `questions`
+--
+
+INSERT INTO `questions` (`ID`, `LOGIN`, `QUESTION`, `ANSWER`, `ANSWERER_LOGIN`, `TIME`) VALUES
+(7, '0000', 'GHbdtn\r\n\r\n', NULL, NULL, '2018-12-13 06:51:45'),
+(6, '3243', 'Нужоны скомейки', 'Не буит', '0000', '2018-12-11 14:45:55'),
+(12, '0000', 'GHbdtn\r\n\r\n', NULL, NULL, '2018-12-13 07:06:46'),
+(13, '0000', 'GHbdtn\r\n\r\n', NULL, NULL, '2018-12-13 07:06:50'),
+(14, '0000', 'GHbdtn\r\n\r\n', NULL, NULL, '2018-12-13 07:06:52'),
+(11, '0000', 'GHbdtn\r\n\r\n', NULL, NULL, '2018-12-13 07:06:36'),
+(15, '0000', 'ЭЩкете', NULL, NULL, '2018-12-13 07:48:26');

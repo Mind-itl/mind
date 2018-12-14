@@ -14,12 +14,6 @@
 			/** @var mixed */
 			$r = $sql->query(...$args);
 
-			if ($r === false)
-				throw new \Exception("Wrong sql connection");
-
-			if ($r === true)
-				return null;
-
 			return $r;
 		}
 

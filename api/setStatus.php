@@ -7,6 +7,9 @@
 
 	class setStatus extends Api_method {
 		public static function handle(): array {
+			if (!Users::has_login($_GET['login']))
+				return [];
+
 			$user = Users::get($_GET['login']);
 
 			if (!$user instanceof Student)

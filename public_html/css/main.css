@@ -452,10 +452,6 @@ input[type="file"].form-control {
     list-style: none;
     font-size: 14px;
     text-align: left;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     background-clip: padding-box;
 }

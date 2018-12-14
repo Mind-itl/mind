@@ -21,7 +21,7 @@
 				"Saturday", 
 			];
 
-			$class = Utils::curr_student()->get_class();
+			$class = Utils::curr_student()->get_group_name();
 
 			$days = [];
 

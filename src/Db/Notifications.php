@@ -55,7 +55,13 @@
 
 			$nots = [];
 			foreach ($s as $v) {
+				if (!Users::has_login($v["FROM_USER"])) {
+					\Mind\Server\Log::info("No user: " . $v["FROM_USER"]);
+					continue;
+				}
+
 				$usr = Users::get($v["FROM_USER"]);
+
 				$nots[] = [
 					"date" => $v["TIME"],
 					"message" => $v["MESSAGE"],

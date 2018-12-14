@@ -19,8 +19,7 @@ $(window).on('load', function() {
 			method: "GET",
 			url: "/api/readNotification",
 			data: {
-				id: id,
-				token: "site_mind_key_3"
+				id: id
 			}
 		})
 	});	

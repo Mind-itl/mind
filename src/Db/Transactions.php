@@ -5,7 +5,10 @@
 	use Mind\Server\Utils;
 
 	class Transactions {
-		public static function add(User $from, User $to, int $points, string $cause): bool {
+		public static function add(User $from, User $to, string $cause, int $points=0): bool {
+			if ($points == 0)
+				$points = Causes::get_price($cause);
+
 			if (!$to->has_role("student"))
 				return false;
 

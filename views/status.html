@@ -4,8 +4,104 @@
 	Баллы
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	<div class="container">
-		<div id="statuses"></div>
+		<div id="statuses">
+
+			{% for group in groups %}
+
+				<div class="group-status">
+					<h1 class="group-name">
+						Класс: {{ group.name }}
+					</h1>
+					
+					<table class="group-students">
+						<tr>
+							<th></th>
+							{% for status in statuses %}
+								<th>{{ status }}</th>
+							{% endfor %}
+						</tr>
+
+						{% for student in group.students %}
+						    <tr class="group-student">
+						    	<td hidden class="student-login">
+						    		{{- student.person.get_login() -}}
+						    	</td>
+						    	<td class="group-student-name">{{ utils.display_user(student.person) }}</td>
+								{% for status in statuses %}
+									{% set has = student.status == status %}
+									{% set style_class = has ? "status-has" : "status-hasnt" %}
+									{% set button_class = has ? "status-set-has" : "status-set-hasnt" %}
+									<td class="status {{ style_class }}">
+										<div hidden class="status-id">
+											{{- status -}}
+										</div>
+										{% if group.can_edit %}
+											<button class="status-set-button {{ button_class }}">
+												{{- has ? "+" : "-" -}}
+											</button>
+										{% else %}
+											<div class="{{ button_class }}">
+												{{- has ? "+" : "-" -}}
+											</div>
+										{% endif %}
+									</td>
+								{% endfor %}
+								
+								<td class="group-student-time">
+									{{- student.time -}}
+								</td>
+
+							</tr>
+						{% endfor %}
+					</table>
+
+				</div>
+			    
+			{% endfor %}
+
+			<script>
+				$(".status-set-button").click(function() {
+					if ($(this).hasClass("status-set-has"))
+						return;
+
+					$(this).parent().parent()
+						.find(".status-set-has")
+						.toggleClass("status-set-has")
+						.toggleClass("status-set-hasnt")
+						.html("-");
+
+					$(this).toggleClass("status-set-has").html("+");
+
+					let status = $(this).parent()
+						.children(".status-id").html().trim();
+
+					let login = $(this).parent().parent()
+						.children(".student-login").html().trim();
+
+					let data = {
+						status: status,
+						login: login
+					};
+
+					console.log(data);
+
+					$.ajax({
+						method: "GET",
+						url: "/api/setStatus",
+						data: data,
+						dataType: "json"
+					}).fail(function(error) {
+						console.log(error);
+					});
+
+					// todo ajax
+				});
+			</script>
+
+		</div>
 	</div>
 {% endblock %}
