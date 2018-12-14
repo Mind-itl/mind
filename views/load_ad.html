@@ -4,14 +4,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<form action="" method="POST" enctype="multipart/form-data">
-			Ссылка <input type="text" name="url">
-			Надпись <input type="text" name="title">
-			С какого числа <input type="date" name="from_date">
-			По какое <input type="date" name="until_date">
-			Картинка: (Разрешение 3510 264 (ну или 1755 132 😊)) <input type="file" name="img" class="form-control">
-			<input type="submit" class="submit big-submit">
+	<div class="container container-points">
+		<form action="" method="POST" enctype="multipart/form-data" class="form-50">
+			<label for="link">Ссылка на картинку</label>
+			<input type="text" class="form-control" id="link" name="url">
+			<label for="alt">Надпись (атрибут alt)</label>
+			<input type="text" class="form-control" id="alt" name="title">
+			<label for="from_date">Начало показа:</label>
+			<input type="date" class="form-control" id="from_date" name="from_date">
+			<label for="till_date">Конец показа:</label>
+			<input type="date" class="form-control" id="till_date" name="until_date">
+			<label for="file">Картинка (разрешение 3510 * 264):</label>
+			<input type="file" id="file" name="img" class="form-control">
+			<input type="submit" class="submit big-submit" value="Загрузить баннер">
 		</form>
 	</div>
 {% endblock %}

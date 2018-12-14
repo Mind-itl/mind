@@ -1,9 +1,3 @@
-.voting_container {
-	max-width: 500px;
-	margin: 10px auto;
-	line-height: 29px;
-}
-
 .voting_container input {
 	width: 100%;
 	height: 30px;
@@ -17,14 +11,9 @@
 	border-radius: 0px;
 	line-height: 15px;
 }
-
-
 .voting_container form {
-	width: 100%;
-	font-size: 16px;
 	position: relative;
 }
-
 .voting_container form p {
 	font-family: 'Courier New', arial;
 	font-size: 16px;
@@ -37,22 +26,19 @@
 	background: white;
 	padding-left: 15px;
 }
-
 .voting_container input[type="date"] {
-	width: 60%;
+	width: 40%;
 	float: right;
-	border-left: none;
 }
 
 .variant input[type="text"] {
 	width: 95%;
 	border-right: none;
-
 }
 
 .variant .removalArea {
 	width: 5%;
-	height: 30.5px;
+	height: 30px;
 	margin-left: 0px;
 	background-color: white;
 	border: 1px solid rgb(0, 75, 126);
@@ -61,16 +47,12 @@
 	margin-top: 0px;
 	position: relative;
 }
-
 .variant:hover > .removalArea > .removeX::before {
 	opacity: 1;
 }
-
 .variant:hover > .removalArea > .removeX::after {
 	opacity: 1;
 }
-
-
 .removalArea .removeX {
 	width: 100%;
 	height: 100%;
@@ -86,7 +68,7 @@
 	background: #ccc;
 	display: block;
 	position: absolute;
-	opacity: 0;	
+	opacity: 0.6;
 	transition: opacity 0.5s ease-in-out ;
 }
 
@@ -110,64 +92,44 @@
 	background: black;
 }
 
-input[type="submit"] {
-	background-color: rgb(0, 75, 126);
-	color: white;
-	letter-spacing: 1px;
-	-webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    outline: none;
-    -webkit-appearance: none;
-    border: 1px solid rgb(0, 75, 126);
-
-}
-
-.vars .variant:nth-child(2n) .removalArea {
-	height: 30px;
-	margin-top: 1px
-}
-
 :active, :hover, :focus {
     outline: 0;
     outline-offset: 0;
 }
-
-input[type="text"]:hover,
-input[type="date"]:hover,
-input[type="date"]:hover #date-field {
-}
-
-input[type="submit"]:hover {
-	background: #005687;
-}
-
-input[type="submit"]:active {
-	background: #004167;
-}
-
-.fakeinput {
+.add-var {
 	width: 100%;
 	height: 30px;
-	line-height: 29px;
-	background-color: #00407E;
-	border: 1px solid #00407E;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	text-align: center;
-	cursor: pointer ;
+	cursor: pointer;
 	padding-left: 3%;
 	font-family: 'Courier New', arial;
-	color: #fff;
+	color: #00407E;
 	transition: 0.5s;
 }
 
-.fakeinput:hover {
-	background-color: #005687;
+.add-var:hover {
+	color: #005687;
 }
 
-.fakeinput:active {
-	background: #004167;
+.add-var:active {
+	color: #004167;
 }
-
+.container form .submit {
+	font-family: 'Courier New', arial;
+	background: #466cb2;
+	padding: 5px 15px;
+	margin-bottom: 10px;
+	border: 0;
+	color: #bed5ff;
+	font-size: 20px;
+	transition: .5s;
+	cursor: pointer;
+	width: auto;
+}
+.container form .submit:hover {
+	background: #77a5f8;
+}
+label {
+	line-height: 30px;
+}

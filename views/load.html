@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container container-points">
 		{% if status %}
 			<div class="status">
 				{% if status=="error" %}
@@ -15,7 +15,7 @@
 			</div>
 		{% endif %}
 
-		<form action="" method="POST" enctype="multipart/form-data">
+		<form action="" method="POST" enctype="multipart/form-data" class="form-40">
 			<select required name="excel_type" class="form-control">
 				{% for reader in readers %}
 				    <option>{{ reader }}</option>
