@@ -25,7 +25,7 @@
 			<h2>Голосование</h2>
 
 			<script>
-				window.is_teacher = {{ me.is_teacher() ? "true" : "false" }};
+				window.is_teacher = {{ me.has_role("teacher") ? "true" : "false" }};
 			</script>
 
 			<div id="music_list">
