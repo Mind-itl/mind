@@ -16,6 +16,7 @@
 
 			$r = Db::query("
 				SELECT * FROM files
+				ORDER BY ID DESC
 			");
 
 			$files = [];
