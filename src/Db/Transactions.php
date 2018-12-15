@@ -6,6 +6,9 @@
 
 	class Transactions {
 		public static function add(User $from, User $to, string $cause, int $points=0): bool {
+			if ($points == 0 && $cause == 'C')
+				return false;
+
 			if ($points == 0)
 				$points = Causes::get_price($cause);
 
