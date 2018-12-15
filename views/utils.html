@@ -12,3 +12,11 @@
 		{{ utils.user_name(user, format) }}
 	</a>
 {% endmacro %}
+
+{# класс либо success, либо warning, либо danger#}
+{% macro message(text_bold, text, class) %}
+	<div class="alert alert-{{ class }}">
+		<strong>{{ text_bold }}</strong> {{ text }}
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	</div>
+{% endmacro %}

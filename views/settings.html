@@ -3,14 +3,16 @@
     Настройки
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	<div class="container">
 		{% if result=="success" %}
-			Успешно!
+			{{ utils.message("Успешно!","Баллы начислены","success") }}
 		{% elseif result=="fail" %}
-			Что-то пошло не так!
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
 		{% elseif result=="wrong" %}
-			Неправильный пароль!
+			{{ utils.message("Внимание!","Введен неправильный пароль!","danger") }}
 		{% endif %}
 
 	    <form action="" method="POST" class="form-40">

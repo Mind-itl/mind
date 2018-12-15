@@ -277,6 +277,8 @@ tr.lesson-now {
 }
 input[type="file"].form-control {
 	background-color: #CCDFEC;
+	padding: 0;
+	margin-bottom: 10px;
 }
 .submit {
 	font-family: 'Courier New', arial;
@@ -671,4 +673,35 @@ iframe {
 	background: none;
 	border-radius: 0;
 	box-shadow: none;
+}
+.alert {
+	padding: 15px;
+	margin-bottom: 15px;
+	width: 60%;
+}
+.alert-success {
+	background: linear-gradient(rgba(56, 223, 100, 0.6), rgba(100, 223, 133, 0.6));
+}
+.alert-warning {	
+	background: linear-gradient(rgba(255, 218, 64, 0.6), rgba(255, 228, 115, 0.6));
+}
+.alert-danger {
+	background: linear-gradient(rgba(247, 62, 95, 0.6), rgba(247, 111, 135, 0.6));
+}
+.alert .close {
+	padding: 0 4px;
+	font-size: 20px;
+	float: right;
+	position: relative;
+	bottom: 2px;
+	border: 0;
+	background: none;
+	cursor: pointer;
+}
+.document-elem {
+	margin-bottom: 5px;
+}
+.document-elem a {
+	color: rgb(0, 75, 126);
+	text-decoration: underline;
 }

@@ -3,12 +3,19 @@
 	Добавить голосование
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	{% if res_link %}
 		{{ res_link }}
 	{% endif %}	
 
 	<div class="container container-points">
+		{% if result=="success" %}
+			{{ utils.message("Успешно!","Голосование создано!","success") }}
+		{% elseif result=="fail" %}
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
+		{% endif %}
 		<div class="voting_container">
 			<form action="" method="POST" class="form-50">
 				<input type="text" class="form-control" placeholder="Название голосования" name="title" required>

@@ -7,6 +7,12 @@
 
 {% block body %}
 	<div class="container">
+		{% if result=="success" %}
+			{{ utils.message("Успешно!","Ваш вопрос принят!","success") }}
+		{% elseif result=="fail" %}
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
+		{% endif %}
+
 		<form action="" method="POST">
 			<textarea name="question" required placeholder="Вопрос"></textarea>
 			<input type="submit" value="Задать вопрос">
