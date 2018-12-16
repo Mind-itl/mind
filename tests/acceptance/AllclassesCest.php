@@ -17,6 +17,6 @@ class AllclassesCest {
 	public function pageDoesntWorkWhenStudent(AcceptanceTester $I) {
 		$I->loginAsStudent();
 		$I->amOnPage("/allclasses");
-		$I->seeResponseCodeIs(403);
+		$I->seeResponseCodeIs(404);
 	}
 }

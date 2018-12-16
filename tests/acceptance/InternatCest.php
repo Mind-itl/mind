@@ -12,7 +12,7 @@ class InternatCest {
 	public function pageDoesntWorkWhenTeacher(AcceptanceTester $I) {
 		$I->loginAsTeacher();
 		$I->amOnPage("/internat");
-		$I->seeResponseCodeIs(403);
+		$I->seeResponseCodeIs(404);
 	}
 
 	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {

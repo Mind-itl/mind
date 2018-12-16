@@ -11,7 +11,7 @@ class AwardCest {
 	public function pageDoesntWorkWhenStudent(AcceptanceTester $I) {
 		$I->loginAsStudent();
 		$I->amOnPage("/award");
-		$I->seeResponseCodeIs(403);
+		$I->seeResponseCodeIs(404);
 	}
 
 	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {
