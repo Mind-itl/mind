@@ -3,14 +3,16 @@
 	Загрузить данные
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	<div class="container container-points">
 		{% if status %}
 			<div class="status">
-				{% if status=="error" %}
-					Произошла ошибка
-				{% elseif status=="success" %}
-					Успешно
+				{% if result=="success" %}
+					{{ utils.message("Успешно!","Данные загружены!","success") }}
+				{% elseif result=="error" %}
+					{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
 				{% endif %}
 			</div>
 		{% endif %}

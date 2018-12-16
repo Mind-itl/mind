@@ -3,8 +3,15 @@
 	Добавить баннер
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	<div class="container container-points">
+		{% if result=="success" %}
+			{{ utils.message("Успешно!","Баннер загружен!","success") }}
+		{% elseif result=="fail" %}
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
+		{% endif %}
 		<form action="" method="POST" enctype="multipart/form-data" class="form-50">
 			<label for="link">Ссылка на картинку</label>
 			<input type="text" class="form-control" id="link" name="url">

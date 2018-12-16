@@ -3,30 +3,22 @@
     Передать баллы
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
-	{% if result=="success" %}
-
-		<div class="alert alert-success alert-dismissable">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong>Готово!</strong> Транзакция успешно завершена!
-		</div>
-
-	{% elseif result=="fail" %}
-
-		<div class="alert alert-danger alert-dismissable">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong>Упс!</strong> Что-то пошло не так!
-		</div>
-
-	{% endif %}
 	<div class="container container-points">
+		{% if result=="success" %}
+			{{ utils.message("Успешно!","Баллы переданы","success") }}
+		{% elseif result=="fail" %}
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
+		{% endif %}
 		<h2>Баланс: <strong>{{ points.count }}</strong> {{ points.noun }}</h2>
 		<script>
 			var causes_list = {{ causes }};
 		</script>
 		<form action="" method="POST">
 			{{ controller("select_student") }}
-			<input placeholder="Введите количество баллов" class="form-control" type="number" name="points" min="0" id="number">
+			<input placeholder="Введите количество баллов" class="form-control" type="number" name="points" min="1" id="number">
 			<input type="submit" class="submit">
 		</form>
 	</div>

@@ -4,12 +4,14 @@
 	Оповестить учеников
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
 	<div class="container">
 		{% if result=="success" %}
-			<span class="all-width">Сообщение отправлено!</span>
+			{{ utils.message("Успешно!","Баллы начислены","success") }}
 		{% elseif result=="fail" %}
-			<span class="all-width">Ошибка</span>
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
 		{% endif %}
 
 		<form action="" method="POST" class="form">

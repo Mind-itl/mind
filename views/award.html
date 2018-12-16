@@ -3,22 +3,18 @@
     Начислить баллы
 {% endblock %}
 
+{% import "utils.html" as utils %}
+
 {% block body %}
-	<div class="container">
+	<div class="container container-points">
 		<script>
 			window.causes_list = {{ causes|raw }};
 		</script>
 
 		{% if result=="success" %}
-			<div class="alert alert-info alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Готово!</strong> Транзакция успешно завершена!
-			</div>
+			{{ utils.message("Успешно!","Баллы начислены","success") }}
 		{% elseif result=="fail" %}
-			<div class="alert alert-info alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Внимание!</strong> Что-то пошло не так!
-			</div>
+			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
 		{% endif %}
 
 		<form action="" method="POST" class="form">

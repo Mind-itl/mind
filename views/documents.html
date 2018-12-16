@@ -9,7 +9,7 @@
 	<div class="container">
 		<ul>
 			{% for file in files %}
-				<li>
+				<li class="document-elem">
 					<a href="{{ file.url }}">
 						{{ file.title }}
 					</a>
@@ -27,13 +27,13 @@
 				Название занято
 			{% endif %}
 
-			<form action="" method="POST" enctype="multipart/form-data">
-				<input required name="file" type="file"><br>
-				<input required name="title" type="text" placeholder="Название">
+			<form action="" method="POST" class="form-40" enctype="multipart/form-data">
+				<input required name="file" type="file" class="form-control">
+				<input required name="title" type="text" placeholder="Название" class="form-control">
 				<input required name="path" type="text"
-					placeholder="Имя файла для ссылки (английские буквы без пробелов с расширением)"
-				>
-				<input type="submit">
+					placeholder="Имя файла для ссылки (английские буквы с расширением)"
+				 class="form-control">
+				<input type="submit" class="submit">
 			</form>
 		{% endif %}
 
