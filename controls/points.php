@@ -2,7 +2,7 @@
 	namespace Mind\Controls;
 
 	use Mind\Db\{Db, Users, Notifications, Json, Causes, Transactions};
-	use Mind\Server\{Control, Utils};
+	use Mind\Server\{Control, Utils, Route};
 	use Mind\Users\{User, Teacher, Student};
 
 	class Points extends Control {
@@ -14,9 +14,16 @@
 		}
 
 		protected function get_data(array $args): array {
-			if (isset($args[1]) && $args[1]!="")
-				$user = Users::student($args[1], true);
-			else 
+			if (isset($args[1]) && $args[1]!="") {
+				$login = trim($args[1]);
+
+				if (
+					!Users::has_login($login, true) ||
+					!Users::get($login, true) instanceof Student
+				) Route::not_found();
+
+				$user = Users::student($login, true);
+			} else
 				$user = Utils::curr_student();
 
 			[$trans, $sum] = $this->trans($user);

@@ -77,7 +77,7 @@
 		},
 		"fdate" => function(\DateTime $date, string $format): string {
 			$s = strftime($format, $date->getTimestamp());
-			$month = Utils::month_rus(intval(date('n')));
+			$month = Utils::month_rus(intval($date->format('n')));
 
 			return str_replace("%Q", $month, $s);
 		}

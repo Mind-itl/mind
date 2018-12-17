@@ -12,7 +12,7 @@ class BroadcastCest {
 	public function pageDoesntWorkWhenStudent(AcceptanceTester $I) {
 		$I->loginAsStudent();
 		$I->amOnPage("/broadcast");
-		$I->seeResponseCodeIs(403);
+		$I->seeResponseCodeIs(404);
 	}
 
 	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {

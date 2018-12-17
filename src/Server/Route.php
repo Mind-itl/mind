@@ -19,7 +19,7 @@
 
 		public static function no_access() {
 			if (Utils::is_logined())
-				header('HTTP/1.0 403 Forbidden');
+				static::not_found();
 			else
 				Utils::redirect("/?from=".$_SERVER["REQUEST_URI"]);
 			exit();

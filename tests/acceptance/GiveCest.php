@@ -11,7 +11,7 @@ class GiveCest {
 	public function pageDoesntWorkWhenTeacher(AcceptanceTester $I) {
 		$I->loginAsTeacher();
 		$I->amOnPage("/give");
-		$I->seeResponseCodeIs(403);
+		$I->seeResponseCodeIs(404);
 	}
 
 	public function pageDoesntWorkWhenNotLogined(AcceptanceTester $I) {
