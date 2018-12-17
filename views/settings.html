@@ -8,7 +8,7 @@
 {% block body %}
 	<div class="container">
 		{% if result=="success" %}
-			{{ utils.message("Успешно!","Баллы начислены","success") }}
+			{{ utils.message("Успешно изменено!","","success") }}
 		{% elseif result=="fail" %}
 			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
 		{% elseif result=="wrong" %}
