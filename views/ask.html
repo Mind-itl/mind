@@ -13,9 +13,9 @@
 			{{ utils.message("Внимание!","Что-то пошло не так!","warning") }}
 		{% endif %}
 
-		<form action="" method="POST">
-			<textarea name="question" required placeholder="Вопрос"></textarea>
-			<input type="submit" value="Задать вопрос">
+		<form action="" method="POST" class="form-40 form-40-marg-all">
+			<textarea name="question" required placeholder="Вопрос" class="form-control"></textarea>
+			<input type="submit" value="Задать вопрос" class="submit">
 		</form>
 
 		{% for q in questions %}
@@ -25,19 +25,18 @@
 		    	</div>
 
 		    	<div class="question-text">
-		    		{{ q.text }}
+			    	{%- if can_remove -%}
+						<button class="question-remove">&times;</button>
+					{%- endif -%}
+		    		<span>{{ q.text }}</span>
+					<span class="userlink">{{ utils.display_user(q.from) }}, </span>
 		    	</div>
-				<div class="from">
-					{{ utils.display_user(q.from) }}
-				</div>
-
-				{%- if can_remove -%}
-					<button class="question-remove">&times;</button>
-				{%- endif -%}
 				
 				{% if can_answer %}
-					<textarea class="question-answer-send-text" placeholder="Для удаления ответа отправьте пустой ответ"></textarea>
-					<button class="question-answer-send">Ответить</button>
+				<div class="answer">
+					<textarea class="question-answer-send-text" placeholder="Для удаления ответа отправьте пустое сообщение"></textarea>
+					<button class="question-answer-send submit">Ответить</button>
+				</div>
 				{% endif %}
 
 				{% if q.answered %}

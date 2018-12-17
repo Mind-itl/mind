@@ -280,6 +280,10 @@ input[type="file"].form-control {
 	padding: 0;
 	margin-bottom: 10px;
 }
+textarea.form-control {
+	resize: vertical;
+	min-height: 40px;
+}
 .submit {
 	font-family: 'Courier New', arial;
 	background: #466cb2;
@@ -574,6 +578,10 @@ input[type="file"].form-control {
 	margin-right: 10%;
 	width: 40%;
 }
+.form-40-marg-all {
+	margin-right: 60%;
+	margin-bottom: 20px;
+}
 label {
 	margin-bottom: 50px;
 }
@@ -704,4 +712,43 @@ iframe {
 .document-elem a {
 	color: rgb(0, 75, 126);
 	text-decoration: underline;
+}
+.question {
+    flex-basis: 48%;
+    padding: 10px;
+    background-color: #93BAC8;
+    margin-bottom: 20px;
+}
+.question-text {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+.question-remove {
+	padding: 3px 7px;
+	margin-right: 5px;
+	border: 0;
+	font-size: 16px;
+	transition: .5s;
+	color: #7F2200;
+	background: #E26638;
+}
+.question span {
+	display: inline-block;
+	margin-right: 8px;
+}
+.question .userlink {
+	font-size: 16px;
+	color: #4d4d4d;
+}
+.question textarea {
+	width: 50%;
+	min-height: 40px;
+	resize: vertical;
+	padding: 5px 10px;
+}
+.question .submit {
+	margin: 0;
+}
+.question-answer {
+	padding-left: 15px;
 }
