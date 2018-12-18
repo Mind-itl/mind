@@ -32,9 +32,9 @@ class getTransactions extends Api_method {
 		foreach (Transactions::of_student($user) as $val) {
 			$ret[] = [
 				"time" => $val["NORM_TIME"],
-				"from" => $val["FROM_LOGIN"],
-				"to" => $val["TO_LOGIN"],
-				"cause" => $val["CAUSE"],
+				"from_login" => $val["FROM_LOGIN"],
+				"to_login" => $val["TO_LOGIN"],
+				"cause_code" => $val["CAUSE"],
 				"points" => $val["POINTS"] 	
 			];
 		}

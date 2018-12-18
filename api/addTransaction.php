@@ -37,7 +37,7 @@ class addTransaction extends Api_method {
 		$to_user = Users::student($to_login, true);
 		$from_user = Users::get($from_login, true);
 
-		if (!isset($_GET['cause']) && $from_user instanceof Teacher)
+		if (!isset($_GET['cause_code']) && $from_user instanceof Teacher)
 			return [
 				"status" => "error",
 				"error" => [
@@ -45,7 +45,7 @@ class addTransaction extends Api_method {
 				]
 			];
 
-		$cause = trim($_GET['cause'] ?? "C");
+		$cause = trim($_GET['cause_code'] ?? "C");
 		$points = intval($_GET['points'] ?? 0);
 
 		$result = Transactions::add($from_user, $to_user, $cause, $points);
