@@ -9,8 +9,12 @@
 			if ($points == 0 && $cause == 'C')
 				return false;
 
-			if ($points == 0)
+			if ($cause != "C" && !Causes::has($cause))
+				return false;
+
+			if ($points == 0) {
 				$points = Causes::get_price($cause);
+			}
 
 			if (!$to->has_role("student"))
 				return false;
