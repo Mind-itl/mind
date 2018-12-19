@@ -57,10 +57,14 @@
 			foreach (static::get_classes() as $class) {
 				$students = [];
 
-				$r = Db::query(
-					"SELECT LOGIN FROM students WHERE CLASS_NUM=?i AND CLASS_LIT=?s",
-					intval($class[0]),
-					$class[1]
+				$r = Db::query("
+					SELECT LOGIN
+					FROM students
+					WHERE
+						CLASS_NUM=?i AND
+						CLASS_LIT=?s
+					ORDER BY FAMILY_NAME, GIVEN_NAME
+					", intval($class[0]), $class[1]
 				);
 
 				foreach ($r as $i) {
