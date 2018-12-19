@@ -15,6 +15,11 @@
 			{{ utils.message("Внимание!","Введен неправильный пароль!","danger") }}
 		{% endif %}
 
+		<div>
+			{{ me.has_role("student") ? "Классные руководители" : "Администраторы" }}
+			не смогут напомнить пароль, если вы его поменяете
+		</div>
+
 	    <form action="" method="POST" class="form-40">
 	    	<h2><strong>Сменить пароль</strong></h2>
 	    	<label>Старый пароль</label>
