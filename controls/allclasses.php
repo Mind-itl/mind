@@ -3,14 +3,15 @@
 
 	use Mind\Db\{Db, Users};
 	use Mind\Server\{Control, Utils};
-	use Mind\Users\{User, Teacher, Student};
+	use Mind\Users\{User, Teacher, Student, Role};
 
 	class Allclasses extends Control {
 		public function has_access(array $args): bool {
 			return Utils::is_logined() && (
-				Utils::get_curr()->has_role("zam") ||
-				Utils::get_curr()->has_role("pedorg") ||
-				Utils::get_curr()->has_role("diric")
+				Utils::get_curr()->has_role(Role::ZAM) ||
+				Utils::get_curr()->has_role(Role::PEDORG) ||
+				Utils::get_curr()->has_role(Role::DIRIC) ||
+				Utils::get_curr()->has_role(Role::AUCTIONER)
 			);
 		}
 
@@ -18,7 +19,8 @@
 			[$arr, $sum] = $this->get_points_by_classes();
 			return [
 				"points_by_classes" => $arr,
-				"sum" => $sum
+				"sum" => $sum,
+				"can_minus_points" => Utils::get_curr()->has_role(Role::AUCTIONER)
 			];
 		}
 
