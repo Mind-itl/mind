@@ -23,16 +23,16 @@
 
 			$can_edit_role = false;
 
-			if ($user instanceof Student) {
-				$clruk = $user->get_classruk();
-				if ($clruk !== null && Utils::get_curr()->has_role("classruk")) {
-					$l = $clruk->get_login();
-					$ll = Utils::get_curr()->get_login();
-					$can_edit_role = $l == $ll;
-				}
-			}
+			// if ($user instanceof Student) {
+			// 	$clruk = $user->get_classruk();
+			// 	if ($clruk !== null && Utils::get_curr()->has_role("classruk")) {
+			// 		$l = $clruk->get_login();
+			// 		$ll = Utils::get_curr()->get_login();
+			// 		$can_edit_role = $l == $ll;
+			// 	}
+			// }
 
-			$can_edit_role = $can_edit_role || Utils::get_curr()->has_role("zam");
+			$can_edit_role = Utils::get_curr()->has_role("zam");
 
 			return [
 				"he" => $user,

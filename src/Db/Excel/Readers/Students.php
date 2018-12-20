@@ -45,12 +45,12 @@
 						$str .= "$rand";
 					}
 					$a = Db::query_assoc("
-						SELECT COUNT(LOGIN) AS COUNT FROM students
+						SELECT COUNT(LOGIN) AS COUNT FROM passwords
 						WHERE
-							LOGIN = ?s		
+							LOGIN = ?s
 					", $str)["COUNT"];
 					$b = Db::query_assoc("
-						SELECT COUNT(ENTRY_LOGIN) AS COUNT FROM students
+						SELECT COUNT(ENTER_LOGIN) AS COUNT FROM passwords
 						WHERE
 							LOGIN = ?s
 					", $str)["COUNT"];
@@ -68,7 +68,7 @@
 		static function add_student($student) {
 			$i = $student;
 			$a = Db::query_assoc("
-				SELECT COUNT(LOGIN) AS COUNT FROM students 
+				SELECT COUNT(LOGIN) AS COUNT FROM passwords
 				WHERE
 					LOGIN = ?s
 			", $i["login"]
