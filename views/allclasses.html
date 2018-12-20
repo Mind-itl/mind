@@ -22,9 +22,29 @@
 					<table class="class-table table-left">
 						{% for student in class.points_by_students %}
 							<tr>
+								<td hidden class="student-login">
+									{{ student.get_enter_login }}
+								</td>
 								<td>{{ utils.display_user(student) }}</td>
 								<td><strong>{{ student.get_points }}</strong></td>
 								<td><a href="/points/{{ student.get_enter_login }}">Подробнее</a></td>
+
+								{% if can_minus_points %}
+									<td>
+										<input
+											placeholder="Баллы"
+											class="minus-points-input"
+											type="number"
+											name="points"
+											min="1"
+											id="number"
+										>
+										<button class="minus-points">
+											Вычесть баллы
+										</button>
+									</td>
+								{% endif %}
+
 							</tr>
 						{% endfor %}
 					</table>
@@ -32,4 +52,33 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	{% if can_minus_points %}
+		<script>
+			$(".minus-points").click(function() {
+				let login = $(this).parent().parent()
+					.find(".student-login").html()
+					.trim();
+
+				let points = $(this).parent()
+					.find(".minus-points-input").val()
+					.trim();
+
+				$.ajax({
+					method: "GET",
+					url: "/api/buyLot",
+					data: {
+						"login": login,
+						"points": points
+					},
+					dataType: "json"
+				}).done(function(data) {
+					document.location = document.location;
+				}).fail(function(error) {
+					console.log(error);
+				});
+			});
+		</script>
+	{% endif %}
+
 {% endblock %}

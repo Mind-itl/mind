@@ -6,10 +6,10 @@
 
 	class Transactions {
 		public static function add(User $from, User $to, string $cause, int $points=0): bool {
-			if ($points == 0 && $cause == 'C')
+			if ($points == 0 && ($cause == 'C' || $cause == 'E'))
 				return false;
 
-			if ($cause != "C" && !Causes::has($cause))
+			if ($cause != "C" && $cause != "E" && !Causes::has($cause))
 				return false;
 
 			if ($points == 0) {
@@ -37,12 +37,13 @@
 
 			$points = Utils::get_points_in_case(intval($points));
 
-			Notifications::add(
-				$to,
-				$from,
-				"Вам перечислили баллы",
-				intval($points)
-			);
+			if ($cause != "E")
+				Notifications::add(
+					$to,
+					$from,
+					"Вам перечислили баллы",
+					intval($points)
+				);
 
 			return true;
 		}

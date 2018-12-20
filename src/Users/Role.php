@@ -21,6 +21,7 @@ class Role {
 	const SECRETAR  = "secretar";
 	const DEPUTAT   = "deputat";
 	const STAROSTA  = "starosta";
+	const AUCTIONER = "auctioner";
 
 	public static function get_role_name(string $role): string {
 		return [
@@ -38,7 +39,8 @@ class Role {
 			static::PRESIDENT => "президент совета лицеистов",
 			static::SECRETAR  => "секретарь совета лицеистов",
 			static::DEPUTAT   => "депутат совета лицеистов",
-			static::STAROSTA  => "староста"
+			static::STAROSTA  => "староста",
+			static::AUCTIONER => "ответственный за аукцион"
 		][$role];
 	}
 
@@ -60,27 +62,17 @@ class Role {
 			static::PRESIDENT,
 			static::SECRETAR,
 			static::DEPUTAT,
-			static::STAROSTA
+			static::STAROSTA,
+			static::AUCTIONER,
 		];
 	}
 
 	public static function get_role_arg_name(string $role): string {
 		return [
-			static::TEACHER  => "",
-			static::DIRIC    => "",
 			static::PREDMET  => "предмет",
 			static::ZAM      => "зам по ..",
 			static::CLASSRUK => "класс",
-			static::SOCPED   => "",
-			static::PEDORG   => "",
-			static::MEDIC    => "",
 			static::VOSPIT   => "класс",
-
-			static::STUDENT   => "",
-			static::PRESIDENT => "",
-			static::SECRETAR  => "",
-			static::DEPUTAT   => "",
-			static::STAROSTA  => ""
-		][$role];
+		][$role] ?? "";
 	}
 }
