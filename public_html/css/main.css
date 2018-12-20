@@ -752,3 +752,18 @@ iframe {
 .question-answer {
 	padding-left: 15px;
 }
+.group-student {
+	width: 100%;
+}
+.group-student td {
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.group-student-name {
+	width: 200px;
+}
+.status-set-button {
+	width: 16px;
+	height: 25px;
+	font-size: 20px;
+	margin: 0 auto;
+}
