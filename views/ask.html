@@ -19,18 +19,18 @@
 		</form>
 
 		{% for q in questions %}
-		    <div class="question">
+			<div class="question">
 				{%- if can_remove -%}
 					<button class="question-remove">&times;</button>
 				{%- endif -%}
 
-		    	<div class="question-id" hidden>
-		    		{{- q.id -}}
-		    	</div>
+				<div class="question-id" hidden>
+					{{- q.id -}}
+				</div>
 
-		    	<div class="question-text">
-		    		{{ q.text }}
-		    	</div>
+				<div class="question-text">
+					{{ q.text|markdown|raw }}
+				</div>
 				<div class="from">
 					{{ utils.display_user(q.from) }}
 				</div>
@@ -44,7 +44,7 @@
 					<div class="question-answer">
 						<img src="../img/arrow.png" alt="" class="answer">
 						<div class="question-answer-text">
-							{{- q.answer -}}
+							{{- q.answer|markdown|raw -}}
 						</div>
 						<div class="question-answer-from">
 							{{ utils.display_user(q.answerer) }}
@@ -52,7 +52,7 @@
 					</div>
 				{% endif %}
 
-		    </div>
+			</div>
 		{% endfor %}
 		
 		{%- if can_remove -%}
@@ -90,23 +90,6 @@
 				});
 			</script>
 		{%- endif -%}
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.2/markdown-it.min.js"></script>
-		<script>
-			(function() {
-				let md = new markdownit();
-				$(".question-text").each(function() {
-					$(this).html(
-						md.render($(this).html())
-					);
-				});
-				$(".question-answer-text").each(function() {
-					$(this).html(
-						md.render($(this).html())
-					);
-				});
-			})();
-		</script>
 
 	</div>
 {% endblock %}

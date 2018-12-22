@@ -3,6 +3,7 @@
 
 	use Twig_Environment,
 		Twig_Loader_Filesystem,
+		Twig_Loader_Array,
 		Twig_Function,
 		Twig_Filter;
 
@@ -80,6 +81,14 @@
 			$month = Utils::month_rus(intval($date->format('n')));
 
 			return str_replace("%Q", $month, $s);
+		},
+		"markdown" => function(string $text): string {
+			$parsedown = new \Parsedown();
+			$parsedown
+				->setSafeMode(true)
+				->setBreaksEnabled(true);
+
+			return $parsedown->text($text);
 		}
 	];
 
