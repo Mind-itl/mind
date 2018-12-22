@@ -3,6 +3,7 @@
 
 	use Twig_Environment,
 		Twig_Loader_Filesystem,
+		Twig_Loader_Array,
 		Twig_Function,
 		Twig_Filter;
 

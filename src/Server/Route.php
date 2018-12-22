@@ -56,6 +56,13 @@
 				is_file($public_file);
 		}
 
+		public static function has_markdown_page(string $url): bool {
+			$public_file = Utils::VIEWS."$url.md";
+			return
+				file_exists($public_file) &&
+				is_file($public_file);
+		}
+
 		public static function init(): void {
 			require_once dirname(__DIR__, 2)."/config.php";
 
@@ -94,6 +101,10 @@
 
 			} elseif (self::has_pure_page($control_name)) {
 				$control = new Control($control_name);
+				$html = $control->get_html($url_arr);
+				echo $html;
+			} elseif (self::has_markdown_page($control_name)) {
+				$control = new MarkdownControl($control_name);
 				$html = $control->get_html($url_arr);
 				echo $html;
 			} else
