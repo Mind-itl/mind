@@ -19,3 +19,7 @@ public_html/dist
 _generated
 _output
 _data
+
+# files
+public_html/files
+public_html/img
