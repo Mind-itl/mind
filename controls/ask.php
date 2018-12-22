@@ -24,7 +24,7 @@
 
 			$r = Db::query("
 				SELECT * FROM questions
-				ORDER BY TIME
+				ORDER BY TIME DESC
 				LIMIT 10
 			");
 

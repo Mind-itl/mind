@@ -91,5 +91,22 @@
 			</script>
 		{%- endif -%}
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.2/markdown-it.min.js"></script>
+		<script>
+			(function() {
+				let md = new markdownit();
+				$(".question-text").each(function() {
+					$(this).html(
+						md.render($(this).html())
+					);
+				});
+				$(".question-answer-text").each(function() {
+					$(this).html(
+						md.render($(this).html())
+					);
+				});
+			})();
+		</script>
+
 	</div>
 {% endblock %}
