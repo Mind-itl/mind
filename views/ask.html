@@ -15,28 +15,29 @@
 
 		<form action="" method="POST" class="form-40 form-40-marg-all">
 			<textarea name="question" required placeholder="Вопрос" class="form-control"></textarea>
-			<input type="submit" value="Задать вопрос" class="submit">
+			<input type="submit" class="submit" value="Задать вопрос">
 		</form>
 
 		{% for q in questions %}
 		    <div class="question">
+				{%- if can_remove -%}
+					<button class="question-remove">&times;</button>
+				{%- endif -%}
+
 		    	<div class="question-id" hidden>
 		    		{{- q.id -}}
 		    	</div>
 
 		    	<div class="question-text">
-			    	{%- if can_remove -%}
-						<button class="question-remove">&times;</button>
-					{%- endif -%}
-		    		<span>{{ q.text }}</span>
-					<span class="userlink">{{ utils.display_user(q.from) }}, </span>
+		    		{{ q.text }}
 		    	</div>
+				<div class="from">
+					{{ utils.display_user(q.from) }}
+				</div>
 				
 				{% if can_answer %}
-				<div class="answer">
-					<textarea class="question-answer-send-text" placeholder="Введите ответ на вопрос"></textarea>
-					<button class="question-answer-send submit">Ответить</button>
-				</div>
+					<textarea class="question-answer-send-text" placeholder="Для удаления ответа отправьте пустой запрос"></textarea>
+					<button class="question-answer-send">Ответить</button>
 				{% endif %}
 
 				{% if q.answered %}
@@ -72,9 +73,7 @@
 				$(".question-answer-send").click(function() {
 					let id = $(this).parent().children(".question-id").html();
 					let answer = $(this).parent().children(".question-answer-send-text").val();
-
 					console.log(answer);
-
 					$.ajax({
 						method: "POST",
 						url: "",
