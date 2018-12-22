@@ -755,8 +755,8 @@ iframe {
 	padding: 5px 10px;
 }
 .question-answer {
-	padding-left: 15px;
 	margin-top: 10px;
+	position: relative;
 }
 .group-student {
 	width: 100%;
@@ -766,6 +766,17 @@ iframe {
 }
 .group-student-name {
 	width: 200px;
+}
+.question-answer-text {
+	margin-left: 16px;
+}
+.question-answer-from {
+	margin-top: 5px;
+}
+img.answer {
+	width: 15px;
+	position: absolute;
+	top: 5px;
 }
 /* status page */
 .status-set-button {
