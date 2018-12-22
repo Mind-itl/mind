@@ -280,7 +280,12 @@ input[type="file"].form-control {
 	padding: 0;
 	margin-bottom: 10px;
 }
-.submit {
+textarea.form-control {
+	resize: vertical;
+	min-height: 40px;
+}
+.submit,
+.question-answer-send {
 	font-family: 'Courier New', arial;
 	background: #466cb2;
 	padding: 5px 15px;
@@ -574,6 +579,10 @@ input[type="file"].form-control {
 	margin-right: 10%;
 	width: 40%;
 }
+.form-40-marg-all {
+	margin-right: 60%;
+	margin-bottom: 20px;
+}
 label {
 	margin-bottom: 50px;
 }
@@ -704,4 +713,75 @@ iframe {
 .document-elem a {
 	color: rgb(0, 75, 126);
 	text-decoration: underline;
+}
+.question {
+    flex-basis: 48%;
+    align-content: s;
+    padding: 10px;
+    background-color: #93BAC8;
+    margin-bottom: 20px;
+}
+.question-text {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+.question-remove {
+	padding: 3px 7px;
+	margin-right: 5px;
+	border: 0;
+	font-size: 16px;
+	transition: .5s;
+	color: #7F2200;
+	background: #E26638;
+}
+.question-text,
+.from {
+	display: inline-block;
+	margin-right: 8px;
+}
+.from {
+	margin-top: -10px;
+	padding-top: 0;
+}
+.question .userlink {
+	font-size: 16px;
+	color: #4d4d4d;
+}
+.question-answer-send-text {
+	width: 60%;
+	margin-right: 40%;
+	min-height: 60px;
+	resize: vertical;
+	padding: 5px 10px;
+}
+.question-answer {
+	margin-top: 10px;
+	position: relative;
+}
+.group-student {
+	width: 100%;
+}
+.group-student td {
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.group-student-name {
+	width: 200px;
+}
+.question-answer-text {
+	margin-left: 16px;
+}
+.question-answer-from {
+	margin-top: 5px;
+}
+img.answer {
+	width: 15px;
+	position: absolute;
+	top: 5px;
+}
+/* status page */
+.status-set-button {
+	width: 16px;
+	height: 25px;
+	font-size: 20px;
+	margin: 0 auto;
 }
