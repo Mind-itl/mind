@@ -19,10 +19,17 @@
 		public function get_html(array $args): string {
 			$file = $this->file_name . ".md";
 			$text = file_get_contents(Utils::VIEWS."$file");
+			if (!$text)
+				$text = "";
+
+			preg_match("/title: (.+)/", $text, $ans);
+			$title = $ans[1];
+
+			$text = preg_replace("/title: (.+)/", "", $text);
 
 			$parsedown = new \Parsedown();
 			$parsedown
-				->setSafeMode(true)
+				// ->setSafeMode(true)
 				->setBreaksEnabled(true);
 
 			$text = $parsedown->text($text);
@@ -35,7 +42,7 @@
 				"{% endblock %}";
 
 			$template = Twig_loader::get_twig()->createTemplate($text);
-			return $template->render([]);
+			return $template->render(["title" => $title]);
 		}
 	}
 ?>
