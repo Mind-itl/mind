@@ -55,7 +55,7 @@
 			$path = basename($path);
 
 			$ext = pathinfo($path)["extension"] ?? "";
-			if (!in_array($ext, ["pdf", "doc", "docx"]))
+			if (!in_array($ext, ["pdf", "doc", "docx", "html"]))
 				return ["fail", ""];
 
 			$has_path = Db::query_assoc("
