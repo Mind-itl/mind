@@ -784,4 +784,19 @@ img.answer {
 	height: 25px;
 	font-size: 20px;
 	margin: 0 auto;
+	border: none;
+	cursor: pointer;
+}
+.status-set-has {
+	background: rgb(0,75,126);
+	color: #fff;
+	border: 1px solid #999;
+}
+.status-set-hasnt {
+	color: rgb(0,75,126);
+	background: #fff;
+	border: 1px solid #999;
+}
+.group-name:first-child {
+	margin-top: 100px;
 }
