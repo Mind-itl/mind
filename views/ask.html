@@ -66,7 +66,7 @@
 							remove_id: id,
 						}
 					}).done(function(data) {
-						document.location.reload();
+						document.location = document.location;
 					}).fail(function(error) {
 						console.log(error);
 					});
@@ -83,7 +83,7 @@
 							answer: answer
 						}
 					}).done(function(data) {
-						document.location.reload();
+						document.location = document.location;
 					}).fail(function(error) {
 						console.log(error);
 					});
