@@ -3,6 +3,31 @@
 	use Mind\Db\Excel\Formatter;
 
 	final class FormatterTest extends TestCase {
+		/**
+		 * @dataProvider providerNames
+		 */
+		public function testName(string $name, string $need): void {
+			$this->assertEquals(
+				$need,
+				Formatter::name($name)
+			);
+		}
+
+		public function providerNames(): array {
+			$right = "Семенов";
+			$variants = [
+				$right,
+				" семенов  ",
+				" семеноВ",
+				"  семёнов  ",
+			];
+
+			$ret = [];
+			foreach ($variants as $v) {
+				$ret[] = [$v, $right];
+			}
+			return $ret;
+		}
 
 		/**
 		 * @dataProvider providerAbbrNames
@@ -49,8 +74,10 @@
 				"  10  . 4   ",
 				"Класс 10 4.",
 				"10 - 4",
+				"10--4",
 				"10 . 4",
-				"10. 4"
+				"10. 4",
+				"10 4"
 			];
 
 			$ret = [];

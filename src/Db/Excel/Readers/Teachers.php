@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Db\Excel\Readers;
 
-	use Mind\Db\Excel\Reader;
+	use Mind\Db\Excel\{Reader, };
 
 	use Mind\Server\Utils;
 	use Mind\Db\{Db, Passwords, Notifications, Users};
@@ -17,19 +17,15 @@
 			}
 		}
 
-		static function format_name(string $name): string {
-			return strtolower($name);
-		}
-
 		static function process(\Closure $f): array {
 			$n = 4; // количество циферок в логине
 			$i = 1;
 			$arr = [];
 			while ($f(0, $i) != "") {
 				$arr[$i] = [];
-				$arr[$i]["family_name"] = $f(1, $i);
-				$arr[$i]["name"] = $f(2, $i);
-				$arr[$i]["father_name"] = $f(3, $i);
+				$arr[$i]["family_name"] = Formatter::name($f(1, $i));
+				$arr[$i]["name"]        = Formatter::name($f(2, $i));
+				$arr[$i]["father_name"] = Formatter::name($f(3, $i));
 
 				$j = 5;
 				$empty = [];
@@ -55,7 +51,7 @@
 					$j++;
 				}
 				$arr[$i]["many_duties"] = $empty;
-				
+
 				//$arr[$i]["birthday"] = $f(6, $i);
 				while (true) {
 					$str = "";
@@ -81,7 +77,7 @@
 		static function add_teacher(array $teacher) {
 			$i = $teacher;
 			$a = Db::query_assoc("
-				SELECT COUNT(LOGIN) AS COUNT FROM teachers 
+				SELECT COUNT(LOGIN) AS COUNT FROM teachers
 				WHERE
 					LOGIN = ?s
 			", $i["login"]

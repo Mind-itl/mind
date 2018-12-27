@@ -12,7 +12,7 @@
 		public static function abbr_name(string $name): string {
 			$name = static::lower($name);
 			$name = preg_replace("/ё/u", "е", $name);
-			
+
 			assert($name !== null);
 
 			preg_match('/(\w+) *(\w)\.? *(\w)\.?/u', $name, $m);
@@ -20,6 +20,17 @@
 			$m[1] = static::upper_first($m[1]);
 
 			return $m[1]." ".static::upper($m[2]).".".static::upper($m[3]).".";
+		}
+
+		static function name(string $name): string {
+			$name = preg_replace("/ё/u", "е", $name);
+			assert($name !== null);
+
+			$name = trim($name);
+			$name = static::lower($name);
+			$name = static::upper_first($name);
+
+			return $name;
 		}
 
 		static function day(string $day): string {

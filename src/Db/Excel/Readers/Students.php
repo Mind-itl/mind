@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Db\Excel\Readers;
 
-	use Mind\Db\Excel\Reader;
+	use Mind\Db\Excel\{Reader, Formatter};
 
 	use Mind\Server\Utils;
 	use Mind\Db\{Db, Passwords, Notifications, Users};
@@ -17,22 +17,17 @@
 			}
 		}
 
-		static function format_name(string $name): string {
-			preg_match('/(\w+) *(\w)\.? *(\w)\.?/u', $name, $m);
-			return $m[1]." ".mb_strtoupper($m[2]).".".mb_strtoupper($m[3]).".";
-		}
-
 		static function process(\Closure $f): array {
 			$n = 4; // количество циферок в логине
 			$i = 1;
 			$arr = [];
 			while ($f(0, $i) != "") {
 				$arr[$i] = [];
-				$arr[$i]["family_name"] = $f(1, $i);
-				$arr[$i]["name"] = $f(2, $i);
-				$arr[$i]["father_name"] = $f(3, $i);
+				$arr[$i]["family_name"] = Formatter::name($f(1, $i));
+				$arr[$i]["name"]        = Formatter::name($f(2, $i));
+				$arr[$i]["father_name"] = Formatter::name($f(3, $i));
+				$class                  = Formatter::group($f(4, $i));
 
-				$class = $f(4, $i);
 				[$aaa, $bbb] = explode('-', $class);
 				$arr[$i]["num"] = $aaa;
 				$arr[$i]["lit"] = $bbb;
@@ -44,11 +39,13 @@
 						$rand = random_int(0, 9);
 						$str .= "$rand";
 					}
+
 					$a = Db::query_assoc("
 						SELECT COUNT(LOGIN) AS COUNT FROM passwords
 						WHERE
 							LOGIN = ?s
 					", $str)["COUNT"];
+
 					$b = Db::query_assoc("
 						SELECT COUNT(ENTER_LOGIN) AS COUNT FROM passwords
 						WHERE
