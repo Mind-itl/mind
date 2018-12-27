@@ -26,11 +26,11 @@
 						</tr>
 
 						{% for student in group.students %}
-						    <tr class="group-student">
-						    	<td hidden class="student-login">
-						    		{{- student.person.get_login() -}}
-						    	</td>
-						    	<td class="group-student-name">{{ utils.display_user(student.person) }}</td>
+							<tr class="group-student">
+								<td hidden class="student-login">
+									{{- student.person.get_login() -}}
+								</td>
+								<td class="group-student-name">{{ utils.display_user(student.person) }}</td>
 								{% for status in statuses %}
 									{% set has = student.status == status %}
 									{% set style_class = has ? "status-has" : "status-hasnt" %}
@@ -50,7 +50,7 @@
 										{% endif %}
 									</td>
 								{% endfor %}
-								
+
 								<td class="group-student-time">
 									{{- student.time -}}
 								</td>
@@ -58,13 +58,14 @@
 							</tr>
 						{% endfor %}
 					</table>
-
 				</div>
-			    
+
 			{% endfor %}
 
 			<script>
 				$(".status-set-button").click(function() {
+					'use strict';
+
 					if ($(this).hasClass("status-set-has"))
 						return;
 
@@ -74,7 +75,10 @@
 						.toggleClass("status-set-hasnt")
 						.html("-");
 
-					$(this).toggleClass("status-set-has").html("+");
+					$(this)
+						.toggleClass("status-set-has")
+						.toggleClass("status-set-hasnt")
+						.html("+");
 
 					let status = $(this).parent()
 						.children(".status-id").html().trim();
@@ -86,6 +90,10 @@
 						status: status,
 						login: login
 					};
+
+					$(this).parent().parent()
+						.find(".group-student-time")
+						.html(new Date().toISOString().slice(0, 19).replace('T', ' '));
 
 					console.log(data);
 
