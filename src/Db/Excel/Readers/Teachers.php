@@ -1,7 +1,7 @@
 <?php
 	namespace Mind\Db\Excel\Readers;
 
-	use Mind\Db\Excel\{Reader, };
+	use Mind\Db\Excel\{Reader, Formatter};
 
 	use Mind\Server\Utils;
 	use Mind\Db\{Db, Passwords, Notifications, Users};
@@ -53,22 +53,7 @@
 				$arr[$i]["many_duties"] = $empty;
 
 				//$arr[$i]["birthday"] = $f(6, $i);
-				while (true) {
-					$str = "";
-					for ($j = 0; $j < $n; $j++) {
-						$rand = random_int(0, 9);
-						$str .= "$rand";
-					}
-					$a = Db::query_assoc("
-						SELECT COUNT(LOGIN) AS COUNT FROM teachers
-						WHERE
-							LOGIN = ?s
-					", $str)["COUNT"];
-					if (intval($a) == 0) {
-						$arr[$i]["login"] = $str;
-						break;
-					}
-				}
+
 				$i++;
 			}
 			return $arr;
@@ -79,9 +64,12 @@
 			$a = Db::query_assoc("
 				SELECT COUNT(LOGIN) AS COUNT FROM teachers
 				WHERE
-					LOGIN = ?s
-			", $i["login"]
+					GIVEN_NAME=?s AND
+					FATHER_NAME=?s AND
+					FAMILY_NAME=?s
+				", $i["name"], $i["father_name"], $i["family_name"]
 			)["COUNT"];
+
 			if (intval($a) != 0)
 				return;
 
@@ -90,14 +78,33 @@
 				$pas .= (random_int(0, 9));
 			}
 
+			while (true) {
+				$str = "";
+				for ($j = 0; $j < 4; $j++) {
+					$rand = random_int(0, 9);
+					$str .= "$rand";
+				}
+				$a = Db::query_assoc("
+					SELECT COUNT(LOGIN) AS COUNT FROM teachers
+					WHERE
+						LOGIN = ?s
+				", $str)["COUNT"];
+				if (intval($a) == 0) {
+					$login = $str;
+					break;
+				}
+			}
+
+			$login = $login ?? "lolkek";
+
 			Db::query("
 				INSERT INTO teachers (
 					GIVEN_NAME, FATHER_NAME, FAMILY_NAME, LOGIN
 				) VALUES (
 					?s, ?s, ?s, ?s
-				)", $i["name"], $i["father_name"], $i["family_name"], $i["login"]
+				)", $i["name"], $i["father_name"], $i["family_name"], $login
 			);
-			Passwords::register_user($i["login"], $pas, "teacher");
+			Passwords::register_user($login, $pas, "teacher");
 
 			foreach ($i["many_duties"] as $q) {
 				Db::query("
@@ -105,7 +112,7 @@
 						LOGIN, ROLE, ARG
 					) VALUES (
 						?s, ?s, ?s
-					)", $i["login"], $q["duties"], $q["classes"]
+					)", $login, $q["duties"], $q["classes"]
 				);
 			}
 
@@ -113,8 +120,8 @@
 
 			Notifications::add(
 				$user,
-				Users::get($i["login"]),
-				"Пользователь зарегестрировался. Логин: ".$i["login"]." Пароль: $pas"
+				Users::get($login),
+				"Пользователь зарегестрировался. Логин: ".$login." Пароль: $pas"
 			);
 		}
 	}
