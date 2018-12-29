@@ -13,6 +13,9 @@
 
 		{% if he.has_role("student") %}
 			<h3>Класс: <strong>{{ he.get_group_name }}</strong></h3>
+			{% if he.get_classruk() %}
+				<h3>Классный руководитель: {{ utils.display_user(he.get_classruk()) }}</h3>
+			{% endif %}
 			<h3>Баллы: <strong>{{ he.get_points }}</strong></h3>
 			<a href="/points/{{ he.get_enter_login }}" class="submit">Выписка по баллам</a><br>
 		{% endif %}
