@@ -13,6 +13,9 @@
 					<a href="{{ file.url }}">
 						{{ file.title }}
 					</a>
+					{% if can_edit %}
+						<button class="document-remove" doc-id="{{ file.id }}">&times;</button>
+					{% endif %}
 				</li>
 			{% endfor %}
 		</ul>
@@ -35,6 +38,24 @@
 				 class="form-control">
 				<input type="submit" class="submit">
 			</form>
+
+			<script>
+				$(".document-remove").click(function() {
+					let id = $(this).attr("doc-id");
+
+					$.ajax({
+						method: "POST",
+						url: "",
+						data: {
+							remove_id: id,
+						}
+					}).done(function(data) {
+						document.location = document.location;
+					}).fail(function(error) {
+						console.log(error);
+					});
+				});
+			</script>
 		{% endif %}
 
 	</div>

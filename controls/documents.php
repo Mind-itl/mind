@@ -11,6 +11,12 @@
 		}
 
 		public function get_data(array $args): array {
+			if (Utils::isset_post_fields("remove_id")) {
+				$id = intval($_POST["remove_id"]);
+
+				Db::query("DELETE FROM files WHERE ID=?s", $id);
+			}
+
 			if (Utils::isset_post_fields("path","title") && isset($_FILES["file"]))
 				$status = $this->add_protocol();
 
