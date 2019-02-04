@@ -111,7 +111,7 @@
 			if ($last_var_id === false)
 				$last_var_id = 0;
 			else
-				$last_var_id = intval($last_var_id->fetch_assoc()["VARIANT_ID"]) + 1;
+				$last_var_id = intval($last_var_id->fetch_assoc()["VARIANT_ID"]);
 
 			$last_var_id = intval($last_var_id);
 
@@ -132,9 +132,9 @@
 				INSERT INTO votings (
 					TITLE, DESCRIPTION, TILL_DATE
 				) VALUES (
-					?s, ?s, ?i
+					?s, ?s, ?s
 				)
-				", $title, $desc, $till->format('U')
+				", $title, $desc, $till->format("Y-m-d H:i:s")
 			);
 
 			$id = Db::query_assoc("
